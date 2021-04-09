@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(TestFrameworkVersions)</TargetFrameworks>
+    <RootNamespace>AsyncQueryableAdapterPrototype.Tests</RootNamespace>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);CS0436</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AsyncQueryableAdapter\AsyncQueryableAdapter.csproj" />
+  </ItemGroup>
+  
+ <ItemGroup>
+    <None Include="QueryAdapterSpecification.SingleEntryQuery.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterSpecification.SingleEntryQuery.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="QueryAdapterSpecification.MathAggregate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryAdapterSpecification.MathAggregate.tt.cs</LastGenOutput>
+    </None>
+    <None Update="QueryAdapterSpecification.SingleEntryQuery.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryAdapterSpecification.SingleEntryQuery.tt.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QueryAdapterSpecification.MathAggregate.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterSpecification.MathAggregate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="QueryAdapterSpecification.SingleEntryQuery.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterSpecification.SingleEntryQuery.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

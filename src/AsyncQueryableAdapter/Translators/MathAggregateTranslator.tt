@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".tt.cs" #>
+<#
+    var operations = new [] { "Min", "Max", "Sum", "Average" };
+#>
+using System;
+using System.Linq.Expressions;
+using System.Threading;
+using AsyncQueryableAdapter.Utils;
+
+namespace AsyncQueryableAdapter.Translators
+{
+<#
+foreach(var operation in operations)
+{
+#>
+    internal sealed class <#=operation#>MethodTranslator : MathAggregateTranslator
+    {
+        protected override string OperationName => "<#=operation#>";
+
+        protected override ConstantExpression ProcessOperation(
+            TranslatedQueryable translatedQueryable,
+            CancellationToken cancellation)
+        {
+            var elementType = translatedQueryable.ElementType;
+            var returnType = TypeHelper.GetValueTaskType(elementType);
+            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
+                elementType,
+                translatedQueryable.GetQueryable(),
+                cancellation);
+
+            return Expression.Constant(evaluationResult.Instance, returnType);
+        }
+
+        protected override ConstantExpression ProcessOperation(
+            Type resultType,
+            TranslatedQueryable translatedQueryable,
+            Expression selector,
+            CancellationToken cancellation)
+        {
+            var elementType = translatedQueryable.ElementType;
+            var returnType = TypeHelper.GetValueTaskType(resultType);
+            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
+                elementType,
+                resultType,
+                translatedQueryable.GetQueryable(),
+                selector,
+                cancellation);
+
+            return Expression.Constant(evaluationResult.Instance, returnType);
+        }
+    }
+<#
+}
+#>
+}

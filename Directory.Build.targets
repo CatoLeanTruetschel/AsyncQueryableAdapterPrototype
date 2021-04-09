@@ -1,0 +1,6 @@
+<!--EXTERNAL_PROPERTIES: TargetFramework;MSBuildThisFileDirectory-->
+<Project>
+  <PropertyGroup>
+    <DefineConstants Condition="$(IsCLSCompliant) == 'TRUE'">$(DefineConstants);IS_CLS_COMPLIANT;</DefineConstants>
+  </PropertyGroup>
+</Project>

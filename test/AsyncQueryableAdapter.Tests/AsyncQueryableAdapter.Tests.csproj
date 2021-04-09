@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFrameworks>$(TestFrameworkVersions)</TargetFrameworks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AsyncQueryableAdapter\AsyncQueryableAdapter.csproj" />
+    <ProjectReference Include="..\AsyncQueryableAdapterPrototype.Specification\AsyncQueryableAdapterPrototype.Specification.csproj" />
+  </ItemGroup>  
+  
+</Project>

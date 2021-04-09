@@ -1,0 +1,109 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".tt.cs" #>
+<#
+    var mathAggregateOperations = new [] { "Min", "Max", "Sum", "Average" };
+    var singleEntryQueryOperations = new [] { "First", "FirstOrDefault", "Last", "LastOrDefault", "Single", "SingleOrDefault" };
+#>
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
+using AsyncQueryableAdapter.Utils;
+
+namespace AsyncQueryableAdapter
+{
+    partial class QueryAdapterBase
+    {
+        partial interface INonGenericElementTypeQueryAdapter
+        {
+<#
+foreach(var mathAggregateOperation in mathAggregateOperations)
+{
+#>
+            AsyncTypeAwaitable <#=mathAggregateOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
+
+<#
+}
+#>
+
+<#
+foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
+{
+#>
+            AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
+
+            AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, Expression predicate, CancellationToken cancellation);
+
+<#
+}
+#>
+        }
+
+        partial class NonGenericElementTypeQueryAdapter<T>
+        {
+<#
+foreach(var mathAggregateOperation in mathAggregateOperations)
+{
+#>
+            public AsyncTypeAwaitable <#=mathAggregateOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                var task =  queryAdapter.<#=mathAggregateOperation#>Async(typedQueryable, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+<#
+}
+#>
+
+<#
+foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
+{
+#>
+            public AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                var task = queryAdapter.<#=singleEntryQueryOperation#>Async(typedQueryable, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+            public AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression predicate,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                if (predicate is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    predicate = unaryExpression.Operand;
+                }
+                
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.<#=singleEntryQueryOperation#>Async(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+<#
+}
+#>
+        }
+    }
+}

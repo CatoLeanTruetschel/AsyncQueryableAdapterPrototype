@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(LibVersions)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt</DependentUpon>
+    </None>
+    <None Include="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt</DependentUpon>
+    </None>
+    <None Include="Translators\MathAggregateTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MathAggregateTranslator.tt</DependentUpon>
+    </None>
+    <None Include="Translators\SingleEntryQueryMethodTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SingleEntryQueryMethodTranslator.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Async.Queryable" />
+    <PackageReference Include="Linq.Expression.Optimizer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs</LastGenOutput>
+    </None>
+    <None Update="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs</LastGenOutput>
+    </None>
+    <None Update="Translators\MathAggregateTranslator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MathAggregateTranslator.tt.cs</LastGenOutput>
+    </None>
+    <None Update="Translators\SingleEntryQueryMethodTranslator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SingleEntryQueryMethodTranslator.tt.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Translators\MathAggregateTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MathAggregateTranslator.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Translators\SingleEntryQueryMethodTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SingleEntryQueryMethodTranslator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+</Project>
