@@ -6,7 +6,7 @@ This is a prototype that enables to use the `IAsyncQueryable` type ([System.Linq
 Querying a database is a long-lasting IO-operation that shall at best be done asynchronously to prevent blocking the current thread. Todays database drivers targeting .Net implement support for the `IQueryableType`. With this type and the LINQ methods defined on it, like `Where`, `Select`, `OrderBy`, etc. are recorded and executed, when the instance is casted to `IEnumerable`. As this cast as well as the operations on the `IEnumerable` type are inherently synchronously, the database driver has no chance, but blocking the thread, even if it only allocated a database cursor, that is wrapped to implement the `IEnumerable` type.  
 Most database drivers implement custom methods to evaluate an `IQueryable` instance asynchronously, as well as some (or all) of the LINQ functions that return a scalar like `int` or `bool`. This however is highly dependent on the database driver used. This prevents to write the data access code in an independent fashion, that a database driver can be plugged into. For example EntityFramework Core implemented these functions in its [EntityFrameworkQueryableExtensions](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions), MongoDB defines its own interface that inherits from `IQueryable` and defined the mentioned functions on this interface in its type [MongoQueryable](https://mongodb.github.io/mongo-csharp-driver/2.4/apidocs/html/T_MongoDB_Driver_Linq_MongoQueryable.htm). Here, not only the functions themselves are database driver dependent, but the type of queryable, so that casts are necessary, when a general purpose API that works with the `IQueryable` types are necessary.
 
-## How does this prototype solve the solution?
+## How does this prototype solve the problem?
 ### The user API
 The solution, as implemented here builds on top of the `IAsyncEnumerable` and `IAsyncQueryable` type. These are the asynchronous equivalents of the `IEnumerable` and `IQueryable` types, respectively. It provides instances of types `IAsyncQueryable` that can be accessed for a database driver and used to record a query (via generic LINQ method calls) and execute it in an asynchronous way, by either casting to `IAsyncQueryable` or calling one of the methods that return an awaitable type resulting in a scalar, like `MaxAsync` or `AnyAsync`.  
 
@@ -81,7 +81,7 @@ internal sealed class MongoDBQueryAdapter : QueryAdapterBase
             (source as IMongoQueryable<TSource>).MinAsync(cancellation));
     }
 
-    // Override ass the other virtual members that the database driver has special support for.
+    // Override all the other virtual members that the database driver has special support for.
     // [...]
 }
 ```
