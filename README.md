@@ -258,6 +258,11 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Basic support
         * [x] Support for async selectors (when translatable to sync selectors)
         * [x] Unit-test
+* [ ] Nested-query support (f.e. A query in a predicate); Sub-queries are supported via basic support
+* [ ] Support combining mulitple queryables
+    * [ ] From the same query adapter
+    * [ ] From the same "family" of query adapters (Needed for MongoDB support; query adapters belong to the same family if they share the same database and transaction)
+    * [ ] From different query adapter
 * [ ] End-2-end tests
 * [ ] Generic MongoDB database driver support
 * [ ] Generic EF-Core database driver support
