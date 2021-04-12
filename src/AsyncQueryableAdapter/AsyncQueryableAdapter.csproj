@@ -5,16 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt</DependentUpon>
-    </None>
-    <None Include="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt</DependentUpon>
-    </None>
     <None Include="Translators\MathAggregateTranslator.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -33,13 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt">
+    <None Update="QueryAdapterBase.GenericQueryAdapter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs</LastGenOutput>
-    </None>
-    <None Update="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs</LastGenOutput>
+      <LastGenOutput>QueryAdapterBase.GenericQueryAdapter.tt.cs</LastGenOutput>
     </None>
     <None Update="Translators\MathAggregateTranslator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -56,15 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt.cs">
+    <Compile Update="QueryAdapterBase.GenericQueryAdapter.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>QueryAdapterBase.NonGenericElementResultTypeQueryAdapter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QueryAdapterBase.NonGenericElementTypeQueryAdapter.tt</DependentUpon>
+      <DependentUpon>QueryAdapterBase.GenericQueryAdapter.tt</DependentUpon>
     </Compile>
     <Compile Update="Translators\MathAggregateTranslator.tt.cs">
       <DesignTime>True</DesignTime>

@@ -49,7 +49,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).GetQueryable(this);
+            return GetQueryAdapter(elementType).GetQueryable(this);
         }
 
         protected abstract IAsyncEnumerable<T> EvaluateAsync<T>(
@@ -64,7 +64,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).EvaluateAsync(this, queryable, cancellation);
+            return GetQueryAdapter(elementType).EvaluateAsync(this, queryable, cancellation);
         }
 
         protected virtual ValueTask<TSource> AggregateAsync<TSource>(
@@ -219,7 +219,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).AverageAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).AverageAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TResult> AverageAsync<TSource, TResult>(
@@ -300,7 +300,7 @@ namespace AsyncQueryableAdapter
             if (resultType is null)
                 throw new ArgumentNullException(nameof(resultType));
 
-            return GetNonGenericAdapter(elementType, resultType).AverageAsync(this, source, selector, cancellation);
+            return BuildQueryAdapter(elementType, resultType).AverageAsync(this, source, selector, cancellation);
         }
 
         protected virtual ValueTask<bool> ContainsAsync<TSource>(
@@ -403,7 +403,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).FirstAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).FirstAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource> FirstAsync<TSource>(
@@ -427,7 +427,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).FirstAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).FirstAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource?> FirstOrDefaultAsync<TSource>(
@@ -449,7 +449,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).FirstOrDefaultAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).FirstOrDefaultAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource?> FirstOrDefaultAsync<TSource>(
@@ -473,7 +473,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).FirstOrDefaultAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).FirstOrDefaultAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource> LastAsync<TSource>(
@@ -502,7 +502,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).LastAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).LastAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource> LastAsync<TSource>(
@@ -536,7 +536,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).LastAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).LastAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource?> LastOrDefaultAsync<TSource>(
@@ -565,7 +565,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).LastOrDefaultAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).LastOrDefaultAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource?> LastOrDefaultAsync<TSource>(
@@ -599,7 +599,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).LastOrDefaultAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).LastOrDefaultAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<long> LongCountAsync<TSource>(
@@ -653,7 +653,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).MaxAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).MaxAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TResult> MaxAsync<TSource, TResult>(
@@ -684,7 +684,7 @@ namespace AsyncQueryableAdapter
             if (resultType is null)
                 throw new ArgumentNullException(nameof(resultType));
 
-            return GetNonGenericAdapter(elementType, resultType).MaxAsync(this, source, selector, cancellation);
+            return BuildQueryAdapter(elementType, resultType).MaxAsync(this, source, selector, cancellation);
         }
 
         protected virtual ValueTask<TSource> MinAsync<TSource>(
@@ -706,7 +706,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).MinAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).MinAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TResult> MinAsync<TSource, TResult>(
@@ -737,7 +737,7 @@ namespace AsyncQueryableAdapter
             if (resultType is null)
                 throw new ArgumentNullException(nameof(resultType));
 
-            return GetNonGenericAdapter(elementType, resultType).MinAsync(this, source, selector, cancellation);
+            return BuildQueryAdapter(elementType, resultType).MinAsync(this, source, selector, cancellation);
         }
 
         protected virtual ValueTask<bool> SequenceEqualAsync<TSource>(
@@ -801,7 +801,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).SingleAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).SingleAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource> SingleAsync<TSource>(
@@ -825,7 +825,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).SingleAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).SingleAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource?> SingleOrDefaultAsync<TSource>(
@@ -847,7 +847,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).SingleOrDefaultAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).SingleOrDefaultAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TSource?> SingleOrDefaultAsync<TSource>(
@@ -871,7 +871,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).SingleOrDefaultAsync(this, source, predicate, cancellation);
+            return GetQueryAdapter(elementType).SingleOrDefaultAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource> SumAsync<TSource>(
@@ -950,7 +950,7 @@ namespace AsyncQueryableAdapter
             if (elementType is null)
                 throw new ArgumentNullException(nameof(elementType));
 
-            return GetNonGenericAdapter(elementType).SumAsync(this, source, cancellation);
+            return GetQueryAdapter(elementType).SumAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<TResult> SumAsync<TSource, TResult>(
@@ -1059,7 +1059,7 @@ namespace AsyncQueryableAdapter
             if (resultType is null)
                 throw new ArgumentNullException(nameof(resultType));
 
-            return GetNonGenericAdapter(elementType, resultType).SumAsync(this, source, selector, cancellation);
+            return BuildQueryAdapter(elementType, resultType).SumAsync(this, source, selector, cancellation);
         }
     }
 }

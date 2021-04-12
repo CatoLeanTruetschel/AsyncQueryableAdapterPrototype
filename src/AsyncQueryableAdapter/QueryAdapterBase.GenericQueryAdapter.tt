@@ -38,7 +38,7 @@ namespace AsyncQueryableAdapter
 {
     partial class QueryAdapterBase
     {
-        partial interface INonGenericElementTypeQueryAdapter
+        partial interface IGenericElementTypeQueryAdapter
         {
 <#
 foreach(var mathAggregateOperation in mathAggregateOperations)
@@ -63,7 +63,7 @@ foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
 #>
         }
 
-        partial class NonGenericElementTypeQueryAdapter<T>
+        partial class GenericQueryAdapter<T>
         {
 <#
 foreach(var mathAggregateOperation in mathAggregateOperations)
@@ -119,10 +119,58 @@ foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
                 var task = queryAdapter.<#=singleEntryQueryOperation#>Async(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
+<#
+}
+#>
+        }
+
+        partial interface IGenericElementResultTypeQueryAdapter
+        {
+<#
+foreach(var mathAggregateOperation in mathAggregateOperations)
+{
+#>
+            AsyncTypeAwaitable <#=mathAggregateOperation#>Async(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation);
 
 <#
 }
 #>
+        }
+
+        partial class GenericQueryAdapter<TSource, TResult>
+        {
+<#
+foreach(var mathAggregateOperation in mathAggregateOperations)
+{
+#>
+            public AsyncTypeAwaitable <#=mathAggregateOperation#>Async(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<TSource> typedQueryable)
+                {
+                    typedQueryable = source.Cast<TSource>();
+                }
+
+                if (selector is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    selector = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.<#=mathAggregateOperation#>Async(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+<#
+}
+#>      
         }
     }
 }

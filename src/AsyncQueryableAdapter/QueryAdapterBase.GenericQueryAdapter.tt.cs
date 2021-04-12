@@ -28,7 +28,7 @@ namespace AsyncQueryableAdapter
 {
     partial class QueryAdapterBase
     {
-        partial interface INonGenericElementTypeQueryAdapter
+        partial interface IGenericElementTypeQueryAdapter
         {
             AsyncTypeAwaitable MinAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
 
@@ -65,7 +65,7 @@ namespace AsyncQueryableAdapter
 
         }
 
-        partial class NonGenericElementTypeQueryAdapter<T>
+        partial class GenericQueryAdapter<T>
         {
             public AsyncTypeAwaitable MinAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
@@ -143,7 +143,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.FirstAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
-
             public AsyncTypeAwaitable FirstOrDefaultAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
                 if (source is not IQueryable<T> typedQueryable)
@@ -175,7 +174,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.FirstOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
-
             public AsyncTypeAwaitable LastAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
                 if (source is not IQueryable<T> typedQueryable)
@@ -207,7 +205,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.LastAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
-
             public AsyncTypeAwaitable LastOrDefaultAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
                 if (source is not IQueryable<T> typedQueryable)
@@ -239,7 +236,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.LastOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
-
             public AsyncTypeAwaitable SingleAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
                 if (source is not IQueryable<T> typedQueryable)
@@ -271,7 +267,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.SingleAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
-
             public AsyncTypeAwaitable SingleOrDefaultAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
                 if (source is not IQueryable<T> typedQueryable)
@@ -303,7 +298,123 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.SingleOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
+        }
 
+        partial interface IGenericElementResultTypeQueryAdapter
+        {
+            AsyncTypeAwaitable MinAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation);
+
+            AsyncTypeAwaitable MaxAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation);
+
+            AsyncTypeAwaitable SumAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation);
+
+            AsyncTypeAwaitable AverageAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation);
+
+        }
+
+        partial class GenericQueryAdapter<TSource, TResult>
+        {
+            public AsyncTypeAwaitable MinAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<TSource> typedQueryable)
+                {
+                    typedQueryable = source.Cast<TSource>();
+                }
+
+                if (selector is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    selector = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.MinAsync(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+            public AsyncTypeAwaitable MaxAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<TSource> typedQueryable)
+                {
+                    typedQueryable = source.Cast<TSource>();
+                }
+
+                if (selector is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    selector = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.MaxAsync(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+            public AsyncTypeAwaitable SumAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<TSource> typedQueryable)
+                {
+                    typedQueryable = source.Cast<TSource>();
+                }
+
+                if (selector is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    selector = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.SumAsync(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+            public AsyncTypeAwaitable AverageAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                Expression selector,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<TSource> typedQueryable)
+                {
+                    typedQueryable = source.Cast<TSource>();
+                }
+
+                if (selector is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    selector = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                var task = queryAdapter.AverageAsync(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
+                return task.AsTypeAwaitable();
+            }
+
+      
         }
     }
 }
