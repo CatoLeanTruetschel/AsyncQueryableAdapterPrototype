@@ -631,7 +631,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -652,7 +652,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -672,7 +672,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -695,7 +695,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -715,7 +715,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -738,7 +738,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -758,7 +758,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -784,7 +784,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -809,7 +809,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -832,7 +832,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -854,7 +854,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -880,7 +880,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -906,7 +906,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -929,7 +929,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1010,7 +1010,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1031,7 +1031,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1051,7 +1051,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1074,7 +1074,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1094,7 +1094,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1117,7 +1117,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1137,7 +1137,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1163,7 +1163,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1188,7 +1188,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1211,7 +1211,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1233,7 +1233,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1259,7 +1259,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1285,7 +1285,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
@@ -1308,7 +1308,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #if SUPPORTS_QUERYABLE_TAKE_LAST
 				DisallowImplicitPostProcessing
 #else
-				AllowImplicitPostProcessing
+				AllowInMemoryEvaluation
 #endif
 				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();

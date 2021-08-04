@@ -78,7 +78,7 @@ namespace AsyncQueryableAdapter
             if (accumulator is null)
                 throw new ArgumentNullException(nameof(accumulator));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -97,7 +97,7 @@ namespace AsyncQueryableAdapter
             if (accumulator is null)
                 throw new ArgumentNullException(nameof(accumulator));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -120,7 +120,7 @@ namespace AsyncQueryableAdapter
             if (resultSelector is null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -170,7 +170,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -233,7 +233,7 @@ namespace AsyncQueryableAdapter
             if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var compiledSelector = selector.Compile();
@@ -327,7 +327,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -341,7 +341,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Select(p => 1), cancellation);
@@ -359,7 +359,7 @@ namespace AsyncQueryableAdapter
             if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
@@ -486,7 +486,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstAsync(source.TakeLast(1), cancellation);
 #else
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -519,7 +519,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstAsync(source.Where(predicate).TakeLast(1), cancellation);
 #else
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate), cancellation);
@@ -549,7 +549,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstOrDefaultAsync(source.TakeLast(1), cancellation);
 #else
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -582,7 +582,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstOrDefaultAsync(source.Where(predicate).TakeLast(1), cancellation);
 #else
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate), cancellation);
@@ -609,7 +609,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Select(p => 1), cancellation);
@@ -627,7 +627,7 @@ namespace AsyncQueryableAdapter
             if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
@@ -743,43 +743,72 @@ namespace AsyncQueryableAdapter
         protected virtual ValueTask<bool> SequenceEqualAsync<TSource>(
             IQueryable<TSource> first,
             IAsyncEnumerable<TSource> second,
-            CancellationToken cancellation)
-        {
-            if (first is null)
-                throw new ArgumentNullException(nameof(first));
-
-            if (second is null)
-                throw new ArgumentNullException(nameof(second));
-
-            if (!Options.AllowImplicitPostProcessing)
-                ThrowHelper.ThrowQueryNotSupportedException();
-
-            var inMemoryCollection = EvaluateAsync(first, cancellation);
-            return inMemoryCollection.SequenceEqualAsync(second, cancellation);
-        }
-
-        protected virtual ValueTask<bool> SequenceEqualAsync<TSource>(
-            IQueryable<TSource> first,
-            IAsyncEnumerable<TSource> second,
             IEqualityComparer<TSource>? comparer,
             CancellationToken cancellation)
         {
-            if (comparer is null)
-            {
-                return SequenceEqualAsync(first, second, cancellation);
-            }
-
             if (first is null)
                 throw new ArgumentNullException(nameof(first));
 
             if (second is null)
                 throw new ArgumentNullException(nameof(second));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(first, cancellation);
             return inMemoryCollection.SequenceEqualAsync(second, comparer, cancellation);
+        }
+
+        internal ValueTask<bool> SequenceEqualAsync(
+            Type elementType,
+            IQueryable source,
+            IAsyncEnumerable<object> second,
+            object? comparer,
+            CancellationToken cancellation)
+        {
+            if (elementType is null)
+                throw new ArgumentNullException(nameof(elementType));
+
+            return BuildQueryAdapter(elementType).SequenceEqualAsync(this, source, second, comparer, cancellation);
+        }
+
+        protected virtual ValueTask<bool> SequenceEqualAsync<TSource>(
+            IQueryable<TSource> first,
+            IQueryable<TSource> second,
+            IEqualityComparer<TSource>? comparer,
+            CancellationToken cancellation)
+        {
+            if (first is null)
+                throw new ArgumentNullException(nameof(first));
+
+            if (second is null)
+                throw new ArgumentNullException(nameof(second));
+
+            // TODO: Can be put together a better solution with ZIP, which reuslts in a stream of pairs, that we
+            //       can transform to a stream of bools via SELECT with a comparison function and then perform the 
+            //       ALL operation?
+            //       The problem here is that we do not know the length of the streams and ZIP terminates,
+            //       when any of the input streams terminates.
+
+            if (!Options.AllowInMemoryEvaluation)
+                ThrowHelper.ThrowQueryNotSupportedException();
+
+            var firstInMemory = EvaluateAsync(first, cancellation);
+            var secondInMemory = EvaluateAsync(second, cancellation);
+            return firstInMemory.SequenceEqualAsync(secondInMemory, comparer, cancellation);
+        }
+
+        internal ValueTask<bool> SequenceEqualAsync(
+            Type elementType,
+            IQueryable source,
+            IQueryable second,
+            object? comparer,
+            CancellationToken cancellation)
+        {
+            if (elementType is null)
+                throw new ArgumentNullException(nameof(elementType));
+
+            return BuildQueryAdapter(elementType).SequenceEqualAsync(this, source, second, comparer, cancellation);
         }
 
         protected virtual ValueTask<TSource> SingleAsync<TSource>(
@@ -881,7 +910,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -964,7 +993,7 @@ namespace AsyncQueryableAdapter
             if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
 
-            if (!Options.AllowImplicitPostProcessing)
+            if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var compiledSelector = selector.Compile();

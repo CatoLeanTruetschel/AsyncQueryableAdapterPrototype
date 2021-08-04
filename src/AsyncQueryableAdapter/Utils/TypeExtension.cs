@@ -27,7 +27,7 @@ namespace System
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
 
-            if(assignableType is null)
+            if (assignableType is null)
             {
                 return false;
             }

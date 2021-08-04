@@ -842,7 +842,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSelectSumTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -857,7 +857,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumWithSelectorTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -872,7 +872,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -887,7 +887,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -907,7 +907,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -926,7 +926,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitWithCancellationTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -943,7 +943,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitWithCancellationTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -963,7 +963,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitWithCancellationTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -983,7 +983,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -1000,7 +1000,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSumAwaitWithCancellationTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Sum(p => p.Age);
 
@@ -1068,7 +1068,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSelectAverageTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1083,7 +1083,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageWithSelectorTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1098,7 +1098,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1113,7 +1113,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1133,7 +1133,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1152,7 +1152,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitWithCancellationTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1169,7 +1169,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitWithCancellationTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1189,7 +1189,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitWithCancellationTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1209,7 +1209,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 
@@ -1226,7 +1226,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereAverageAwaitWithCancellationTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Average(p => p.Age);
 

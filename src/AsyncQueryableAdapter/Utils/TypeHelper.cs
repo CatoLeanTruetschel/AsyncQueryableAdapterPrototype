@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -97,11 +98,25 @@ namespace AsyncQueryableAdapter.Utils
             return typeof(IAsyncQueryable<>).MakeGenericType(_1EntryTypeBuffer);
         }
 
+        public static Type GetAsyncEnumerableType(Type sourceType)
+        {
+            _1EntryTypeBuffer ??= new Type[1];
+            _1EntryTypeBuffer[0] = sourceType;
+            return typeof(IAsyncEnumerable<>).MakeGenericType(_1EntryTypeBuffer);
+        }
+
         public static Type GetValueTaskType(Type type)
         {
             _1EntryTypeBuffer ??= new Type[1];
             _1EntryTypeBuffer[0] = type;
             return typeof(ValueTask<>).MakeGenericType(_1EntryTypeBuffer);
+        }
+
+        public static Type GetEqualityComparerType(Type sourceType)
+        {
+            _1EntryTypeBuffer ??= new Type[1];
+            _1EntryTypeBuffer[0] = sourceType;
+            return typeof(IEqualityComparer<>).MakeGenericType(_1EntryTypeBuffer);
         }
     }
 }

@@ -95,19 +95,29 @@ namespace AsyncQueryableAdapterPrototype.Tests
         private static readonly AsyncQueryableOptions DisallowImplicitPostProcessing = new AsyncQueryableOptions
         {
             AllowImplicitPostProcessing = false,
-            AllowImplicitDefaultPostProcessing = false
+            AllowImplicitDefaultPostProcessing = false,
+            AllowInMemoryEvaluation = false
         };
 
         private static readonly AsyncQueryableOptions AllowImplicitPostProcessing = new AsyncQueryableOptions
         {
             AllowImplicitPostProcessing = true,
-            AllowImplicitDefaultPostProcessing = false
+            AllowImplicitDefaultPostProcessing = false,
+            AllowInMemoryEvaluation = false
         };
 
         private static readonly AsyncQueryableOptions AllowImplicitDefaultPostProcessing = new AsyncQueryableOptions
         {
             AllowImplicitPostProcessing = true,
-            AllowImplicitDefaultPostProcessing = true
+            AllowImplicitDefaultPostProcessing = true,
+            AllowInMemoryEvaluation = false
+        };
+
+        private static readonly AsyncQueryableOptions AllowInMemoryEvaluation = new AsyncQueryableOptions
+        {
+            AllowImplicitPostProcessing = false,
+            AllowImplicitDefaultPostProcessing = false,
+            AllowInMemoryEvaluation = true
         };
 
         // Tests on a single set that are fully convertible to sync queryable calls

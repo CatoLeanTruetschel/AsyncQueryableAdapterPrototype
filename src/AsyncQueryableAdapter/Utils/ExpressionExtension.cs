@@ -120,7 +120,7 @@ namespace System.Linq.Expressions
             translatedExpression = null;
 
             // If expression is of form: Expression<Func<TSource, ValueTask<TResult>>>
-            // Or of form: Expression<Func<TSource, CancellationToken ValueTask<TResult>>>
+            // Or of form: Expression<Func<TSource, CancellationToken, ValueTask<TResult>>>
             // Translate it to form Expression<Func<TSource, TResult>> if possible
 
             var selectorExpressionVisitor = new SelectorExpressionVisitor(targetType);

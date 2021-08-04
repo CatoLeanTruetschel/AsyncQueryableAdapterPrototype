@@ -246,10 +246,10 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Basic support
         * [x] Support for async selectors (when translatable to sync selectors)
         * [x] Unit-test    
-    * [ ] SequenceEqual operation translator
-        * [ ] Basic support
-        * [ ] Support for EqualityComparer
-        * [ ] Unit-test
+    * [x] SequenceEqual operation translator
+        * [x] Basic support
+        * [x] Support for EqualityComparer
+        * [x] Unit-test
     * [x] Single operation translator
         * [x] Basic support
         * [x] Support for async predicates (when translatable to sync selectors)

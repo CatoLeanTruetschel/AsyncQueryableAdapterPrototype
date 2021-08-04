@@ -28,6 +28,7 @@ namespace AsyncQueryableAdapter
 
         private readonly bool _disallowImplicitPostProcessing;
         private readonly bool _disallowImplicitDefaultPostProcessing;
+        private readonly bool _disallowInMemoryProcessing;
 
         /// <summary>
         /// Gets or sets a boolean value indicating whether an implicit in-process post-processing step is allowed.
@@ -69,6 +70,24 @@ namespace AsyncQueryableAdapter
             init
             {
                 _disallowImplicitDefaultPostProcessing = !value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a boolean value indicating whether an in-memory evaluation of (parts of) the query by the 
+        /// query adapter is allowed, when the query cannot be performed natively by the underlying storage system.
+        /// </summary>
+        /// <remarks>
+        /// Settings this to <c>true</c> enables in-memory query evaluations, when this setting is set to <c>false</c>
+        /// and the query adapter cannot perform a native query via the storage system, a 
+        /// <see cref="NotSupportedException"/> is raised.
+        /// </remarks>
+        internal bool AllowInMemoryEvaluation
+        {
+            get => !_disallowInMemoryProcessing;
+            init
+            {
+                _disallowInMemoryProcessing = !value;
             }
         }
 

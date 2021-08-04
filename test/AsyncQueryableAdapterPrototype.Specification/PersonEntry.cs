@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace AsyncQueryableAdapterPrototype.Tests
 {
@@ -25,5 +26,21 @@ namespace AsyncQueryableAdapterPrototype.Tests
     {
         public PersonEntry(string firstName, string lastName, double age)
             : this(Guid.NewGuid(), firstName, lastName, age, DateTime.Now.AddDays(-age * 365)) { }
+    }
+
+    internal sealed class PersonEntryByLastNameEqualityComparer : IEqualityComparer<PersonEntry>
+    {
+        public bool Equals(PersonEntry? x, PersonEntry? y)
+        {
+            return string.Equals(x?.LastName, y?.LastName, StringComparison.Ordinal);
+        }
+
+        public int GetHashCode(PersonEntry obj)
+        {
+            if (obj is null)
+                throw new ArgumentNullException(nameof(obj));
+
+            return HashCode.Combine(obj.LastName);
+        }
     }
 }

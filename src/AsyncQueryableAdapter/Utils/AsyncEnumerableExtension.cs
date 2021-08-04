@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using AsyncQueryableAdapter.Utils;
 
 namespace System.Collections.Generic
 {
@@ -86,7 +87,7 @@ namespace System.Collections.Generic
 
         private static IAsyncQueryable<T> AsAsyncQueryable<T>(IAsyncEnumerable<object?> asyncEnumerable)
         {
-            if(asyncEnumerable is not IAsyncEnumerable<T> typedEnumerable)
+            if (asyncEnumerable is not IAsyncEnumerable<T> typedEnumerable)
             {
                 typedEnumerable = asyncEnumerable.Cast<object?, T>();
             }
@@ -105,7 +106,12 @@ namespace System.Collections.Generic
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if(source is CastAsyncEnumerable<TTarget> original)
+            if (typeof(TSource).IsAssignableTo(typeof(TTarget)))
+            {
+                return (IAsyncEnumerable<TTarget>)source;
+            }
+
+            if (source is CastAsyncEnumerable<TTarget> original)
             {
                 return original.SourceEnumerable;
             }
@@ -113,7 +119,14 @@ namespace System.Collections.Generic
             return new CastAsyncEnumerable<TSource, TTarget>(source);
         }
 
-        private abstract class CastAsyncEnumerable<TSource>
+        private interface ICastAsyncEnumerable
+        {
+            Type SourceType { get; }
+
+            object SourceEnumerable { get; }
+        }
+
+        private abstract class CastAsyncEnumerable<TSource> : ICastAsyncEnumerable
         {
             public CastAsyncEnumerable(IAsyncEnumerable<TSource> sourceEnumerable)
             {
@@ -121,13 +134,17 @@ namespace System.Collections.Generic
                 SourceEnumerable = sourceEnumerable;
             }
 
+            public Type SourceType => typeof(TSource);
+
             public IAsyncEnumerable<TSource> SourceEnumerable { get; }
+
+            object ICastAsyncEnumerable.SourceEnumerable => SourceEnumerable;
         }
 
-        private sealed class CastAsyncEnumerable<TSource, TTarget> 
+        private sealed class CastAsyncEnumerable<TSource, TTarget>
             : CastAsyncEnumerable<TSource>, IAsyncEnumerable<TTarget>
         {
-            public CastAsyncEnumerable(IAsyncEnumerable<TSource> sourceEnumerable) : base(sourceEnumerable)  { }
+            public CastAsyncEnumerable(IAsyncEnumerable<TSource> sourceEnumerable) : base(sourceEnumerable) { }
 
             public IAsyncEnumerator<TTarget> GetAsyncEnumerator(CancellationToken cancellationToken = default)
             {
@@ -156,6 +173,116 @@ namespace System.Collections.Generic
                     return _sourceEnumerable.DisposeAsync();
                 }
             }
+        }
+
+        [ThreadStatic]
+        private static Type[]? _2EntryTypeBuffer;
+
+        [ThreadStatic]
+        private static Expression[]? _1EntryExpressionBuffer;
+
+#pragma warning disable VSTHRD200
+        public static IAsyncEnumerable<TTarget> Cast<TTarget>(object source, Type elementType)
+#pragma warning restore VSTHRD200
+        {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (source is ICastAsyncEnumerable original)
+            {
+                return Cast<TTarget>(original.SourceEnumerable, original.SourceType);
+            }
+
+            if (!source.GetType().IsAssignableTo(TypeHelper.GetAsyncEnumerableType(elementType)))
+            {
+                throw new ArgumentException(
+                    $"The source object must be assignable to type {TypeHelper.GetAsyncEnumerableType(elementType)}");
+            }
+
+            if (elementType.IsAssignableTo(typeof(TTarget)))
+            {
+                return (IAsyncEnumerable<TTarget>)source;
+            }
+
+            var converter = GetAsyncEnumerableConverter(elementType, typeof(TTarget));
+            return (IAsyncEnumerable<TTarget>)converter(source);
+        }
+
+        private static readonly ConditionalWeakTable<Type, AsyncEnumerableConverterLookupEntry> _asyncEnumerableConverterLookup = new();
+        private static readonly ConditionalWeakTable<Type, AsyncEnumerableConverterLookupEntry>.CreateValueCallback _buildEnumerableConverterLookupEntry
+            = BuildEnumerableConverterLookupEntry;
+
+        private class AsyncEnumerableConverterLookupEntry
+        {
+            private readonly ConditionalWeakTable<Type, Func<object, object>> _lookup = new();
+            private readonly ConditionalWeakTable<Type, Func<object, object>>.CreateValueCallback _buildEntry;
+
+            public AsyncEnumerableConverterLookupEntry(Type sourceType)
+            {
+                SourceType = sourceType;
+                _buildEntry = BuildAsyncEnumerableConverter;
+            }
+
+            public Type SourceType { get; }
+
+            public Func<object, object> GetAsyncEnumerableConverter(Type targetType)
+            {
+                return _lookup.GetValue(targetType, _buildEntry);
+            }
+
+            private Func<object, object> BuildAsyncEnumerableConverter(Type targetType)
+            {
+                var sourceEnumerableType = TypeHelper.GetAsyncEnumerableType(SourceType);
+                var castAsyncEnumerableTypeDefinition = typeof(CastAsyncEnumerable<,>);
+
+                _2EntryTypeBuffer ??= new Type[2];
+                _2EntryTypeBuffer[0] = SourceType;
+                _2EntryTypeBuffer[1] = targetType;
+
+                var castAsyncEnumerableType = castAsyncEnumerableTypeDefinition.MakeGenericType(_2EntryTypeBuffer);
+
+                _1EntryTypeBuffer ??= new Type[1];
+                _1EntryTypeBuffer[0] = sourceEnumerableType;
+
+                var castAsyncEnumerableTypeCtor = castAsyncEnumerableType.GetConstructor(_1EntryTypeBuffer);
+
+                Debug.Assert(castAsyncEnumerableTypeCtor is not null);
+
+                var sourceParameter = Expression.Parameter(typeof(object), "source");
+                var convertSourceParameter = Expression.Convert(sourceParameter, sourceEnumerableType);
+
+                _1EntryExpressionBuffer ??= new Expression[1];
+                _1EntryExpressionBuffer[0] = convertSourceParameter;
+
+                var castAsyncEnumerableTypeCtorCall = Expression.New(
+                    castAsyncEnumerableTypeCtor,
+                    _1EntryExpressionBuffer);
+                var convertAsyncEnumerable = Expression.Convert(castAsyncEnumerableTypeCtorCall, typeof(object));
+
+                _1EntryParameterExpressionBuffer ??= new ParameterExpression[1];
+                _1EntryParameterExpressionBuffer[0] = sourceParameter;
+
+                var lambda = Expression.Lambda<Func<object, object>>(
+                    convertAsyncEnumerable,
+                    _1EntryParameterExpressionBuffer);
+
+                var converter = lambda.Compile();
+                return converter;
+            }
+        }
+
+        private static Func<object, object> GetAsyncEnumerableConverter(Type sourceType, Type targetType)
+        {
+            var lookupEntry = _asyncEnumerableConverterLookup.GetValue(
+                sourceType,
+                _buildEnumerableConverterLookupEntry);
+
+            return lookupEntry.GetAsyncEnumerableConverter(targetType);
+        }
+
+        private static AsyncEnumerableConverterLookupEntry BuildEnumerableConverterLookupEntry(Type sourceType)
+        {
+            return new AsyncEnumerableConverterLookupEntry(sourceType);
         }
 
         #endregion

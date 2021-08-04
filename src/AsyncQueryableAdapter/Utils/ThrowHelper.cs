@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AsyncQueryableAdapter.Utils
@@ -29,6 +30,19 @@ namespace AsyncQueryableAdapter.Utils
         {
             // TODO: Exception message: Describe the method that is not supported.
             throw new NotSupportedException("The current query is not supported by the query provider.");
+        }
+
+        [DoesNotReturn]
+        public static void ThrowComparerMustBeOfType<TElement>(string? paramName = null)
+        {
+            var message = $"The comparer must be of type {typeof(IEqualityComparer<TElement>)}.";
+
+            if (paramName is null)
+            {
+                throw new ArgumentException(message, paramName);
+            }
+            
+            throw new ArgumentException(message);
         }
     }
 }

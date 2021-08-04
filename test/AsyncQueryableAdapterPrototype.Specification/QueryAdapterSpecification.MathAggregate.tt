@@ -41,7 +41,7 @@ foreach(var operation in operations)
     // TODO: This can be done in a better way!
     var canProcessNonPrimitiveType = operation.Equals("Min", StringComparison.Ordinal) || operation.Equals("Max", StringComparison.Ordinal);
     var canBeProcessedInDatabase = operation.Equals("Min", StringComparison.Ordinal) || operation.Equals("Max", StringComparison.Ordinal);
-    var implicitPostProcessingOptionsName = canBeProcessedInDatabase ? "DisallowImplicitPostProcessing" : "AllowImplicitPostProcessing";
+    var optionsName = canBeProcessedInDatabase ? "DisallowImplicitPostProcessing" : "AllowInMemoryEvaluation";
 #>
 
         //
@@ -60,7 +60,7 @@ if(canBeProcessedInDatabase)
         public async Task WhereSelect<#=operation#>Test()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -79,7 +79,7 @@ if(canProcessNonPrimitiveType)
         public async Task WhereSelect<#=operation#>NonPrimitiveTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -97,7 +97,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>WithSelectorTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -116,7 +116,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>NonPrimitiveWithSelectorTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -134,7 +134,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -149,7 +149,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -169,7 +169,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -188,7 +188,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -205,7 +205,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -225,7 +225,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -245,7 +245,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -262,7 +262,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Age);
 
@@ -284,7 +284,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitNonPrimitiveTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -299,7 +299,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitNonPrimitiveTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -319,7 +319,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitNonPrimitiveTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -338,7 +338,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationNonPrimitiveTranslatableTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -355,7 +355,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationNonPrimitiveTranslatableConditionalConstTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -375,7 +375,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationNonPrimitiveTranslatableConditionalCapturedTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -395,7 +395,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitNonPrimitiveTranslatableFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 
@@ -412,7 +412,7 @@ if(canProcessNonPrimitiveType)
         public async Task Where<#=operation#>AwaitWithCancellationNonPrimitiveTranslatableFactoryMethodTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(<#=implicitPostProcessingOptionsName#>);
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).<#=operation#>(p => p.Birthday);
 

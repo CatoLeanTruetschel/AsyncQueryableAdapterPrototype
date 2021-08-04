@@ -40,12 +40,12 @@ namespace AsyncQueryableAdapterPrototype.Tests
 foreach(var operation in operations) 
 {
     var allowsEmptyCollection = operation.EndsWith("OrDefault", StringComparison.Ordinal);
-    var conditionallyNeedsImplicitPostProcessing = operation.Equals("Last", StringComparison.Ordinal) || operation.Equals("LastOrDefault", StringComparison.Ordinal);
+    var conditionallyNeedsInMemoryProcessing= operation.Equals("Last", StringComparison.Ordinal) || operation.Equals("LastOrDefault", StringComparison.Ordinal);
     var singleEntryQueryAsyncQueryableOptions = "DisallowImplicitPostProcessing";
     
-    if(conditionallyNeedsImplicitPostProcessing)
+    if(conditionallyNeedsInMemoryProcessing)
     {
-       singleEntryQueryAsyncQueryableOptions = "\r\n#if SUPPORTS_QUERYABLE_TAKE_LAST\r\n\t\t\t\tDisallowImplicitPostProcessing\r\n#else\r\n\t\t\t\tAllowImplicitPostProcessing\r\n#endif\r\n\t\t\t\t";
+       singleEntryQueryAsyncQueryableOptions = "\r\n#if SUPPORTS_QUERYABLE_TAKE_LAST\r\n\t\t\t\tDisallowImplicitPostProcessing\r\n#else\r\n\t\t\t\tAllowInMemoryEvaluation\r\n#endif\r\n\t\t\t\t";
     }
 #>
 

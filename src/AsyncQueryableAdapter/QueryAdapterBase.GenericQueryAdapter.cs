@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
+using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
 {
@@ -64,6 +66,20 @@ namespace AsyncQueryableAdapter
             IAsyncEnumerable<object?> EvaluateAsync(
                 QueryAdapterBase queryAdapter,
                 IQueryable queryable,
+                CancellationToken cancellation);
+
+            ValueTask<bool> SequenceEqualAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                IAsyncEnumerable<object> second,
+                object? comparer,
+                CancellationToken cancellation);
+
+            ValueTask<bool> SequenceEqualAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                IQueryable second,
+                object? comparer,
                 CancellationToken cancellation);
         }
 
@@ -119,6 +135,68 @@ namespace AsyncQueryableAdapter
                 }
 
                 return typedEnumerable.Cast<T, object?>();
+            }
+
+            public ValueTask<bool> SequenceEqualAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                IAsyncEnumerable<object> second,
+                object? comparer,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                if (second is not IAsyncEnumerable<T> typedSecond)
+                {
+                    typedSecond = second.Cast<T>();
+                }
+
+                var typedComparer = comparer as IEqualityComparer<T>;
+
+                if (comparer is not null && typedComparer is null)
+                {
+                    ThrowHelper.ThrowComparerMustBeOfType<T>(nameof(comparer));
+                }
+
+                return queryAdapter.SequenceEqualAsync(
+                    typedQueryable,
+                    typedSecond,
+                    typedComparer,
+                    cancellation);
+            }
+
+            public ValueTask<bool> SequenceEqualAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                IQueryable second,
+                object? comparer,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedFirst)
+                {
+                    typedFirst = source.Cast<T>();
+                }
+
+                if (second is not IQueryable<T> typedSecond)
+                {
+                    typedSecond = source.Cast<T>();
+                }
+
+                var typedComparer = comparer as IEqualityComparer<T>;
+
+                if (comparer is not null && typedComparer is null)
+                {
+                    ThrowHelper.ThrowComparerMustBeOfType<T>(nameof(comparer));
+                }
+
+                return queryAdapter.SequenceEqualAsync(
+                    typedFirst,
+                    typedSecond,
+                    typedComparer,
+                    cancellation);
             }
         }
 
