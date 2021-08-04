@@ -1,21 +1,20 @@
-﻿/* License
- * --------------------------------------------------------------------------------------------------------------------
- * (C) Copyright 2021 Cato Léan Trütschel and contributors 
- * (https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * --------------------------------------------------------------------------------------------------------------------
- */
+﻿// License
+// --------------------------------------------------------------------------------------------------------------------
+// (C) Copyright 2021 Cato Léan Trütschel and contributors
+// (github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype)
+//
+// Licensed under the Apache License, Version 2.0 (the "License")
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Linq;
@@ -26,9 +25,9 @@ using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
 {
-    partial class QueryAdapterBase
+    public partial class QueryAdapterBase
     {
-        partial interface IGenericElementTypeQueryAdapter
+        private partial interface IGenericElementTypeQueryAdapter
         {
             AsyncTypeAwaitable MinAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
 
@@ -65,7 +64,7 @@ namespace AsyncQueryableAdapter
 
         }
 
-        partial class GenericQueryAdapter<T>
+        private partial class GenericQueryAdapter<T>
         {
             public AsyncTypeAwaitable MinAsync(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
             {
@@ -74,7 +73,7 @@ namespace AsyncQueryableAdapter
                     typedQueryable = source.Cast<T>();
                 }
 
-                var task =  queryAdapter.MinAsync(typedQueryable, cancellation);
+                var task = queryAdapter.MinAsync(typedQueryable, cancellation);
                 return task.AsTypeAwaitable();
             }
 
@@ -85,7 +84,7 @@ namespace AsyncQueryableAdapter
                     typedQueryable = source.Cast<T>();
                 }
 
-                var task =  queryAdapter.MaxAsync(typedQueryable, cancellation);
+                var task = queryAdapter.MaxAsync(typedQueryable, cancellation);
                 return task.AsTypeAwaitable();
             }
 
@@ -96,7 +95,7 @@ namespace AsyncQueryableAdapter
                     typedQueryable = source.Cast<T>();
                 }
 
-                var task =  queryAdapter.SumAsync(typedQueryable, cancellation);
+                var task = queryAdapter.SumAsync(typedQueryable, cancellation);
                 return task.AsTypeAwaitable();
             }
 
@@ -107,7 +106,7 @@ namespace AsyncQueryableAdapter
                     typedQueryable = source.Cast<T>();
                 }
 
-                var task =  queryAdapter.AverageAsync(typedQueryable, cancellation);
+                var task = queryAdapter.AverageAsync(typedQueryable, cancellation);
                 return task.AsTypeAwaitable();
             }
 
@@ -138,7 +137,7 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.FirstAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
@@ -169,7 +168,7 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.FirstOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
@@ -200,7 +199,7 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.LastAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
@@ -231,7 +230,7 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.LastOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
@@ -262,7 +261,7 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.SingleAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
@@ -293,14 +292,14 @@ namespace AsyncQueryableAdapter
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.SingleOrDefaultAsync(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
             }
         }
 
-        partial interface IGenericElementResultTypeQueryAdapter
+        private partial interface IGenericElementResultTypeQueryAdapter
         {
             AsyncTypeAwaitable MinAsync(
                 QueryAdapterBase queryAdapter,
@@ -328,7 +327,7 @@ namespace AsyncQueryableAdapter
 
         }
 
-        partial class GenericQueryAdapter<TSource, TResult>
+        private partial class GenericQueryAdapter<TSource, TResult>
         {
             public AsyncTypeAwaitable MinAsync(
                 QueryAdapterBase queryAdapter,
@@ -413,8 +412,6 @@ namespace AsyncQueryableAdapter
                 var task = queryAdapter.AverageAsync(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
                 return task.AsTypeAwaitable();
             }
-
-      
         }
     }
 }
