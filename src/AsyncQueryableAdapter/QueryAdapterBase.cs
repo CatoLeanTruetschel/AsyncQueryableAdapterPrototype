@@ -141,6 +141,18 @@ namespace AsyncQueryableAdapter
             return !notResult;
         }
 
+        internal ValueTask<bool> AllAsync(
+            Type sourceType,
+            IQueryable source,
+            Expression predicate,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).AllAsync(this, source, predicate, cancellation);
+        }
+
         protected virtual ValueTask<bool> AnyAsync<TSource>(
             IQueryable<TSource> source,
             CancellationToken cancellation)
@@ -149,6 +161,17 @@ namespace AsyncQueryableAdapter
                 throw new ArgumentNullException(nameof(source));
 
             return EvaluateAsync(source.Take(1), cancellation).AnyAsync(cancellation);
+        }
+
+        internal ValueTask<bool> AnyAsync(
+            Type sourceType,
+            IQueryable source,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).AnyAsync(this, source, cancellation);
         }
 
         protected virtual ValueTask<bool> AnyAsync<TSource>(
@@ -160,6 +183,18 @@ namespace AsyncQueryableAdapter
                 throw new ArgumentNullException(nameof(source));
 
             return EvaluateAsync(source.Where(predicate).Take(1), cancellation).AnyAsync(cancellation);
+        }
+
+        internal ValueTask<bool> AnyAsync(
+            Type sourceType,
+            IQueryable source,
+            Expression predicate,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).AnyAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource> AverageAsync<TSource>(
@@ -347,6 +382,17 @@ namespace AsyncQueryableAdapter
             return inMemoryCollection.CountAsync(cancellation);
         }
 
+        internal ValueTask<int> CountAsync(
+            Type sourceType,
+            IQueryable source,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).CountAsync(this, source, cancellation);
+        }
+
         protected virtual ValueTask<int> CountAsync<TSource>(
             IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
@@ -363,6 +409,18 @@ namespace AsyncQueryableAdapter
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
             return inMemoryCollection.CountAsync(cancellation);
+        }
+
+        internal ValueTask<int> CountAsync(
+            Type sourceType,
+            IQueryable source,
+            Expression predicate,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).CountAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource> ElementAtAsync<TSource>(
@@ -615,6 +673,17 @@ namespace AsyncQueryableAdapter
             return inMemoryCollection.LongCountAsync(cancellation);
         }
 
+        internal ValueTask<long> LongCountAsync(
+            Type sourceType,
+            IQueryable source,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).LongCountAsync(this, source, cancellation);
+        }
+
         protected virtual ValueTask<long> LongCountAsync<TSource>(
             IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
@@ -631,6 +700,18 @@ namespace AsyncQueryableAdapter
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
             return inMemoryCollection.LongCountAsync(cancellation);
+        }
+
+        internal ValueTask<long> LongCountAsync(
+           Type sourceType,
+           IQueryable source,
+           Expression predicate,
+           CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).LongCountAsync(this, source, predicate, cancellation);
         }
 
         protected virtual ValueTask<TSource> MaxAsync<TSource>(

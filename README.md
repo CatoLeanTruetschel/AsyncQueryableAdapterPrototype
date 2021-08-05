@@ -201,14 +201,14 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [ ] Seed support
         * [ ] Support for async accumulators and resultSelectors (when translatable to sync)
         * [ ] Unit-test   
-    * [ ] All operation translator
-        * [ ] Basic support
-        * [ ] Support for async predicates (when translatable to sync selectors)
-        * [ ] Unit-test
-    * [ ] Any operation translator
-        * [ ] Basic support
-        * [ ] Support for async predicates (when translatable to sync selectors)
-        * [ ] Unit-test
+    * [x] All operation translator
+        * [x] Basic support
+        * [x] Support for async predicates (when translatable to sync predicates)
+        * [x] Unit-test
+    * [x] Any operation translator
+        * [x] Basic support
+        * [x] Support for async predicates (when translatable to sync predicates)
+        * [x] Unit-test
     * [x] Average operation translator
         * [x] Basic support
         * [x] Support for async selectors (when translatable to sync selectors)
@@ -216,10 +216,10 @@ This is a prototype. It is **not** feature complete. There are currently no rele
     * [ ] Contains operation translator
         * [ ] Basic support
         * [ ] Unit-test
-    * [ ] Count operation translator
-        * [ ] Basic support
-        * [ ] Support for async predicates (when translatable to sync selectors)
-        * [ ] Unit-test
+    * [x] Count operation translator
+        * [x] Basic support
+        * [x] Support for async predicates (when translatable to sync predicates)
+        * [x] Unit-test
     * [ ] ElementAt operation translator
         * [ ] Basic support
         * [ ] Support for ElementAtDefault
@@ -234,10 +234,10 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Support for async predicates (when translatable to sync selectors)
         * [x] Support for LastOrDefault
         * [x] Unit-test
-    * [ ] LongCount operation translator
-        * [ ] Basic support
-        * [ ] Support for async predicates (when translatable to sync selectors)
-        * [ ] Unit-test
+    * [x] LongCount operation translator
+        * [x] Basic support
+        * [x] Support for async predicates (when translatable to sync predicates)
+        * [x] Unit-test
     * [x] Max operation translator
         * [x] Basic support
         * [x] Support for async selectors (when translatable to sync selectors)

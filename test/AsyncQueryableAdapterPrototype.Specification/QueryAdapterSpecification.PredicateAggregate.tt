@@ -1,0 +1,331 @@
+﻿/* License
+ * --------------------------------------------------------------------------------------------------------------------
+ * (C) Copyright 2021 Cato Léan Trütschel and contributors 
+ * (https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * --------------------------------------------------------------------------------------------------------------------
+ */
+
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".tt.cs" #>
+<#
+    var operations = new [] { "All", "Any", "Count", "LongCount" };
+#>
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace AsyncQueryableAdapterPrototype.Tests
+{
+    partial class QueryAdapterSpecification
+    {
+<# 
+foreach (var operation in operations) 
+{
+    var canBeProcessedInDatabase = operation.Equals("All", StringComparison.Ordinal) || operation.Equals("Any", StringComparison.Ordinal);
+    var optionsName = canBeProcessedInDatabase ? "DisallowImplicitPostProcessing" : "AllowInMemoryEvaluation";
+#>
+
+        //
+        // Test cases for the <#=operation#> Operation
+        //
+<#
+if (!operation.Equals("All", StringComparison.Ordinal))
+{
+#>
+        [Fact]
+        public async Task WhereSelect<#=operation#>Test()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.Where(p => p.Age > 42).Select(p => p.Age).<#=operation#>Async();
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+<#
+}
+#>
+        [Fact]
+        public async Task <#=operation#>WithPredicateTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.<#=operation#>Async(p => p.Age > 42);
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitTranslatableTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.Where(p => true).<#=operation#>AwaitAsync(p => new ValueTask<bool>(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task <#=operation#>AwaitTranslatableTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.<#=operation#>AwaitAsync(p => new ValueTask<bool>(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitTranslatableConditionalConstTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var constConditionalPredicate = BuildAsyncConstConditionalAccessExpression(
+                (PersonEntry person) => person.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitAsync(constConditionalPredicate);
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitTranslatableConditionalCapturedTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var trueValue = true;
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitAsync(p => trueValue ? new ValueTask<bool>(p.Age > 42) : new ValueTask<bool>(false));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task <#=operation#>AwaitTranslatableConditionalCapturedTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var trueValue = true;
+
+            // Act
+            var queryResult = await personQueryable
+                .<#=operation#>AwaitAsync(p => trueValue ? new ValueTask<bool>(p.Age > 42) : new ValueTask<bool>(false));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitWithCancellationTranslatableTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitWithCancellationAsync((p, c) => new ValueTask<bool>(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitWithCancellationTranslatableConditionalConstTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var constConditionalPredicate = BuildAsyncConstConditionalAccessWithCancellationExpression(
+                (PersonEntry person) => person.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitWithCancellationAsync(constConditionalPredicate);
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitWithCancellationTranslatableConditionalCapturedTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var trueValue = true;
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitWithCancellationAsync((p, c) => trueValue ? new ValueTask<bool>(p.Age > 42) : new ValueTask<bool>(false));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task <#=operation#>AwaitWithCancellationTranslatableConditionalCapturedTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            var trueValue = true;
+
+            // Act
+            var queryResult = await personQueryable
+                .<#=operation#>AwaitWithCancellationAsync((p, c) => trueValue ? new ValueTask<bool>(p.Age > 42) : new ValueTask<bool>(false));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+#if NETCORE50
+        [Fact]
+        public async Task Where<#=operation#>AwaitTranslatableValueTaskFactoryMethodTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitAsync(p => ValueTask.FromResult(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitWithCancellationTranslatableValueTaskFactoryMethodTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(<#=optionsName#>);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true)
+                .<#=operation#>AwaitWithCancellationAsync((p, c) => ValueTask.FromResult(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+#endif
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitDefaultPostProcessing);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.Where(p => true).<#=operation#>AwaitAsync(p => CreateValueTaskAsync(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task Where<#=operation#>AwaitWithCancellationTest()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitDefaultPostProcessing);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable
+                .Where(p => true).<#=operation#>AwaitWithCancellationAsync((p, c) => CreateValueTaskAsync(p.Age > 42));
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+
+        [Fact]
+        public async Task WhereAwait<#=operation#>Test()
+        {
+            // Arrange
+            var queryAdapter = await GetQueryAdapterAsync(AllowImplicitPostProcessing);
+            var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
+            var expectedQueryResult = _personEntries.<#=operation#>(p => p.Age > 42);
+
+            // Act
+            var queryResult = await personQueryable.WhereAwait(p => CreateValueTaskAsync(true)).<#=operation#>Async(p => p.Age > 42);
+
+            // Assert
+            Assert.Equal(expectedQueryResult, queryResult);
+        }
+<# 
+} 
+#>
+    }
+}

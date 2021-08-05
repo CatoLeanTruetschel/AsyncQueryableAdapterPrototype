@@ -11,6 +11,11 @@
   </ItemGroup>
   
  <ItemGroup>
+    <None Include="QueryAdapterSpecification.PredicateAggregate.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterSpecification.PredicateAggregate.tt</DependentUpon>
+    </None>
     <None Include="QueryAdapterSpecification.SingleEntryQuery.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -21,6 +26,10 @@
     <None Update="QueryAdapterSpecification.MathAggregate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>QueryAdapterSpecification.MathAggregate.tt.cs</LastGenOutput>
+    </None>
+    <None Update="QueryAdapterSpecification.PredicateAggregate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryAdapterSpecification.PredicateAggregate.tt.cs</LastGenOutput>
     </None>
     <None Update="QueryAdapterSpecification.SingleEntryQuery.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -37,6 +46,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>QueryAdapterSpecification.MathAggregate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="QueryAdapterSpecification.PredicateAggregate.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryAdapterSpecification.PredicateAggregate.tt</DependentUpon>
     </Compile>
     <Compile Update="QueryAdapterSpecification.SingleEntryQuery.tt.cs">
       <DesignTime>True</DesignTime>

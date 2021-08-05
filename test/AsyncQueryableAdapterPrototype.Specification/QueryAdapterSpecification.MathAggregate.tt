@@ -275,7 +275,6 @@ if(canProcessNonPrimitiveType)
             Assert.Equal(expectedQueryResult, queryResult);
         }
 #endif
-
 <#
 if(canProcessNonPrimitiveType)
 {
@@ -481,7 +480,7 @@ if(canBeProcessedInDatabase)
 
             // Assert
             Assert.Equal(expectedQueryResult, queryResult);
-        }          
+        }
 <# 
 } 
 #>

@@ -26,7 +26,15 @@
 <#
     var mathAggregateOperations = new [] { "Min", "Max", "Sum", "Average" };
     var singleEntryQueryOperations = new [] { "First", "FirstOrDefault", "Last", "LastOrDefault", "Single", "SingleOrDefault" };
+    var predicateAggregateOperations = new [] {
+        new PredicateAggregateOperation("Any", false, typeof(bool)),
+        new PredicateAggregateOperation("All", true, typeof(bool)),
+        new PredicateAggregateOperation("Count", false, typeof(int)),
+        new PredicateAggregateOperation("LongCount", false, typeof(long))
+    };
 #>
+#pragma warning disable IDE0049
+
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -41,22 +49,33 @@ namespace AsyncQueryableAdapter
         partial interface IGenericElementTypeQueryAdapter
         {
 <#
-foreach(var mathAggregateOperation in mathAggregateOperations)
+foreach (var mathAggregateOperation in mathAggregateOperations)
 {
 #>
             AsyncTypeAwaitable <#=mathAggregateOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
 
 <#
 }
-#>
-
-<#
-foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
+foreach (var singleEntryQueryOperation in singleEntryQueryOperations)
 {
 #>
             AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
 
             AsyncTypeAwaitable <#=singleEntryQueryOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, Expression predicate, CancellationToken cancellation);
+
+<#
+}
+foreach (var predicateAggregateOperation in predicateAggregateOperations) 
+{
+    if (!predicateAggregateOperation.PredicateRequired)
+    {
+#>
+            ValueTask<<#=predicateAggregateOperation.ResultType#>> <#=predicateAggregateOperation.Name#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation);
+
+<#
+    }
+#>
+            ValueTask<<#=predicateAggregateOperation.ResultType#>> <#=predicateAggregateOperation.Name#>Async(QueryAdapterBase queryAdapter, IQueryable source, Expression predicate, CancellationToken cancellation);
 
 <#
 }
@@ -66,7 +85,7 @@ foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
         partial class GenericQueryAdapter<T>
         {
 <#
-foreach(var mathAggregateOperation in mathAggregateOperations)
+foreach (var mathAggregateOperation in mathAggregateOperations)
 {
 #>
             public AsyncTypeAwaitable <#=mathAggregateOperation#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
@@ -76,15 +95,12 @@ foreach(var mathAggregateOperation in mathAggregateOperations)
                     typedQueryable = source.Cast<T>();
                 }
 
-                var task =  queryAdapter.<#=mathAggregateOperation#>Async(typedQueryable, cancellation);
+                var task = queryAdapter.<#=mathAggregateOperation#>Async(typedQueryable, cancellation);
                 return task.AsTypeAwaitable();
             }
 
 <#
 }
-#>
-
-<#
 foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
 {
 #>
@@ -114,10 +130,46 @@ foreach(var singleEntryQueryOperation in singleEntryQueryOperations)
                 {
                     predicate = unaryExpression.Operand;
                 }
-                
+
                 // TODO: Can we convert the selector if it is not of the appropriate type?
                 var task = queryAdapter.<#=singleEntryQueryOperation#>Async(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
                 return task.AsTypeAwaitable();
+            }
+<#
+}
+foreach (var predicateAggregateOperation in predicateAggregateOperations) 
+{
+    if (!predicateAggregateOperation.PredicateRequired)
+    {
+#>
+
+            public ValueTask<<#=predicateAggregateOperation.ResultType#>> <#=predicateAggregateOperation.Name#>Async(QueryAdapterBase queryAdapter, IQueryable source, CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                return queryAdapter.<#=predicateAggregateOperation.Name#>Async(typedQueryable, cancellation);
+            }
+
+<#
+    }
+#>
+            public ValueTask<<#=predicateAggregateOperation.ResultType#>> <#=predicateAggregateOperation.Name#>Async(QueryAdapterBase queryAdapter, IQueryable source, Expression predicate, CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedQueryable)
+                {
+                    typedQueryable = source.Cast<T>();
+                }
+
+                if (predicate is UnaryExpression unaryExpression && unaryExpression.NodeType == ExpressionType.Quote)
+                {
+                    predicate = unaryExpression.Operand;
+                }
+
+                // TODO: Can we convert the selector if it is not of the appropriate type?
+                return queryAdapter.<#=predicateAggregateOperation.Name#>Async(typedQueryable, (Expression<Func<T, bool>>)predicate, cancellation);
             }
 <#
 }
@@ -147,6 +199,7 @@ foreach(var mathAggregateOperation in mathAggregateOperations)
 foreach(var mathAggregateOperation in mathAggregateOperations)
 {
 #>
+
             public AsyncTypeAwaitable <#=mathAggregateOperation#>Async(
                 QueryAdapterBase queryAdapter,
                 IQueryable source,
@@ -167,10 +220,24 @@ foreach(var mathAggregateOperation in mathAggregateOperations)
                 var task = queryAdapter.<#=mathAggregateOperation#>Async(typedQueryable, (Expression<Func<TSource, TResult>>)selector, cancellation);
                 return task.AsTypeAwaitable();
             }
-
 <#
 }
-#>      
+#>
         }
     }
 }
+<#+
+    class PredicateAggregateOperation
+    {
+        public PredicateAggregateOperation(string name, bool predicateRequired, Type resultType)
+        {
+            Name = name;
+            PredicateRequired = predicateRequired;
+            ResultType = resultType;
+        }
+
+        public string Name { get; }
+        public bool PredicateRequired { get; } 
+        public Type ResultType { get; } 
+    }
+#>

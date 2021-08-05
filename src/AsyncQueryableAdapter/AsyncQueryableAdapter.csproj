@@ -10,6 +10,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MathAggregateTranslator.tt</DependentUpon>
     </None>
+    <None Include="Translators\PredicateAggregateTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PredicateAggregateTranslator.tt</DependentUpon>
+    </None>
     <None Include="Translators\SingleEntryQueryMethodTranslator.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -31,6 +36,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MathAggregateTranslator.tt.cs</LastGenOutput>
     </None>
+    <None Update="Translators\PredicateAggregateTranslator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PredicateAggregateTranslator.tt.cs</LastGenOutput>
+    </None>
     <None Update="Translators\SingleEntryQueryMethodTranslator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SingleEntryQueryMethodTranslator.tt.cs</LastGenOutput>
@@ -51,6 +60,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MathAggregateTranslator.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Translators\PredicateAggregateTranslator.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PredicateAggregateTranslator.tt</DependentUpon>
     </Compile>
     <Compile Update="Translators\SingleEntryQueryMethodTranslator.tt.cs">
       <DesignTime>True</DesignTime>
