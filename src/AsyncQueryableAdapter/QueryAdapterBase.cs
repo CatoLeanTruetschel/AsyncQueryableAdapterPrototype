@@ -832,11 +832,26 @@ namespace AsyncQueryableAdapter
             if (second is null)
                 throw new ArgumentNullException(nameof(second));
 
+            if (comparer is null)
+            {
+                return SequenceEqualAsync(first, second, cancellation);
+            }
+
             if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(first, cancellation);
             return inMemoryCollection.SequenceEqualAsync(second, comparer, cancellation);
+        }
+
+        private async ValueTask<bool> SequenceEqualAsync<TSource>(
+            IQueryable<TSource> first,
+            IAsyncEnumerable<TSource> second,
+            CancellationToken cancellation)
+        {
+            var secondList = await second.ToListAsync(cancellation).ConfigureAwait(false);
+            return await SequenceEqualAsync(first, secondList.AsQueryable(), comparer: null, cancellation)
+                .ConfigureAwait(false);
         }
 
         internal ValueTask<bool> SequenceEqualAsync(
@@ -864,11 +879,28 @@ namespace AsyncQueryableAdapter
             if (second is null)
                 throw new ArgumentNullException(nameof(second));
 
-            // TODO: Can be put together a better solution with ZIP, which reuslts in a stream of pairs, that we
-            //       can transform to a stream of bools via SELECT with a comparison function and then perform the 
-            //       ALL operation?
-            //       The problem here is that we do not know the length of the streams and ZIP terminates,
-            //       when any of the input streams terminates.
+#if SUPPORTS_QUERYABLE_APPEND
+            // Can be put together a better solution with ZIP, which results in a stream of pairs, that we
+            // can transform to a stream of bools via SELECT with a comparison function and then perform the 
+            // ALL operation?
+            // The problem here is that we do not know the length of the streams and ZIP terminates,
+            // when any of the input streams terminates.
+            if (comparer is null || comparer == EqualityComparer<TSource>.Default)
+            {
+                var firstProjection = first
+                   .Select(p => new { Element = (TSource?)p, Terminated = false })
+                   .Append(new { Element = default(TSource), Terminated = true });
+
+                var secondProjection = second
+                    .Select(p => new { Element = (TSource?)p, Terminated = false })
+                    .Append(new { Element = default(TSource), Terminated = true });
+
+                var combined = firstProjection.Zip(
+                    secondProjection, 
+                    (a, b) => (a.Terminated && b.Terminated) || (a.Terminated == b.Terminated && a.Element!.Equals(b.Element)));
+                return AllAsync<bool>(combined, p => p, cancellation);
+            }
+#endif
 
             if (!Options.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();

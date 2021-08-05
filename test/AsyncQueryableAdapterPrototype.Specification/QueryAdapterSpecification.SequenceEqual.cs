@@ -19,17 +19,25 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AsyncQueryableAdapter;
 using Xunit;
 
 namespace AsyncQueryableAdapterPrototype.Tests
 {
     public partial class QueryAdapterSpecification
     {
+        private AsyncQueryableOptions SequenceEqualNoComparerOptions =>
+#if SUPPORTS_QUERYABLE_APPEND
+            DisallowImplicitPostProcessing;
+#else
+            AllowInMemoryEvaluation;
+#endif
+
         [Fact]
         public async Task WhereSequenceEqualAreEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = _personEntries.Where(p => p.Age == 21).ToAsyncEnumerable();
 
@@ -44,7 +52,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualAreNotEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = _personEntries.Where(p => p.Age != 21).ToAsyncEnumerable();
 
@@ -59,7 +67,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualWithEqualConditionAreEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = personQueryable.Where(p => p.Age == 21);
 
@@ -74,7 +82,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualWithNullSecondArgumentThrowsArgumentNullExceptionTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act and Assert
@@ -88,7 +96,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualNullComparerAreEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = _personEntries.Where(p => p.Age == 21).ToAsyncEnumerable();
 
@@ -105,7 +113,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualNullComparerAreNotEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = _personEntries.Where(p => p.Age != 21).ToAsyncEnumerable();
 
@@ -122,7 +130,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualNullComparerWithEqualConditionAreEqualTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var comparisonSequence = personQueryable.Where(p => p.Age == 21);
 
@@ -139,7 +147,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
         public async Task WhereSequenceEqualNullComparerWithNullSecondArgumentThrowsArgumentNullExceptionTest()
         {
             // Arrange
-            var queryAdapter = await GetQueryAdapterAsync(AllowInMemoryEvaluation);
+            var queryAdapter = await GetQueryAdapterAsync(SequenceEqualNoComparerOptions);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act and Assert
