@@ -197,9 +197,9 @@ This is a prototype. It is **not** feature complete. There are currently no rele
             * [ ] Where, WhereAwait, WhereAwaitWithCancellation
             * [ ] Zip, ZipAwait, ZipAwaitWithCancellation
     * [ ] Aggregate operation translator
-        * [ ] Basic support
-        * [ ] Seed support
-        * [ ] Support for async accumulators and resultSelectors (when translatable to sync)
+        * [x] Basic support
+        * [x] Seed support
+        * [x] Support for async accumulators and resultSelectors (when translatable to sync)
         * [ ] Unit-test   
     * [x] All operation translator
         * [x] Basic support

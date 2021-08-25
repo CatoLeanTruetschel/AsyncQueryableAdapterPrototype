@@ -36,6 +36,9 @@ namespace AsyncQueryableAdapter.Utils
         [ThreadStatic]
         private static Type[]? _3EntryTypeBuffer;
 
+        [ThreadStatic]
+        private static Type[]? _4EntryTypeBuffer;
+
         public static Type GetPredicateType(Type sourceType)
         {
             return GetFuncExpressionType(sourceType, typeof(bool));
@@ -82,6 +85,22 @@ namespace AsyncQueryableAdapter.Utils
             _3EntryTypeBuffer[1] = sourceType2;
             _3EntryTypeBuffer[2] = resultType;
             var selectorType = typeof(Func<,,>).MakeGenericType(_3EntryTypeBuffer);
+
+            _1EntryTypeBuffer ??= new Type[1];
+            _1EntryTypeBuffer[0] = selectorType;
+            var selectorExpressionType = typeof(Expression<>).MakeGenericType(_1EntryTypeBuffer);
+
+            return selectorExpressionType;
+        }
+
+        public static Type GetFuncExpressionType(Type sourceType1, Type sourceType2, Type sourceType3, Type resultType)
+        {
+            _4EntryTypeBuffer ??= new Type[4];
+            _4EntryTypeBuffer[0] = sourceType1;
+            _4EntryTypeBuffer[1] = sourceType2;
+            _4EntryTypeBuffer[2] = sourceType3;
+            _4EntryTypeBuffer[3] = resultType;
+            var selectorType = typeof(Func<,,,>).MakeGenericType(_4EntryTypeBuffer);
 
             _1EntryTypeBuffer ??= new Type[1];
             _1EntryTypeBuffer[0] = selectorType;

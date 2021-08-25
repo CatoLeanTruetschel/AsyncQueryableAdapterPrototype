@@ -91,6 +91,18 @@ namespace AsyncQueryableAdapter
             return inMemoryCollection.AggregateAsync(accumulator.Compile(), cancellation);
         }
 
+        internal AsyncTypeAwaitable AggregateAsync(
+            Type elementType,
+            IQueryable queryable,
+            Expression accumulator,
+            CancellationToken cancellation)
+        {
+            if (elementType is null)
+                throw new ArgumentNullException(nameof(elementType));
+
+            return GetQueryAdapter(elementType).AggregateAsync(this, queryable, accumulator, cancellation);
+        }
+
         protected virtual ValueTask<TAccumulate> AggregateAsync<TSource, TAccumulate>(
             IQueryable<TSource> source,
             TAccumulate seed,
@@ -108,6 +120,25 @@ namespace AsyncQueryableAdapter
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
             return inMemoryCollection.AggregateAsync(seed, accumulator.Compile(), cancellation);
+        }
+
+        internal AsyncTypeAwaitable AggregateAsync(
+            Type elementType,
+            Type accumulateType,
+            IQueryable queryable,
+            object? seed,
+            Expression accumulator,
+            CancellationToken cancellation)
+        {
+            if (elementType is null)
+                throw new ArgumentNullException(nameof(elementType));
+
+            if (accumulateType is null)
+                throw new ArgumentNullException(nameof(accumulateType));
+
+            return GetQueryAdapter(elementType)
+                .GetQueryAdapter(accumulateType)
+                .AggregateAsync(this, queryable, seed, accumulator, cancellation);
         }
 
         protected virtual ValueTask<TResult> AggregateAsync<TSource, TAccumulate, TResult>(
@@ -133,6 +164,28 @@ namespace AsyncQueryableAdapter
 
             return inMemoryCollection.AggregateAsync(
                 seed, accumulator.Compile(), resultSelector.Compile(), cancellation);
+        }
+
+        internal AsyncTypeAwaitable AggregateAsync(
+            Type elementType,
+            Type accumulateType,
+            Type resultType,
+            IQueryable queryable,
+            object? seed,
+            Expression accumulator,
+            Expression resultSelector,
+            CancellationToken cancellation)
+        {
+            if (elementType is null)
+                throw new ArgumentNullException(nameof(elementType));
+
+            if (accumulateType is null)
+                throw new ArgumentNullException(nameof(accumulateType));
+
+            return GetQueryAdapter(elementType)
+                .GetQueryAdapter(accumulateType)
+                .GetQueryAdapter(resultType)
+                .AggregateAsync(this, queryable, seed, accumulator, resultSelector, cancellation);
         }
 
         protected virtual async ValueTask<bool> AllAsync<TSource>(

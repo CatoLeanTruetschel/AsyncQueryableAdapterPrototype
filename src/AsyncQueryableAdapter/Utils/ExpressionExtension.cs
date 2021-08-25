@@ -27,7 +27,13 @@ namespace System.Linq.Expressions
         private static Type[]? _2EntryTypeBuffer;
 
         [ThreadStatic]
+        private static Type[]? _3EntryTypeBuffer;
+
+        [ThreadStatic]
         private static ParameterExpression[]? _1EntryParameterExpressionBuffer;
+
+        [ThreadStatic]
+        private static ParameterExpression[]? _2EntryParameterExpressionBuffer;
 
         public static Expression ConvertRespectNullReferences<T>(this Expression expression)
         {
@@ -151,6 +157,61 @@ namespace System.Linq.Expressions
 
             var parameters = _1EntryParameterExpressionBuffer ??= new ParameterExpression[1];
             parameters[0] = sourceParameter;
+
+            translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
+
+            return true;
+        }
+
+        public static bool TryTranslateExpressionToSync(
+           this Expression expression,
+           Type sourceType1,
+           Type sourceType2,
+           Type targetType,
+           [NotNullWhen(true)] out Expression? translatedExpression)
+        {
+            translatedExpression = null;
+
+            // If expression is of form: Expression<Func<TSource1, TSource2, ValueTask<TResult>>>
+            // Or of form: Expression<Func<TSource1, TSource2, CancellationToken, ValueTask<TResult>>>
+            // Translate it to form Expression<Func<TSource1, TSource2, TResult>> if possible
+
+            var selectorExpressionVisitor = new SelectorExpressionVisitor(targetType);
+
+            if (expression.Unquote() is not LambdaExpression lambdaExpression)
+                return false;
+
+            var body = lambdaExpression.Body;
+            var translatedBody = selectorExpressionVisitor.Visit(body).Unquote();
+
+            if (translatedBody.Type != targetType)
+                return false;
+
+            if (selectorExpressionVisitor.Parameters.Count > 2)
+                return false;
+
+            var source1Parameter = selectorExpressionVisitor.Parameters.FirstOrDefault();
+            var source2Parameter = selectorExpressionVisitor.Parameters.Skip(1).FirstOrDefault();
+
+            if (source1Parameter is not null && source1Parameter.Type != sourceType1)
+                return false;
+
+            if (source2Parameter is not null && source2Parameter.Type != sourceType2)
+                return false;
+
+            source1Parameter ??= Expression.Parameter(sourceType1);
+            source2Parameter ??= Expression.Parameter(sourceType2);
+
+            _3EntryTypeBuffer ??= new Type[3];
+            _3EntryTypeBuffer[0] = sourceType1;
+            _3EntryTypeBuffer[1] = sourceType2;
+            _3EntryTypeBuffer[2] = targetType;
+
+            var selectorType = typeof(Func<,,>).MakeGenericType(_3EntryTypeBuffer);
+
+            var parameters = _2EntryParameterExpressionBuffer ??= new ParameterExpression[2];
+            parameters[0] = source1Parameter;
+            parameters[1] = source2Parameter;
 
             translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
 

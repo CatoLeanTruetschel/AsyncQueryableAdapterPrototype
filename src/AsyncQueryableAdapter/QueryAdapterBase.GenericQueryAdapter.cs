@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -99,6 +100,12 @@ namespace AsyncQueryableAdapter
                 object value,
                 object? comparer,
                 CancellationToken cancellation);
+
+            AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                Expression accumulator,
+                CancellationToken cancellation);
         }
 
         private partial interface IGenericElementResultTypeQueryAdapter
@@ -106,10 +113,36 @@ namespace AsyncQueryableAdapter
             Type ElementType { get; }
 
             Type ResultType { get; }
+
+            IGeneric3TypesQueryAdapter GetQueryAdapter(Type accumulateType);
+
+            AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                object? seed,
+                Expression accumulator,
+                CancellationToken cancellation);
+        }
+
+        private partial interface IGeneric3TypesQueryAdapter
+        {
+            Type ElementType { get; }
+
+            Type AccumulateType { get; }
+
+            Type ResultType { get; }
+
+            AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                object? seed,
+                Expression accumulator,
+                Expression resultSelector,
+                CancellationToken cancellation);
         }
 
 #pragma warning disable CA1812
-        private sealed partial class GenericQueryAdapter<T> : IGenericElementTypeQueryAdapter
+        private sealed partial class GenericQueryAdapter<T> : IGenericElementTypeQueryAdapter // TODO: Rename T to TElement
 #pragma warning restore CA1812
         {
             private static readonly ConditionalWeakTable<Type, IGenericElementResultTypeQueryAdapter> _queryAdapters
@@ -274,16 +307,104 @@ namespace AsyncQueryableAdapter
                     return queryAdapter.ContainsAsync(typedSource, typedValue, typedComparer, cancellation);
                 }
             }
+
+            public AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                Expression accumulator,
+                CancellationToken cancellation)
+            {
+                if (queryable is not IQueryable<T> typedSource)
+                {
+                    typedSource = queryable.Cast<T>();
+                }
+
+                accumulator = accumulator.Unquote();
+
+                return queryAdapter.AggregateAsync(typedSource, (Expression<Func<T, T, T>>)accumulator, cancellation)
+                    .AsTypeAwaitable();
+            }
         }
 
 #pragma warning disable CA1812
-        private sealed partial class GenericQueryAdapter<TSource, TResult>
+        private sealed partial class GenericQueryAdapter<TSource, TResult> // TODO: Rename TSource to TElement
 #pragma warning restore CA1812
             : IGenericElementResultTypeQueryAdapter
         {
+            private static readonly ConditionalWeakTable<Type, IGeneric3TypesQueryAdapter> _queryAdapters
+                = new();
+            private static readonly ConditionalWeakTable<Type, IGeneric3TypesQueryAdapter>.CreateValueCallback _buildQueryAdapter
+                = BuildQueryAdapter;
+
+            private static IGeneric3TypesQueryAdapter BuildQueryAdapter(Type accumulateType)
+            {
+                var type = _elementResultTypeQueryAdapterTypeDefinition.MakeGenericType(
+                    typeof(TSource), accumulateType, typeof(TResult));
+
+                return (IGeneric3TypesQueryAdapter)Activator.CreateInstance(type)!;
+            }
+
             public Type ElementType => typeof(TSource);
 
             public Type ResultType => typeof(TResult);
+
+            public IGeneric3TypesQueryAdapter GetQueryAdapter(Type t3)
+            {
+                return _queryAdapters.GetValue(t3, _buildQueryAdapter);
+            }
+
+            public AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                object? seed,
+                Expression accumulator,
+                CancellationToken cancellation)
+            {
+                if (queryable is not IQueryable<TSource> typedSource)
+                {
+                    typedSource = queryable.Cast<TSource>();
+                }
+
+                accumulator = accumulator.Unquote();
+
+                return queryAdapter.AggregateAsync(
+                    typedSource,
+                    seed is null ? default! : (TResult)seed, // TODO: Per spec seed may be null but is unnotated as non-null.
+                    (Expression<Func<TResult, TSource, TResult>>)accumulator,
+                    cancellation).AsTypeAwaitable();
+            }
+        }
+
+        private sealed partial class GenericQueryAdapter<TElement, TAccumulate, TResult> : IGeneric3TypesQueryAdapter
+        {
+            public Type ElementType => typeof(TElement);
+
+            public Type AccumulateType => typeof(TAccumulate);
+
+            public Type ResultType => typeof(TResult);
+
+            public AsyncTypeAwaitable AggregateAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable queryable,
+                object? seed,
+                Expression accumulator,
+                Expression resultSelector,
+                CancellationToken cancellation)
+            {
+                if (queryable is not IQueryable<TElement> typedSource)
+                {
+                    typedSource = queryable.Cast<TElement>();
+                }
+
+                accumulator = accumulator.Unquote();
+
+                return queryAdapter.AggregateAsync(
+                    typedSource,
+                    seed is null ? default! : (TAccumulate)seed, // TODO: Per spec seed may be null but is unnotated as non-null.
+                    (Expression<Func<TAccumulate, TElement, TAccumulate>>)accumulator,
+                    (Expression<Func<TAccumulate, TResult>>)resultSelector,
+                    cancellation).AsTypeAwaitable();
+            }
         }
     }
 }

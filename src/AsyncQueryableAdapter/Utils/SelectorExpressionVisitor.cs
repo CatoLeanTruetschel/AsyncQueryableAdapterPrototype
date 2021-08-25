@@ -105,6 +105,7 @@ namespace AsyncQueryableAdapter.Utils
 
         private HashSet<ParameterExpression>? _parameters;
 
+        // TODO: This is required to be ordered!
         public ISet<ParameterExpression> Parameters
             => _parameters ?? (ISet<ParameterExpression>)ImmutableHashSet<ParameterExpression>.Empty;
 
