@@ -213,9 +213,9 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Basic support
         * [x] Support for async selectors (when translatable to sync selectors)
         * [x] Unit-test
-    * [ ] Contains operation translator
-        * [ ] Basic support
-        * [ ] Unit-test
+    * [x] Contains operation translator
+        * [X] Basic support
+        * [X] Unit-test
     * [x] Count operation translator
         * [x] Basic support
         * [x] Support for async predicates (when translatable to sync predicates)

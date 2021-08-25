@@ -347,32 +347,41 @@ namespace AsyncQueryableAdapter
         protected virtual ValueTask<bool> ContainsAsync<TSource>(
             IQueryable<TSource> source,
             TSource value,
-            CancellationToken cancellation)
-        {
-            // TODO: Build an expression tree that support null values for entries and for value and 
-            //       that calls the correct equals method (equality operator, IEquatable, default Equals)
-            return AnyAsync(source, p => p!.Equals(value), cancellation);
-        }
-
-        protected virtual ValueTask<bool> ContainsAsync<TSource>(
-            IQueryable<TSource> source,
-            TSource value,
             IEqualityComparer<TSource>? comparer,
             CancellationToken cancellation)
         {
-            if (comparer is null)
-            {
-                return ContainsAsync(source, value, cancellation);
-            }
-
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
+
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
+
+            if (comparer is null)
+            {
+                return AnyAsync(source, p => value.Equals(p), cancellation);
+            }
 
             if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
             return inMemoryCollection.ContainsAsync(value, cancellation);
+        }
+
+        internal ValueTask<bool> ContainsAsync(
+            Type sourceType,
+            IQueryable source,
+            object value,
+            object? comparer,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
+
+            return BuildQueryAdapter(sourceType).ContainsAsync(this, source, value, comparer, cancellation);
         }
 
         protected virtual ValueTask<int> CountAsync<TSource>(

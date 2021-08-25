@@ -92,6 +92,13 @@ namespace AsyncQueryableAdapter
                 IQueryable source,
                 int index,
                 CancellationToken cancellation);
+
+            ValueTask<bool> ContainsAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                object value,
+                object? comparer,
+                CancellationToken cancellation);
         }
 
         private partial interface IGenericElementResultTypeQueryAdapter
@@ -236,6 +243,36 @@ namespace AsyncQueryableAdapter
                 }
 
                 return queryAdapter.ElementAtOrDefaultAsync(typedSource, index, cancellation).AsTypeAwaitable();
+            }
+
+            public ValueTask<bool> ContainsAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                object value,
+                object? comparer,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedSource)
+                {
+                    typedSource = source.Cast<T>();
+                }
+
+                var typedComparer = comparer as IEqualityComparer<T>;
+
+                if (comparer is not null && typedComparer is null)
+                {
+                    ThrowHelper.ThrowComparerMustBeOfType<T>(nameof(comparer));
+                }
+
+                if (value is not T typedValue)
+                {
+                    ThrowHelper.ThrowMustBeOfType<T>(nameof(comparer));
+                    throw null; // Never be reached
+                }
+                else
+                {
+                    return queryAdapter.ContainsAsync(typedSource, typedValue, typedComparer, cancellation);
+                }
             }
         }
 

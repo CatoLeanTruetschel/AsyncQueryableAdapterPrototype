@@ -32,6 +32,19 @@ namespace AsyncQueryableAdapter.Utils
         }
 
         [DoesNotReturn]
+        public static void ThrowMustBeOfType<TElement>(string? paramName = null)
+        {
+            var message = $"The value must be of type {typeof(TElement)}.";
+
+            if (paramName is null)
+            {
+                throw new ArgumentException(message, paramName);
+            }
+
+            throw new ArgumentException(message);
+        }
+
+        [DoesNotReturn]
         public static void ThrowComparerMustBeOfType<TElement>(string? paramName = null)
         {
             var message = $"The comparer must be of type {typeof(IEqualityComparer<TElement>)}.";

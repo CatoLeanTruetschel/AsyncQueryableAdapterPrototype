@@ -21,17 +21,78 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
+using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
 {
     internal sealed class ContainsMethodTranslatorBuilder : IMethodTranslatorBuilder
     {
+        private string OperationName { get; } = "Contains";
+        private string OperationMethod => OperationName + "Async";
+
         public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
         {
-            // TODO: Implement me pls
-
             result = null;
-            return false;
+
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
+
+            if (method.IsGenericMethod)
+            {
+                method = method.GetGenericMethodDefinition();
+            }
+
+            if (method.DeclaringType != typeof(System.Linq.AsyncQueryable))
+            {
+                return false;
+            }
+
+            var methodName = method.Name;
+
+            if (!string.Equals(methodName, OperationMethod, StringComparison.Ordinal))
+                return false;
+
+            if (!method.IsGenericMethod)
+                return false;
+
+            var genericArguments = method.GetGenericArguments();
+
+            if (genericArguments.Length is not 1)
+                return false;
+
+            var sourceType = genericArguments[0];
+            var returnType = method.ReturnType;
+            var parameters = method.GetParameters();
+
+            if (returnType != typeof(ValueTask<bool>))
+                return false;
+
+            if (parameters.Length is < 3 or > 4)
+                return false;
+
+            // Last parameter is of type CancellationToken
+            if (parameters[^1].ParameterType != typeof(CancellationToken))
+                return false;
+
+            // First parameter is of type IAsyncQueryable<TSource>
+            if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
+                return false;
+
+            // Second parameter is of type TSource
+            if (parameters[1].ParameterType != sourceType)
+                return false;
+
+            // If there are 4 parameters, the third parameter is of type IEqualityComparer<TSource>
+            if (parameters.Length is 4
+                && parameters[2].ParameterType != TypeHelper.GetEqualityComparerType(sourceType))
+            {
+                return false;
+            }
+
+            result = new ContainsMethodTranslator();
+            return true;
         }
     }
 
@@ -44,10 +105,38 @@ namespace AsyncQueryableAdapter.Translators
             ReadOnlySpan<int> translatedQueryableArgumentIndices,
             [NotNullWhen(true)] out Expression? result)
         {
-            // TODO: Implement me pls
-
             result = null;
-            return false;
+
+            var hasEqualityComparer = arguments.Count is 4;
+
+            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+                return false;
+
+            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+                return false;
+
+            if (translatedQueryable is null)
+                return false;
+
+            var elementType = translatedQueryable.ElementType;
+            var queryable = translatedQueryable.GetQueryable();
+            var untypedValue = arguments[1].Evaluate();
+
+            // TODO: Is it allowed that value is null?
+            //if (untypedValue is null)
+            //    return false;
+
+            var comparer = hasEqualityComparer ? arguments[2].Evaluate() : null;
+
+            var evaluationResult = translatedQueryable.QueryAdapter.ContainsAsync(
+                elementType,
+                queryable,
+                untypedValue!,
+                comparer,
+                cancellationToken);
+
+            result = Expression.Constant(evaluationResult, typeof(ValueTask<bool>));
+            return true;
         }
     }
 }
