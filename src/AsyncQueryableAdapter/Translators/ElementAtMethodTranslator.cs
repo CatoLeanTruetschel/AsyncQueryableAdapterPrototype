@@ -25,9 +25,20 @@ using System.Reflection;
 namespace AsyncQueryableAdapter.Translators
 {
     // Also handles ElementAtOrDefaultAsync
-    internal sealed class ElementAtMethodTranslator : MethodTranslator
+    internal sealed class ElementAtMethodTranslatorBuilder : IMethodTranslatorBuilder
     {
-        public override bool TryTranslate(
+        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
+        {
+            // TODO: Implement me pls
+
+            result = null;
+            return false;
+        }
+    }
+
+    internal sealed class ElementAtMethodTranslator : IMethodTranslator
+    {
+        public bool TryTranslate(
             MethodInfo method,
             Expression? instance,
             ReadOnlyCollection<Expression> arguments,

@@ -18,16 +18,13 @@
 
 using System;
 using System.Linq;
+using AsyncQueryableAdapter.Translators;
 
 namespace AsyncQueryableAdapter
 {
-    public readonly struct AsyncQueryableOptions : IEquatable<AsyncQueryableOptions>
+    public sealed class AsyncQueryableOptions
     {
-        public static AsyncQueryableOptions Default => default;
-
-        private readonly bool _disallowImplicitPostProcessing;
-        private readonly bool _disallowImplicitDefaultPostProcessing;
-        private readonly bool _disallowInMemoryProcessing;
+        public static readonly AsyncQueryableOptions Default = new();
 
         /// <summary>
         /// Gets or sets a boolean value indicating whether an implicit in-process post-processing step is allowed.
@@ -41,14 +38,7 @@ namespace AsyncQueryableAdapter
         /// This does not prevent the execution of explicit transferal of entries in the main-memory, like
         /// executing any of the conversion methods f.e. <see cref="System.Linq.AsyncQueryable.ToListAsync"/>.
         /// </remarks>
-        public bool AllowImplicitPostProcessing
-        {
-            get => !_disallowImplicitPostProcessing;
-            init
-            {
-                _disallowImplicitPostProcessing = !value;
-            }
-        }
+        public bool AllowImplicitPostProcessing { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a boolean value indicating whether an implicit in-process post-processing step for a 
@@ -63,14 +53,9 @@ namespace AsyncQueryableAdapter
         /// This does not prevent the execution of explicit transferal of entries in the main-memory, like
         /// executing any of the conversion methods f.e. <see cref="System.Linq.AsyncQueryable.ToListAsync"/>.
         /// </remarks>
-        internal bool AllowImplicitDefaultPostProcessing // Until we find a proper use-case and name for this, this is for testing-purposes only.
-        {
-            get => !_disallowImplicitDefaultPostProcessing;
-            init
-            {
-                _disallowImplicitDefaultPostProcessing = !value;
-            }
-        }
+        internal bool AllowImplicitDefaultPostProcessing { get; set; } = true; // Until we find a proper use-case
+                                                                               // and name for this, this is for
+                                                                               // testing-purposes only.
 
         /// <summary>
         /// Gets or sets a boolean value indicating whether an in-memory evaluation of (parts of) the query by the 
@@ -81,44 +66,33 @@ namespace AsyncQueryableAdapter
         /// and the query adapter cannot perform a native query via the storage system, a 
         /// <see cref="NotSupportedException"/> is raised.
         /// </remarks>
-        internal bool AllowInMemoryEvaluation
+        internal bool AllowInMemoryEvaluation { get; set; } = true;
+
+        public IMethodTranslatorRegistry MethodTranslators { get; } = BuildDefaultMethodTranslatorRegistry();
+
+        private static MethodTranslatorRegistry BuildDefaultMethodTranslatorRegistry()
         {
-            get => !_disallowInMemoryProcessing;
-            init
+            var result = new MethodTranslatorRegistry
             {
-                _disallowInMemoryProcessing = !value;
-            }
-        }
-
-        [CLSCompliant(false)]
-        public bool Equals(in AsyncQueryableOptions other)
-        {
-            return _disallowImplicitPostProcessing == other._disallowImplicitPostProcessing;
-        }
-
-        bool IEquatable<AsyncQueryableOptions>.Equals(AsyncQueryableOptions other)
-        {
-            return Equals(in other);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return obj is AsyncQueryableOptions options && Equals(options);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(_disallowImplicitPostProcessing);
-        }
-
-        public static bool operator ==(in AsyncQueryableOptions left, in AsyncQueryableOptions right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(in AsyncQueryableOptions left, in AsyncQueryableOptions right)
-        {
-            return !left.Equals(right);
+                new AggregateMethodTranslatorBuilder(),
+                new ContainsMethodTranslatorBuilder(),
+                new ElementAtMethodTranslatorBuilder(),
+                new GroupByMethodTranslatorBuilder(),
+                new MinMethodTranslatorBuilder(),
+                new MaxMethodTranslatorBuilder(),
+                new SumMethodTranslatorBuilder(),
+                new AverageMethodTranslatorBuilder(),
+                new AnyMethodTranslatorBuilder(),
+                new AllMethodTranslatorBuilder(),
+                new CountMethodTranslatorBuilder(),
+                new LongCountMethodTranslatorBuilder(),
+                new SequenceEqualMethodTranslatorBuilder(),
+                new FirstMethodTranslatorBuilder(),
+                new LastMethodTranslatorBuilder(),
+                new SingleMethodTranslatorBuilder(),
+                new DefaultMethodTranslatorBuilder()
+            };
+            return result;
         }
     }
 }

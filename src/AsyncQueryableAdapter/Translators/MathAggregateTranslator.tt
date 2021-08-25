@@ -37,38 +37,46 @@ namespace AsyncQueryableAdapter.Translators
 foreach(var operation in operations)
 {
 #>
-    internal sealed class <#=operation#>MethodTranslator : MathAggregateTranslator
+    internal sealed class <#=operation#>MethodTranslatorBuilder : MathAggregateTranslatorBuilder
     {
         protected override string OperationName => "<#=operation#>";
 
-        protected override ConstantExpression ProcessOperation(
-            TranslatedQueryable translatedQueryable,
-            CancellationToken cancellation)
+        protected override IMethodTranslator BuildMethodTranslator(bool asyncSelector)
         {
-            var elementType = translatedQueryable.ElementType;
-            var returnType = TypeHelper.GetValueTaskType(elementType);
-            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
-                elementType,
-                translatedQueryable.GetQueryable(),
-                cancellation);
-
-            return Expression.Constant(evaluationResult.Instance, returnType);
+            return new <#=operation#>MethodTranslator(asyncSelector);
         }
+    }
+
+    internal sealed class <#=operation#>MethodTranslator : MathAggregateTranslator
+    {
+        public <#=operation#>MethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
         protected override ConstantExpression ProcessOperation(
             Type resultType,
             TranslatedQueryable translatedQueryable,
-            Expression selector,
+            Expression? selector,
             CancellationToken cancellation)
         {
             var elementType = translatedQueryable.ElementType;
             var returnType = TypeHelper.GetValueTaskType(resultType);
-            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
-                elementType,
-                resultType,
-                translatedQueryable.GetQueryable(),
-                selector,
-                cancellation);
+            AsyncTypeAwaitable evaluationResult;
+
+            if (selector is null)
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
+                    cancellation);
+            }
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
+                    elementType,
+                    resultType,
+                    translatedQueryable.GetQueryable(),
+                    selector,
+                    cancellation);
+            }
 
             return Expression.Constant(evaluationResult.Instance, returnType);
         }

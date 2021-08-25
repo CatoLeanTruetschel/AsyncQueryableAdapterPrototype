@@ -23,84 +23,89 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class SequenceEqualMethodTranslator : MethodTranslator
+    internal sealed class SequenceEqualMethodTranslatorBuilder : IMethodTranslatorBuilder
     {
-        private readonly CompiledDictionary<MethodInfo, MethodCallEvaluator> _evaluators;
-
-        public SequenceEqualMethodTranslator()
-        {
-            _evaluators = BuildEvaluators();
-        }
-
         private string OperationName { get; } = "SequenceEqual";
+        private string OperationMethod => OperationName + "Async";
 
-        private CompiledDictionary<MethodInfo, MethodCallEvaluator> BuildEvaluators()
+        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
         {
-            var operationMethod = OperationName + "Async";
-            var asyncQueryableType = typeof(System.Linq.AsyncQueryable);
-            var methods = asyncQueryableType.GetMethods(BindingFlags.Static | BindingFlags.Public);
-            var resultBuilder = CompiledDictionary.CreateBuilder<MethodInfo, MethodCallEvaluator>();
+            result = null;
 
-            foreach (var method in methods)
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
+
+            if (method.IsGenericMethod)
             {
-                var methodName = method.Name;
-
-                if (!string.Equals(methodName, operationMethod, StringComparison.Ordinal))
-                    continue;
-
-                if (!method.IsGenericMethod)
-                    continue;
-
-                var genericArguments = method.GetGenericArguments();
-
-                if (genericArguments.Length is not 1)
-                    continue;
-
-                var sourceType = genericArguments[0];
-                var returnType = method.ReturnType;
-                var parameters = method.GetParameters();
-
-                if (returnType != typeof(ValueTask<bool>))
-                    continue;
-
-                if (parameters.Length is < 3 or > 4)
-                    continue;
-
-                // Last parameter is of type CancellationToken
-                if (parameters[^1].ParameterType != typeof(CancellationToken))
-                    continue;
-
-                // First parameter is of type IAsyncQueryable<TSource>
-                if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
-                    continue;
-
-                // Second parameter is of type IAsyncEnumerable<TSource>
-                if (parameters[1].ParameterType != TypeHelper.GetAsyncEnumerableType(sourceType))
-                    continue;
-
-                // If there are 4 parameters, the third parameter is of type IEqualityComparer<TSource>
-                if (parameters.Length is 4
-                    && parameters[2].ParameterType != TypeHelper.GetEqualityComparerType(sourceType))
-                {
-                    continue;
-                }
-
-                resultBuilder.Add(method, TryEvaluate);
+                method = method.GetGenericMethodDefinition();
             }
 
-            return resultBuilder.Build();
-        }
+            if (method.DeclaringType != typeof(System.Linq.AsyncQueryable))
+            {
+                return false;
+            }
 
-        private bool TryEvaluate(
+            var methodName = method.Name;
+
+            if (!string.Equals(methodName, OperationMethod, StringComparison.Ordinal))
+                return false;
+
+            if (!method.IsGenericMethod)
+                return false;
+
+            var genericArguments = method.GetGenericArguments();
+
+            if (genericArguments.Length is not 1)
+                return false;
+
+            var sourceType = genericArguments[0];
+            var returnType = method.ReturnType;
+            var parameters = method.GetParameters();
+
+            if (returnType != typeof(ValueTask<bool>))
+                return false;
+
+            if (parameters.Length is < 3 or > 4)
+                return false;
+
+            // Last parameter is of type CancellationToken
+            if (parameters[^1].ParameterType != typeof(CancellationToken))
+                return false;
+
+            // First parameter is of type IAsyncQueryable<TSource>
+            if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
+                return false;
+
+            // Second parameter is of type IAsyncEnumerable<TSource>
+            if (parameters[1].ParameterType != TypeHelper.GetAsyncEnumerableType(sourceType))
+                return false;
+
+            // If there are 4 parameters, the third parameter is of type IEqualityComparer<TSource>
+            if (parameters.Length is 4
+                && parameters[2].ParameterType != TypeHelper.GetEqualityComparerType(sourceType))
+            {
+                return false;
+            }
+
+            result = new SequenceEqualMethodTranslator();
+            return true;
+        }
+    }
+
+    internal sealed class SequenceEqualMethodTranslator : IMethodTranslator
+    {
+        public bool TryTranslate(
+            MethodInfo method,
+            Expression? instance,
             ReadOnlyCollection<Expression> arguments,
-            [NotNullWhen(true)] out ConstantExpression? result)
+            ReadOnlySpan<int> translatedQueryableArgumentIndices,
+            [NotNullWhen(true)] out Expression? result)
         {
             result = null;
 
@@ -162,24 +167,6 @@ namespace AsyncQueryableAdapter.Translators
 
             result = Expression.Constant(evaluationResult, typeof(ValueTask<bool>));
             return true;
-        }
-
-        public override bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
-        {
-            if (method.IsGenericMethod)
-            {
-                method = method.GetGenericMethodDefinition();
-            }
-
-            result = null;
-
-            return _evaluators.TryGetValue(method, out var evaluator)
-                && evaluator(arguments, out Unsafe.As<Expression, ConstantExpression>(ref result!)!);
         }
     }
 }

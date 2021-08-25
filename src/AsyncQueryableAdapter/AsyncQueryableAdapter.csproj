@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Async.Queryable" />
+    <PackageReference Include="Linq.Expression.Optimizer" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Include="Translators\MathAggregateTranslator.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -20,11 +27,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SingleEntryQueryMethodTranslator.tt</DependentUpon>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Linq.Async.Queryable" />
-    <PackageReference Include="Linq.Expression.Optimizer" />
   </ItemGroup>
 
   <ItemGroup>

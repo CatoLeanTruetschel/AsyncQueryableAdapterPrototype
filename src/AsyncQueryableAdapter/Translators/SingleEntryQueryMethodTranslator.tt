@@ -36,13 +36,23 @@ namespace AsyncQueryableAdapter.Translators
 foreach(var operation in operations)
 {
 #>
-    internal sealed class <#=operation#>MethodTranslator : SingleEntryQueryMethodTranslator
+    internal sealed class <#=operation#>MethodTranslatorBuilder : SingleEntryQueryMethodTranslatorBuilder
     {
         protected override string OperationName => "<#=operation#>";
 
+        protected override IMethodTranslator BuildMethodTranslator(bool asyncPredicate, bool returnDefaultOnNoMatch)
+        {
+            return new <#=operation#>MethodTranslator(asyncPredicate, returnDefaultOnNoMatch);
+        }
+    }
+
+    internal sealed class <#=operation#>MethodTranslator : SingleEntryQueryMethodTranslator
+    {
+        public <#=operation#>MethodTranslator(bool asyncPredicate, bool returnDefaultOnNoMatch)
+            : base(asyncPredicate, returnDefaultOnNoMatch) { }
+
         protected override ConstantExpression ProcessOperation(
             TranslatedQueryable translatedQueryable,
-            bool returnDefaultOnNoMatch,
             Expression? predicate,
             CancellationToken cancellation)
         {
@@ -53,7 +63,9 @@ foreach(var operation in operations)
 
             if (predicate is null)
             {
-                if (returnDefaultOnNoMatch)
+                // TODO: Why are there overloads without a predicate, if we can just pass null in the more general 
+                //       overload?
+                if (ReturnDefaultOnNoMatch)
                 {
                     evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>OrDefaultAsync(
                        elementType,
@@ -70,7 +82,7 @@ foreach(var operation in operations)
             }
             else
             {
-                if (returnDefaultOnNoMatch)
+                if (ReturnDefaultOnNoMatch)
                 {
                     evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>OrDefaultAsync(
                        elementType,

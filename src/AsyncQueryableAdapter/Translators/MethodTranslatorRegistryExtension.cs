@@ -17,37 +17,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class GroupByMethodTranslatorBuilder : IMethodTranslatorBuilder
+    public static class MethodTranslatorRegistryExtension
     {
-        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
+        public static IMethodTranslatorBuilder CreateMethodTranslatorBuilder(this IMethodTranslatorRegistry registry)
         {
-            // TODO: Implement me pls
+            if (registry is null)
+                throw new ArgumentNullException(nameof(registry));
 
-            result = null;
-            return false;
-        }
-    }
-
-    internal sealed class GroupByMethodTranslator : IMethodTranslator
-    {
-        public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
-        {
-            // TODO: Implement me pls
-
-            result = null;
-            return false;
+            return new CombinedMethodTranslatorBuilder(registry);
         }
     }
 }

@@ -5,11 +5,13 @@
     <PackageVersion Include="System.Linq.Async.Queryable" Version="5.0.0" />
     <PackageVersion Include="System.Memory" Version="4.5.4" />
     <PackageVersion Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageVersion Include="ClrHeapAllocationAnalyzer" Version="3.0.0"/>
     <PackageVersion Include="coverlet.collector" Version="3.0.3" />
     <PackageVersion Include="FSharp.Core" Version="5.0.1"/>
-    <PackageVersion Include="Linq.Expression.Optimizer" Version=" 1.0.13" />
+    <PackageVersion Include="Linq.Expression.Optimizer" Version="1.0.13" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3"/> 

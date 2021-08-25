@@ -63,9 +63,9 @@ namespace AsyncQueryableAdapter
 
         IAsyncQueryProvider IAsyncQueryable.Provider => Provider;
 
-        public static AsyncQueryable<T> Create<T>(QueryAdapterBase queryAdapter)
+        public static AsyncQueryable<T> Create<T>(QueryAdapterBase queryAdapter, MethodProcessor methodProcessor)
         {
-            return new AsyncQueryable<T>(queryAdapter);
+            return new AsyncQueryable<T>(queryAdapter, methodProcessor);
         }
     }
 
@@ -75,8 +75,8 @@ namespace AsyncQueryableAdapter
     // but not to AsyncQueryable. We had to derive from this type which breaks encapsulation and is quite messy.
     internal class AsyncQueryable<T> : AsyncQueryable, IOrderedAsyncQueryable<T>
     {
-        public AsyncQueryable(QueryAdapterBase queryAdapter)
-            : base(typeof(T), new AsyncQueryProvider(queryAdapter)) { }
+        public AsyncQueryable(QueryAdapterBase queryAdapter, MethodProcessor methodProcessor)
+            : base(typeof(T), new AsyncQueryProvider(queryAdapter, methodProcessor)) { }
 
         public AsyncQueryable(AsyncQueryProvider provider, Expression expression)
             : base(typeof(T), provider, expression) { }

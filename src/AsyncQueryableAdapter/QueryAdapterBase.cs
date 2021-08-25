@@ -24,21 +24,28 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter.Utils;
+using Microsoft.Extensions.Options;
 
 namespace AsyncQueryableAdapter
 {
     public abstract partial class QueryAdapterBase
     {
-        public AsyncQueryableOptions Options { get; }
+        private readonly MethodProcessor _methodProcessor;
 
-        protected QueryAdapterBase(AsyncQueryableOptions options)
+        public IOptions<AsyncQueryableOptions> Options { get; }
+
+        protected QueryAdapterBase(IOptions<AsyncQueryableOptions> options)
         {
+            if (options is null)
+                throw new ArgumentNullException(nameof(options));
+
             Options = options;
+            _methodProcessor = new MethodProcessor(options);
         }
 
         public IAsyncQueryable<T> GetAsyncQueryable<T>()
         {
-            return new AsyncQueryable<T>(this);
+            return new AsyncQueryable<T>(this, _methodProcessor);
         }
 
         protected abstract IQueryable<T> GetQueryable<T>();
@@ -77,7 +84,7 @@ namespace AsyncQueryableAdapter
             if (accumulator is null)
                 throw new ArgumentNullException(nameof(accumulator));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -96,7 +103,7 @@ namespace AsyncQueryableAdapter
             if (accumulator is null)
                 throw new ArgumentNullException(nameof(accumulator));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -119,7 +126,7 @@ namespace AsyncQueryableAdapter
             if (resultSelector is null)
                 throw new ArgumentNullException(nameof(resultSelector));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -204,7 +211,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -267,7 +274,7 @@ namespace AsyncQueryableAdapter
             if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var compiledSelector = selector.Compile();
@@ -361,7 +368,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -375,7 +382,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Select(p => 1), cancellation);
@@ -404,7 +411,7 @@ namespace AsyncQueryableAdapter
             if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
@@ -543,7 +550,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstAsync(source.TakeLast(1), cancellation);
 #else
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -576,7 +583,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstAsync(source.Where(predicate).TakeLast(1), cancellation);
 #else
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate), cancellation);
@@ -606,7 +613,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstOrDefaultAsync(source.TakeLast(1), cancellation);
 #else
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -639,7 +646,7 @@ namespace AsyncQueryableAdapter
 #if SUPPORTS_QUERYABLE_TAKE_LAST
             return FirstOrDefaultAsync(source.Where(predicate).TakeLast(1), cancellation);
 #else
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate), cancellation);
@@ -666,7 +673,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Select(p => 1), cancellation);
@@ -695,7 +702,7 @@ namespace AsyncQueryableAdapter
             if (predicate is null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source.Where(predicate).Select(p => 1), cancellation);
@@ -837,7 +844,7 @@ namespace AsyncQueryableAdapter
                 return SequenceEqualAsync(first, second, cancellation);
             }
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(first, cancellation);
@@ -896,13 +903,13 @@ namespace AsyncQueryableAdapter
                     .Append(new { Element = default(TSource), Terminated = true });
 
                 var combined = firstProjection.Zip(
-                    secondProjection, 
+                    secondProjection,
                     (a, b) => (a.Terminated && b.Terminated) || (a.Terminated == b.Terminated && a.Element!.Equals(b.Element)));
                 return AllAsync<bool>(combined, p => p, cancellation);
             }
 #endif
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var firstInMemory = EvaluateAsync(first, cancellation);
@@ -1022,7 +1029,7 @@ namespace AsyncQueryableAdapter
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var inMemoryCollection = EvaluateAsync(source, cancellation);
@@ -1105,7 +1112,7 @@ namespace AsyncQueryableAdapter
             if (selector is null)
                 throw new ArgumentNullException(nameof(selector));
 
-            if (!Options.AllowInMemoryEvaluation)
+            if (!Options.Value.AllowInMemoryEvaluation)
                 ThrowHelper.ThrowQueryNotSupportedException();
 
             var compiledSelector = selector.Compile();

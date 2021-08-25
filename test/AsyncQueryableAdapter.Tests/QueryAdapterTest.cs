@@ -46,7 +46,7 @@ namespace AsyncQueryableAdapter.Tests
 
         private QueryAdapter(
             AsyncQueryableOptions options,
-            ImmutableDictionary<Type, IEnumerable> entries) : base(options)
+            ImmutableDictionary<Type, IEnumerable> entries) : base(Microsoft.Extensions.Options.Options.Create(options))
         {
             Debug.Assert(entries is not null);
 

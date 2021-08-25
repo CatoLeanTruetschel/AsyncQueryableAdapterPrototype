@@ -117,7 +117,8 @@ namespace AsyncQueryableAdapter.Sample
     {
         private readonly Repository _repository;
 
-        public RepositoryQueryAdapter(Repository repository) : base(default)
+        public RepositoryQueryAdapter(Repository repository)
+            : base(Microsoft.Extensions.Options.Options.Create(new AsyncQueryableOptions()))
         {
             if (repository is null)
                 throw new ArgumentNullException(nameof(repository));

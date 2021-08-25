@@ -22,7 +22,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using AsyncQueryableAdapter.Translators;
 
 namespace AsyncQueryableAdapter
 {
@@ -30,11 +29,14 @@ namespace AsyncQueryableAdapter
     internal sealed class QueryExpressionVisitor : ExpressionVisitor
     {
         private bool _isInRootMethod = true;
-        private readonly AsyncQueryableOptions _options;
+        private readonly MethodProcessor _methodProcessor;
 
-        public QueryExpressionVisitor(in AsyncQueryableOptions options)
+        public QueryExpressionVisitor(MethodProcessor methodProcessor)
         {
-            _options = options;
+            if (methodProcessor is null)
+                throw new ArgumentNullException(nameof(methodProcessor));
+
+            _methodProcessor = methodProcessor;
         }
 
         protected override Expression VisitLambda<T>(Expression<T> node)
@@ -147,8 +149,8 @@ namespace AsyncQueryableAdapter
 
             if (queryableTranslationsCount > 0)
             {
-                return MethodTranslator.TranslateMethod(
-                    method, instance, arguments, translatedQueryableArgumentIndices, _options);
+                return _methodProcessor.ProcessMethod(
+                    method, instance, arguments, translatedQueryableArgumentIndices);
             }
 
             return Expression.Call(instance, method, arguments);
@@ -174,6 +176,7 @@ namespace AsyncQueryableAdapter
                     {
                         newNodes[j] = nodes.GetArgument(j);
                     }
+
                     newNodes[i] = node;
                 }
             }

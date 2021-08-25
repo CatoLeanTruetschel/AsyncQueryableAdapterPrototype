@@ -21,156 +21,157 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal abstract class PredicateAggregateTranslator : MethodTranslator
+    internal abstract class PredicateAggregateTranslatorBuilder : IMethodTranslatorBuilder
     {
-        private readonly CompiledDictionary<MethodInfo, MethodCallEvaluator> _evaluators;
-
-        protected PredicateAggregateTranslator()
-        {
-            _evaluators = BuildEvaluators();
-        }
-
         protected abstract string OperationName { get; }
+
+        protected string OperationMethod => OperationName + "Async";
+        protected string OperationAwaitMethod => OperationName + "AwaitAsync";
+        protected string OperationAwaitWithCancellationMethod => OperationName + "AwaitWithCancellationAsync";
 
         protected abstract bool PredicateRequired { get; }
 
         protected abstract Type ResultType { get; }
 
-        private CompiledDictionary<MethodInfo, MethodCallEvaluator> BuildEvaluators()
+        protected abstract IMethodTranslator BuildMethodTranslator(bool asyncPredicate);
+
+        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
         {
-            var operationMethod = OperationName + "Async";
-            var operationAwaitMethod = OperationName + "AwaitAsync";
-            var operationAwaitWithCancellationMethod = OperationName + "AwaitWithCancellationAsync";
+            result = null;
 
-            var asyncQueryableType = typeof(System.Linq.AsyncQueryable);
-            var methods = asyncQueryableType.GetMethods(BindingFlags.Static | BindingFlags.Public);
-            var resultBuilder = CompiledDictionary.CreateBuilder<MethodInfo, MethodCallEvaluator>();
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
 
-            MethodCallEvaluator? evaluateSyncPredicate = null;
-            MethodCallEvaluator? evaluateAsyncPredicate = null;
-
-            foreach (var method in methods)
+            if (method.IsGenericMethod)
             {
-                var methodName = method.Name;
-
-                if (!method.IsGenericMethod)
-                    continue;
-
-                var genericArguments = method.GetGenericArguments();
-
-                if (genericArguments.Length is not 1)
-                    continue;
-
-                var sourceType = genericArguments[0];
-                var returnType = method.ReturnType;
-                var parameters = method.GetParameters();
-
-                if (returnType != TypeHelper.GetValueTaskType(ResultType))
-                    continue;
-
-                if (parameters.Length is < 2 or > 3)
-                    continue;
-
-                if (PredicateRequired && parameters.Length is not 3)
-                    continue;
-
-                // Last parameter is of type CancellationToken
-                if (parameters[^1].ParameterType != typeof(CancellationToken))
-                    continue;
-
-                // First parameter is of type IAsyncQueryable<TSource>
-                if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
-                    continue;
-
-                if (parameters.Length is 3)
-                {
-                    var predicateParameterType = parameters[1].ParameterType;
-                    Type expectedPredicateType;
-
-                    if (string.Equals(methodName, operationMethod, StringComparison.Ordinal))
-                    {
-                        // Sync predicate
-                        expectedPredicateType = TypeHelper.GetFuncExpressionType(sourceType, typeof(bool));
-
-                        if (predicateParameterType != expectedPredicateType)
-                            continue;
-
-                        evaluateSyncPredicate ??= TryEvaluateSyncPredicate;
-                        resultBuilder.Add(method, evaluateSyncPredicate);
-                    }
-                    else if (string.Equals(methodName, operationAwaitMethod, StringComparison.Ordinal))
-                    {
-                        // Async predicate
-                        expectedPredicateType = TypeHelper.GetFuncExpressionType(sourceType, typeof(ValueTask<bool>));
-
-                        if (predicateParameterType != expectedPredicateType)
-                            continue;
-
-                        evaluateAsyncPredicate ??= TryEvaluateAsyncPredicate;
-                        resultBuilder.Add(method, evaluateAsyncPredicate);
-                    }
-                    else if (string.Equals(methodName, operationAwaitWithCancellationMethod, StringComparison.Ordinal))
-                    {
-                        // Async predicate with cancellation
-                        expectedPredicateType = TypeHelper.GetFuncExpressionType(
-                            sourceType,
-                            typeof(CancellationToken),
-                            typeof(ValueTask<bool>));
-
-                        if (predicateParameterType != expectedPredicateType)
-                            continue;
-
-                        evaluateAsyncPredicate ??= TryEvaluateAsyncPredicate;
-                        resultBuilder.Add(method, evaluateAsyncPredicate);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                else if (PredicateRequired)
-                {
-                    continue;
-                }
-                else // if(parameters.Length is 2)
-                {
-                    // No predicate
-                    if (!string.Equals(methodName, operationMethod, StringComparison.Ordinal))
-                        continue;
-
-                    evaluateSyncPredicate ??= TryEvaluateSyncPredicate;
-                    resultBuilder.Add(method, evaluateSyncPredicate);
-                }
+                method = method.GetGenericMethodDefinition();
             }
 
-            return resultBuilder.Build();
-        }
+            if (method.DeclaringType != typeof(System.Linq.AsyncQueryable))
+            {
+                return false;
+            }
 
-        private bool TryEvaluateSyncPredicate(
-            ReadOnlyCollection<Expression> arguments,
-            [NotNullWhen(true)] out ConstantExpression? result)
+            var methodName = method.Name;
+
+            if (!method.IsGenericMethod)
+                return false;
+
+            var genericArguments = method.GetGenericArguments();
+
+            if (genericArguments.Length is not 1)
+                return false;
+
+            var sourceType = genericArguments[0];
+            var returnType = method.ReturnType;
+            var parameters = method.GetParameters();
+
+            if (returnType != TypeHelper.GetValueTaskType(ResultType))
+                return false;
+
+            if (parameters.Length is < 2 or > 3)
+                return false;
+
+            if (PredicateRequired && parameters.Length is not 3)
+                return false;
+
+            // Last parameter is of type CancellationToken
+            if (parameters[^1].ParameterType != typeof(CancellationToken))
+                return false;
+
+            // First parameter is of type IAsyncQueryable<TSource>
+            if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
+                return false;
+
+            bool asyncPredicate;
+
+            if (parameters.Length is 3)
+            {
+                var predicateParameterType = parameters[1].ParameterType;
+                Type expectedPredicateType;
+
+                if (string.Equals(methodName, OperationMethod, StringComparison.Ordinal))
+                {
+                    // Sync predicate
+                    expectedPredicateType = TypeHelper.GetFuncExpressionType(sourceType, typeof(bool));
+
+                    if (predicateParameterType != expectedPredicateType)
+                        return false;
+
+                    asyncPredicate = false;
+                }
+                else if (string.Equals(methodName, OperationAwaitMethod, StringComparison.Ordinal))
+                {
+                    // Async predicate
+                    expectedPredicateType = TypeHelper.GetFuncExpressionType(sourceType, typeof(ValueTask<bool>));
+
+                    if (predicateParameterType != expectedPredicateType)
+                        return false;
+
+                    asyncPredicate = true;
+                }
+                else if (string.Equals(methodName, OperationAwaitWithCancellationMethod, StringComparison.Ordinal))
+                {
+                    // Async predicate with cancellation
+                    expectedPredicateType = TypeHelper.GetFuncExpressionType(
+                        sourceType,
+                        typeof(CancellationToken),
+                        typeof(ValueTask<bool>));
+
+                    if (predicateParameterType != expectedPredicateType)
+                        return false;
+
+                    asyncPredicate = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (PredicateRequired)
+            {
+                return false;
+            }
+            else // if(parameters.Length is 2)
+            {
+                // No predicate
+                if (!string.Equals(methodName, OperationMethod, StringComparison.Ordinal))
+                    return false;
+
+                asyncPredicate = false;
+            }
+
+            result = BuildMethodTranslator(asyncPredicate);
+            return true;
+        }
+    }
+
+    internal abstract class PredicateAggregateTranslator : IMethodTranslator
+    {
+        protected PredicateAggregateTranslator(bool asyncPredicate)
         {
-            return TryEvaluate(arguments, processAsyncPredicate: false, out result);
+            AsyncPredicate = asyncPredicate;
         }
 
-        private bool TryEvaluateAsyncPredicate(
-            ReadOnlyCollection<Expression> arguments,
-            [NotNullWhen(true)] out ConstantExpression? result)
-        {
-            return TryEvaluate(arguments, processAsyncPredicate: true, out result);
-        }
+        protected bool AsyncPredicate { get; }
 
-        private bool TryEvaluate(
+        protected abstract ConstantExpression ProcessOperation(
+            TranslatedQueryable translatedQueryable,
+            Expression? predicate,
+            CancellationToken cancellation);
+
+        public bool TryTranslate(
+            MethodInfo method,
+            Expression? instance,
             ReadOnlyCollection<Expression> arguments,
-            bool processAsyncPredicate,
-            [NotNullWhen(true)] out ConstantExpression? result)
+            ReadOnlySpan<int> translatedQueryableArgumentIndices,
+            [NotNullWhen(true)] out Expression? result)
         {
             result = null;
 
@@ -187,14 +188,14 @@ namespace AsyncQueryableAdapter.Translators
             if (arguments.Count is 2)
             {
                 result = ProcessOperation(
-                    translatedQueryable, cancellationToken);
+                    translatedQueryable, null, cancellationToken);
 
                 return true;
             }
 
             var selector = arguments[1];
 
-            if (processAsyncPredicate && !selector.TryTranslateExpressionToSync(
+            if (AsyncPredicate && !selector.TryTranslateExpressionToSync(
               translatedQueryable.ElementType, typeof(bool), out selector))
             {
                 return false;
@@ -202,33 +203,6 @@ namespace AsyncQueryableAdapter.Translators
 
             result = ProcessOperation(translatedQueryable, selector, cancellationToken);
             return true;
-        }
-
-        protected abstract ConstantExpression ProcessOperation(
-          TranslatedQueryable translatedQueryable,
-          CancellationToken cancellation);
-
-        protected abstract ConstantExpression ProcessOperation(
-            TranslatedQueryable translatedQueryable,
-            Expression predicate,
-            CancellationToken cancellation);
-
-        public override bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
-        {
-            if (method.IsGenericMethod)
-            {
-                method = method.GetGenericMethodDefinition();
-            }
-
-            result = null;
-
-            return _evaluators.TryGetValue(method, out var evaluator)
-                && evaluator(arguments, out Unsafe.As<Expression, ConstantExpression>(ref result!)!);
         }
     }
 }

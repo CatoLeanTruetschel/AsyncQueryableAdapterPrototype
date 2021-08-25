@@ -24,7 +24,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using AsyncQueryableAdapter.Utils;
 
 // TODO: Make this handle and test the following functions 
@@ -55,43 +54,137 @@ using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class DefaultTranslator : MethodTranslator
+    internal sealed class DefaultMethodTranslatorBuilder : IMethodTranslatorBuilder
+    {
+        public bool TryBuildMethodTranslator(
+            MethodInfo method,
+            [NotNullWhen(true)] out IMethodTranslator? result)
+        {
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
+
+            result = null;
+
+            if (method.DeclaringType != typeof(System.Linq.AsyncQueryable))
+            {
+                return false;
+            }
+
+            if (method.IsGenericMethod)
+            {
+                method = method.GetGenericMethodDefinition();
+            }
+
+            // Try to find a method with the same signature in the System.Linq.Queryable type that works
+            // on the type IQueryable (or IQueryable<T>) instead.
+            var translatedMethod = FindSyncQueryableMethod(method);
+            if (translatedMethod is not null)
+            {
+                result = new DefaultMethodTranslator(method, translatedMethod);
+                return true;
+            }
+
+            return false;
+        }
+
+        private static MethodInfo? FindSyncQueryableMethod(MethodInfo method)
+        {
+            Type[]? asyncGenericArguments = null;
+            var asyncParameters = method.GetParameters();
+            var candidates = typeof(Queryable).GetMethods(BindingFlags.Public | BindingFlags.Static);
+
+            foreach (var candidate in candidates)
+            {
+                if (!candidate.Name.Equals(method.Name, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                // If the candidate is generic, construct the candidate with the async generic args
+                var constructedCandidate = candidate;
+
+                if (constructedCandidate.IsGenericMethodDefinition)
+                {
+                    if (!method.IsGenericMethod)
+                    {
+                        continue;
+                    }
+
+                    asyncGenericArguments ??= method.GetGenericArguments();
+
+                    if (constructedCandidate.GetGenericArguments().Length != asyncGenericArguments.Length)
+                    {
+                        continue;
+                    }
+
+                    constructedCandidate = candidate.MakeGenericMethod(asyncGenericArguments);
+                }
+                else if (method.IsGenericMethod)
+                {
+                    continue;
+                }
+
+                var parameters = constructedCandidate.GetParameters();
+                var argumentMatch = true;
+
+                if (parameters.Length != asyncParameters.Length)
+                {
+                    continue;
+                }
+
+                for (var j = 0; j < parameters.Length; j++)
+                {
+                    var asyncParameter = asyncParameters[j];
+                    var parameter = parameters[j];
+
+                    if (!TypeTranslationHelper.IsCompatibleTranslationTarget(
+                        parameter.ParameterType,
+                        asyncParameter.ParameterType))
+                    {
+                        argumentMatch = false;
+                        break;
+                    }
+                }
+
+                if (!argumentMatch)
+                {
+                    continue;
+                }
+
+                if (!TypeTranslationHelper.IsCompatibleTranslationTarget(
+                    constructedCandidate.ReturnType,
+                    method.ReturnType))
+                {
+                    continue;
+                }
+
+                return candidate;
+            }
+
+            return null;
+        }
+    }
+
+    internal sealed class DefaultMethodTranslator : IMethodTranslator
     {
         [ThreadStatic]
         private static List<Expression>? _argumentsBuffer;
 
-        private readonly CompiledDictionary<MethodInfo, MethodInfo> _translationTargets;
-        private readonly ConditionalWeakTable<MethodInfo, MethodInfo?> _constructedTranslationTargets
-            = new ConditionalWeakTable<MethodInfo, MethodInfo?>();
-        private readonly ConditionalWeakTable<MethodInfo, MethodInfo?>.CreateValueCallback _constructTranslationTarget;
+        private readonly MethodInfo _targetMethod;
+        private readonly MethodInfo _translatedMethod;
 
-        public DefaultTranslator()
+        public DefaultMethodTranslator(MethodInfo targetMethod, MethodInfo translatedMethod)
         {
-            _translationTargets = BuildTranslationTargets();
-            _constructTranslationTarget = ConstructTranslationTarget;
+            if (targetMethod is null)
+                throw new ArgumentNullException(nameof(targetMethod));
+
+            if (translatedMethod is null)
+                throw new ArgumentNullException(nameof(translatedMethod));
+            _targetMethod = targetMethod;
+            _translatedMethod = translatedMethod;
         }
 
-        private static CompiledDictionary<MethodInfo, MethodInfo> BuildTranslationTargets()
-        {
-            var resultBuilder = CompiledDictionary.CreateBuilder<MethodInfo, MethodInfo>();
-            var asyncQueryableType = typeof(System.Linq.AsyncQueryable);
-            var methods = asyncQueryableType.GetMethods(BindingFlags.Static | BindingFlags.Public);
-
-            foreach (var method in methods)
-            {
-                // Try to find a method with the same signature in the System.Linq.Queryable type that works
-                // on the type IQueryable (or IQueryable<T>) instead.
-                if (TryFindSyncQueryableMethod(method, out var translatedMethod))
-                {
-                    resultBuilder.Add(method, translatedMethod);
-                }
-
-            }
-
-            return resultBuilder.Build();
-        }
-
-        public override bool TryTranslate(
+        public bool TryTranslate(
             MethodInfo method,
             Expression? instance,
             ReadOnlyCollection<Expression> arguments,
@@ -100,8 +193,7 @@ namespace AsyncQueryableAdapter.Translators
         {
             result = null;
 
-            var constructedTranslationTarget = _constructedTranslationTargets.GetValue(
-                method, _constructTranslationTarget);
+            var constructedTranslationTarget = ConstructTranslationTarget(method);
 
             if (constructedTranslationTarget is null)
                 return false;
@@ -163,23 +255,24 @@ namespace AsyncQueryableAdapter.Translators
         private MethodInfo? ConstructTranslationTarget(MethodInfo method)
         {
             var methodDefinition = method;
+            var translatedMethod = _translatedMethod;
 
             if (methodDefinition.IsGenericMethod)
             {
                 methodDefinition = methodDefinition.GetGenericMethodDefinition();
             }
 
-            if (!_translationTargets.TryGetValue(methodDefinition, out var translationTarget))
+            if (methodDefinition != _targetMethod)
             {
                 return null;
             }
 
-            if (translationTarget.IsGenericMethod)
+            if (translatedMethod.IsGenericMethod)
             {
-                translationTarget = translationTarget.MakeGenericMethod(method.GetGenericArguments());
+                translatedMethod = translatedMethod.MakeGenericMethod(method.GetGenericArguments());
             }
 
-            return translationTarget;
+            return translatedMethod;
         }
 
         private static bool IsCompatible(ReadOnlyCollection<Expression> arguments, MethodInfo translatedMethod)
@@ -212,121 +305,6 @@ namespace AsyncQueryableAdapter.Translators
             }
 
             return isCompatible;
-        }
-
-        private static bool TryFindSyncQueryableMethod(
-           MethodInfo method,
-           [NotNullWhen(true)] out MethodInfo? translatedMethod)
-        {
-            Type[]? asyncGenericArguments = null;
-            var asyncParameters = method.GetParameters();
-            var candidates = typeof(Queryable).GetMethods(BindingFlags.Public | BindingFlags.Static);
-
-            foreach (var candidate in candidates)
-            {
-                if (!candidate.Name.Equals(method.Name, StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                // If the candidate is generic, construct the candidate with the async generic args
-                var constructedCandidate = candidate;
-
-                if (constructedCandidate.IsGenericMethodDefinition)
-                {
-                    if (!method.IsGenericMethod)
-                    {
-                        continue;
-                    }
-
-                    asyncGenericArguments ??= method.GetGenericArguments();
-
-                    if (constructedCandidate.GetGenericArguments().Length != asyncGenericArguments.Length)
-                    {
-                        continue;
-                    }
-
-                    constructedCandidate = candidate.MakeGenericMethod(asyncGenericArguments);
-                }
-                else if (method.IsGenericMethod)
-                {
-                    continue;
-                }
-
-                var parameters = constructedCandidate.GetParameters();
-                var argumentMatch = true;
-
-                if (parameters.Length != asyncParameters.Length)
-                {
-                    continue;
-                }
-
-                for (var j = 0; j < parameters.Length; j++)
-                {
-                    var asyncParameter = asyncParameters[j];
-                    var parameter = parameters[j];
-
-                    if (!AreCompatibleTypes(parameter.ParameterType, asyncParameter.ParameterType))
-                    {
-                        argumentMatch = false;
-                        break;
-                    }
-                }
-
-                if (!argumentMatch)
-                {
-                    continue;
-                }
-
-                if (!AreCompatibleTypes(constructedCandidate.ReturnType, method.ReturnType))
-                {
-                    continue;
-                }
-
-                translatedMethod = candidate;
-                return true;
-            }
-
-            translatedMethod = null;
-            return false;
-        }
-
-        private static bool AreCompatibleTypes(Type type, Type asyncType)
-        {
-            if (type.IsAssignableTo<IQueryable>() && !asyncType.IsAssignableTo<IQueryable>())
-            {
-                if (!asyncType.IsAssignableTo<IAsyncQueryable>())
-                {
-                    return false;
-                }
-
-                var elementType = typeof(object);
-
-                // Assume for now that this is the IQueryable or IQueryable<T> interface directly
-                //TODO: Add some checks and implement a more general solution.
-                if (type.IsGenericType)
-                {
-                    elementType = type.GetGenericArguments().First();
-                }
-
-                // Assume for now that this is the IAsyncQueryable<T> interface directly
-                //TODO: Add some checks and implement a more general solution.
-                if (!asyncType.IsConstructedGenericType)
-                {
-                    return false;
-                }
-
-                if (asyncType.GetGenericTypeDefinition() != typeof(IAsyncQueryable<>))
-                {
-                    return false;
-                }
-
-                var asyncElementType = asyncType.GetGenericArguments().First();
-
-                return elementType == asyncElementType;
-            }
-
-            return type == asyncType;
         }
     }
 }

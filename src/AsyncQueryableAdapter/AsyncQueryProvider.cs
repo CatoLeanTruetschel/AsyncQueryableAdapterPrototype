@@ -28,12 +28,18 @@ namespace AsyncQueryableAdapter
 {
     internal sealed class AsyncQueryProvider : IAsyncQueryProvider
     {
-        public AsyncQueryProvider(QueryAdapterBase queryAdapter)
+        private readonly MethodProcessor _methodProcessor;
+
+        public AsyncQueryProvider(QueryAdapterBase queryAdapter, MethodProcessor methodProcessor)
         {
             if (queryAdapter is null)
                 throw new ArgumentNullException(nameof(queryAdapter));
 
+            if (methodProcessor is null)
+                throw new ArgumentNullException(nameof(methodProcessor));
+
             QueryAdapter = queryAdapter;
+            _methodProcessor = methodProcessor;
         }
 
         public QueryAdapterBase QueryAdapter { get; }
@@ -65,7 +71,7 @@ namespace AsyncQueryableAdapter
             // Rewrite the recorded expression, in order to perform as many of the query processing in the database
             // engine (or the database driver) which will be highly optimized by them. Fall back to in memory processing
             // only if necessary as a post-processing step.
-            var expressionVisitor = new QueryExpressionVisitor(QueryAdapter.Options);
+            var expressionVisitor = new QueryExpressionVisitor(_methodProcessor);
             expression = expressionVisitor.Visit(expression);
 
             // Get the untyped (typeof object) result from the expression. This does not execute the query

@@ -16,38 +16,9 @@
 // limitations under the License.
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class GroupByMethodTranslatorBuilder : IMethodTranslatorBuilder
-    {
-        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
-        {
-            // TODO: Implement me pls
-
-            result = null;
-            return false;
-        }
-    }
-
-    internal sealed class GroupByMethodTranslator : IMethodTranslator
-    {
-        public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
-        {
-            // TODO: Implement me pls
-
-            result = null;
-            return false;
-        }
-    }
+    public sealed class MethodTranslatorRegistry : List<IMethodTranslatorBuilder>, IMethodTranslatorRegistry { }
 }

@@ -24,30 +24,13 @@ using System.Reflection;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class GroupByMethodTranslatorBuilder : IMethodTranslatorBuilder
+    public interface IMethodTranslator
     {
-        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
-        {
-            // TODO: Implement me pls
-
-            result = null;
-            return false;
-        }
-    }
-
-    internal sealed class GroupByMethodTranslator : IMethodTranslator
-    {
-        public bool TryTranslate(
+        public abstract bool TryTranslate(
             MethodInfo method,
             Expression? instance,
             ReadOnlyCollection<Expression> arguments,
             ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
-        {
-            // TODO: Implement me pls
-
-            result = null;
-            return false;
-        }
+            [NotNullWhen(true)] out Expression? result);
     }
 }

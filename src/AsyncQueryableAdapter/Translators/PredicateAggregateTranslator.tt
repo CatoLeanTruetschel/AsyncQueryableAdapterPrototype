@@ -34,10 +34,10 @@
 #pragma warning disable IDE0049
 
 using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
 {
@@ -45,51 +45,67 @@ namespace AsyncQueryableAdapter.Translators
 foreach(var operation in operations)
 {
 #>
-    internal sealed partial class <#=operation.Name#>MethodTranslator : PredicateAggregateTranslator
+    internal sealed partial class <#=operation.Name#>MethodTranslatorBuilder : PredicateAggregateTranslatorBuilder
     {
         protected override string OperationName => "<#=operation.Name#>";
         protected override bool PredicateRequired => <#=operation.PredicateRequired ? "true" : "false" #>;
         protected override Type ResultType => typeof(<#=operation.ResultType#>);
 
+        protected override IMethodTranslator BuildMethodTranslator(bool asyncPredicate)
+        {
+            return new <#=operation.Name#>MethodTranslator(asyncPredicate);
+        }
+    }
+
+    internal sealed partial class <#=operation.Name#>MethodTranslator : PredicateAggregateTranslator
+    {
+        public <#=operation.Name#>MethodTranslator(bool asyncPredicate) : base(asyncPredicate) { }
+
         protected override ConstantExpression ProcessOperation(
             TranslatedQueryable translatedQueryable,
+            Expression? predicate,
             CancellationToken cancellation)
         {
+            var elementType = translatedQueryable.ElementType;
+            var returnType = typeof(ValueTask<<#=operation.ResultType#>>);
+            ValueTask<<#=operation.ResultType#>> evaluationResult;
+
 <#
 if (operation.PredicateRequired)
 {
 #>
-            throw new NotSupportedException();
+            Debug.Assert(predicate is not null);
+
 <#
 }
 else
 {
 #>
-            var elementType = translatedQueryable.ElementType;
-            var returnType = typeof(ValueTask<<#=operation.ResultType#>>);
-            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation.Name#>Async(
-                elementType,
-                translatedQueryable.GetQueryable(),
-                cancellation);
-
-            return Expression.Constant(evaluationResult, returnType);
+            if (predicate is not null)
 <#
 }
 #>
-        }
-
-        protected override ConstantExpression ProcessOperation(
-            TranslatedQueryable translatedQueryable,
-            Expression predicate,
-            CancellationToken cancellation)
-        {
-            var elementType = translatedQueryable.ElementType;
-            var returnType = typeof(ValueTask<<#=operation.ResultType#>>);
-            var evaluationResult = translatedQueryable.QueryAdapter.<#=operation.Name#>Async(
-                elementType,
-                translatedQueryable.GetQueryable(),
-                predicate,
-                cancellation);
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.<#=operation.Name#>Async(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
+                    predicate,
+                    cancellation);
+            }
+<#
+if (!operation.PredicateRequired)
+{
+#>
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.<#=operation.Name#>Async(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
+                    cancellation);
+            }
+<#
+}
+#>
 
             return Expression.Constant(evaluationResult, returnType);
         }

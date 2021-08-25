@@ -24,9 +24,19 @@ using System.Reflection;
 
 namespace AsyncQueryableAdapter.Translators
 {
-    internal sealed class AggregateMethodTranslator : MethodTranslator
+    internal sealed class AggregateMethodTranslatorBuilder : IMethodTranslatorBuilder
     {
-        public override bool TryTranslate(
+        public bool TryBuildMethodTranslator(MethodInfo method, [NotNullWhen(true)] out IMethodTranslator? result)
+        {
+            // TODO: Implement me pls
+            result = null;
+            return false;
+        }
+    }
+
+    internal sealed class AggregateMethodTranslator : IMethodTranslator
+    {
+        public bool TryTranslate(
             MethodInfo method,
             Expression? instance,
             ReadOnlyCollection<Expression> arguments,
