@@ -430,13 +430,36 @@ namespace AsyncQueryableAdapter
             return GetQueryAdapter(sourceType).CountAsync(this, source, predicate, cancellation);
         }
 
-        protected virtual ValueTask<TSource> ElementAtAsync<TSource>(
+        protected virtual async ValueTask<TSource> ElementAtAsync<TSource>(
             IQueryable<TSource> source,
             int index,
             CancellationToken cancellation)
         {
-            // TODO: Does this throw the correct type of exception, if the index is out of range?
-            return FirstAsync(source.Skip(index), cancellation);
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            try
+            {
+                return await FirstAsync(source.Skip(index), cancellation).ConfigureAwait(false);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+        }
+
+        internal AsyncTypeAwaitable ElementAtAsync(
+            Type sourceType,
+            IQueryable source,
+            int index,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).ElementAtAsync(this, source, index, cancellation);
         }
 
         protected virtual ValueTask<TSource?> ElementAtOrDefaultAsync<TSource>(
@@ -444,8 +467,24 @@ namespace AsyncQueryableAdapter
             int index,
             CancellationToken cancellation)
         {
-            // TODO: Does this correctly return the default value, if the index is out of range?
+            if (index < 0)
+            {
+                return new ValueTask<TSource?>(default(TSource));
+            }
+
             return FirstOrDefaultAsync(source.Skip(index), cancellation);
+        }
+
+        internal AsyncTypeAwaitable ElementAtOrDefaultAsync(
+            Type sourceType,
+            IQueryable source,
+            int index,
+            CancellationToken cancellation)
+        {
+            if (sourceType is null)
+                throw new ArgumentNullException(nameof(sourceType));
+
+            return GetQueryAdapter(sourceType).ElementAtOrDefaultAsync(this, source, index, cancellation);
         }
 
         protected virtual ValueTask<TSource> FirstAsync<TSource>(

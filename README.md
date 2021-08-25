@@ -220,10 +220,10 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Basic support
         * [x] Support for async predicates (when translatable to sync predicates)
         * [x] Unit-test
-    * [ ] ElementAt operation translator
-        * [ ] Basic support
-        * [ ] Support for ElementAtDefault
-        * [ ] Unit-test
+    * [x] ElementAt operation translator
+        * [x] Basic support
+        * [x] Support for ElementAtDefault
+        * [x] Unit-test
     * [x] First operation translator
         * [x] Basic support
         * [x] Support for async predicates (when translatable to sync selectors)

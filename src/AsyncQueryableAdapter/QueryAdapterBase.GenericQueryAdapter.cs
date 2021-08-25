@@ -80,6 +80,18 @@ namespace AsyncQueryableAdapter
                 IQueryable second,
                 object? comparer,
                 CancellationToken cancellation);
+
+            AsyncTypeAwaitable ElementAtAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                int index,
+                CancellationToken cancellation);
+
+            AsyncTypeAwaitable ElementAtOrDefaultAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                int index,
+                CancellationToken cancellation);
         }
 
         private partial interface IGenericElementResultTypeQueryAdapter
@@ -196,6 +208,34 @@ namespace AsyncQueryableAdapter
                     typedSecond,
                     typedComparer,
                     cancellation);
+            }
+
+            public AsyncTypeAwaitable ElementAtAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                int index,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedSource)
+                {
+                    typedSource = source.Cast<T>();
+                }
+
+                return queryAdapter.ElementAtAsync(typedSource, index, cancellation).AsTypeAwaitable();
+            }
+
+            public AsyncTypeAwaitable ElementAtOrDefaultAsync(
+                QueryAdapterBase queryAdapter,
+                IQueryable source,
+                int index,
+                CancellationToken cancellation)
+            {
+                if (source is not IQueryable<T> typedSource)
+                {
+                    typedSource = source.Cast<T>();
+                }
+
+                return queryAdapter.ElementAtOrDefaultAsync(typedSource, index, cancellation).AsTypeAwaitable();
             }
         }
 

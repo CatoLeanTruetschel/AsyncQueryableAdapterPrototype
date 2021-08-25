@@ -58,7 +58,7 @@ namespace AsyncQueryableAdapter.Translators
 
             if (methodName.StartsWith(OperationNameOrDefault, StringComparison.Ordinal))
             {
-                methodName = OperationName + methodName.Substring(OperationNameOrDefault.Length);
+                methodName = OperationName + methodName[OperationNameOrDefault.Length..];
                 returnDefaultOnNoMatch = true;
             }
 
