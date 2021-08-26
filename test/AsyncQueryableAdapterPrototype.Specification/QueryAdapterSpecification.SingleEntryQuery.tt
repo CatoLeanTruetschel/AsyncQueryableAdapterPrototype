@@ -358,7 +358,7 @@ else
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task Where<#=operation#>AwaitTranslatableValueTaskFactoryMethodTest()
         {

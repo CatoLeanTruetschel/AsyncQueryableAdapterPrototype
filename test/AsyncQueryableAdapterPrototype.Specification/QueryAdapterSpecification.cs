@@ -91,28 +91,28 @@ namespace AsyncQueryableAdapterPrototype.Tests
             }
         }
 
-        private static readonly AsyncQueryableOptions DisallowImplicitPostProcessing = new AsyncQueryableOptions
+        private static readonly AsyncQueryableOptions DisallowImplicitPostProcessing = new()
         {
             AllowImplicitPostProcessing = false,
             AllowImplicitDefaultPostProcessing = false,
             AllowInMemoryEvaluation = false
         };
 
-        private static readonly AsyncQueryableOptions AllowImplicitPostProcessing = new AsyncQueryableOptions
+        private static readonly AsyncQueryableOptions AllowImplicitPostProcessing = new()
         {
             AllowImplicitPostProcessing = true,
             AllowImplicitDefaultPostProcessing = false,
             AllowInMemoryEvaluation = false
         };
 
-        private static readonly AsyncQueryableOptions AllowImplicitDefaultPostProcessing = new AsyncQueryableOptions
+        private static readonly AsyncQueryableOptions AllowImplicitDefaultPostProcessing = new()
         {
             AllowImplicitPostProcessing = true,
             AllowImplicitDefaultPostProcessing = true,
             AllowInMemoryEvaluation = false
         };
 
-        private static readonly AsyncQueryableOptions AllowInMemoryEvaluation = new AsyncQueryableOptions
+        private static readonly AsyncQueryableOptions AllowInMemoryEvaluation = new()
         {
             AllowImplicitPostProcessing = false,
             AllowImplicitDefaultPostProcessing = false,
@@ -174,8 +174,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
         // Tests on a single set that are fully convertible to sync queryable calls
         // except for the last call which results in a scalar, which is supported by the query adapter
-
-
 
         // TODO: Add tests
 
@@ -293,6 +291,34 @@ namespace AsyncQueryableAdapterPrototype.Tests
             return Expression.Lambda<Func<TSource, ValueTask<TTarget>>>(conditional, sourceParameter);
         }
 
+        private static Expression<Func<TSource1, TSource2, ValueTask<TTarget>>> BuildAsyncConstConditionalAccessExpression<TSource1, TSource2, TTarget>(
+            Expression<Func<TSource1, TSource2, TTarget>> accessExpression)
+        {
+            // Build the expression tree by hand, because the C# compiler optimizes away conditional, based on a const
+            // Build the expression: p => true ? new ValueTask<int>(p.Age) : CreateValueTaskAsync(p.Age)
+
+            var source1Parameter = accessExpression.Parameters[0];
+            var source2Parameter = accessExpression.Parameters[1];
+            var memberAccess = accessExpression.Body;
+
+            var valueTaskCtor = typeof(ValueTask<TTarget>).GetConstructor(new[] { typeof(TTarget) });
+            var valueTaskCtorCall = Expression.New(valueTaskCtor, memberAccess);
+
+            var createValueTaskMethod = CREATE_VALUE_TASK_METHOD_DEFINITION.MakeGenericMethod(typeof(TTarget));
+            var createValueTaskMethodCall = Expression.Call(createValueTaskMethod, memberAccess);
+
+            // Build a complex expression that, when evaluated is constant
+            var xExpression = Expression.Constant(5);
+            var yExpression = Expression.Constant(10);
+            var xYSumExpression = Expression.Add(xExpression, yExpression);
+            var zExpression = Expression.Constant(15);
+            var comparison = Expression.Equal(xYSumExpression, zExpression);
+
+            var conditional = Expression.Condition(comparison, valueTaskCtorCall, createValueTaskMethodCall);
+            return Expression.Lambda<Func<TSource1, TSource2, ValueTask<TTarget>>>(
+                conditional, source1Parameter, source2Parameter);
+        }
+
         private static Expression<Func<TSource, CancellationToken, ValueTask<TTarget>>> BuildAsyncConstConditionalAccessWithCancellationExpression<TSource, TTarget>(
             Expression<Func<TSource, TTarget>> accessExpression)
         {
@@ -306,6 +332,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             return Expression.Lambda<Func<TSource, CancellationToken, ValueTask<TTarget>>>(
                 body, sourceParameter, cancellationParameter);
+        }
+
+        private static Expression<Func<TSource1, TSource2, CancellationToken, ValueTask<TTarget>>> BuildAsyncConstConditionalAccessWithCancellationExpression<TSource1, TSource2, TTarget>(
+            Expression<Func<TSource1, TSource2, TTarget>> accessExpression)
+        {
+            // Build the expression tree by hand, because the C# compiler optimizes away conditional, based on a const
+            // Build the expression: (p, c) => true ? new ValueTask<int>(p.Age) : CreateValueTaskAsync(p.Age)
+            var result = BuildAsyncConstConditionalAccessExpression(accessExpression);
+
+            var source1Parameter = result.Parameters[0];
+            var source2Parameter = result.Parameters[1];
+
+            var body = result.Body;
+            var cancellationParameter = Expression.Parameter(typeof(CancellationToken), "cancellation");
+
+            return Expression.Lambda<Func<TSource1, TSource2, CancellationToken, ValueTask<TTarget>>>(
+                body, source1Parameter, source2Parameter, cancellationParameter);
         }
     }
 }

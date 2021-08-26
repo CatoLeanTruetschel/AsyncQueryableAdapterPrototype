@@ -1,20 +1,21 @@
-﻿// License
-// --------------------------------------------------------------------------------------------------------------------
-// (C) Copyright 2021 Cato Léan Trütschel and contributors
-// (github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype)
-//
-// Licensed under the Apache License, Version 2.0 (the "License")
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// --------------------------------------------------------------------------------------------------------------------
+﻿/* License
+ * --------------------------------------------------------------------------------------------------------------------
+ * (C) Copyright 2021 Cato Léan Trütschel and contributors 
+ * (https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * --------------------------------------------------------------------------------------------------------------------
+ */
 
 using System;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).FirstAsync();
             });
@@ -86,7 +87,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).FirstAsync(p => p.LastName == "Higgins");
             });
@@ -117,7 +118,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).FirstAwaitAsync(p => new ValueTask<bool>(p.LastName == "Higgins"));
             });
@@ -179,7 +180,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-        [Fact]
+                [Fact]
         public async Task WhereFirstAwaitWithCancellationNoEntryThrowsInvalidOperationExceptionTest()
         {
             // Arrange
@@ -187,7 +188,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable
                     .Where(p => p.Age > 1000)
@@ -234,7 +235,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereFirstAwaitTranslatableValueTaskFactoryMethodTest()
         {
@@ -529,7 +530,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereFirstOrDefaultAwaitTranslatableValueTaskFactoryMethodTest()
         {
@@ -628,11 +629,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age == 21).Last();
 
@@ -649,15 +650,15 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).LastAsync();
             });
@@ -669,11 +670,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -692,15 +693,15 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).LastAsync(p => p.LastName == "Higgins");
             });
@@ -712,11 +713,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -735,15 +736,15 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).LastAwaitAsync(p => new ValueTask<bool>(p.LastName == "Higgins"));
             });
@@ -755,11 +756,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -781,11 +782,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -806,11 +807,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -823,21 +824,21 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-        [Fact]
+                [Fact]
         public async Task WhereLastAwaitWithCancellationNoEntryThrowsInvalidOperationExceptionTest()
         {
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable
                     .Where(p => p.Age > 1000)
@@ -851,11 +852,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -877,11 +878,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -896,18 +897,18 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereLastAwaitTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
 				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -926,11 +927,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
 				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).Last(p => p.LastName == "Adams");
 
@@ -1007,11 +1008,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age == 21).LastOrDefault();
 
@@ -1028,11 +1029,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act
@@ -1048,11 +1049,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1071,11 +1072,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act
@@ -1091,11 +1092,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1114,11 +1115,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act
@@ -1134,11 +1135,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1160,11 +1161,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1185,11 +1186,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1202,17 +1203,17 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-        [Fact]
+                [Fact]
         public async Task WhereLastOrDefaultAwaitWithCancellationNoEntryReturnDefaultTest()
         {
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act
@@ -1230,11 +1231,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1256,11 +1257,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
-                AllowInMemoryEvaluation
+				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1275,18 +1276,18 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereLastOrDefaultAwaitTranslatableValueTaskFactoryMethodTest()
         {
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
 				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1305,11 +1306,11 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
             var queryAdapter = await GetQueryAdapterAsync(
 #if SUPPORTS_QUERYABLE_TAKE_LAST
-                DisallowImplicitPostProcessing
+				DisallowImplicitPostProcessing
 #else
 				AllowInMemoryEvaluation
 #endif
-                );
+				);
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
             var expectedQueryResult = _personEntries.Where(p => p.Age > 42).LastOrDefault(p => p.LastName == "Adams");
 
@@ -1403,7 +1404,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).SingleAsync();
             });
@@ -1434,7 +1435,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).SingleAsync(p => p.LastName == "Higgins");
             });
@@ -1465,7 +1466,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable.Where(p => p.Age > 1000).SingleAwaitAsync(p => new ValueTask<bool>(p.LastName == "Higgins"));
             });
@@ -1527,7 +1528,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-        [Fact]
+                [Fact]
         public async Task WhereSingleAwaitWithCancellationNoEntryThrowsInvalidOperationExceptionTest()
         {
             // Arrange
@@ -1535,7 +1536,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var personQueryable = queryAdapter.GetAsyncQueryable<PersonEntry>();
 
             // Act, Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
             {
                 await personQueryable
                     .Where(p => p.Age > 1000)
@@ -1582,7 +1583,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereSingleAwaitTranslatableValueTaskFactoryMethodTest()
         {
@@ -1822,7 +1823,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-        [Fact]
+                [Fact]
         public async Task WhereSingleOrDefaultAwaitWithCancellationNoEntryReturnDefaultTest()
         {
             // Arrange
@@ -1877,7 +1878,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Assert.Equal(expectedQueryResult, queryResult);
         }
 
-#if NETCORE50
+#if SUPPORTS_VALUE_TASK_FROM_RESULT
         [Fact]
         public async Task WhereSingleOrDefaultAwaitTranslatableValueTaskFactoryMethodTest()
         {
