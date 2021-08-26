@@ -107,9 +107,29 @@ namespace AsyncQueryableAdapter.Translators
                 if (parameters.Length is not 3)
                     return false;
 
-                // Expression<Func<TSource, TSource, TSource>>
-                var accumulatorType = TypeHelper.GetFuncExpressionType(
-                    genericArguments[0], genericArguments[0], genericArguments[0]);
+                Type accumulatorType;
+
+                if (!asyncFunctions)
+                {
+                    // Expression<Func<TSource, TSource, TSource>>
+                    accumulatorType = TypeHelper.GetFuncExpressionType(
+                        genericArguments[0], genericArguments[0], genericArguments[0]);
+                }
+                else if (!withCancellation)
+                {
+                    // Expression<Func<TSource, TSource, ValueTask<TSource>>>
+                    accumulatorType = TypeHelper.GetFuncExpressionType(
+                        genericArguments[0], genericArguments[0], TypeHelper.GetValueTaskType(genericArguments[0]));
+                }
+                else
+                {
+                    // Expression<Func<TSource, TSource, CancellationToken, ValueTask<TSource>>>
+                    accumulatorType = TypeHelper.GetFuncExpressionType(
+                        genericArguments[0],
+                        genericArguments[0],
+                        typeof(CancellationToken),
+                        TypeHelper.GetValueTaskType(genericArguments[0]));
+                }
 
                 if (parameters[1].ParameterType != accumulatorType)
                     return false;

@@ -35,6 +35,9 @@ namespace AsyncQueryableAdapter
         private static readonly Type _elementResultTypeQueryAdapterTypeDefinition
               = typeof(GenericQueryAdapter<,>);
 
+        private static readonly Type _3TypesQueryAdapterTypeDefinition
+            = typeof(GenericQueryAdapter<,,>);
+
         private static readonly ConditionalWeakTable<Type, IGenericElementTypeQueryAdapter> _nonGenericAdapters = new();
         private static readonly ConditionalWeakTable<Type, IGenericElementTypeQueryAdapter>.CreateValueCallback _buildQueryAdapter
             = BuildQueryAdapter;
@@ -338,7 +341,7 @@ namespace AsyncQueryableAdapter
 
             private static IGeneric3TypesQueryAdapter BuildQueryAdapter(Type accumulateType)
             {
-                var type = _elementResultTypeQueryAdapterTypeDefinition.MakeGenericType(
+                var type = _3TypesQueryAdapterTypeDefinition.MakeGenericType(
                     typeof(TSource), accumulateType, typeof(TResult));
 
                 return (IGeneric3TypesQueryAdapter)Activator.CreateInstance(type)!;
@@ -348,9 +351,9 @@ namespace AsyncQueryableAdapter
 
             public Type ResultType => typeof(TResult);
 
-            public IGeneric3TypesQueryAdapter GetQueryAdapter(Type t3)
+            public IGeneric3TypesQueryAdapter GetQueryAdapter(Type accumulateType)
             {
-                return _queryAdapters.GetValue(t3, _buildQueryAdapter);
+                return _queryAdapters.GetValue(accumulateType, _buildQueryAdapter);
             }
 
             public AsyncTypeAwaitable AggregateAsync(
@@ -397,6 +400,7 @@ namespace AsyncQueryableAdapter
                 }
 
                 accumulator = accumulator.Unquote();
+                resultSelector = resultSelector.Unquote();
 
                 return queryAdapter.AggregateAsync(
                     typedSource,

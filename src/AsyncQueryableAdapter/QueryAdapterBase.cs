@@ -183,8 +183,8 @@ namespace AsyncQueryableAdapter
                 throw new ArgumentNullException(nameof(accumulateType));
 
             return GetQueryAdapter(elementType)
-                .GetQueryAdapter(accumulateType)
                 .GetQueryAdapter(resultType)
+                .GetQueryAdapter(accumulateType)
                 .AggregateAsync(this, queryable, seed, accumulator, resultSelector, cancellation);
         }
 
