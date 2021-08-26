@@ -196,11 +196,11 @@ This is a prototype. It is **not** feature complete. There are currently no rele
             * [ ] Union
             * [ ] Where, WhereAwait, WhereAwaitWithCancellation
             * [ ] Zip, ZipAwait, ZipAwaitWithCancellation
-    * [ ] Aggregate operation translator
+    * [x] Aggregate operation translator
         * [x] Basic support
         * [x] Seed support
         * [x] Support for async accumulators and resultSelectors (when translatable to sync)
-        * [ ] Unit-test   
+        * [x] Unit-test   
     * [x] All operation translator
         * [x] Basic support
         * [x] Support for async predicates (when translatable to sync predicates)
