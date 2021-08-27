@@ -174,7 +174,6 @@ This is a prototype. It is **not** feature complete. There are currently no rele
             * [ ] DefaultIfEmpty
             * [ ] Distinct
             * [ ] Except
-            * [ ] GroupBy, GroupByAwait, GroupByAwaitWithCancellation
             * [ ] GroupJoin, GroupJoinAwait, GroupJoinAwaitWithCancellation
             * [ ] Intersect
             * [ ] Join, JoinAwait, JoinAwaitWithCancellation
@@ -229,9 +228,19 @@ This is a prototype. It is **not** feature complete. There are currently no rele
         * [x] Support for async predicates (when translatable to sync selectors)
         * [x] Support for FirstOrDefault
         * [x] Unit-test
+    * [ ] GroupBy operation translator, GroupByAwait, GroupByAwaitWithCancellation
+        * [ ] Basic support
+            * [x] Translator implementation
+            * [ ] Special TranslatedQueryable type for grouped sequences
+                * [x] Special-case support in default translator
+                * [x] Special-case support in method processor in preparation of post-processing
+                * [x] Special-case support in query provider to evaluate query
+                * [ ] Special-case support in all operation translators
+        * [ ] Support for async predicates (when translatable to sync predicates)
+        * [ ] Unit-test
     * [x] Last operation translator
         * [x] Basic support
-        * [x] Support for async predicates (when translatable to sync selectors)
+        * [x] Support for async predicates (when translatable to sync predicates)
         * [x] Support for LastOrDefault
         * [x] Unit-test
     * [x] LongCount operation translator

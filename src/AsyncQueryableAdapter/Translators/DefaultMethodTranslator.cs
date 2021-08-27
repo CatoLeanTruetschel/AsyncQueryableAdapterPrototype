@@ -30,7 +30,6 @@ using AsyncQueryableAdapter.Utils;
 //       (that all accept an argument of type IAsyncEnumerable)
 // * Concat
 // * Except
-// * GroupBy (Default case) <-- This will be a special case probably, due to the special return type (IAsyncGrouping)
 // * GroupJoin (Default case)
 // * Intersect
 // * Join (Default case)
@@ -170,6 +169,9 @@ namespace AsyncQueryableAdapter.Translators
         [ThreadStatic]
         private static List<Expression>? _argumentsBuffer;
 
+        [ThreadStatic]
+        private static List<(int index, TranslatedGroupByQueryable groupQueryable)>? _groupQueryablesBuffer;
+
         private readonly MethodInfo _targetMethod;
         private readonly MethodInfo _translatedMethod;
 
@@ -193,23 +195,19 @@ namespace AsyncQueryableAdapter.Translators
         {
             result = null;
 
-            var constructedTranslationTarget = ConstructTranslationTarget(method);
-
-            if (constructedTranslationTarget is null)
-                return false;
-
-            if (!IsCompatible(arguments, constructedTranslationTarget))
-                return false;
-
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
             translatedArguments.AddRange(arguments);
+
+            List<(int index, TranslatedGroupByQueryable groupQueryable)>? groupQueryables = null;
 
             QueryAdapterBase? queryAdapter = null;
             IQueryProvider? queryProvider = null;
             for (var i = 0; i < translatedQueryableArgumentIndices.Length; i++)
             {
-                if (!translatedArguments[i].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+                var argIdx = translatedQueryableArgumentIndices[i];
+
+                if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 {
                     return false;
                 }
@@ -217,6 +215,18 @@ namespace AsyncQueryableAdapter.Translators
                 if (translatedQueryable is null)
                 {
                     return false;
+                }
+
+                if (translatedQueryable is TranslatedGroupByQueryable translatedGroupByQueryable)
+                {
+                    if (groupQueryables is null)
+                    {
+                        _groupQueryablesBuffer ??= new();
+                        groupQueryables = _groupQueryablesBuffer;
+                        groupQueryables.Clear();
+                    }
+
+                    groupQueryables.Add((translatedQueryableArgumentIndices[argIdx], translatedGroupByQueryable));
                 }
 
                 if (i == 0)
@@ -237,25 +247,10 @@ namespace AsyncQueryableAdapter.Translators
                     }
                 }
 
-                translatedArguments[i] = translatedQueryable.Expression;
+                translatedArguments[argIdx] = translatedQueryable.Expression;
             }
 
-            Debug.Assert(queryAdapter is not null);
-            Debug.Assert(queryProvider is not null);
-
-            var translatedExpression = Expression.Call(instance, constructedTranslationTarget, translatedArguments);
-            // TODO: Not every call results in a queryable type. There may also be scalar results.
-            var resultTranslatedQueryable = new TranslatedQueryable(
-                queryAdapter, translatedExpression, queryProvider);
-
-            result = Expression.Constant(resultTranslatedQueryable);
-            return true;
-        }
-
-        private MethodInfo? ConstructTranslationTarget(MethodInfo method)
-        {
             var methodDefinition = method;
-            var translatedMethod = _translatedMethod;
 
             if (methodDefinition.IsGenericMethod)
             {
@@ -264,18 +259,241 @@ namespace AsyncQueryableAdapter.Translators
 
             if (methodDefinition != _targetMethod)
             {
-                return null;
+                return false;
             }
+
+            var genericArguments = method.GetGenericArguments();
+            var isResultGrouped = false;
+            var resultKeyType = typeof(object);
+            var resultElementType = typeof(object);
+
+            if (groupQueryables is not null)
+            {
+                Debug.Assert(groupQueryables.Any());
+                var parameter = method.GetParameters();
+
+                var methodDefinitionGenericArguments = methodDefinition.GetGenericArguments();
+                var methodDefinitionParameters = methodDefinition.GetParameters();
+                //var translatedTypeParameterIndices = new HashSet<int>();
+                Dictionary<int, (Type groupingType, Type asyncGroupingType)>? translatedTypeParameters = null;
+
+                // Rewrite the type parameters
+                foreach (var (i, groupQueryable) in groupQueryables)
+                {
+                    // The type of the concrete parameter (The constructed generic method)
+                    // F.e. IAsyncEnumerable<IGrouping<int, Person>>
+                    var parameterType = parameter[i].ParameterType;
+
+                    // The type of the unconstructed parameter
+                    // F.e. IAsyncEnumerable<TSource>
+                    var methodDefinitionParameterType = methodDefinitionParameters[i].ParameterType;
+
+                    var enumerableGroupingType = TypeHelper.GetAsyncEnumerableType(groupQueryable.AsyncGroupingType);
+                    var queryableGroupingType = TypeHelper.GetAsyncQueryableType(groupQueryable.AsyncGroupingType);
+
+                    // The concrete parameter type must be of the form
+                    // IAsync{Enumerable, Queryable}<IAsyncGrouping<TKey, TElement>>
+                    // TODO: Is this true? What about co-variance? Can we test this somehow?
+                    if (parameterType != enumerableGroupingType && parameterType != queryableGroupingType)
+                    {
+                        // Cannot translate
+                        return false;
+                    }
+
+                    // We expect that one of the methods generic arguments represents the grouping
+                    // That is one generic argument fulfills the condition
+                    // typeof(TArg) == typeof(IAsyncGrouping<TKey, TElement>)
+                    // But we search for the generic parameter that supports the parameter, that is
+                    // the TArg that the current parameter uses as grouping type
+                    // IAsync{Enumerable, Queryable}<TArg>
+
+                    // The generic parameter that specifies the grouping type
+                    // F.e. TSource
+                    var groupingType = methodDefinitionParameterType.GetGenericArguments()[0];
+                    var foundMatchingTypeParameter = false;
+
+                    for (var j = 0; j < methodDefinitionGenericArguments.Length; j++)
+                    {
+                        if (methodDefinitionGenericArguments[i] == groupingType)
+                        {
+                            // A matching type parameter was found
+                            foundMatchingTypeParameter = true;
+
+                            // The type parameter is of form IAsyncGrouping<TKey, TElement>
+                            // TODO: What about co-variance? Can we test this somehow?
+
+                            translatedTypeParameters ??= new();
+
+                            // The type parameter was not yet translated
+                            if (translatedTypeParameters.TryAdd(j, (groupQueryable.GroupingType, groupQueryable.AsyncGroupingType)))
+                            {
+                                genericArguments[j] = groupQueryable.GroupingType;
+                            }
+                            // The type parameter was already transformed, check if the transformation is consistent with our translation
+                            // TODO: What about co-variance? Can we test this somehow?
+                            else if (genericArguments[j] != groupQueryable.GroupingType)
+                            {
+                                return false;
+                            }
+
+                            break;
+                        }
+                    }
+
+                    // The method has a form that we cannot (or do not) translate with this algorithm.
+                    // This should never be the case for any of the LINQ methods as of the time of the original
+                    // implementation of this algorithm.
+                    if (!foundMatchingTypeParameter)
+                    {
+                        return false;
+                    }
+                }
+
+                if (translatedTypeParameters is not null)
+                {
+                    Debug.Assert(translatedTypeParameters.Any());
+
+                    // Translate all expressions, that use the type-parameters
+                    for (var i = 0; i < translatedArguments.Count; i++)
+                    {
+                        // TODO This operation is O(n)
+                        if (translatedQueryableArgumentIndices.Contains(i))
+                            continue;
+
+                        var arg = translatedArguments[i].Unquote();
+
+                        if (arg is not LambdaExpression lambdaExpression)
+                        {
+                            continue;
+                        }
+
+                        var lamdaParams = lambdaExpression.Parameters;
+
+                        // The lambda expression is of some type
+                        // Expression<Func<TSource, int, TOther, TResult>>
+                        // We need to get the sets of parameters of the lamda expression, we need to rewrite.
+
+                        // Use the parameter of the generic method definition to find the parameters
+                        var methodDefinitionParameter = methodDefinitionParameters[i]
+                            .ParameterType;
+
+                        if (!methodDefinitionParameter.IsGenericType
+                            || methodDefinitionParameter.GetGenericTypeDefinition() != typeof(Expression<>))
+                        {
+                            // Just skip this. We check whether the parameters match in the end anyway, so we
+                            // so not break anything.
+                            continue;
+                        }
+
+                        var funcType = methodDefinitionParameter.GetGenericArguments()[0];
+
+                        if (!FuncTypeHelper.IsFuncType(funcType))
+                        {
+                            // Just skip this. We check whether the parameters match in the end anyway, so we
+                            // so not break anything.
+                            continue;
+                        }
+
+                        var funcArgs = funcType.GetGenericArguments().AsSpan()[..^1];
+                        Debug.Assert(funcArgs.Length == lamdaParams.Count);
+
+                        Dictionary<ParameterExpression, (Type groupingType, Type asyncGroupingType)>? lambdaParamsToRewrite = null;
+
+                        for (var j = 0; j < funcArgs.Length; j++)
+                        {
+                            foreach (var typeParamIdx in translatedTypeParameters.Keys)
+                            {
+                                if (funcArgs[j] == methodDefinitionGenericArguments[typeParamIdx])
+                                {
+                                    // TODO: Perf: We can read out the kvps from the dictionary pairwise.
+                                    var groupingsTranslation = translatedTypeParameters[typeParamIdx];
+
+                                    lambdaParamsToRewrite ??= new();
+                                    lambdaParamsToRewrite.Add(lamdaParams[j], groupingsTranslation);
+                                }
+                            }
+                        }
+
+                        if (lambdaParamsToRewrite is not null)
+                        {
+                            Debug.Assert(lambdaParamsToRewrite.Any());
+
+                            if (!GroupingExpressionRewriter.TryRewriteLamdaExpression(
+                                lambdaExpression, lambdaParamsToRewrite, out var translatedArg))
+                            {
+                                return false;
+                            }
+
+                            translatedArguments[i] = Expression.Quote(translatedArg);
+                        }
+                    }
+
+                    // TODO: Check that this condition holds in the builder!
+                    // We expect the return type to be IQueryable<TResult>
+
+                    var sequenceResultTypeDefinition = methodDefinition.ReturnType.GetGenericArguments()[0];
+
+                    // Check whether we have to pass on the group special case
+                    foreach (var typeParamIdx in translatedTypeParameters.Keys)
+                    {
+                        if (sequenceResultTypeDefinition == methodDefinitionGenericArguments[typeParamIdx])
+                        {
+                            isResultGrouped = true;
+                            var asyncGroupingType = translatedTypeParameters[typeParamIdx].asyncGroupingType;
+
+                            // TODO: Do not store the constructed grouping types but the key and element types instead.
+                            resultKeyType = asyncGroupingType.GetGenericArguments()[0];
+                            resultElementType = asyncGroupingType.GetGenericArguments()[1];
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var constructedTranslationTarget = ConstructTranslationTarget(genericArguments);
+
+            if (constructedTranslationTarget is null)
+                return false;
+
+            if (!IsCompatible(translatedArguments, constructedTranslationTarget))
+                return false;
+
+            Debug.Assert(queryAdapter is not null);
+            Debug.Assert(queryProvider is not null);
+
+            var translatedExpression = Expression.Call(instance, constructedTranslationTarget, translatedArguments);
+
+            if (isResultGrouped)
+            {
+                var resultTranslatedQueryable = new TranslatedGroupByQueryable(
+                      queryAdapter, resultKeyType, resultElementType, translatedExpression, queryProvider);
+                result = Expression.Constant(resultTranslatedQueryable);
+            }
+            else
+            {
+                var elementType = translatedExpression.Type.GetGenericArguments().First();
+                var resultTranslatedQueryable = new TranslatedQueryable(
+                    queryAdapter, elementType, translatedExpression, queryProvider);
+                result = Expression.Constant(resultTranslatedQueryable);
+            }
+
+            return true;
+        }
+
+        private MethodInfo? ConstructTranslationTarget(Type[] genericArguments)
+        {
+            var translatedMethod = _translatedMethod;
 
             if (translatedMethod.IsGenericMethod)
             {
-                translatedMethod = translatedMethod.MakeGenericMethod(method.GetGenericArguments());
+                translatedMethod = translatedMethod.MakeGenericMethod(genericArguments);
             }
 
             return translatedMethod;
         }
 
-        private static bool IsCompatible(ReadOnlyCollection<Expression> arguments, MethodInfo translatedMethod)
+        private static bool IsCompatible(IReadOnlyList<Expression> arguments, MethodInfo translatedMethod)
         {
             var isCompatible = true;
             var parameters = translatedMethod.GetParameters();
@@ -286,7 +504,7 @@ namespace AsyncQueryableAdapter.Translators
             {
                 var type = arguments[i].Type;
 
-                if (type == typeof(TranslatedQueryable))
+                if (type.IsAssignableTo(typeof(TranslatedQueryable)))
                 {
                     if (!arguments[i].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                         return false;

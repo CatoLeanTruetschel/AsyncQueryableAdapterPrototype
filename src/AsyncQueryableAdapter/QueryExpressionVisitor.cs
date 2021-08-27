@@ -134,7 +134,7 @@ namespace AsyncQueryableAdapter
                     }
 
                     // A translation only happens to type TranslatedQueryable
-                    if (arguments[i].Type != typeof(TranslatedQueryable))
+                    if (!arguments[i].Type.IsAssignableTo(typeof(TranslatedQueryable)))
                     {
                         continue;
                     }

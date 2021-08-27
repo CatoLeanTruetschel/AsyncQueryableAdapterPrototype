@@ -20,34 +20,28 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
 {
-    internal sealed class TranslatedQueryable
+    internal class TranslatedQueryable
     {
-        public TranslatedQueryable(QueryAdapterBase queryAdapter, Type elementType, Expression expression, IQueryProvider queryProvider)
+        public TranslatedQueryable(
+            QueryAdapterBase queryAdapter,
+            Type elementType,
+            Expression expression,
+            IQueryProvider queryProvider)
         {
             Debug.Assert(queryAdapter is not null);
             Debug.Assert(elementType is not null);
             Debug.Assert(expression is not null);
-            Debug.Assert(expression.Type.IsAssignableTo(typeof(IQueryable<>).MakeGenericType(elementType)));
+            Debug.Assert(
+                this is TranslatedGroupByQueryable ||
+                expression.Type.IsAssignableTo(typeof(IQueryable<>).MakeGenericType(elementType)));
             Debug.Assert(queryProvider is not null);
 
             QueryAdapter = queryAdapter;
             ElementType = elementType;
-            Expression = expression;
-            QueryProvider = queryProvider;
-        }
-
-        public TranslatedQueryable(QueryAdapterBase queryAdapter, Expression expression, IQueryProvider queryProvider)
-        {
-            Debug.Assert(queryAdapter is not null);
-            Debug.Assert(expression is not null);
-            Debug.Assert(expression.Type.IsConstructedGenericType && expression.Type.GetGenericTypeDefinition() == typeof(IQueryable<>)); // TODO: Can we lower this restriction?
-            Debug.Assert(queryProvider is not null);
-
-            QueryAdapter = queryAdapter;
-            ElementType = expression.Type.GetGenericArguments().First();
             Expression = expression;
             QueryProvider = queryProvider;
         }
@@ -64,5 +58,23 @@ namespace AsyncQueryableAdapter
         {
             return QueryProvider.CreateQuery(Expression);
         }
+    }
+
+    internal class TranslatedGroupByQueryable : TranslatedQueryable
+    {
+        public TranslatedGroupByQueryable(
+            QueryAdapterBase queryAdapter,
+            Type keyType,
+            Type elementType,
+            Expression expression,
+            IQueryProvider queryProvider) : base(queryAdapter, elementType, expression, queryProvider)
+        {
+            Debug.Assert(keyType is not null);
+            KeyType = keyType;
+        }
+
+        public Type KeyType { get; }
+        public Type GroupingType => TypeHelper.GetGroupingType(KeyType, ElementType);
+        public Type AsyncGroupingType => TypeHelper.GetAsyncGroupingType(KeyType, ElementType);
     }
 }

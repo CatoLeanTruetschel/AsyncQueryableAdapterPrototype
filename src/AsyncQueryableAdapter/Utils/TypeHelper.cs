@@ -123,6 +123,22 @@ namespace AsyncQueryableAdapter.Utils
             return typeof(IAsyncEnumerable<>).MakeGenericType(_1EntryTypeBuffer);
         }
 
+        public static Type GetGroupingType(Type keyType, Type elementType)
+        {
+            _2EntryTypeBuffer ??= new Type[2];
+            _2EntryTypeBuffer[0] = keyType;
+            _2EntryTypeBuffer[1] = elementType;
+            return typeof(IGrouping<,>).MakeGenericType(_2EntryTypeBuffer);
+        }
+
+        public static Type GetAsyncGroupingType(Type keyType, Type elementType)
+        {
+            _2EntryTypeBuffer ??= new Type[2];
+            _2EntryTypeBuffer[0] = keyType;
+            _2EntryTypeBuffer[1] = elementType;
+            return typeof(IAsyncGrouping<,>).MakeGenericType(_2EntryTypeBuffer);
+        }
+
         public static Type GetValueTaskType(Type type)
         {
             _1EntryTypeBuffer ??= new Type[1];

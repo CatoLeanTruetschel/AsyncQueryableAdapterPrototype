@@ -113,13 +113,36 @@ namespace AsyncQueryableAdapter
                 }
 
                 var queryable = translatedQueryable.QueryProvider.CreateQuery(translatedQueryable.Expression);
-                var asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
-                    translatedQueryable.ElementType,
-                    queryable,
-                    CancellationToken.None); // TODO: Where do we get the cancellation token from?
+                IAsyncEnumerable<object?> asyncEnumerable;
+                Type elementType;
+
+                if (translatedQueryable is TranslatedGroupByQueryable translatedGroupByQueryable)
+                {
+                    asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
+                        translatedGroupByQueryable.GroupingType,
+                        queryable,
+                        CancellationToken.None); // TODO: Where do we get the cancellation token from?
+
+                    asyncEnumerable = GroupSequenceConverter.Convert(
+                        translatedGroupByQueryable.KeyType,
+                        translatedGroupByQueryable.ElementType,
+                        asyncEnumerable);
+
+                    elementType = translatedGroupByQueryable.AsyncGroupingType;
+                }
+                else
+                {
+
+                    asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
+                        translatedQueryable.ElementType,
+                        queryable,
+                        CancellationToken.None); // TODO: Where do we get the cancellation token from?
+
+                    elementType = translatedQueryable.ElementType;
+                }
 
                 translatedArguments[i] = Expression.Constant(
-                    asyncEnumerable.AsAsyncQueryable(translatedQueryable.ElementType));
+                        asyncEnumerable.AsAsyncQueryable(elementType));
             }
 
             return Expression.Call(instance, method, translatedArguments);

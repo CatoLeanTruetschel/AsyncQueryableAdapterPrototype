@@ -24,6 +24,40 @@ namespace System.Collections.Generic
 {
     internal static class AsyncEnumerableExtension
     {
+        public static async ValueTask<IEnumerable<IGrouping<TKey, TElement>>> AwaitGroupings<TKey, TElement>(
+            this IAsyncEnumerable<IAsyncGrouping<TKey, TElement>> asyncEnumerable)
+        {
+            if (asyncEnumerable is null)
+                throw new ArgumentNullException(nameof(asyncEnumerable));
+
+            var enumerable = await asyncEnumerable.ConfigureAwait(false);
+            IEnumerable<IGrouping<TKey, TElement>> groupings;
+
+            try
+            {
+                groupings = await Task.WhenAll(
+                    enumerable.Select(grouping => AwaitGrouping(grouping))).ConfigureAwait(false);
+            }
+            catch (ArgumentNullException)
+            {
+                throw new ArgumentException("The enumerable must not contain null entries.");
+            }
+
+            return groupings;
+        }
+
+        private static async Task<IGrouping<TKey, TElement>> AwaitGrouping<TKey, TElement>(
+            IAsyncGrouping<TKey, TElement> asyncGrouping)
+        {
+            if (asyncGrouping is null)
+                throw new ArgumentNullException(nameof(asyncGrouping));
+
+            var key = asyncGrouping.Key;
+            var enumerable = await asyncGrouping.ConfigureAwait(false);
+
+            return new Grouping<TKey, TElement>(key, enumerable);
+        }
+
         public static async ValueTask<IEnumerable<T>> EvaluateAsync<T>(this IAsyncEnumerable<T> asyncEnumerable)
         {
             if (asyncEnumerable is null)
@@ -38,6 +72,72 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(asyncEnumerable));
 
             return asyncEnumerable.EvaluateAsync().GetAwaiter();
+        }
+
+        public static ConfiguredAsyncEnumerable<T> ConfigureAwait<T>(
+            this IAsyncEnumerable<T> asyncEnumerable,
+            bool continueOnCapturedContext)
+        {
+            if (asyncEnumerable is null)
+                throw new ArgumentNullException(nameof(asyncEnumerable));
+
+            return new ConfiguredAsyncEnumerable<T>(asyncEnumerable, continueOnCapturedContext);
+        }
+    }
+
+    internal class Grouping<TKey, TElement> : IGrouping<TKey, TElement>
+    {
+        private readonly IEnumerable<TElement> _enumerable;
+
+        public Grouping(TKey key, IEnumerable<TElement> enumerable)
+        {
+            if (enumerable is null)
+                throw new ArgumentNullException(nameof(enumerable));
+
+            Key = key;
+            _enumerable = enumerable;
+        }
+
+        public TKey Key { get; }
+
+        public IEnumerator<TElement> GetEnumerator()
+        {
+            return _enumerable.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)_enumerable).GetEnumerator();
+        }
+    }
+
+    internal readonly struct ConfiguredAsyncEnumerable<T>
+    {
+        private readonly IAsyncEnumerable<T>? _asyncEnumerable;
+        private readonly bool _continueOnCapturedContext;
+
+        public ConfiguredAsyncEnumerable(IAsyncEnumerable<T> asyncEnumerable, bool continueOnCapturedContext)
+        {
+            if (asyncEnumerable is null)
+                throw new ArgumentNullException(nameof(asyncEnumerable));
+
+            _asyncEnumerable = asyncEnumerable;
+            _continueOnCapturedContext = continueOnCapturedContext;
+        }
+
+        public ConfiguredAsyncEnumerable<T> ConfigureAwait(bool continueOnCapturedContext)
+        {
+            return new ConfiguredAsyncEnumerable<T>(_asyncEnumerable, continueOnCapturedContext);
+        }
+
+        private async ValueTask<IEnumerable<T>> EvaluateAsync()
+        {
+            return await _asyncEnumerable.ToArrayAsync().ConfigureAwait(_continueOnCapturedContext);
+        }
+
+        public ValueTaskAwaiter<IEnumerable<T>> GetAwaiter()
+        {
+            return EvaluateAsync().GetAwaiter();
         }
     }
 }

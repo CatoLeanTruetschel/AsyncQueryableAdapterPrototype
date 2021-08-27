@@ -48,7 +48,14 @@ namespace AsyncQueryableAdapter.Utils
                     return false;
                 }
 
-                if (translatedType.GetGenericTypeDefinition() != typeof(IAsyncQueryable<>))
+                if (type.IsAssignableTo<IOrderedQueryable>())
+                {
+                    if (translatedType.GetGenericTypeDefinition() != typeof(IOrderedAsyncQueryable<>))
+                    {
+                        return false;
+                    }
+                }
+                else if (translatedType.GetGenericTypeDefinition() != typeof(IAsyncQueryable<>))
                 {
                     return false;
                 }

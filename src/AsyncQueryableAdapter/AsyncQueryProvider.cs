@@ -84,6 +84,41 @@ namespace AsyncQueryableAdapter
             //    when a query method is executed as the last step that produces a scalar result
             var untypedResult = expression.Evaluate(); // TODO: Make preferInterpretation param configurable
 
+            if (expression.Type == typeof(TranslatedGroupByQueryable))
+            {
+                if (untypedResult is not TranslatedGroupByQueryable translatedQueryable)
+                {
+                    throw new InvalidOperationException(); // TODO
+                }
+
+                var elementType = translatedQueryable.ElementType;
+                var keyType = translatedQueryable.KeyType;
+
+                var expectedResultType = TypeHelper.GetAsyncEnumerableType(translatedQueryable.AsyncGroupingType);
+
+                // Due to the check above and the fact that we only translate instances of type AsyncQueryable, 
+                // the type of the original expression must be one of the following: 
+                // object,
+                // IAsyncQueryable, IAsyncQueryable<T>,
+                // IOrderedAsyncQueryable, IOrderedAsyncQueryable<T>,
+                // IAsyncEnumerable<T>
+                // Therefore TResult MUST be of type IAsyncEnumerable<T>
+                if (!typeof(TResult).IsAssignableTo(expectedResultType)) // TODO: Isn't IsAssignableFrom correct here?
+                {
+                    throw new InvalidOperationException(); // TODO
+                }
+
+                // Get the queryable from the expression
+                var queryable = translatedQueryable.QueryProvider.CreateQuery(translatedQueryable.Expression);
+
+                // Evaluation the expression
+                var result = QueryAdapter.EvaluateAsync(translatedQueryable.GroupingType, queryable, token);
+
+                // Translate IAsyncEnumerable<IGrouping<TKey, TElement>>
+                // to IAsyncEnumerable<IAsyncGrouping<TKey, TElement>>
+                return (TResult)GroupSequenceConverter.Convert(keyType, elementType, result);
+            }
+
             if (expression.Type == typeof(TranslatedQueryable))
             {
                 if (untypedResult is not TranslatedQueryable translatedQueryable)
@@ -100,7 +135,7 @@ namespace AsyncQueryableAdapter
                 // IOrderedAsyncQueryable, IOrderedAsyncQueryable<T>,
                 // IAsyncEnumerable<T>
                 // Therefore TResult MUST be of type IAsyncEnumerable<T>
-                if (!typeof(TResult).IsAssignableTo(typeof(IAsyncEnumerable<>).MakeGenericType(elementType)))
+                if (!typeof(TResult).IsAssignableTo(typeof(IAsyncEnumerable<>).MakeGenericType(elementType))) // TODO: Isn't IsAssignableFrom correct here?
                 {
                     throw new InvalidOperationException(); // TODO
                 }
