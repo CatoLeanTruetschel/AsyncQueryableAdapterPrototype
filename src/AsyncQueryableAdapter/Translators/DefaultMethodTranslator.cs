@@ -187,25 +187,22 @@ namespace AsyncQueryableAdapter.Translators
         }
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(arguments);
+            translatedArguments.AddRange(translationContext.Arguments);
 
             List<(int index, TranslatedGroupByQueryable groupQueryable)>? groupQueryables = null;
 
             QueryAdapterBase? queryAdapter = null;
             IQueryProvider? queryProvider = null;
-            for (var i = 0; i < translatedQueryableArgumentIndices.Length; i++)
+            for (var i = 0; i < translationContext.TranslatedQueryableArgumentIndices.Length; i++)
             {
-                var argIdx = translatedQueryableArgumentIndices[i];
+                var argIdx = translationContext.TranslatedQueryableArgumentIndices[i];
 
                 if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 {
@@ -226,7 +223,9 @@ namespace AsyncQueryableAdapter.Translators
                         groupQueryables.Clear();
                     }
 
-                    groupQueryables.Add((translatedQueryableArgumentIndices[argIdx], translatedGroupByQueryable));
+                    groupQueryables.Add(
+                        (translationContext.TranslatedQueryableArgumentIndices[argIdx],
+                        translatedGroupByQueryable));
                 }
 
                 if (i == 0)
@@ -250,7 +249,7 @@ namespace AsyncQueryableAdapter.Translators
                 translatedArguments[argIdx] = translatedQueryable.Expression;
             }
 
-            var methodDefinition = method;
+            var methodDefinition = translationContext.Method;
 
             if (methodDefinition.IsGenericMethod)
             {
@@ -262,7 +261,7 @@ namespace AsyncQueryableAdapter.Translators
                 return false;
             }
 
-            var genericArguments = method.GetGenericArguments();
+            var genericArguments = translationContext.Method.GetGenericArguments();
             var isResultGrouped = false;
             var resultKeyType = typeof(object);
             var resultElementType = typeof(object);
@@ -270,7 +269,7 @@ namespace AsyncQueryableAdapter.Translators
             if (groupQueryables is not null)
             {
                 Debug.Assert(groupQueryables.Any());
-                var parameter = method.GetParameters();
+                var parameter = translationContext.Method.GetParameters();
 
                 var methodDefinitionGenericArguments = methodDefinition.GetGenericArguments();
                 var methodDefinitionParameters = methodDefinition.GetParameters();
@@ -357,7 +356,7 @@ namespace AsyncQueryableAdapter.Translators
                     for (var i = 0; i < translatedArguments.Count; i++)
                     {
                         // TODO This operation is O(n)
-                        if (translatedQueryableArgumentIndices.Contains(i))
+                        if (translationContext.TranslatedQueryableArgumentIndices.Contains(i))
                             continue;
 
                         var arg = translatedArguments[i].Unquote();
@@ -462,7 +461,10 @@ namespace AsyncQueryableAdapter.Translators
             Debug.Assert(queryAdapter is not null);
             Debug.Assert(queryProvider is not null);
 
-            var translatedExpression = Expression.Call(instance, constructedTranslationTarget, translatedArguments);
+            var translatedExpression = Expression.Call(
+                translationContext.Instance,
+                constructedTranslationTarget,
+                translatedArguments);
 
             if (isResultGrouped)
             {

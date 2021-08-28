@@ -149,8 +149,10 @@ namespace AsyncQueryableAdapter
 
             if (queryableTranslationsCount > 0)
             {
-                return _methodProcessor.ProcessMethod(
-                    method, instance, arguments, translatedQueryableArgumentIndices);
+                var translationContext = new MethodTranslationContext(
+                    instance, method, arguments, translatedQueryableArgumentIndices);
+
+                return _methodProcessor.ProcessMethod(translationContext);
             }
 
             return Expression.Call(instance, method, arguments);

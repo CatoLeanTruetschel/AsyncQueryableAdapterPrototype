@@ -229,31 +229,28 @@ namespace AsyncQueryableAdapter.Translators
         public bool AsyncFunctions { get; }
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
                 return false;
 
-            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+            if (!translationContext.Arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
                 return false;
 
             var elementType = translatedQueryable.ElementType;
             var queryable = translatedQueryable.GetQueryable();
-            var returnType = method.ReturnType;
+            var returnType = translationContext.Method.ReturnType;
             AsyncTypeAwaitable evaluationResult;
 
-            if (arguments.Count is 3) // Cases 1, 4, 7
+            if (translationContext.Arguments.Count is 3) // Cases 1, 4, 7
             {
-                var accumulator = arguments[1];
+                var accumulator = translationContext.Arguments[1];
 
                 if (AsyncFunctions && !accumulator.TryTranslateExpressionToSync(
                     elementType,
@@ -278,12 +275,12 @@ namespace AsyncQueryableAdapter.Translators
                 Type accumulateType;
                 Expression? resultSelector = null;
 
-                if (arguments.Count is 5) // Cases 3, 6, 9
+                if (translationContext.Arguments.Count is 5) // Cases 3, 6, 9
                 {
                     // TODO: Can we access this without requesting the generic arguments for perf reasons?
-                    accumulateType = method.GetGenericArguments()[1];
+                    accumulateType = translationContext.Method.GetGenericArguments()[1];
 
-                    resultSelector = arguments[3];
+                    resultSelector = translationContext.Arguments[3];
 
                     if (AsyncFunctions && !resultSelector.TryTranslateExpressionToSync(
                         accumulateType,
@@ -293,7 +290,7 @@ namespace AsyncQueryableAdapter.Translators
                         return false;
                     }
                 }
-                else if (arguments.Count is 4) // Cases 2, 5, 8
+                else if (translationContext.Arguments.Count is 4) // Cases 2, 5, 8
                 {
                     accumulateType = resultType;
                 }
@@ -302,8 +299,8 @@ namespace AsyncQueryableAdapter.Translators
                     return false;
                 }
 
-                var seed = arguments[1].Evaluate();
-                var accumulator = arguments[2];
+                var seed = translationContext.Arguments[1].Evaluate();
+                var accumulator = translationContext.Arguments[2];
 
                 if (AsyncFunctions && !accumulator.TryTranslateExpressionToSync(
                     accumulateType,
@@ -314,7 +311,7 @@ namespace AsyncQueryableAdapter.Translators
                     return false;
                 }
 
-                if (arguments.Count is 4) // Cases 3, 6, 9
+                if (translationContext.Arguments.Count is 4) // Cases 3, 6, 9
                 {
                     evaluationResult = translatedQueryable.QueryAdapter.AggregateAsync(
                         elementType,

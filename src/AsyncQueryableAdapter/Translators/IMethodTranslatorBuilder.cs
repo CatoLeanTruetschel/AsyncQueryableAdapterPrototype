@@ -16,13 +16,29 @@
 // limitations under the License.
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace AsyncQueryableAdapter.Translators
 {
+    /// <summary>
+    /// Represents a builder that can be used to construct <see cref="IMethodTranslator"/>s for a specific subset of
+    /// asynchronous LINQ methods.
+    /// </summary>
     public interface IMethodTranslatorBuilder
     {
+        /// <summary>
+        /// Tries to create a <see cref="IMethodTranslator"/> instance for the specified method.
+        /// </summary>
+        /// <param name="method">The <see cref="MethodInfo"/> that a method translator is requested for.</param>
+        /// <param name="result">
+        /// Contains the constructed <see cref="IMethodTranslator"/> if the operation is successful.
+        /// </param>
+        /// <returns>
+        /// True if the a method translator for <paramref name="method"/> was constructed successfully, false otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="method"/> is <c>null</c>.</exception>
         bool TryBuildMethodTranslator(
             MethodInfo method,
             [NotNullWhen(true)] out IMethodTranslator? result);

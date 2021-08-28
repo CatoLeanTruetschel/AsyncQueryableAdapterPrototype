@@ -16,21 +16,36 @@
 // limitations under the License.
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Linq;
 
 namespace AsyncQueryableAdapter.Translators
 {
+    /// <summary>
+    /// Represents a method translator that is responsible for translating a specific subset of asynchronous LINQ 
+    /// methods to their synchronous counterparts.
+    /// </summary>
     public interface IMethodTranslator
     {
+        /// <summary>
+        /// Tries to translate a synchronous LINQ method as specified by the translation context.
+        /// </summary>
+        /// <param name="translationContext">The translation context that specifies the method to translate.</param>
+        /// <param name="result">
+        /// Contains a <see cref="ConstantExpression"/> that represents the translation result of the translation is 
+        /// successful.
+        /// </param>
+        /// <returns>True if the method was translated successfully, false otherwise.</returns>
+        /// <remarks>
+        /// The <see cref="ConstantExpression"/> returned contains an instance of type <see cref="TranslatedQueryable"/>
+        /// if the translated method is a chain-able method (i.e. the translated method returns 
+        /// <see cref="IAsyncQueryable{T}"/> or <see cref="IOrderedAsyncQueryable{T}"/>) or a value of exactly the same 
+        /// type as the return type of the translated method otherwise.
+        /// See the call post-condition in <see cref="MethodProcessor.ProcessMethod(in MethodTranslationContext)"/>.
+        /// </remarks>
         public abstract bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result);
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result);
     }
 }

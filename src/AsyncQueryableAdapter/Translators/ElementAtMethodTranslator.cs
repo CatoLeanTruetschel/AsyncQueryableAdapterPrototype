@@ -105,24 +105,21 @@ namespace AsyncQueryableAdapter.Translators
         public bool ReturnDefaultOnNoMatch { get; }
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
                 return false;
 
-            if (!arguments[1].TryEvaluate<int>(out var index))
+            if (!translationContext.Arguments[1].TryEvaluate<int>(out var index))
                 return false;
 
-            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+            if (!translationContext.Arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
                 return false;
 
             result = ProcessOperation(translatedQueryable, index, cancellationToken);

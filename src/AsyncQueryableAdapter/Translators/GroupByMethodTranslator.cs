@@ -140,22 +140,21 @@ namespace AsyncQueryableAdapter.Translators
         private static List<Expression>? _argumentsBuffer;
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
                 return false;
 
-            var keySelector = arguments[1];
-            var keyType = method.GetGenericArguments()[1]; // TODO: Can we get the type from somewhere else cheaper?
+            var keySelector = translationContext.Arguments[1];
+
+            // TODO: Can we get the type from somewhere else cheaper?
+            var keyType = translationContext.Method.GetGenericArguments()[1];
 
             result = ProcessOperation(translatedQueryable, keyType, keySelector);
             return true;

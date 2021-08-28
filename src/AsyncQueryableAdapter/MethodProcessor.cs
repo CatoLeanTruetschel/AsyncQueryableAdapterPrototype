@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -29,39 +30,71 @@ using Microsoft.Extensions.Options;
 
 namespace AsyncQueryableAdapter
 {
-    // TODO: Rename
+    /// <summary>
+    /// Represents a LINQ method processor that is responsible for processing a single asynchronous method call by 
+    /// either translating it to an equivalent synchronous method call or an implicit post-processing step.
+    /// </summary>
     internal class MethodProcessor
     {
         [ThreadStatic]
         private static List<Expression>? _argumentsBuffer;
 
-        private readonly IOptions<AsyncQueryableOptions> _options;
+        private readonly IOptions<AsyncQueryableOptions> _optionsAccessor;
         private readonly IMethodTranslatorBuilder _methodTranslatorBuilder;
 
-        public MethodProcessor(IOptions<AsyncQueryableOptions> options)
+        /// <summary>
+        /// Creates a new instance of the <see cref="MethodProcessor"/> type with the specified options.
+        /// </summary>
+        /// <param name="optionsAccessor">
+        /// An <see cref="IOptions{AsyncQueryableOptions}"/> instance that is used to access the options configured.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if <paramref name="optionsAccessor"/> is <c>null</c>.
+        /// </exception>
+        public MethodProcessor(IOptions<AsyncQueryableOptions> optionsAccessor)
         {
-            if (options is null)
-                throw new ArgumentNullException(nameof(options));
+            if (optionsAccessor is null)
+                throw new ArgumentNullException(nameof(optionsAccessor));
 
-            _options = options;
-            _methodTranslatorBuilder = options.Value.MethodTranslators.CreateMethodTranslatorBuilder();
+            _optionsAccessor = optionsAccessor;
+            _methodTranslatorBuilder = optionsAccessor.Value.MethodTranslators.CreateMethodTranslatorBuilder();
         }
 
         public Expression ProcessMethod(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices)
+            in MethodTranslationContext translationContext)
         {
             var hasNonDefaultTranslator = false;
 
             // Try to translate the complete method call.
-            if (_methodTranslatorBuilder.TryBuildMethodTranslator(method, out var methodTranslator))
+            if (_methodTranslatorBuilder.TryBuildMethodTranslator(translationContext.Method, out var methodTranslator))
             {
                 hasNonDefaultTranslator = methodTranslator is not DefaultMethodTranslator;
 
-                if (methodTranslator.TryTranslate(method, instance, arguments, translatedQueryableArgumentIndices, out var result))
+                if (methodTranslator.TryTranslate(translationContext, out var result))
                 {
+                    // As per spec:
+                    // The <see cref="ConstantExpression"/> returned contains an instance of type TranslatedQueryable
+                    // if the translated method is a chain-able method (i.e. the translated method returns 
+                    // IAsyncQueryable{T} or IOrderedAsyncQueryable) or a value of exactly the same type as the return
+                    // type of the translated method otherwise.
+#if DEBUG
+                    if (TypeHelper.IsAsyncQueryableType(translationContext.Method.ReturnType, allowNonGeneric: false))
+                    {
+                        Debug.Assert(result.Value is TranslatedQueryable);
+                    }
+                    else
+                    {
+                        if (result.Value is not null)
+                        {
+                            Debug.Assert(result.Value.GetType() == translationContext.Method.ReturnType);
+                        }
+                        else
+                        {
+                            Debug.Assert(translationContext.Method.ReturnType.CanContainNull());
+                        }
+                    }
+#endif
+
                     return result;
                 }
             }
@@ -69,40 +102,36 @@ namespace AsyncQueryableAdapter
             // We cannot rewrite this, in order to pass this to the database provider. 
             // Evaluate this and add a post-processing step.
             return EvaluateAndPreparePostProcessing(
-                method,
-                instance,
-                arguments,
-                translatedQueryableArgumentIndices,
+                translationContext,
                 hasNonDefaultTranslator);
         }
 
         private Expression EvaluateAndPreparePostProcessing(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            in ReadOnlySpan<int> queryableTranslationsIndices,
+            in MethodTranslationContext translationContext,
             bool hasNonDefaultTranslator)
         {
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(arguments);
+            translatedArguments.AddRange(translationContext.Arguments);
 
-            if (NeedsImplicitPostProcessing(method))
+            if (NeedsImplicitPostProcessing(translationContext.Method))
             {
-                if (!_options.Value.AllowImplicitPostProcessing)
+                if (!_optionsAccessor.Value.AllowImplicitPostProcessing)
                 {
                     ThrowHelper.ThrowQueryNotSupportedException();
                 }
 
-                if (hasNonDefaultTranslator && !_options.Value.AllowImplicitDefaultPostProcessing)
+                if (hasNonDefaultTranslator && !_optionsAccessor.Value.AllowImplicitDefaultPostProcessing)
                 {
                     ThrowHelper.ThrowQueryNotSupportedException();
                 }
             }
 
-            for (var i = 0; i < queryableTranslationsIndices.Length; i++)
+            for (var i = 0; i < translationContext.TranslatedQueryableArgumentIndices.Length; i++)
             {
-                if (!translatedArguments[i].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+                var argIdx = translationContext.TranslatedQueryableArgumentIndices[i];
+
+                if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 {
                     throw new Exception(); // TODO
                 }
@@ -141,11 +170,11 @@ namespace AsyncQueryableAdapter
                     elementType = translatedQueryable.ElementType;
                 }
 
-                translatedArguments[i] = Expression.Constant(
+                translatedArguments[argIdx] = Expression.Constant(
                         asyncEnumerable.AsAsyncQueryable(elementType));
             }
 
-            return Expression.Call(instance, method, translatedArguments);
+            return Expression.Call(translationContext.Instance, translationContext.Method, translatedArguments);
         }
 
         private static bool NeedsImplicitPostProcessing(MethodInfo method)

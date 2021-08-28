@@ -153,31 +153,28 @@ namespace AsyncQueryableAdapter.Translators
         protected bool ReturnDefaultOnNoMatch { get; }
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
                 return false;
 
-            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+            if (!translationContext.Arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
                 return false;
 
-            if (arguments.Count is 2)
+            if (translationContext.Arguments.Count is 2)
             {
                 result = ProcessOperation(translatedQueryable, predicate: null, cancellationToken);
 
                 return true;
             }
 
-            var predicate = arguments[1];
+            var predicate = translationContext.Arguments[1];
 
             if (AsyncPredicate && !predicate.TryTranslateExpressionToSync(
                 translatedQueryable.ElementType, typeof(bool), out predicate))

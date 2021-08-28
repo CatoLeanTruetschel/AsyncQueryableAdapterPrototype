@@ -222,29 +222,26 @@ namespace AsyncQueryableAdapter.Translators
             CancellationToken cancellation);
 
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            var returnType = method.ReturnType;
+            var returnType = translationContext.Method.ReturnType;
             var resultTypeDescriptor = AwaitableTypeDescriptor.GetTypeDescriptor(returnType);
             var resultType = resultTypeDescriptor.ResultType;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
                 return false;
 
-            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+            if (!translationContext.Arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
                 return false;
 
             // No selector
-            if (arguments.Count is 2)
+            if (translationContext.Arguments.Count is 2)
             {
                 result = ProcessOperation(
                     resultType, translatedQueryable, selector: null, cancellationToken);
@@ -252,7 +249,7 @@ namespace AsyncQueryableAdapter.Translators
                 return true;
             }
 
-            var selector = arguments[1];
+            var selector = translationContext.Arguments[1];
 
             if (AsyncSelector && !selector.TryTranslateExpressionToSync(
                 translatedQueryable.ElementType, resultType, out selector))

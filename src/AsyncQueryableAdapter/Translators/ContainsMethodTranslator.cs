@@ -99,20 +99,17 @@ namespace AsyncQueryableAdapter.Translators
     internal sealed class ContainsMethodTranslator : IMethodTranslator
     {
         public bool TryTranslate(
-            MethodInfo method,
-            Expression? instance,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices,
-            [NotNullWhen(true)] out Expression? result)
+            in MethodTranslationContext translationContext,
+            [NotNullWhen(true)] out ConstantExpression? result)
         {
             result = null;
 
-            var hasEqualityComparer = arguments.Count is 4;
+            var hasEqualityComparer = translationContext.Arguments.Count is 4;
 
-            if (!arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
+            if (!translationContext.Arguments[^1].TryEvaluate<CancellationToken>(out var cancellationToken))
                 return false;
 
-            if (!arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            if (!translationContext.Arguments[0].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 return false;
 
             if (translatedQueryable is null)
@@ -120,13 +117,13 @@ namespace AsyncQueryableAdapter.Translators
 
             var elementType = translatedQueryable.ElementType;
             var queryable = translatedQueryable.GetQueryable();
-            var untypedValue = arguments[1].Evaluate();
+            var untypedValue = translationContext.Arguments[1].Evaluate();
 
             // TODO: Is it allowed that value is null?
             //if (untypedValue is null)
             //    return false;
 
-            var comparer = hasEqualityComparer ? arguments[2].Evaluate() : null;
+            var comparer = hasEqualityComparer ? translationContext.Arguments[2].Evaluate() : null;
 
             var evaluationResult = translatedQueryable.QueryAdapter.ContainsAsync(
                 elementType,

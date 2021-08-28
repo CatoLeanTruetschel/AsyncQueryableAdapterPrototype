@@ -18,10 +18,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace AsyncQueryableAdapter.Utils
 {
@@ -151,6 +153,58 @@ namespace AsyncQueryableAdapter.Utils
             _1EntryTypeBuffer ??= new Type[1];
             _1EntryTypeBuffer[0] = sourceType;
             return typeof(IEqualityComparer<>).MakeGenericType(_1EntryTypeBuffer);
+        }
+
+        public static bool IsAsyncQueryableType(Type type, bool allowNonGeneric)
+        {
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (type.IsGenericType)
+            {
+                var typeDefinition = type.GetGenericTypeDefinition();
+
+                if (typeDefinition == typeof(IAsyncQueryable<>) || typeDefinition == typeof(IOrderedAsyncQueryable<>))
+                {
+                    return true;
+                }
+            }
+            else if (allowNonGeneric)
+            {
+                return type == typeof(IAsyncQueryable) || type == typeof(IOrderedAsyncQueryable);
+            }
+
+            return false;
+        }
+
+        public static bool IsAsyncQueryableType(
+            Type type,
+            bool allowNonGeneric,
+            [NotNullWhen(true)] out Type? elementType)
+        {
+            elementType = null;
+
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (type.IsGenericType)
+            {
+                var typeDefinition = type.GetGenericTypeDefinition();
+
+                if (typeDefinition == typeof(IAsyncQueryable<>) || typeDefinition == typeof(IOrderedAsyncQueryable<>))
+                {
+                    var genericArguments = type.GetGenericArguments();
+                    elementType = genericArguments[0];
+                    return true;
+                }
+            }
+            else if (allowNonGeneric && (type == typeof(IAsyncQueryable) || type == typeof(IOrderedAsyncQueryable)))
+            {
+                elementType = typeof(object);
+                return true;
+            }
+
+            return false;
         }
     }
 }
