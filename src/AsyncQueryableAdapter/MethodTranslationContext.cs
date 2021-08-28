@@ -17,8 +17,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -26,39 +24,33 @@ namespace AsyncQueryableAdapter
 {
     public readonly ref struct MethodTranslationContext
     {
-        private static readonly ReadOnlyCollection<Expression> _emptyArguments = new List<Expression>().AsReadOnly();
         private static readonly MethodInfo _noMethod = new Action(Nop).Method;
 
         private static void Nop() { }
 
         private readonly MethodInfo? _method;
-        private readonly ReadOnlyCollection<Expression>? _arguments;
 
         public MethodTranslationContext(
             Expression? instance,
             MethodInfo method,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices)
+            MethodTranslationArguments arguments)
         {
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
+
             Instance = instance;
             _method = method;
-            _arguments = arguments;
-            TranslatedQueryableArgumentIndices = translatedQueryableArgumentIndices;
+            Arguments = arguments;
         }
 
-        public MethodTranslationContext(
-            MethodInfo method,
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlySpan<int> translatedQueryableArgumentIndices)
-            : this(null, method, arguments, translatedQueryableArgumentIndices)
+        public MethodTranslationContext(MethodInfo method, MethodTranslationArguments arguments)
+            : this(null, method, arguments)
         { }
 
         public Expression? Instance { get; }
 
         public MethodInfo Method => _method ?? _noMethod;
 
-        public ReadOnlyCollection<Expression> Arguments => _arguments ?? _emptyArguments;
-
-        public ReadOnlySpan<int> TranslatedQueryableArgumentIndices { get; }
+        public MethodTranslationArguments Arguments { get; }
     }
 }

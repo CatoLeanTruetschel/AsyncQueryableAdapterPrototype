@@ -116,41 +116,13 @@ namespace AsyncQueryableAdapter
             //    of IAsyncQueryable<T> but may also have an argument type AsyncQueryable<T>, which is the only type
             //    that we translate.
 
-            var queryableTranslationsCount = 0;
-            Span<int> translatedQueryableArgumentIndices = stackalloc int[node.Arguments.Count]; // TODO: Possible stack-overflow
-            if (arguments is not null) // TODO: We can do this already in the VisitArguments method.
-            {
-                if (arguments.Count != node.Arguments.Count)
-                {
-                    throw new InvalidOperationException(); //TODO: Message
-                }
+            using var translationArguments = new MethodTranslationArguments(
+                node.Arguments, arguments, stackalloc int[16]);
 
-                for (var i = 0; i < arguments.Count; i++)
-                {
-                    // A translation only happens from type IAsyncQueryable (or IAsyncQueryable<T>)
-                    if (!node.Arguments[i].Type.IsAssignableTo<IAsyncQueryable>())
-                    {
-                        continue;
-                    }
-
-                    // A translation only happens to type TranslatedQueryable
-                    if (!arguments[i].Type.IsAssignableTo(typeof(TranslatedQueryable)))
-                    {
-                        continue;
-                    }
-
-                    translatedQueryableArgumentIndices[queryableTranslationsCount] = i;
-                    queryableTranslationsCount++;
-                }
-            }
-
-            translatedQueryableArgumentIndices = translatedQueryableArgumentIndices[..queryableTranslationsCount];
-            arguments ??= node.Arguments;
-
-            if (queryableTranslationsCount > 0)
+            if (translationArguments.HasTranslatedQueryableArguments)
             {
                 var translationContext = new MethodTranslationContext(
-                    instance, method, arguments, translatedQueryableArgumentIndices);
+                    instance, method, translationArguments);
 
                 return _methodProcessor.ProcessMethod(translationContext);
             }

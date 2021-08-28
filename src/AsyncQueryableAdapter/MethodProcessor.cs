@@ -124,11 +124,11 @@ namespace AsyncQueryableAdapter
 
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(translationContext.Arguments);
+            translatedArguments.AddRange(translationContext.Arguments.Arguments);
 
-            for (var i = 0; i < translationContext.TranslatedQueryableArgumentIndices.Length; i++)
+            for (var i = 0; i < translationContext.Arguments.TranslatedQueryableArgumentIndices.Length; i++)
             {
-                var argIdx = translationContext.TranslatedQueryableArgumentIndices[i];
+                var argIdx = translationContext.Arguments.TranslatedQueryableArgumentIndices[i];
 
                 if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 {

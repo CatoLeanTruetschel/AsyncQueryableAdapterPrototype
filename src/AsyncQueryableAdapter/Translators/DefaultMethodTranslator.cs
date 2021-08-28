@@ -194,15 +194,15 @@ namespace AsyncQueryableAdapter.Translators
 
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(translationContext.Arguments);
+            translatedArguments.AddRange(translationContext.Arguments.Arguments);
 
             List<(int index, TranslatedGroupByQueryable groupQueryable)>? groupQueryables = null;
 
             QueryAdapterBase? queryAdapter = null;
             IQueryProvider? queryProvider = null;
-            for (var i = 0; i < translationContext.TranslatedQueryableArgumentIndices.Length; i++)
+            for (var i = 0; i < translationContext.Arguments.TranslatedQueryableArgumentIndices.Length; i++)
             {
-                var argIdx = translationContext.TranslatedQueryableArgumentIndices[i];
+                var argIdx = translationContext.Arguments.TranslatedQueryableArgumentIndices[i];
 
                 if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
                 {
@@ -224,7 +224,7 @@ namespace AsyncQueryableAdapter.Translators
                     }
 
                     groupQueryables.Add(
-                        (translationContext.TranslatedQueryableArgumentIndices[argIdx],
+                        (translationContext.Arguments.TranslatedQueryableArgumentIndices[argIdx],
                         translatedGroupByQueryable));
                 }
 
@@ -356,7 +356,7 @@ namespace AsyncQueryableAdapter.Translators
                     for (var i = 0; i < translatedArguments.Count; i++)
                     {
                         // TODO This operation is O(n)
-                        if (translationContext.TranslatedQueryableArgumentIndices.Contains(i))
+                        if (translationContext.Arguments.TranslatedQueryableArgumentIndices.Contains(i))
                             continue;
 
                         var arg = translatedArguments[i].Unquote();
