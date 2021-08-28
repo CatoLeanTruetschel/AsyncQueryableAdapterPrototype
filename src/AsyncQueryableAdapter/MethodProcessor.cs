@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -110,11 +109,7 @@ namespace AsyncQueryableAdapter
             in MethodTranslationContext translationContext,
             bool hasNonDefaultTranslator)
         {
-            var translatedArguments = _argumentsBuffer ??= new List<Expression>();
-            translatedArguments.Clear();
-            translatedArguments.AddRange(translationContext.Arguments);
-
-            if (NeedsImplicitPostProcessing(translationContext.Method))
+            if (IsPostProcessingImplicit(translationContext.Method))
             {
                 if (!_optionsAccessor.Value.AllowImplicitPostProcessing)
                 {
@@ -126,6 +121,10 @@ namespace AsyncQueryableAdapter
                     ThrowHelper.ThrowQueryNotSupportedException();
                 }
             }
+
+            var translatedArguments = _argumentsBuffer ??= new List<Expression>();
+            translatedArguments.Clear();
+            translatedArguments.AddRange(translationContext.Arguments);
 
             for (var i = 0; i < translationContext.TranslatedQueryableArgumentIndices.Length; i++)
             {
@@ -177,14 +176,20 @@ namespace AsyncQueryableAdapter
             return Expression.Call(translationContext.Instance, translationContext.Method, translatedArguments);
         }
 
-        private static bool NeedsImplicitPostProcessing(MethodInfo method)
+        /// <summary>
+        /// Returns a boolean value indicating whether any post-processing for the specified method is implicit 
+        /// (i.e. invisible to the caller).
+        /// </summary>
+        /// <param name="method">The method to post-process.</param>
+        /// <returns>True if the post-processing is implicit, false otherwise.</returns>
+        private static bool IsPostProcessingImplicit(MethodInfo method)
         {
             // Everything that returns IAsyncQueryable, like Select, Where, OrderBy, etc. need post-processing,
             // if not translatable.
             if (method.ReturnType.IsAssignableTo<IAsyncQueryable>())
                 return true;
 
-            // Conversion methods do not need implicit post-processing, because the transferal of entries
+            // Conversion methods are not implicit post-processing, because the transferal of entries
             // from the database to the main-memory is made explicit via .ToXYZAsync() calls.
 
             // There is no conscious way of actually detecting whether a method is a conversion method other then
