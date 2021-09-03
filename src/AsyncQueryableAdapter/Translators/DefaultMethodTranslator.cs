@@ -193,7 +193,7 @@ namespace AsyncQueryableAdapter.Translators
 
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(translationContext.Arguments.Arguments);
+            translatedArguments.AddRange(translationContext.Arguments);
 
             List<(int index, TranslatedGroupByQueryable groupQueryable)>? groupedQueryables = null;
 

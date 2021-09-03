@@ -116,12 +116,9 @@ namespace AsyncQueryableAdapter
             //    of IAsyncQueryable<T> but may also have an argument type AsyncQueryable<T>, which is the only type
             //    that we translate.
 
-            var translationArguments = new MethodTranslationArguments(arguments ?? node.Arguments);
-
             if (hasTranslatedQueryableArguments)
             {
-                var translationContext = new MethodTranslationContext(
-                    instance, method, translationArguments);
+                var translationContext = new MethodTranslationContext(instance, method, arguments ?? node.Arguments);
 
                 return _methodProcessor.ProcessMethod(translationContext);
             }

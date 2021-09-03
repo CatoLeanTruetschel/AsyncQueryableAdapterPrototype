@@ -124,7 +124,7 @@ namespace AsyncQueryableAdapter
 
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
-            translatedArguments.AddRange(translationContext.Arguments.Arguments);
+            translatedArguments.AddRange(translationContext.Arguments);
             TranslateArguments(translatedArguments);
 
             return Expression.Call(translationContext.Instance, translationContext.Method, translatedArguments);

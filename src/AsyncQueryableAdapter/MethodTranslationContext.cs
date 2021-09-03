@@ -17,6 +17,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -24,7 +25,10 @@ namespace AsyncQueryableAdapter
 {
     public readonly ref struct MethodTranslationContext
     {
+        private static readonly ReadOnlyCollection<Expression> _emptyArguments = new(Array.Empty<Expression>());
         private static readonly MethodInfo _noMethod = new Action(Nop).Method;
+
+        private readonly ReadOnlyCollection<Expression>? _arguments;
 
         private static void Nop() { }
 
@@ -33,17 +37,17 @@ namespace AsyncQueryableAdapter
         public MethodTranslationContext(
             Expression? instance,
             MethodInfo method,
-            MethodTranslationArguments arguments)
+            ReadOnlyCollection<Expression> arguments)
         {
             if (method is null)
                 throw new ArgumentNullException(nameof(method));
 
             Instance = instance;
             _method = method;
-            Arguments = arguments;
+            _arguments = arguments;
         }
 
-        public MethodTranslationContext(MethodInfo method, MethodTranslationArguments arguments)
+        public MethodTranslationContext(MethodInfo method, ReadOnlyCollection<Expression> arguments)
             : this(null, method, arguments)
         { }
 
@@ -51,6 +55,6 @@ namespace AsyncQueryableAdapter
 
         public MethodInfo Method => _method ?? _noMethod;
 
-        public MethodTranslationArguments Arguments { get; }
+        public ReadOnlyCollection<Expression> Arguments => _arguments ?? _emptyArguments;
     }
 }
