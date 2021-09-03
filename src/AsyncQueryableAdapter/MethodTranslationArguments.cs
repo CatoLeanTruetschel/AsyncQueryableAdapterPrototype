@@ -17,10 +17,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace AsyncQueryableAdapter
@@ -29,90 +27,16 @@ namespace AsyncQueryableAdapter
     {
         private static readonly ReadOnlyCollection<Expression> _emptyArguments = new List<Expression>().AsReadOnly();
         private readonly ReadOnlyCollection<Expression>? _arguments;
-        private readonly int[]? _rentedArray;
 
-        public MethodTranslationArguments(
-            ReadOnlyCollection<Expression> arguments,
-            ReadOnlyCollection<Expression>? translatedArguments,
-            Span<int> initialIndicesBuffer = default)
+        public MethodTranslationArguments(ReadOnlyCollection<Expression> arguments)
         {
             if (arguments is null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            _arguments = translatedArguments ?? arguments;
-            _rentedArray = null;
-
-            if (translatedArguments is null)
-            {
-                TranslatedQueryableArgumentIndices = ReadOnlySpan<int>.Empty;
-            }
-            else
-            {
-                var indicesBuffer = initialIndicesBuffer;
-                var writtenIndices = 0;
-
-                if (translatedArguments.Count != arguments.Count)
-                {
-                    throw new InvalidOperationException(); //TODO: Message
-                }
-
-                try
-                {
-                    for (var i = 0; i < translatedArguments.Count; i++)
-                    {
-                        // A translation only happens from type IAsyncQueryable (or IAsyncQueryable<T>)
-                        if (!arguments[i].Type.IsAssignableTo<IAsyncQueryable>())
-                        {
-                            continue;
-                        }
-
-                        // A translation only happens to type TranslatedQueryable (or TranslatedGroupByQueryable)
-                        if (!translatedArguments[i].Type.IsAssignableTo(typeof(TranslatedQueryable)))
-                        {
-                            continue;
-                        }
-
-                        if (writtenIndices >= indicesBuffer.Length)
-                        {
-                            // Rent an array from the pool.
-                            var rentedArray = ArrayPool<int>.Shared.Rent(writtenIndices + 1);
-
-                            // Copy over the existing indices. No need to slice, as the indicesBuffer is filles up anyway.
-                            indicesBuffer.CopyTo(rentedArray);
-
-                            indicesBuffer = rentedArray;
-
-                            if (_rentedArray is not null)
-                            {
-                                ArrayPool<int>.Shared.Return(_rentedArray);
-                            }
-
-                            _rentedArray = rentedArray;
-                        }
-
-                        indicesBuffer[writtenIndices] = i;
-                        writtenIndices++;
-                    }
-                }
-                catch
-                {
-                    if (_rentedArray is not null)
-                    {
-                        ArrayPool<int>.Shared.Return(_rentedArray);
-                    }
-
-                    throw;
-                }
-
-                TranslatedQueryableArgumentIndices = indicesBuffer[..writtenIndices];
-            }
+            _arguments = arguments;
         }
 
-        public ReadOnlySpan<int> TranslatedQueryableArgumentIndices { get; }
-
         public ReadOnlyCollection<Expression> Arguments => _arguments ?? _emptyArguments;
-
-        public bool HasTranslatedQueryableArguments => !TranslatedQueryableArgumentIndices.IsEmpty;
 
         public Expression this[int index] => Arguments[index];
 
@@ -121,14 +45,6 @@ namespace AsyncQueryableAdapter
         public Enumerator GetEnumerator()
         {
             return new Enumerator(this);
-        }
-
-        public void Dispose()
-        {
-            if (_rentedArray is not null)
-            {
-                ArrayPool<int>.Shared.Return(_rentedArray);
-            }
         }
 
 #pragma warning disable CA1034

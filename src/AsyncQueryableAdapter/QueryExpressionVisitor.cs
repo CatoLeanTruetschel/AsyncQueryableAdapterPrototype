@@ -94,7 +94,7 @@ namespace AsyncQueryableAdapter
         {
             var method = node.Method;
             var instance = Visit(node.Object);
-            var arguments = VisitArguments(node);
+            var arguments = VisitArguments(node, out var hasTranslatedQueryableArguments);
 
             if (instance == node.Object && arguments is null)
             {
@@ -116,10 +116,9 @@ namespace AsyncQueryableAdapter
             //    of IAsyncQueryable<T> but may also have an argument type AsyncQueryable<T>, which is the only type
             //    that we translate.
 
-            using var translationArguments = new MethodTranslationArguments(
-                node.Arguments, arguments, stackalloc int[16]);
+            var translationArguments = new MethodTranslationArguments(arguments ?? node.Arguments);
 
-            if (translationArguments.HasTranslatedQueryableArguments)
+            if (hasTranslatedQueryableArguments)
             {
                 var translationContext = new MethodTranslationContext(
                     instance, method, translationArguments);
@@ -131,15 +130,18 @@ namespace AsyncQueryableAdapter
         }
 
         // https://github.com/dotnet/runtime/blob/d64c11eabf313cbd52c2f83f89d5a63ad91ddca2/src/libraries/System.Linq.Expressions/src/System/Dynamic/Utils/ExpressionVisitorUtils.cs#L60
-        private ReadOnlyCollection<Expression>? VisitArguments(IArgumentProvider nodes)
+        private ReadOnlyCollection<Expression>? VisitArguments(
+            IArgumentProvider nodes,
+            out bool hasTranslatedQueryableArguments)
         {
+            hasTranslatedQueryableArguments = false;
             Expression[]? newNodes = null;
             for (int i = 0, n = nodes.ArgumentCount; i < n; i++)
             {
                 var curNode = nodes.GetArgument(i);
                 var node = Visit(curNode);
 
-                if (newNodes != null)
+                if (newNodes is not null)
                 {
                     newNodes[i] = node;
                 }
@@ -152,6 +154,22 @@ namespace AsyncQueryableAdapter
                     }
 
                     newNodes[i] = node;
+                }
+
+                var nodeIsTranslatedQueryable = node.Type.IsAssignableTo<TranslatedQueryable>();
+
+                // A translation only happens to type TranslatedQueryable (or TranslatedGroupByQueryable)
+                if (nodeIsTranslatedQueryable)
+                {
+                    var currNodeIsAsyncQueryable = curNode.Type.IsAssignableTo<IAsyncQueryable>();
+
+                    // A translation only happens from type IAsyncQueryable (or IAsyncQueryable<T>)
+                    if (!currNodeIsAsyncQueryable)
+                    {
+                        throw new Exception(); // TODO: Exception message
+                    }
+
+                    hasTranslatedQueryableArguments = true;
                 }
             }
 

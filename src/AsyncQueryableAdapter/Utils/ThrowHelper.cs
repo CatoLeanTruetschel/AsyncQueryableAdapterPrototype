@@ -32,6 +32,12 @@ namespace AsyncQueryableAdapter.Utils
         }
 
         [DoesNotReturn]
+        public static void ThrowSubqueriesWithDifferentQueryProvidersUnsupported()
+        {
+            throw new InvalidOperationException("Subqueries from different query-providers are unsupported.");
+        }
+
+        [DoesNotReturn]
         public static void ThrowMustBeOfType<TElement>(string? paramName = null)
         {
             var message = $"The value must be of type {typeof(TElement)}.";

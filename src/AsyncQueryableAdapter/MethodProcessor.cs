@@ -125,55 +125,75 @@ namespace AsyncQueryableAdapter
             var translatedArguments = _argumentsBuffer ??= new List<Expression>();
             translatedArguments.Clear();
             translatedArguments.AddRange(translationContext.Arguments.Arguments);
-
-            for (var i = 0; i < translationContext.Arguments.TranslatedQueryableArgumentIndices.Length; i++)
-            {
-                var argIdx = translationContext.Arguments.TranslatedQueryableArgumentIndices[i];
-
-                if (!translatedArguments[argIdx].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
-                {
-                    throw new Exception(); // TODO
-                }
-
-                if (translatedQueryable is null)
-                {
-                    throw new Exception(); // TODO
-                }
-
-                var queryable = translatedQueryable.QueryProvider.CreateQuery(translatedQueryable.Expression);
-                IAsyncEnumerable<object?> asyncEnumerable;
-                Type elementType;
-
-                if (translatedQueryable is TranslatedGroupByQueryable translatedGroupByQueryable)
-                {
-                    asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
-                        translatedGroupByQueryable.GroupingType,
-                        queryable,
-                        CancellationToken.None); // TODO: Where do we get the cancellation token from?
-
-                    asyncEnumerable = GroupSequenceConverter.Convert(
-                        translatedGroupByQueryable.KeyType,
-                        translatedGroupByQueryable.ElementType,
-                        asyncEnumerable);
-
-                    elementType = translatedGroupByQueryable.AsyncGroupingType;
-                }
-                else
-                {
-
-                    asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
-                        translatedQueryable.ElementType,
-                        queryable,
-                        CancellationToken.None); // TODO: Where do we get the cancellation token from?
-
-                    elementType = translatedQueryable.ElementType;
-                }
-
-                translatedArguments[argIdx] = Expression.Constant(
-                        asyncEnumerable.AsAsyncQueryable(elementType));
-            }
+            TranslateArguments(translatedArguments);
 
             return Expression.Call(translationContext.Instance, translationContext.Method, translatedArguments);
+        }
+
+        private static void TranslateArguments(List<Expression> arguments)
+        {
+            for (var i = 0; i < arguments.Count; i++)
+            {
+                var argument = arguments[i];
+
+                TranslateArgument(ref argument);
+
+                arguments[i] = argument;
+            }
+        }
+
+        private static void TranslateArgument(ref Expression argument)
+        {
+            // We only process arguments that represent already translated subqueries (i.e. arguments of type
+            // TranslatedQueryable or a derived type)
+            if (!argument.Type.IsAssignableTo(typeof(TranslatedQueryable)))
+            {
+                return;
+            }
+
+            if (!argument.TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+            {
+                throw new Exception(); // TODO
+            }
+
+            if (translatedQueryable is null)
+            {
+                throw new Exception(); // TODO
+            }
+
+            // TODO: Move this to the TranslatedQueryable type and override the relevant stuff in
+            // TranslatedGroupByQueryable
+            var queryable = translatedQueryable.QueryProvider.CreateQuery(translatedQueryable.Expression);
+            IAsyncEnumerable<object?> asyncEnumerable;
+            Type elementType;
+
+            if (translatedQueryable is TranslatedGroupByQueryable translatedGroupByQueryable)
+            {
+                asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
+                    translatedGroupByQueryable.GroupingType,
+                    queryable,
+                    CancellationToken.None); // TODO: Where do we get the cancellation token from?
+
+                asyncEnumerable = GroupSequenceConverter.Convert(
+                    translatedGroupByQueryable.KeyType,
+                    translatedGroupByQueryable.ElementType,
+                    asyncEnumerable);
+
+                elementType = translatedGroupByQueryable.AsyncGroupingType;
+            }
+            else
+            {
+
+                asyncEnumerable = translatedQueryable.QueryAdapter.EvaluateAsync(
+                    translatedQueryable.ElementType,
+                    queryable,
+                    CancellationToken.None); // TODO: Where do we get the cancellation token from?
+
+                elementType = translatedQueryable.ElementType;
+            }
+
+            argument = Expression.Constant(
+                    asyncEnumerable.AsAsyncQueryable(elementType));
         }
 
         /// <summary>
