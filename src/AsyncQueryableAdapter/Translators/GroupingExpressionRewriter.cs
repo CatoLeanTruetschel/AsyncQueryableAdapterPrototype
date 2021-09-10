@@ -32,7 +32,7 @@ namespace AsyncQueryableAdapter.Translators
 
         public static bool TryRewriteLamdaExpression(
             LambdaExpression lambdaExpression,
-            Dictionary<ParameterExpression, (Type groupingType, Type asyncGroupingType)> lambdaParamsToRewrite,
+            Dictionary<ParameterExpression, GroupingDescriptor> lambdaParamsToRewrite,
             [NotNullWhen(true)] out LambdaExpression? translatedArg)
         {
             _instance ??= new GroupingExpressionRewriter();
@@ -44,7 +44,7 @@ namespace AsyncQueryableAdapter.Translators
             return _instance._success;
         }
 
-        private Dictionary<ParameterExpression, (Type groupingType, Type asyncGroupingType)> _lambdaParamsToRewrite;
+        private Dictionary<ParameterExpression, GroupingDescriptor> _lambdaParamsToRewrite;
         private readonly Dictionary<ParameterExpression, ParameterExpression> _rewrittenLamdaParameters;
         private bool _success;
 
@@ -56,9 +56,9 @@ namespace AsyncQueryableAdapter.Translators
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            if (_success && _lambdaParamsToRewrite.TryGetValue(node, out var groupingTranslation))
+            if (_success && _lambdaParamsToRewrite.TryGetValue(node, out var grouping))
             {
-                return RewriteParameterExpression(node, groupingTranslation);
+                return RewriteParameterExpression(node, grouping);
             }
 
             return base.VisitParameter(node);
@@ -69,13 +69,13 @@ namespace AsyncQueryableAdapter.Translators
             if (_success)
             {
                 if (node.Expression is ParameterExpression parameterExpression
-                    && _lambdaParamsToRewrite.TryGetValue(parameterExpression, out var groupingTranslation))
+                    && _lambdaParamsToRewrite.TryGetValue(parameterExpression, out var grouping))
                 {
                     var member = node.Member;
 
                     // TODO: Check whether the member was found
                     // TODO: Perf
-                    var asyncGroupingKeyMember = groupingTranslation.asyncGroupingType.GetProperty("Key");
+                    var asyncGroupingKeyMember = grouping.AsyncGroupingType.GetProperty("Key");
 
                     if (member != asyncGroupingKeyMember)
                     {
@@ -83,11 +83,11 @@ namespace AsyncQueryableAdapter.Translators
                         return base.VisitMember(node);
                     }
 
-                    var expression = RewriteParameterExpression(parameterExpression, groupingTranslation);
+                    var expression = RewriteParameterExpression(parameterExpression, grouping);
 
                     // TODO: Check whether the member was found
                     // TODO: Perf
-                    member = groupingTranslation.groupingType.GetProperty("Key");
+                    member = grouping.GroupingType.GetProperty("Key");
 
                     return Expression.MakeMemberAccess(expression, member!); // TODO: Check whether the member was found
                 }
@@ -144,9 +144,9 @@ namespace AsyncQueryableAdapter.Translators
             {
                 var parameter = node.Parameters[i];
 
-                if (_lambdaParamsToRewrite.TryGetValue(parameter, out var groupingTranslation))
+                if (_lambdaParamsToRewrite.TryGetValue(parameter, out var grouping))
                 {
-                    parameter = RewriteParameterExpression(parameter, groupingTranslation);
+                    parameter = RewriteParameterExpression(parameter, grouping);
 
                     if (translatedArgs is null)
                     {
@@ -181,11 +181,11 @@ namespace AsyncQueryableAdapter.Translators
 
         private ParameterExpression RewriteParameterExpression(
             ParameterExpression parameter,
-            (Type groupingType, Type asyncGroupingType) groupingTranslation)
+            GroupingDescriptor grouping)
         {
             if (!_rewrittenLamdaParameters.TryGetValue(parameter, out var rewrittenNode))
             {
-                rewrittenNode = Expression.Parameter(groupingTranslation.groupingType, parameter.Name);
+                rewrittenNode = Expression.Parameter(grouping.GroupingType, parameter.Name);
                 _rewrittenLamdaParameters.Add(parameter, rewrittenNode);
             }
 

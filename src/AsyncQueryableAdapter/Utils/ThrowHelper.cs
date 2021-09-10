@@ -32,9 +32,24 @@ namespace AsyncQueryableAdapter.Utils
         }
 
         [DoesNotReturn]
-        public static void ThrowSubqueriesWithDifferentQueryProvidersUnsupported()
+        public static void ThrowSubqueriesWithDifferentQueryProvidersUnsupported(string? paramName = null)
         {
-            throw new InvalidOperationException("Subqueries from different query-providers are unsupported.");
+            throw new ArgumentException("Subqueries from different query-providers are unsupported.", paramName);
+        }
+
+        [DoesNotReturn]
+        public static void ThrowUnableToExtractTranslatedQueryableFromArgument()
+        {
+            throw new InvalidOperationException(
+                    "Unable to extract the translated queryable object from the argument.");
+        }
+
+        [DoesNotReturn]
+        public static void ThrowArgumentsMustContainATranslatedQueryable(string? paramName = null)
+        {
+            throw new ArgumentException(
+                "The arguments must contains at least one translated queryable.",
+                paramName);
         }
 
         [DoesNotReturn]
@@ -61,6 +76,28 @@ namespace AsyncQueryableAdapter.Utils
             }
 
             throw new ArgumentException(message);
+        }
+
+        [DoesNotReturn]
+        public static void ThrowMustNonGenericOrConstructedGenericMethod(string? paramName = null)
+        {
+            throw new ArgumentException(
+                    "The argument must be a non-generic or a constructed generic method.",
+                    paramName);
+        }
+
+        [DoesNotReturn]
+        public static void ThrowMustBeAGenericMethodDefinition(string? paramName = null)
+        {
+            throw new ArgumentException(
+                   "The argument must be a generic method definition.",
+                   paramName);
+        }
+
+        [DoesNotReturn]
+        public static void ThrowCollectionMustNotContainNullEntries(string? paramName = null)
+        {
+            throw new ArgumentException("The collection must not contain null entries", paramName);
         }
     }
 }

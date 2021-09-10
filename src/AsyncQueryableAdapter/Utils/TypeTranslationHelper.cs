@@ -17,7 +17,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace AsyncQueryableAdapter.Utils
 {
@@ -66,6 +69,50 @@ namespace AsyncQueryableAdapter.Utils
             }
 
             return type == translatedType;
+        }
+
+        public static bool AreArgumentsCompatible(MethodInfo method, IReadOnlyList<Expression> arguments)
+        {
+            if (method is null)
+                throw new ArgumentNullException(nameof(method));
+
+            if (arguments is null)
+                throw new ArgumentNullException(nameof(arguments));
+
+            var isCompatible = true;
+            var parameters = method.GetParameters();
+
+            if (parameters.Length != arguments.Count)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < parameters.Length; i++)
+            {
+                if (arguments[i] is null)
+                {
+                    ThrowHelper.ThrowCollectionMustNotContainNullEntries(nameof(arguments));
+                }
+
+                var type = arguments[i].Type;
+
+                // TODO: Why was this necessary? The test all pass without this.
+                //if (type.IsAssignableTo(typeof(TranslatedQueryable)))
+                //{
+                //    if (!arguments[i].TryEvaluate<TranslatedQueryable>(out var translatedQueryable))
+                //        return false;
+
+                //    type = translatedQueryable.Expression.Type;
+                //}
+
+                if (!type.IsAssignableTo(parameters[i].ParameterType))
+                {
+                    isCompatible = false;
+                    break;
+                }
+            }
+
+            return isCompatible;
         }
     }
 }

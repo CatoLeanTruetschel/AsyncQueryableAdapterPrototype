@@ -87,7 +87,10 @@ namespace System.Linq.Expressions
             return executor();
         }
 
-        public static bool TryEvaluate<T>(this Expression expression, out T? result, bool preferInterpretation = false)
+        public static bool TryEvaluate<T>(
+            this Expression expression,
+            [NotNullWhen(true)] out T? result,
+            bool preferInterpretation = false)
         {
             var value = Evaluate(expression, preferInterpretation);
 
