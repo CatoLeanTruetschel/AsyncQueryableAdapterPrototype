@@ -154,7 +154,7 @@ namespace AsyncQueryableAdapter.Utils
             return typeof(IEqualityComparer<>).MakeGenericType(_1EntryTypeBuffer);
         }
 
-        public static bool IsAsyncQueryableType(Type type, bool allowNonGeneric)
+        public static bool IsAsyncQueryableType(Type type, bool allowNonGeneric = false)
         {
             if (type is null)
                 throw new ArgumentNullException(nameof(type));
@@ -174,6 +174,13 @@ namespace AsyncQueryableAdapter.Utils
             }
 
             return false;
+        }
+
+        public static bool IsAsyncQueryableType(
+            Type type,
+            [NotNullWhen(true)] out Type? elementType)
+        {
+            return IsAsyncQueryableType(type, out elementType);
         }
 
         public static bool IsAsyncQueryableType(

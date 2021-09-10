@@ -73,6 +73,21 @@ namespace AsyncQueryableAdapter.Translators
             {
                 method = method.GetGenericMethodDefinition();
             }
+            else
+            {
+                return false;
+            }
+
+            if (!TypeHelper.IsAsyncQueryableType(method.ReturnType))
+            {
+                return false;
+            }
+
+            var resultElementType = method.ReturnType.GetGenericArguments()[0];
+            if (!method.GetGenericArguments().Any(p => p == resultElementType))
+            {
+                return false;
+            }
 
             // Try to find a method with the same signature in the System.Linq.Queryable type that works
             // on the type IQueryable (or IQueryable<T>) instead.
@@ -275,8 +290,7 @@ namespace AsyncQueryableAdapter.Translators
             // therefore construct the special-case translated-queryable type.
             if (isAnyGenericArgumentTranslated)
             {
-                // TODO: Check that this condition holds in the builder!
-                // We expect the return type to be IQueryable<TResult>
+                // We expect the return type to be IAsyncQueryable<TResult>
                 var sequenceResultTypeDefinition = methodDefinition.ReturnType.GetGenericArguments()[0];
 
                 var isResultGrouped = IsResultGrouped(
@@ -416,9 +430,8 @@ namespace AsyncQueryableAdapter.Translators
             [NotNullWhen(true)] out Type? resultElementType)
         {
             // We expect the sequence result type definition to be one of the generic arguments.
-            // F.e. in the type definition IQueryable<TResult> XY<TSource, TResult>(...)
+            // F.e. in the type definition IAsyncQueryable<TResult> XY<TSource, TResult>(...)
             // TResult is the sequence result type definition which is the TResult type parameter.
-            // TODO: Check that this expectation holds in the builder type.
 
             // Iterate over all translated generic arguments and check whether it is the sequence result type def.
             for (var i = 0; i < translatedGenericArguments.Length; i++)
