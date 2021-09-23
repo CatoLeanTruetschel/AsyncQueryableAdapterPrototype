@@ -883,7 +883,7 @@ namespace AsyncQueryableAdapter
                 throw new ArgumentNullException(nameof(source));
 
             // TODO: Is throwing the correct strategy, if there are no elements?
-            return FirstAsync(source.OrderBy(p => p), cancellation);
+            return FirstAsync(source.Where(p => p != null).OrderBy(p => p), cancellation);
         }
 
         internal AsyncTypeAwaitable MinAsync(
@@ -909,7 +909,7 @@ namespace AsyncQueryableAdapter
                 throw new ArgumentNullException(nameof(selector));
 
             // TODO: Is throwing the correct strategy, if there are no elements?
-            return FirstAsync(source.Select(selector).OrderBy(p => p), cancellation);
+            return FirstAsync(source.Select(selector).Where(p => p != null).OrderBy(p => p), cancellation);
         }
 
         internal AsyncTypeAwaitable MinAsync(
