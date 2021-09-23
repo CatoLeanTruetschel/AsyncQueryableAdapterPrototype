@@ -43,6 +43,19 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             var asyncParamType = asyncParameter.ParameterType;
             var syncParamType = syncParameter.ParameterType;
 
+            int? limit = null;
+
+            // Limit the source of Single and SingleOrDefault operations, but only if there is not predicate
+            if (string.Equals(operationName, "Single", StringComparison.Ordinal)
+                || string.Equals(operationName, "SingleOrDefault", StringComparison.Ordinal))
+            {
+                // Use the sync method, here as the async method can have a cancellation-token
+                if ((syncParameter.Member as MethodInfo)!.GetParameters().Length == 1)
+                {
+                    limit = 1;
+                }
+            }
+
             if (TryEvaluateKnownType(
                 asyncParamType,
                 syncParamType,
@@ -50,6 +63,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                 syncParameter.Name!,
                 identifierBuilder,
                 transform: null,
+                limit,
                 out result))
             {
                 return true;
@@ -131,6 +145,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                         syncParameter.Name!,
                         identifierBuilder: null,
                         transform: "p => (object)p",
+                        limit: null,
                         out result))
                     {
                         return true;
@@ -148,6 +163,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             string syncParamName,
             UniqueIdentifierBuilder? identifierBuilder,
             string? transform,
+            int? limit,
             [NotNullWhen(true)] out ParameterPair? result)
         {
             result = null;
@@ -184,6 +200,11 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                     value += $".Select({transform})";
                 }
 
+                if (limit is not null)
+                {
+                    value += $".Take({limit})";
+                }
+
                 await writer.WriteLineAsync(FormatVariableDefinition(variableName, value)).ConfigureAwait(false);
             });
 
@@ -194,6 +215,11 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                 if (!string.IsNullOrEmpty(transform))
                 {
                     value += $".Select({transform})";
+                }
+
+                if (limit is not null)
+                {
+                    value += $".Take({limit})";
                 }
 
                 await writer.WriteLineAsync(FormatVariableDefinition(variableName, value)).ConfigureAwait(false);

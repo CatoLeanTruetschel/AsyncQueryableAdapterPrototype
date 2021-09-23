@@ -49,10 +49,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double?>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -76,7 +76,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -129,10 +129,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double>();
+            var source = GetQueryable<double>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -156,7 +156,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -209,10 +209,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
+            var source = GetQueryable<decimal>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -236,7 +236,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -289,10 +289,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal?>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -316,7 +316,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -369,10 +369,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float?>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -396,7 +396,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -449,10 +449,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float>();
+            var source = GetQueryable<float>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -476,7 +476,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -529,10 +529,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long>();
+            var source = GetQueryable<long>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -556,7 +556,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -609,10 +609,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int>();
+            var source = GetQueryable<int>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -636,7 +636,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -689,10 +689,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long?>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -716,7 +716,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -769,10 +769,10 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int?>().Take(1);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -796,7 +796,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int?>().Take(1);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -852,13 +852,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            Func<double?, bool> predicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -885,7 +885,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -914,7 +914,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -971,13 +971,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double>();
 
             // Arrange 'predicate' parameter
-            Func<double, bool> predicate = (p) => p > 3;
+            Func<double, bool> predicate = (p) => p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<double, bool>> asyncPredicate = (p) => p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1004,7 +1004,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<double, bool>> asyncPredicate = (p) => p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1033,7 +1033,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<double, bool>> asyncPredicate = (p) => p <= -25.234324D;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1090,13 +1090,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal>();
 
             // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
+            Func<decimal, bool> predicate = (p) => p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1123,7 +1123,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1152,7 +1152,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1209,13 +1209,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'predicate' parameter
-            Func<decimal?, bool> predicate = (p) => p != null && p > 3;
+            Func<decimal?, bool> predicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1242,7 +1242,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1271,7 +1271,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<decimal?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1328,13 +1328,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'predicate' parameter
-            Func<float?, bool> predicate = (p) => p != null && p > 3;
+            Func<float?, bool> predicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1361,7 +1361,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1390,7 +1390,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<float?, bool>> asyncPredicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1447,13 +1447,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float>();
 
             // Arrange 'predicate' parameter
-            Func<float, bool> predicate = (p) => p > 3;
+            Func<float, bool> predicate = (p) => p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<float, bool>> asyncPredicate = (p) => p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1480,7 +1480,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<float, bool>> asyncPredicate = (p) => p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1509,7 +1509,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<float, bool>> asyncPredicate = (p) => p <= -25.234324F;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1566,13 +1566,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long>();
 
             // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
+            Func<long, bool> predicate = (p) => p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<long, bool>> asyncPredicate = (p) => p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1599,7 +1599,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<long, bool>> asyncPredicate = (p) => p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1628,7 +1628,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<long, bool>> asyncPredicate = (p) => p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1685,13 +1685,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int>();
 
             // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
+            Func<int, bool> predicate = (p) => p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<int, bool>> asyncPredicate = (p) => p <= -25;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1718,7 +1718,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<int, bool>> asyncPredicate = (p) => p <= -25;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1747,7 +1747,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+            Expression<Func<int, bool>> asyncPredicate = (p) => p <= -25;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1804,13 +1804,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'predicate' parameter
-            Func<long?, bool> predicate = (p) => p != null && p > 3;
+            Func<long?, bool> predicate = (p) => p != null && p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1837,7 +1837,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1866,7 +1866,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<long?, bool>> asyncPredicate = (p) => p != null && p <= -25L;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1923,13 +1923,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'predicate' parameter
-            Func<int?, bool> predicate = (p) => p != null && p > 3;
+            Func<int?, bool> predicate = (p) => p != null && p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p <= -25;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -1956,7 +1956,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p <= -25;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -1985,7 +1985,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            Expression<Func<int?, bool>> asyncPredicate = (p) => p != null && p <= -25;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2042,13 +2042,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            Func<double?, bool> predicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2075,7 +2075,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2104,7 +2104,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2161,13 +2161,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double>();
 
             // Arrange 'predicate' parameter
-            Func<double, bool> predicate = (p) => p > 3;
+            Func<double, bool> predicate = (p) => p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2194,7 +2194,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2223,7 +2223,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2280,13 +2280,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal>();
 
             // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
+            Func<decimal, bool> predicate = (p) => p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2313,7 +2313,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2342,7 +2342,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2399,13 +2399,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'predicate' parameter
-            Func<decimal?, bool> predicate = (p) => p != null && p > 3;
+            Func<decimal?, bool> predicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2432,7 +2432,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2461,7 +2461,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2518,13 +2518,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'predicate' parameter
-            Func<float?, bool> predicate = (p) => p != null && p > 3;
+            Func<float?, bool> predicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2551,7 +2551,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2580,7 +2580,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2637,13 +2637,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float>();
 
             // Arrange 'predicate' parameter
-            Func<float, bool> predicate = (p) => p > 3;
+            Func<float, bool> predicate = (p) => p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2670,7 +2670,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2699,7 +2699,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2756,13 +2756,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long>();
 
             // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
+            Func<long, bool> predicate = (p) => p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2789,7 +2789,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2818,7 +2818,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2875,13 +2875,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int>();
 
             // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
+            Func<int, bool> predicate = (p) => p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2908,7 +2908,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2937,7 +2937,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2994,13 +2994,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'predicate' parameter
-            Func<long?, bool> predicate = (p) => p != null && p > 3;
+            Func<long?, bool> predicate = (p) => p != null && p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3027,7 +3027,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3056,7 +3056,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3113,13 +3113,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'predicate' parameter
-            Func<int?, bool> predicate = (p) => p != null && p > 3;
+            Func<int?, bool> predicate = (p) => p != null && p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3146,7 +3146,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3175,7 +3175,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3232,13 +3232,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            Func<double?, bool> predicate = (p) => p != null && p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3265,7 +3265,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3294,7 +3294,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3351,13 +3351,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double>();
 
             // Arrange 'predicate' parameter
-            Func<double, bool> predicate = (p) => p > 3;
+            Func<double, bool> predicate = (p) => p <= -25.234324D;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3384,7 +3384,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3413,7 +3413,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<double, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324D);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3470,13 +3470,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal>();
 
             // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
+            Func<decimal, bool> predicate = (p) => p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3503,7 +3503,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3532,7 +3532,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3589,13 +3589,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'predicate' parameter
-            Func<decimal?, bool> predicate = (p) => p != null && p > 3;
+            Func<decimal?, bool> predicate = (p) => p != null && p <= -25.234324M;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3622,7 +3622,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3651,7 +3651,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<decimal?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324M);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3708,13 +3708,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'predicate' parameter
-            Func<float?, bool> predicate = (p) => p != null && p > 3;
+            Func<float?, bool> predicate = (p) => p != null && p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3741,7 +3741,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3770,7 +3770,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<float?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3827,13 +3827,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float>();
 
             // Arrange 'predicate' parameter
-            Func<float, bool> predicate = (p) => p > 3;
+            Func<float, bool> predicate = (p) => p <= -25.234324F;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3860,7 +3860,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3889,7 +3889,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<float, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25.234324F);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3946,13 +3946,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long>();
 
             // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
+            Func<long, bool> predicate = (p) => p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3979,7 +3979,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -4008,7 +4008,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4065,13 +4065,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int>();
 
             // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
+            Func<int, bool> predicate = (p) => p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4098,7 +4098,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -4127,7 +4127,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4184,13 +4184,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'predicate' parameter
-            Func<long?, bool> predicate = (p) => p != null && p > 3;
+            Func<long?, bool> predicate = (p) => p != null && p <= -25L;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4217,7 +4217,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -4246,7 +4246,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25L);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4303,13 +4303,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'predicate' parameter
-            Func<int?, bool> predicate = (p) => p != null && p > 3;
+            Func<int?, bool> predicate = (p) => p != null && p <= -25;
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -4336,7 +4336,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -4365,7 +4365,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<int?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p <= -25);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;

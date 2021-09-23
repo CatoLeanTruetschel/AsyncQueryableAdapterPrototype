@@ -18,6 +18,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using AsyncQueryableAdapter.Utils;
@@ -162,24 +163,57 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             }
 
             var sourceType = _parameterTypes.Span[0];
+            var underlyingSourceType = sourceType;
+            var isNullableSourceType = false;
+
+            if (TypeHelper.IsNullableType(sourceType, out var underlyingType))
+            {
+                underlyingSourceType = underlyingType;
+                isNullableSourceType = true;
+            }
+
             string resultValue;
 
-            if (TypeHelper.IsIntegratedNumericType(sourceType))
+            if (TypeHelper.IsIntegratedNumericType(underlyingSourceType))
             {
-                resultValue = "p > 3";
-            }
-            else if (TypeHelper.IsNullableIntegratedNumericType(sourceType, out var underlyingType))
-            {
-                resultValue = "p != null && p > 3";
+                // For the single case, we have to precisely filter out a single element only!
+                if (string.Equals(OperationName, "Single", StringComparison.Ordinal)
+                    || string.Equals(OperationName, "SingleOrDefault", StringComparison.Ordinal))
+                {
+                    var value = -25.234324d;
+
+                    var valueInCorrectType = Convert.ChangeType(value, underlyingSourceType, CultureInfo.InvariantCulture);
+                    var formattedValueInCorrectType = ((IFormattable)valueInCorrectType).ToString(null, CultureInfo.InvariantCulture);
+
+                    var suffix = TypeHelper.GetIntegratedNumericTypeSuffix(underlyingSourceType);
+
+                    if (suffix is not null)
+                    {
+                        resultValue = $"p <= {formattedValueInCorrectType}{suffix}";
+                    }
+                    else
+                    {
+                        resultValue = $"p <= ({TypeHelper.FormatCSharpTypeName(underlyingSourceType, _knownNamespaces.Namespaces)}){formattedValueInCorrectType}";
+                    }
+                }
+                else
+                {
+                    resultValue = "p > 3";
+                }
             }
             else
             {
                 return false; // TODO: Check if this is another type of delegate.
             }
 
+            if (isNullableSourceType)
+            {
+                resultValue = "p != null && " + resultValue;
+            }
+
             if (hasIndex)
             {
-                resultValue = resultValue + "&& i < 10";
+                resultValue += "&& i < 10";
             }
 
             IdentifierBuilder?.WithParameter(ParamName, hasIndex ? "WithIndexed" : string.Empty);
