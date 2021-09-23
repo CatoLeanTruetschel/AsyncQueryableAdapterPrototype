@@ -1,0 +1,6 @@
+﻿        private static partial ImmutableDictionary<Type, IEnumerable> BuildDataSets()
+        {
+            var builder = ImmutableDictionary.CreateBuilder<Type, IEnumerable>();
+{0}
+            return builder.ToImmutable();
+        }

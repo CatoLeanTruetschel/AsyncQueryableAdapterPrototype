@@ -27,11 +27,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SingleEntryQueryMethodTranslator.tt</DependentUpon>
     </None>
-    <None Include="Utils\FuncTypeHelper.tt.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>FuncTypeHelper.tt</DependentUpon>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -50,10 +45,6 @@
     <None Update="Translators\SingleEntryQueryMethodTranslator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SingleEntryQueryMethodTranslator.tt.cs</LastGenOutput>
-    </None>
-    <None Update="Utils\FuncTypeHelper.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FuncTypeHelper.tt.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -82,11 +73,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SingleEntryQueryMethodTranslator.tt</DependentUpon>
     </Compile>
-    <Compile Update="Utils\FuncTypeHelper.tt.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>FuncTypeHelper.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
+
+  <Import Project="..\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems" Label="Shared" />
   
 </Project>

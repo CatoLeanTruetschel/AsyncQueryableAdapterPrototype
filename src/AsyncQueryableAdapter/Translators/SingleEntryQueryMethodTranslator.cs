@@ -176,8 +176,11 @@ namespace AsyncQueryableAdapter.Translators
 
             var predicate = translationContext.Arguments[1];
 
-            if (AsyncPredicate && !predicate.TryTranslateExpressionToSync(
-                translatedQueryable.ElementType, typeof(bool), out predicate))
+            if (AsyncPredicate && !ExpressionHelper.TryTranslateExpressionToSync(
+                predicate,
+                translatedQueryable.ElementType,
+                typeof(bool),
+                out predicate))
             {
                 return false;
             }

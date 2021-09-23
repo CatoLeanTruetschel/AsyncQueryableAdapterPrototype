@@ -26,6 +26,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter;
 using AsyncQueryableAdapterPrototype.Tests.Utils;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace AsyncQueryableAdapterPrototype.Tests

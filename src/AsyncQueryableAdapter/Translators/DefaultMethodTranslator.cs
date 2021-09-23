@@ -151,7 +151,7 @@ namespace AsyncQueryableAdapter.Translators
                     var asyncParameter = asyncParameters[j];
                     var parameter = parameters[j];
 
-                    if (!TypeTranslationHelper.IsCompatibleTranslationTarget(
+                    if (!TypeTranslationHelper.IsEquivalentAsyncType(
                         parameter.ParameterType,
                         asyncParameter.ParameterType))
                     {
@@ -165,7 +165,7 @@ namespace AsyncQueryableAdapter.Translators
                     continue;
                 }
 
-                if (!TypeTranslationHelper.IsCompatibleTranslationTarget(
+                if (!TypeTranslationHelper.IsEquivalentAsyncType(
                     constructedCandidate.ReturnType,
                     method.ReturnType))
                 {
@@ -485,10 +485,8 @@ namespace AsyncQueryableAdapter.Translators
             in ArgumentDescriptorCollection arguments,
             in ReadOnlyGenericArgumentsDescriptor genericArguments)
         {
-            for (var i = 0; i < arguments.Count; i++)
+            foreach (var argument in arguments)
             {
-                var argument = arguments[i];
-
                 if (argument.Argument.Type.IsAssignableTo(typeof(TranslatedQueryable)))
                     continue;
 
@@ -519,7 +517,7 @@ namespace AsyncQueryableAdapter.Translators
 
                 var funcType = methodDefinitionParameter.GetGenericArguments()[0];
 
-                if (!FuncTypeHelper.IsFuncType(funcType))
+                if (!TypeHelper.IsFuncType(funcType))
                 {
                     // Just skip this. We check whether the parameters match in the end anyway, so we
                     // do not break anything.

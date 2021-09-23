@@ -20,12 +20,15 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
 {
     internal class TranslatedQueryable
     {
+        private static readonly ConditionalWeakTable<QueryAdapterBase, IQueryProvider> _queryProviderLookup = new();
+
         public TranslatedQueryable(
             QueryAdapterBase queryAdapter,
             Type elementType,
@@ -43,7 +46,7 @@ namespace AsyncQueryableAdapter
             QueryAdapter = queryAdapter;
             ElementType = elementType;
             Expression = expression;
-            QueryProvider = queryProvider;
+            QueryProvider = _queryProviderLookup.GetValue(queryAdapter, _ => queryProvider);
         }
 
         public QueryAdapterBase QueryAdapter { get; }

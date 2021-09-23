@@ -9,8 +9,17 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\AsyncQueryableAdapter\AsyncQueryableAdapter.csproj" />
   </ItemGroup>
-  
- <ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="$(RepositorySharedPath)NullabilityAttributes.cs" />
+    <Compile Remove="$(RepositorySharedPath)SkipLocalsInitAttribute.cs" />
+    <Compile Remove="$(RepositorySharedPath)Range.cs" />
+    <Compile Remove="$(RepositorySharedPath)Rune.cs" />
+    <Compile Remove="$(RepositorySharedPath)IsExternalInit.cs" />
+    <Compile Remove="$(RepositorySharedPath)ConditionalCLSCompliance.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="QueryAdapterSpecification.PredicateAggregate.tt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -57,6 +66,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>QueryAdapterSpecification.SingleEntryQuery.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generated\" />
   </ItemGroup>
 
 </Project>

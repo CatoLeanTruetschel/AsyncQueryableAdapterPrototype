@@ -132,7 +132,7 @@ namespace AsyncQueryableAdapter.Translators
 
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
-            if (!FuncTypeHelper.IsFuncType<T>())
+            if (!TypeHelper.IsFuncType<T>())
             {
                 _success = false;
                 return node;
@@ -169,7 +169,7 @@ namespace AsyncQueryableAdapter.Translators
             if (translatedArgs is not null)
             {
                 Span<Type> funcTypes = translatedArgs.Select(p => p.Type).ToArray(); // TODO: Perf
-                return Expression.Lambda(FuncTypeHelper.GetFuncType(funcTypes, body.Type), body, translatedArgs);
+                return Expression.Lambda(TypeHelper.GetFuncType(funcTypes, body.Type), body, translatedArgs);
             }
             else if (!ReferenceEquals(body, node.Body))
             {

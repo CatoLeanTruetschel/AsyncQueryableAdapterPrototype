@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c38a4bf7-9050-4e12-89ea-3187397bb678</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>AsyncQueryableAdapterPrototype</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncEnumerableExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AwaitableTypeDescriptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\CircularBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\CompiledDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\DictionaryExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\EnumerableExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\KeyValuePairExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Maybe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\MemoryExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamWriterExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StringExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ThrowHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TypeExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TypeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TypeTranslationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ValueTaskExtension.cs" />
+  </ItemGroup>
+</Project>

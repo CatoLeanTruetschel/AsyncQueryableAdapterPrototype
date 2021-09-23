@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>$(RuntimeVersions)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\RootSpecification.txt" />
+    <None Remove="Resources\TestFooter.txt" />
+    <None Remove="Resources\TestHeader.txt" />
+    <None Remove="SpecificationFileFooter.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\test\AsyncQueryableAdapterPrototype.Specification\TestTypes\CustomGrouping.cs" Link="TestTypes\CustomGrouping.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Async.Queryable" />
+    <PackageReference Include="Namotion.Reflection" />
+    <PackageReference Include="Nito.AsyncEx.Coordination" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestTypes\" />
+  </ItemGroup>
+
+  <Import Project="..\..\src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems" Label="Shared" />
+
+</Project>

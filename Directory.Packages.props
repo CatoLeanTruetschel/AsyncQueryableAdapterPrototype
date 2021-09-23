@@ -11,12 +11,15 @@
     <PackageVersion Include="coverlet.collector" Version="3.0.3" />
     <PackageVersion Include="FSharp.Core" Version="5.0.1"/>
     <PackageVersion Include="Linq.Expression.Optimizer" Version="1.0.13" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2 " />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3"/> 
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.9.54"/>
+    <PackageVersion Include="Namotion.Reflection" Version="2.0.3" />
+    <PackageVersion Include="Nito.AsyncEx.Coordination" Version="5.1.0" />
     <PackageVersion Include="xunit" Version="2.4.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
   </ItemGroup>

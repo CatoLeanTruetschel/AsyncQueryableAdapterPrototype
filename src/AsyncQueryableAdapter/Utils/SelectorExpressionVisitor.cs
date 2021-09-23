@@ -26,14 +26,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using AsyncQueryableAdapter.Utils;
 
-namespace AsyncQueryableAdapter.Utils
+namespace AsyncQueryableAdapter
 {
     // TODO: Pool me pls
     internal sealed class SelectorExpressionVisitor : ExpressionVisitor
     {
-        [ThreadStatic]
-        private static Type[]? _1EntryTypeBuffer;
         private const string VALUE_TASK_FROM_RESULT_METHOD_NAME = "FromResult";
 
         private static readonly MethodInfo? VALUE_TASK_FROM_RESULT_METHOD_DEFINITION
@@ -272,12 +271,7 @@ namespace AsyncQueryableAdapter.Utils
                 if (VALUE_TASK_FROM_RESULT_METHOD_DEFINITION is not null)
                     ValueTaskFromResultMethod = VALUE_TASK_FROM_RESULT_METHOD_DEFINITION.MakeGenericMethod(type);
 
-                _1EntryTypeBuffer ??= new Type[1];
-                _1EntryTypeBuffer[0] = type;
-
-                var valueTaskFromResultConstructor = typeof(ValueTask<>)
-                    .MakeGenericType(_1EntryTypeBuffer)
-                    .GetConstructor(_1EntryTypeBuffer);
+                var valueTaskFromResultConstructor = TypeHelper.GetValueTaskType(type).GetConstructor(type);
 
                 Debug.Assert(valueTaskFromResultConstructor is not null);
                 ValueTaskFromResultConstructor = valueTaskFromResultConstructor;
