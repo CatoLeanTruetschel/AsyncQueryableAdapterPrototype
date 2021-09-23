@@ -69,7 +69,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<double?>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<double>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -251,7 +251,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<decimal>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -342,7 +342,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<decimal?>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -433,7 +433,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<float?>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -524,7 +524,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.ElementAtAsync<float>(asyncSource, index, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]

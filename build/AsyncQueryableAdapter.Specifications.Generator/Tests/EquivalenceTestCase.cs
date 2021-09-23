@@ -69,7 +69,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
             else if (_methods.SyncMethod.Name.Equals("SkipLast", StringComparison.Ordinal)
                || _methods.SyncMethod.Name.Equals("TakeLast", StringComparison.Ordinal))
             {
-                await writer.WriteLineAsync($"            var expectedResult =").ConfigureAwait(false);         
+                await writer.WriteLineAsync($"            var expectedResult =").ConfigureAwait(false);
                 await writer.WriteLineAsync($"            EnumerableExtension").ConfigureAwait(false);
                 await writer.WriteAsync($"            .{_methods.SyncMethod.Name}").ConfigureAwait(false);
             }
@@ -148,7 +148,33 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
 
         protected override async Task FormatAssertAsync(StreamWriter writer)
         {
-            await writer.WriteLineAsync("            Assert.Equal(expectedResult, result);").ConfigureAwait(false);
+            var syncResultType = _methods.SyncMethod.ReturnType;
+            var asyncReturnType = _methods.AsyncMethod.ReturnType;
+            var asyncResultType = AwaitableTypeDescriptor.GetTypeDescriptor(asyncReturnType).ResultType;
+
+            var isSyncResultFPType = syncResultType == typeof(float)
+                || syncResultType == typeof(float?)
+                || syncResultType == typeof(double)
+                || syncResultType == typeof(double?)
+                || syncResultType == typeof(decimal)
+                || syncResultType == typeof(decimal?);
+
+            var isAsyncResultFPType = asyncResultType == typeof(float)
+                || syncResultType == typeof(float?)
+                || syncResultType == typeof(double)
+                || syncResultType == typeof(double?)
+                || syncResultType == typeof(decimal)
+                || syncResultType == typeof(decimal?);
+
+            // Compare with tolerance
+            if (isSyncResultFPType && isAsyncResultFPType)
+            {
+                await writer.WriteLineAsync("            AssertHelper.Equal(expectedResult, result);").ConfigureAwait(false);
+            }
+            else
+            {
+                await writer.WriteLineAsync("            Assert.Equal(expectedResult, result);").ConfigureAwait(false);
+            }
         }
     }
 }

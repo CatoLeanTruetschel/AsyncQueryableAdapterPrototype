@@ -1260,7 +1260,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?, double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1379,7 +1379,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double, double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1498,7 +1498,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal, decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1617,7 +1617,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?, decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1736,7 +1736,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?, float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1855,7 +1855,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float, float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2450,7 +2450,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2569,7 +2569,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2688,7 +2688,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2807,7 +2807,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2926,7 +2926,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3045,7 +3045,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3164,7 +3164,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3283,7 +3283,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3402,7 +3402,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3521,7 +3521,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3640,7 +3640,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3759,7 +3759,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3878,7 +3878,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3997,7 +3997,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4116,7 +4116,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4235,7 +4235,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4354,7 +4354,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4473,7 +4473,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4592,7 +4592,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4711,7 +4711,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4830,7 +4830,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4949,7 +4949,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5068,7 +5068,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5187,7 +5187,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5306,7 +5306,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5425,7 +5425,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5544,7 +5544,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5663,7 +5663,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5782,7 +5782,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5901,7 +5901,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6020,7 +6020,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6139,7 +6139,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6258,7 +6258,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6377,7 +6377,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6496,7 +6496,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6615,7 +6615,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6734,7 +6734,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6853,7 +6853,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6972,7 +6972,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7091,7 +7091,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7210,7 +7210,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7329,7 +7329,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7448,7 +7448,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7567,7 +7567,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7686,7 +7686,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7805,7 +7805,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7924,7 +7924,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8043,7 +8043,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8162,7 +8162,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8281,7 +8281,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8400,7 +8400,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8519,7 +8519,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8638,7 +8638,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8757,7 +8757,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8876,7 +8876,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8995,7 +8995,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9114,7 +9114,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9233,7 +9233,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9352,7 +9352,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9471,7 +9471,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14350,7 +14350,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double?, double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14469,7 +14469,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<double, double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14588,7 +14588,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal, decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14707,7 +14707,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<decimal?, decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14826,7 +14826,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float?, float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14945,7 +14945,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitWithCancellationAsync<float, float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15534,7 +15534,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15614,7 +15614,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15694,7 +15694,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15774,7 +15774,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15854,7 +15854,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15934,7 +15934,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16334,7 +16334,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16414,7 +16414,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16494,7 +16494,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16574,7 +16574,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16654,7 +16654,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16734,7 +16734,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17140,7 +17140,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17259,7 +17259,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17378,7 +17378,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17497,7 +17497,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17616,7 +17616,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17735,7 +17735,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17854,7 +17854,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17973,7 +17973,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18092,7 +18092,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18211,7 +18211,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18330,7 +18330,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18449,7 +18449,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18568,7 +18568,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18687,7 +18687,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18806,7 +18806,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18925,7 +18925,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19044,7 +19044,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19163,7 +19163,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19282,7 +19282,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19401,7 +19401,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19520,7 +19520,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19639,7 +19639,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19758,7 +19758,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19877,7 +19877,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19996,7 +19996,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20115,7 +20115,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20234,7 +20234,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20353,7 +20353,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20472,7 +20472,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20591,7 +20591,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20710,7 +20710,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20829,7 +20829,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20948,7 +20948,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21067,7 +21067,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21186,7 +21186,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21305,7 +21305,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21424,7 +21424,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21543,7 +21543,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21662,7 +21662,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21781,7 +21781,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21900,7 +21900,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22019,7 +22019,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22138,7 +22138,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22257,7 +22257,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22376,7 +22376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22495,7 +22495,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22614,7 +22614,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22733,7 +22733,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22852,7 +22852,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22971,7 +22971,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23090,7 +23090,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23209,7 +23209,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23328,7 +23328,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23447,7 +23447,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23566,7 +23566,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23685,7 +23685,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23804,7 +23804,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23923,7 +23923,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24042,7 +24042,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24161,7 +24161,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29040,7 +29040,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double?, double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29159,7 +29159,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<double, double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29278,7 +29278,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal, decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29397,7 +29397,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<decimal?, decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29516,7 +29516,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float?, float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29635,7 +29635,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAsync<float, float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30230,7 +30230,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30349,7 +30349,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30468,7 +30468,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30587,7 +30587,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30706,7 +30706,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30825,7 +30825,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30944,7 +30944,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31063,7 +31063,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31182,7 +31182,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31301,7 +31301,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31420,7 +31420,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31539,7 +31539,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31658,7 +31658,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31777,7 +31777,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31896,7 +31896,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32015,7 +32015,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32134,7 +32134,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32253,7 +32253,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32372,7 +32372,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32491,7 +32491,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32610,7 +32610,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32729,7 +32729,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32848,7 +32848,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32967,7 +32967,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33086,7 +33086,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33205,7 +33205,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33324,7 +33324,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33443,7 +33443,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33562,7 +33562,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33681,7 +33681,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33800,7 +33800,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33919,7 +33919,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34038,7 +34038,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34157,7 +34157,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34276,7 +34276,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34395,7 +34395,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34514,7 +34514,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34633,7 +34633,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34752,7 +34752,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34871,7 +34871,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34990,7 +34990,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35109,7 +35109,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35228,7 +35228,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35347,7 +35347,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35466,7 +35466,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35585,7 +35585,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35704,7 +35704,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35823,7 +35823,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35942,7 +35942,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36061,7 +36061,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36180,7 +36180,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36299,7 +36299,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36418,7 +36418,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36537,7 +36537,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36656,7 +36656,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36775,7 +36775,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36894,7 +36894,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -37013,7 +37013,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -37132,7 +37132,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -37251,7 +37251,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.MaxAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]

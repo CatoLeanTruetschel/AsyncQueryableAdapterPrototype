@@ -70,7 +70,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -308,7 +308,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -427,7 +427,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -546,7 +546,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -665,7 +665,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -784,7 +784,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -903,7 +903,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1022,7 +1022,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1141,7 +1141,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1260,7 +1260,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1379,7 +1379,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1498,7 +1498,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1617,7 +1617,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1736,7 +1736,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1855,7 +1855,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -1974,7 +1974,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2093,7 +2093,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2212,7 +2212,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2331,7 +2331,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2450,7 +2450,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2569,7 +2569,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2688,7 +2688,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2807,7 +2807,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -2926,7 +2926,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3045,7 +3045,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3164,7 +3164,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3283,7 +3283,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3402,7 +3402,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3521,7 +3521,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3640,7 +3640,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3759,7 +3759,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3878,7 +3878,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -3997,7 +3997,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4116,7 +4116,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4235,7 +4235,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4354,7 +4354,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4473,7 +4473,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4592,7 +4592,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4711,7 +4711,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4830,7 +4830,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -4949,7 +4949,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5068,7 +5068,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5187,7 +5187,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5306,7 +5306,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5425,7 +5425,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5544,7 +5544,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5663,7 +5663,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5782,7 +5782,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -5901,7 +5901,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6020,7 +6020,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6139,7 +6139,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6258,7 +6258,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6377,7 +6377,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6496,7 +6496,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6615,7 +6615,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6734,7 +6734,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6853,7 +6853,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -6972,7 +6972,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7091,7 +7091,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7210,7 +7210,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7329,7 +7329,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7448,7 +7448,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7567,7 +7567,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7686,7 +7686,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7805,7 +7805,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -7924,7 +7924,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8043,7 +8043,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8162,7 +8162,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8281,7 +8281,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8400,7 +8400,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8519,7 +8519,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8638,7 +8638,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8757,7 +8757,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8876,7 +8876,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -8995,7 +8995,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9114,7 +9114,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9233,7 +9233,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9352,7 +9352,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9471,7 +9471,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9590,7 +9590,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9709,7 +9709,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9828,7 +9828,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -9947,7 +9947,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10066,7 +10066,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10185,7 +10185,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10304,7 +10304,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10423,7 +10423,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10542,7 +10542,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10661,7 +10661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10780,7 +10780,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -10899,7 +10899,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11018,7 +11018,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11137,7 +11137,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11256,7 +11256,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11375,7 +11375,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11494,7 +11494,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11613,7 +11613,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11732,7 +11732,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11851,7 +11851,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -11970,7 +11970,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12089,7 +12089,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12208,7 +12208,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12327,7 +12327,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12446,7 +12446,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12565,7 +12565,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12684,7 +12684,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12803,7 +12803,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -12922,7 +12922,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13041,7 +13041,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13160,7 +13160,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13279,7 +13279,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13398,7 +13398,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13517,7 +13517,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13636,7 +13636,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13755,7 +13755,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13874,7 +13874,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -13993,7 +13993,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14112,7 +14112,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14231,7 +14231,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14350,7 +14350,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14469,7 +14469,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14588,7 +14588,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14707,7 +14707,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14826,7 +14826,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -14945,7 +14945,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15064,7 +15064,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15183,7 +15183,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15302,7 +15302,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15421,7 +15421,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15540,7 +15540,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15659,7 +15659,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15778,7 +15778,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -15897,7 +15897,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16016,7 +16016,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16135,7 +16135,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16254,7 +16254,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16373,7 +16373,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16492,7 +16492,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16611,7 +16611,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16730,7 +16730,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16849,7 +16849,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -16968,7 +16968,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17087,7 +17087,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17206,7 +17206,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17325,7 +17325,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17444,7 +17444,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17563,7 +17563,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17682,7 +17682,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17801,7 +17801,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -17920,7 +17920,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18039,7 +18039,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18158,7 +18158,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18277,7 +18277,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18396,7 +18396,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18515,7 +18515,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18634,7 +18634,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18753,7 +18753,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18872,7 +18872,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -18991,7 +18991,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19110,7 +19110,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19229,7 +19229,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19348,7 +19348,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19467,7 +19467,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19586,7 +19586,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19705,7 +19705,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19824,7 +19824,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -19943,7 +19943,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20062,7 +20062,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20181,7 +20181,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20300,7 +20300,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20419,7 +20419,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20538,7 +20538,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20657,7 +20657,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20776,7 +20776,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -20895,7 +20895,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21014,7 +21014,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21133,7 +21133,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21252,7 +21252,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21371,7 +21371,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21490,7 +21490,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21609,7 +21609,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21728,7 +21728,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21847,7 +21847,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -21966,7 +21966,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22085,7 +22085,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22204,7 +22204,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22323,7 +22323,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22442,7 +22442,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22561,7 +22561,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22680,7 +22680,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22799,7 +22799,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -22918,7 +22918,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23037,7 +23037,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23156,7 +23156,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23275,7 +23275,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23394,7 +23394,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23513,7 +23513,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23632,7 +23632,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23751,7 +23751,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23870,7 +23870,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -23989,7 +23989,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24108,7 +24108,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24227,7 +24227,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24346,7 +24346,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24465,7 +24465,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24584,7 +24584,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24703,7 +24703,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24822,7 +24822,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -24941,7 +24941,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25060,7 +25060,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25179,7 +25179,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25298,7 +25298,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25417,7 +25417,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25536,7 +25536,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25655,7 +25655,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25774,7 +25774,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -25893,7 +25893,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26012,7 +26012,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26131,7 +26131,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26250,7 +26250,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26369,7 +26369,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26488,7 +26488,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26607,7 +26607,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26726,7 +26726,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26845,7 +26845,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -26964,7 +26964,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27083,7 +27083,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27202,7 +27202,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27321,7 +27321,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27440,7 +27440,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27559,7 +27559,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27678,7 +27678,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27797,7 +27797,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -27916,7 +27916,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28035,7 +28035,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28154,7 +28154,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28273,7 +28273,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28392,7 +28392,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28511,7 +28511,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28630,7 +28630,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28749,7 +28749,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28868,7 +28868,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -28987,7 +28987,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29106,7 +29106,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29225,7 +29225,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29344,7 +29344,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29463,7 +29463,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29582,7 +29582,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29701,7 +29701,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAwaitWithCancellationAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29814,7 +29814,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29894,7 +29894,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -29974,7 +29974,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30054,7 +30054,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30134,7 +30134,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30214,7 +30214,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30294,7 +30294,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30374,7 +30374,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30454,7 +30454,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30534,7 +30534,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30620,7 +30620,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30739,7 +30739,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30858,7 +30858,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -30977,7 +30977,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31096,7 +31096,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31215,7 +31215,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31334,7 +31334,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31453,7 +31453,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31572,7 +31572,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31691,7 +31691,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31810,7 +31810,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -31929,7 +31929,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32048,7 +32048,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32167,7 +32167,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32286,7 +32286,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32405,7 +32405,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32524,7 +32524,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32643,7 +32643,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32762,7 +32762,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -32881,7 +32881,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33000,7 +33000,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33119,7 +33119,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33238,7 +33238,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33357,7 +33357,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33476,7 +33476,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33595,7 +33595,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33714,7 +33714,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33833,7 +33833,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -33952,7 +33952,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34071,7 +34071,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34190,7 +34190,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34309,7 +34309,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34428,7 +34428,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34547,7 +34547,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34666,7 +34666,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34785,7 +34785,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -34904,7 +34904,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35023,7 +35023,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35142,7 +35142,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35261,7 +35261,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35380,7 +35380,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35499,7 +35499,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<double>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35618,7 +35618,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35737,7 +35737,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<decimal?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35856,7 +35856,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -35975,7 +35975,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<float>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36094,7 +36094,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36213,7 +36213,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36332,7 +36332,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<long?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -36451,7 +36451,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var result = await AsyncQueryable.AverageAsync<int?>(asyncSource, asyncSelector, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            Assert.Equal(expectedResult, result);
+            AssertHelper.Equal(expectedResult, result);
         }
 
         [Fact]
