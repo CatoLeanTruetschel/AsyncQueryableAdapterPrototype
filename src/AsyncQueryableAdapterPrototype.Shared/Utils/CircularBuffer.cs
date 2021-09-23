@@ -23,15 +23,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AsyncQueryableAdapterPrototype.Utils
 {
-    internal sealed class CircularBuffer<T> : IReadOnlyList<T>
+    internal sealed class CircularBuffer<T> : IReadOnlyList<T>, IDisposable
     {
+        private readonly bool _ownsBuffer;
         private readonly Memory<T?> _buffer;
         private int _enqueueIdx;
         private int _stateToken;
+        private bool _isDisposed;
 
         public CircularBuffer(Memory<T?> buffer)
         {
             _buffer = buffer;
+            _ownsBuffer = false;
         }
 
         public CircularBuffer(int capacity)
@@ -40,6 +43,7 @@ namespace AsyncQueryableAdapterPrototype.Utils
                 throw new ArgumentOutOfRangeException(nameof(capacity));
 
             _buffer = new T[capacity];
+            _ownsBuffer = true;
         }
 
         public int Capacity => _buffer.Length;
@@ -75,7 +79,7 @@ namespace AsyncQueryableAdapterPrototype.Utils
             Count++;
             _enqueueIdx++;
 
-            if (_enqueueIdx > Capacity)
+            if (_enqueueIdx >= Capacity)
             {
                 _enqueueIdx -= Capacity;
             }
@@ -130,6 +134,21 @@ namespace AsyncQueryableAdapterPrototype.Utils
             }
 
             return result;
+        }
+
+        public void Dispose()
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (!_ownsBuffer)
+            {
+                _buffer.Span.Clear();
+            }
+
+            _isDisposed = true;
         }
 
         public Enumerator GetEnumerator()

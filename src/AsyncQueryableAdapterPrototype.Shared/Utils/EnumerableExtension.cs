@@ -35,7 +35,7 @@ namespace System.Collections.Generic
             var array = ArrayPool<T?>.Shared.Rent(count);
             try
             {
-                var buffer = new CircularBuffer<T>(array.AsMemory(0, count));
+                using var buffer = new CircularBuffer<T>(array.AsMemory(0, count));
 
                 foreach (var entry in source)
                 {
@@ -64,7 +64,7 @@ namespace System.Collections.Generic
             if (count == 0)
                 return Enumerable.Empty<T>();
 
-            var buffer = new CircularBuffer<T>(count);
+            using var buffer = new CircularBuffer<T>(count);
 
             foreach (var entry in source)
             {
@@ -76,7 +76,7 @@ namespace System.Collections.Generic
                 buffer.Enqueue(entry);
             }
 
-            return buffer;
+            return buffer.ToArray();
         }
     }
 }
