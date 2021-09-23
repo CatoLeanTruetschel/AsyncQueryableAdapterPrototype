@@ -49,13 +49,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -82,7 +82,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -138,7 +138,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = null!;
@@ -406,13 +406,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -439,7 +439,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -495,7 +495,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = null!;
@@ -525,13 +525,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -558,7 +558,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -614,7 +614,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = null!;
@@ -1001,13 +1001,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -1034,7 +1034,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -1090,7 +1090,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = null!;
@@ -1120,13 +1120,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -1153,7 +1153,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -1209,7 +1209,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = null!;
@@ -1239,7 +1239,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -1247,7 +1247,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -1277,7 +1277,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -1339,7 +1339,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = null!;
@@ -1638,7 +1638,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -1646,7 +1646,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -1676,7 +1676,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -1738,7 +1738,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = null!;
@@ -1771,7 +1771,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -1779,7 +1779,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -1809,7 +1809,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -1871,7 +1871,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = null!;
@@ -2303,7 +2303,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -2311,7 +2311,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -2341,7 +2341,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -2403,7 +2403,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = null!;
@@ -2436,7 +2436,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -2444,7 +2444,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -2474,7 +2474,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -2536,7 +2536,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = null!;
@@ -2569,7 +2569,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -2578,7 +2578,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<double?, double?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -2608,7 +2608,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -2670,7 +2670,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = null!;
@@ -2700,7 +2700,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -3061,7 +3061,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -3070,7 +3070,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<decimal?, decimal?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -3100,7 +3100,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -3162,7 +3162,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = null!;
@@ -3192,7 +3192,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -3225,7 +3225,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -3234,7 +3234,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<float?, float?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -3264,7 +3264,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -3326,7 +3326,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = null!;
@@ -3356,7 +3356,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -3881,7 +3881,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -3890,7 +3890,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<long?, long?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -3920,7 +3920,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -3982,7 +3982,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = null!;
@@ -4012,7 +4012,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -4045,7 +4045,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -4054,7 +4054,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<int?, int?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -4084,7 +4084,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -4146,7 +4146,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = null!;
@@ -4176,7 +4176,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -4209,7 +4209,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -4220,7 +4220,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -4253,7 +4253,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -4321,7 +4321,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = null!;
@@ -4354,7 +4354,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
@@ -4752,7 +4752,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -4763,7 +4763,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -4796,7 +4796,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -4864,7 +4864,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = null!;
@@ -4897,7 +4897,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, decimal?>> asyncKeySelector = (p) => p + 3;
@@ -4933,7 +4933,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -4944,7 +4944,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -4977,7 +4977,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -5045,7 +5045,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = null!;
@@ -5078,7 +5078,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, float?>> asyncKeySelector = (p) => p + 3;
@@ -5657,7 +5657,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -5668,7 +5668,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -5701,7 +5701,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -5769,7 +5769,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = null!;
@@ -5802,7 +5802,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, long?>> asyncKeySelector = (p) => p + 3;
@@ -5838,7 +5838,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -5849,7 +5849,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -5882,7 +5882,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -5950,7 +5950,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = null!;
@@ -5983,7 +5983,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, int?>> asyncKeySelector = (p) => p + 3;
@@ -6019,13 +6019,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -6052,7 +6052,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -6108,7 +6108,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
@@ -6376,13 +6376,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -6409,7 +6409,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -6465,7 +6465,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -6495,13 +6495,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -6528,7 +6528,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -6584,7 +6584,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = null!;
@@ -6971,13 +6971,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -7004,7 +7004,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -7060,7 +7060,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = null!;
@@ -7090,13 +7090,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -7123,7 +7123,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -7179,7 +7179,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = null!;
@@ -7209,7 +7209,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -7217,7 +7217,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -7247,7 +7247,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -7309,7 +7309,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
@@ -7608,7 +7608,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -7616,7 +7616,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -7646,7 +7646,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -7708,7 +7708,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -7741,7 +7741,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -7749,7 +7749,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -7779,7 +7779,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -7841,7 +7841,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = null!;
@@ -8273,7 +8273,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -8281,7 +8281,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -8311,7 +8311,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -8373,7 +8373,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = null!;
@@ -8406,7 +8406,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -8414,7 +8414,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -8444,7 +8444,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -8506,7 +8506,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = null!;
@@ -8539,7 +8539,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -8548,7 +8548,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<double?, double?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -8578,7 +8578,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -8640,7 +8640,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
@@ -8670,7 +8670,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -9031,7 +9031,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -9040,7 +9040,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<decimal?, decimal?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -9070,7 +9070,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -9132,7 +9132,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -9162,7 +9162,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -9195,7 +9195,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -9204,7 +9204,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<float?, float?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -9234,7 +9234,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -9296,7 +9296,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = null!;
@@ -9326,7 +9326,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -9851,7 +9851,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -9860,7 +9860,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<long?, long?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -9890,7 +9890,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -9952,7 +9952,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = null!;
@@ -9982,7 +9982,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -10015,7 +10015,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -10024,7 +10024,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<int?, int?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -10054,7 +10054,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -10116,7 +10116,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = null!;
@@ -10146,7 +10146,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -10179,7 +10179,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -10190,7 +10190,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -10223,7 +10223,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -10291,7 +10291,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
@@ -10324,7 +10324,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
@@ -10722,7 +10722,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -10733,7 +10733,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -10766,7 +10766,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -10834,7 +10834,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -10867,7 +10867,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, ValueTask<decimal?>>> asyncKeySelector = (p) => new ValueTask<decimal?>(p + 3);
@@ -10903,7 +10903,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -10914,7 +10914,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -10947,7 +10947,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -11015,7 +11015,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = null!;
@@ -11048,7 +11048,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, ValueTask<float?>>> asyncKeySelector = (p) => new ValueTask<float?>(p + 3);
@@ -11627,7 +11627,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -11638,7 +11638,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -11671,7 +11671,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -11739,7 +11739,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = null!;
@@ -11772,7 +11772,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, ValueTask<long?>>> asyncKeySelector = (p) => new ValueTask<long?>(p + 3);
@@ -11808,7 +11808,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -11819,7 +11819,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -11852,7 +11852,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -11920,7 +11920,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = null!;
@@ -11953,7 +11953,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, ValueTask<int?>>> asyncKeySelector = (p) => new ValueTask<int?>(p + 3);
@@ -11989,13 +11989,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -12022,7 +12022,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -12078,7 +12078,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
@@ -12346,13 +12346,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -12379,7 +12379,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -12435,7 +12435,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -12465,13 +12465,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -12498,7 +12498,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -12554,7 +12554,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = null!;
@@ -12941,13 +12941,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -12974,7 +12974,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -13030,7 +13030,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = null!;
@@ -13060,13 +13060,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -13093,7 +13093,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -13149,7 +13149,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = null!;
@@ -13179,7 +13179,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -13187,7 +13187,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -13217,7 +13217,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -13279,7 +13279,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
@@ -13578,7 +13578,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -13586,7 +13586,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -13616,7 +13616,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -13678,7 +13678,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -13711,7 +13711,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -13719,7 +13719,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -13749,7 +13749,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -13811,7 +13811,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = null!;
@@ -14243,7 +14243,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -14251,7 +14251,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -14281,7 +14281,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -14343,7 +14343,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = null!;
@@ -14376,7 +14376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -14384,7 +14384,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -14414,7 +14414,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -14476,7 +14476,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = null!;
@@ -14509,7 +14509,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -14518,7 +14518,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<double?, double?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -14548,7 +14548,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -14610,7 +14610,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
@@ -14640,7 +14640,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -15001,7 +15001,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -15010,7 +15010,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<decimal?, decimal?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -15040,7 +15040,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -15102,7 +15102,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -15132,7 +15132,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -15165,7 +15165,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -15174,7 +15174,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<float?, float?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -15204,7 +15204,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -15266,7 +15266,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = null!;
@@ -15296,7 +15296,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -15821,7 +15821,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -15830,7 +15830,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<long?, long?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -15860,7 +15860,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -15922,7 +15922,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = null!;
@@ -15952,7 +15952,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -15985,7 +15985,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -15994,7 +15994,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             Func<int?, int?> elementSelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -16024,7 +16024,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -16086,7 +16086,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = null!;
@@ -16116,7 +16116,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -16149,7 +16149,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'keySelector' parameter
             Func<double?, double?> keySelector = (p) => p + 3;
@@ -16160,7 +16160,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -16193,7 +16193,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -16261,7 +16261,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
@@ -16294,7 +16294,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<double>().Select(p => (double?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
@@ -16692,7 +16692,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<decimal?>();
+            var source = GetQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'keySelector' parameter
             Func<decimal?, decimal?> keySelector = (p) => p + 3;
@@ -16703,7 +16703,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -16736,7 +16736,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -16804,7 +16804,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = null!;
@@ -16837,7 +16837,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (decimal?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<decimal?, CancellationToken, ValueTask<decimal?>>> asyncKeySelector = (p, c) => new ValueTask<decimal?>(p + 3);
@@ -16873,7 +16873,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<float?>();
+            var source = GetQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'keySelector' parameter
             Func<float?, float?> keySelector = (p) => p + 3;
@@ -16884,7 +16884,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -16917,7 +16917,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -16985,7 +16985,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = null!;
@@ -17018,7 +17018,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<float>().Select(p => (float?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<float?, CancellationToken, ValueTask<float?>>> asyncKeySelector = (p, c) => new ValueTask<float?>(p + 3);
@@ -17597,7 +17597,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<long?>();
+            var source = GetQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'keySelector' parameter
             Func<long?, long?> keySelector = (p) => p + 3;
@@ -17608,7 +17608,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -17641,7 +17641,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -17709,7 +17709,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = null!;
@@ -17742,7 +17742,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>().Select(p => (long?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<long?, CancellationToken, ValueTask<long?>>> asyncKeySelector = (p, c) => new ValueTask<long?>(p + 3);
@@ -17778,7 +17778,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'source' parameter
-            var source = GetQueryable<int?>();
+            var source = GetQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'keySelector' parameter
             Func<int?, int?> keySelector = (p) => p + 3;
@@ -17789,7 +17789,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -17822,7 +17822,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);
@@ -17890,7 +17890,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = null!;
@@ -17923,7 +17923,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var queryAdapter = await GetQueryAdapterAsync();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>().Select(p => (int?)p);
 
             // Arrange 'asyncKeySelector' parameter
             Expression<Func<int?, CancellationToken, ValueTask<int?>>> asyncKeySelector = (p, c) => new ValueTask<int?>(p + 3);

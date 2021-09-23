@@ -57,6 +57,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             }
 
             if (TryEvaluateKnownType(
+                operationName,
                 asyncParamType,
                 syncParamType,
                 asyncParameter.Name!,
@@ -139,6 +140,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                     var syncResultType = (syncParameter.Member as MethodInfo)!.ReturnType;
 
                     if (TryEvaluateKnownType(
+                        operationName,
                         asyncResultType,
                         syncResultType,
                         asyncParameter.Name!,
@@ -157,6 +159,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
         }
 
         private bool TryEvaluateKnownType(
+            string operationName,
             Type asyncParamType,
             Type syncParamType,
             string asyncParamName,
@@ -180,6 +183,22 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
                 return false;
             }
 
+            string? transform0 = null;
+
+            if (string.Equals(operationName, "ToDictionary", StringComparison.Ordinal))
+            {
+                if (TypeHelper.IsNullableType(asyncElementType, out var underlyingType))
+                {
+                    transform0 = $"p => ({TypeHelper.FormatCSharpTypeName(asyncElementType, KnownNamespaces.Namespaces)})p";
+                    asyncElementType = underlyingType;
+                }
+
+                if (TypeHelper.IsNullableType(syncElementType, out underlyingType))
+                {
+                    syncElementType = underlyingType;
+                }
+            }
+
             if (!KnownCollectionTypes.CollectionTypes.Contains(asyncElementType)
                 || !KnownCollectionTypes.CollectionTypes.Contains(syncElementType))
             {
@@ -194,6 +213,11 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             var asyncParamDefinition = Parameter.Default(asyncParamName, "async", async (writer, variableName) =>
             {
                 var value = $"queryAdapter.GetAsyncQueryable<{TypeHelper.FormatCSharpTypeName(asyncElementType, KnownNamespaces.Namespaces)}>()";
+
+                if (!string.IsNullOrEmpty(transform0))
+                {
+                    value += $".Select({transform0})";
+                }
 
                 if (!string.IsNullOrEmpty(transform))
                 {
@@ -211,6 +235,11 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             var syncParamDefinition = Parameter.Default(syncParamName, async (writer, variableName) =>
             {
                 var value = $"GetQueryable<{TypeHelper.FormatCSharpTypeName(syncElementType, KnownNamespaces.Namespaces)}>()";
+
+                if (!string.IsNullOrEmpty(transform0))
+                {
+                    value += $".Select({transform0})";
+                }
 
                 if (!string.IsNullOrEmpty(transform))
                 {
