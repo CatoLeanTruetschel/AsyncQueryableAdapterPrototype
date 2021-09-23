@@ -52,13 +52,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncSelector = (p) => (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncSelector = (p) => (new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -82,7 +82,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncSelector = (p) => (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncSelector = (p) => (new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Act
             // -
@@ -295,13 +295,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncSelector = (p) => (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncSelector = (p) => (new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -325,7 +325,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncSelector = (p) => (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncSelector = (p) => (new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Act
             // -
@@ -376,13 +376,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncSelector = (p) => (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncSelector = (p) => (new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -406,7 +406,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncSelector = (p) => (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncSelector = (p) => (new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Act
             // -
@@ -700,13 +700,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncSelector = (p) => (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncSelector = (p) => (new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -730,7 +730,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncSelector = (p) => (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncSelector = (p) => (new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Act
             // -
@@ -781,13 +781,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncSelector = (p) => (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncSelector = (p) => (new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -811,7 +811,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncSelector = (p) => (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncSelector = (p) => (new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Act
             // -
@@ -862,13 +862,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -892,7 +892,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Act
             // -
@@ -1105,13 +1105,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -1135,7 +1135,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Act
             // -
@@ -1186,13 +1186,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -1216,7 +1216,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Act
             // -
@@ -1510,13 +1510,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -1540,7 +1540,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Act
             // -
@@ -1591,13 +1591,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -1621,7 +1621,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Act
             // -
@@ -1672,7 +1672,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -1681,7 +1681,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -1708,7 +1708,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -1762,7 +1762,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<double?, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p) => (new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
@@ -2032,7 +2032,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -2041,7 +2041,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2068,7 +2068,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2122,7 +2122,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<decimal?, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p) => (new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = null!;
@@ -2152,7 +2152,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -2161,7 +2161,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2188,7 +2188,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2242,7 +2242,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<float?, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p) => (new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = null!;
@@ -2632,7 +2632,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -2641,7 +2641,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2668,7 +2668,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2722,7 +2722,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<long?, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p) => (new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = null!;
@@ -2752,7 +2752,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -2761,7 +2761,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2788,7 +2788,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2842,7 +2842,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable();
+            Expression<Func<int?, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p) => (new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = null!;
@@ -2872,7 +2872,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -2881,7 +2881,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2908,7 +2908,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -2962,7 +2962,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<double?, int, IAsyncEnumerable<double?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
@@ -3232,7 +3232,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -3241,7 +3241,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3268,7 +3268,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3322,7 +3322,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<decimal?, int, IAsyncEnumerable<decimal?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, decimal?>> asyncResultSelector = null!;
@@ -3352,7 +3352,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -3361,7 +3361,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3388,7 +3388,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3442,7 +3442,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<float?, int, IAsyncEnumerable<float?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, float?>> asyncResultSelector = null!;
@@ -3832,7 +3832,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -3841,7 +3841,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3868,7 +3868,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3922,7 +3922,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<long?, int, IAsyncEnumerable<long?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, long?>> asyncResultSelector = null!;
@@ -3952,7 +3952,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -3961,7 +3961,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -3988,7 +3988,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = (p, q) => p + 3 - q;
@@ -4042,7 +4042,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable();
+            Expression<Func<int?, int, IAsyncEnumerable<int?>>> asyncCollectionSelector = (p, i) => (i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable();
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, int?>> asyncResultSelector = null!;
@@ -4072,13 +4072,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -4102,7 +4102,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -4315,13 +4315,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -4345,7 +4345,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -4396,13 +4396,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -4426,7 +4426,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -4720,13 +4720,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -4750,7 +4750,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -4801,13 +4801,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -4831,7 +4831,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -4882,13 +4882,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -4912,7 +4912,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -5125,13 +5125,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -5155,7 +5155,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -5206,13 +5206,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -5236,7 +5236,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -5530,13 +5530,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -5560,7 +5560,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -5611,13 +5611,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -5641,7 +5641,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -5692,7 +5692,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -5701,7 +5701,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
@@ -5728,7 +5728,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
@@ -5782,7 +5782,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
@@ -6052,7 +6052,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -6061,7 +6061,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = (p, q) => new ValueTask<decimal?>(p + 3 - q);
@@ -6088,7 +6088,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = (p, q) => new ValueTask<decimal?>(p + 3 - q);
@@ -6142,7 +6142,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = null!;
@@ -6172,7 +6172,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -6181,7 +6181,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = (p, q) => new ValueTask<float?>(p + 3 - q);
@@ -6208,7 +6208,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = (p, q) => new ValueTask<float?>(p + 3 - q);
@@ -6262,7 +6262,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = null!;
@@ -6652,7 +6652,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -6661,7 +6661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = (p, q) => new ValueTask<long?>(p + 3 - q);
@@ -6688,7 +6688,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = (p, q) => new ValueTask<long?>(p + 3 - q);
@@ -6742,7 +6742,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = null!;
@@ -6772,7 +6772,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -6781,7 +6781,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = (p, q) => new ValueTask<int?>(p + 3 - q);
@@ -6808,7 +6808,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = (p, q) => new ValueTask<int?>(p + 3 - q);
@@ -6862,7 +6862,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = null!;
@@ -6892,7 +6892,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -6901,7 +6901,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
@@ -6928,7 +6928,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
@@ -6982,7 +6982,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
@@ -7252,7 +7252,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -7261,7 +7261,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = (p, q) => new ValueTask<decimal?>(p + 3 - q);
@@ -7288,7 +7288,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = (p, q) => new ValueTask<decimal?>(p + 3 - q);
@@ -7342,7 +7342,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, ValueTask<decimal?>>> asyncResultSelector = null!;
@@ -7372,7 +7372,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -7381,7 +7381,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = (p, q) => new ValueTask<float?>(p + 3 - q);
@@ -7408,7 +7408,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = (p, q) => new ValueTask<float?>(p + 3 - q);
@@ -7462,7 +7462,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, ValueTask<float?>>> asyncResultSelector = null!;
@@ -7852,7 +7852,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -7861,7 +7861,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = (p, q) => new ValueTask<long?>(p + 3 - q);
@@ -7888,7 +7888,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = (p, q) => new ValueTask<long?>(p + 3 - q);
@@ -7942,7 +7942,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, ValueTask<long?>>> asyncResultSelector = null!;
@@ -7972,7 +7972,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -7981,7 +7981,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = (p, q) => new ValueTask<int?>(p + 3 - q);
@@ -8008,7 +8008,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = (p, q) => new ValueTask<int?>(p + 3 - q);
@@ -8062,7 +8062,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, ValueTask<int?>>> asyncResultSelector = null!;
@@ -8092,13 +8092,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> selector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -8122,7 +8122,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -8335,13 +8335,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> selector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -8365,7 +8365,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -8416,13 +8416,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> selector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -8446,7 +8446,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -8740,13 +8740,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> selector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -8770,7 +8770,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -8821,13 +8821,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> selector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -8851,7 +8851,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Act
             // -
@@ -8902,13 +8902,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'selector' parameter
-            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> selector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<double?, double?>(source, selector);
@@ -8932,7 +8932,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -9145,13 +9145,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'selector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> selector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<decimal?, decimal?>(source, selector);
@@ -9175,7 +9175,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -9226,13 +9226,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'selector' parameter
-            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> selector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<float?, float?>(source, selector);
@@ -9256,7 +9256,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -9550,13 +9550,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'selector' parameter
-            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> selector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<long?, long?>(source, selector);
@@ -9580,7 +9580,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -9631,13 +9631,13 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'selector' parameter
-            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> selector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'expectedResult' parameter
             var expectedResult = Enumerable.SelectMany<int?, int?>(source, selector);
@@ -9661,7 +9661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Act
             // -
@@ -9712,7 +9712,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) };
+            Func<double?, IEnumerable<double?>> collectionSelector = (p) => new double?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -9721,7 +9721,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
@@ -9748,7 +9748,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
@@ -9802,7 +9802,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<double?, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<double?>>((new double?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
@@ -10072,7 +10072,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) };
+            Func<decimal?, IEnumerable<decimal?>> collectionSelector = (p) => new decimal?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -10081,7 +10081,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal?>(p + 3 - q);
@@ -10108,7 +10108,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal?>(p + 3 - q);
@@ -10162,7 +10162,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<decimal?, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<decimal?>>((new decimal?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = null!;
@@ -10192,7 +10192,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) };
+            Func<float?, IEnumerable<float?>> collectionSelector = (p) => new float?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -10201,7 +10201,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = (p, q, c) => new ValueTask<float?>(p + 3 - q);
@@ -10228,7 +10228,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = (p, q, c) => new ValueTask<float?>(p + 3 - q);
@@ -10282,7 +10282,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<float?, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<float?>>((new float?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = null!;
@@ -10672,7 +10672,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) };
+            Func<long?, IEnumerable<long?>> collectionSelector = (p) => new long?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -10681,7 +10681,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = (p, q, c) => new ValueTask<long?>(p + 3 - q);
@@ -10708,7 +10708,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = (p, q, c) => new ValueTask<long?>(p + 3 - q);
@@ -10762,7 +10762,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<long?, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<long?>>((new long?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = null!;
@@ -10792,7 +10792,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) };
+            Func<int?, IEnumerable<int?>> collectionSelector = (p) => new int?[] { p + 3, p - 1, p + 1 };
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -10801,7 +10801,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = (p, q, c) => new ValueTask<int?>(p + 3 - q);
@@ -10828,7 +10828,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = (p, q, c) => new ValueTask<int?>(p + 3 - q);
@@ -10882,7 +10882,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) }).ToAsyncEnumerable());
+            Expression<Func<int?, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, c) => new ValueTask<IAsyncEnumerable<int?>>((new int?[] { p + 3, p - 1, p + 1 }).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = null!;
@@ -10912,7 +10912,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<double?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) });
+            Func<double?, int, IEnumerable<double?>> collectionSelector = (p, i) => i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
@@ -10921,7 +10921,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
@@ -10948,7 +10948,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<double?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
@@ -11002,7 +11002,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { (double)(p + 3), (double)(p - 1), (double)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<double?, int, CancellationToken, ValueTask<IAsyncEnumerable<double?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<double?>>((i % 3 == 0 ? new double?[] { 3D } : (new double?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
@@ -11272,7 +11272,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<decimal?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) });
+            Func<decimal?, int, IEnumerable<decimal?>> collectionSelector = (p, i) => i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, decimal?, decimal?> resultSelector = (p, q) => p + 3 - q;
@@ -11281,7 +11281,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal?>(p + 3 - q);
@@ -11308,7 +11308,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<decimal?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal?>(p + 3 - q);
@@ -11362,7 +11362,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { (decimal)(p + 3), (decimal)(p - 1), (decimal)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<decimal?, int, CancellationToken, ValueTask<IAsyncEnumerable<decimal?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<decimal?>>((i % 3 == 0 ? new decimal?[] { 3M } : (new decimal?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<decimal?, decimal?, CancellationToken, ValueTask<decimal?>>> asyncResultSelector = null!;
@@ -11392,7 +11392,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<float?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) });
+            Func<float?, int, IEnumerable<float?>> collectionSelector = (p, i) => i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<float?, float?, float?> resultSelector = (p, q) => p + 3 - q;
@@ -11401,7 +11401,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = (p, q, c) => new ValueTask<float?>(p + 3 - q);
@@ -11428,7 +11428,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<float?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = (p, q, c) => new ValueTask<float?>(p + 3 - q);
@@ -11482,7 +11482,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { (float)(p + 3), (float)(p - 1), (float)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<float?, int, CancellationToken, ValueTask<IAsyncEnumerable<float?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<float?>>((i % 3 == 0 ? new float?[] { 3F } : (new float?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<float?, float?, CancellationToken, ValueTask<float?>>> asyncResultSelector = null!;
@@ -11872,7 +11872,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<long?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) });
+            Func<long?, int, IEnumerable<long?>> collectionSelector = (p, i) => i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<long?, long?, long?> resultSelector = (p, q) => p + 3 - q;
@@ -11881,7 +11881,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = (p, q, c) => new ValueTask<long?>(p + 3 - q);
@@ -11908,7 +11908,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<long?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = (p, q, c) => new ValueTask<long?>(p + 3 - q);
@@ -11962,7 +11962,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { (long)(p + 3), (long)(p - 1), (long)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<long?, int, CancellationToken, ValueTask<IAsyncEnumerable<long?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<long?>>((i % 3 == 0 ? new long?[] { 3L } : (new long?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<long?, long?, CancellationToken, ValueTask<long?>>> asyncResultSelector = null!;
@@ -11992,7 +11992,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var source = GetQueryable<int?>();
 
             // Arrange 'collectionSelector' parameter
-            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) });
+            Func<int?, int, IEnumerable<int?>> collectionSelector = (p, i) => i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 });
 
             // Arrange 'resultSelector' parameter
             Func<int?, int?, int?> resultSelector = (p, q) => p + 3 - q;
@@ -12001,7 +12001,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = (p, q, c) => new ValueTask<int?>(p + 3 - q);
@@ -12028,7 +12028,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             IAsyncQueryable<int?> asyncSource = null!;
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = (p, q, c) => new ValueTask<int?>(p + 3 - q);
@@ -12082,7 +12082,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
 
             // Arrange 'asyncCollectionSelector' parameter
-            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { (int)(p + 3), (int)(p - 1), (int)(p + 1) })).ToAsyncEnumerable());
+            Expression<Func<int?, int, CancellationToken, ValueTask<IAsyncEnumerable<int?>>>> asyncCollectionSelector = (p, i, c) => new ValueTask<IAsyncEnumerable<int?>>((i % 3 == 0 ? new int?[] { 3 } : (new int?[] { p + 3, p - 1, p + 1 })).ToAsyncEnumerable());
 
             // Arrange 'asyncResultSelector' parameter
             Expression<Func<int?, int?, CancellationToken, ValueTask<int?>>> asyncResultSelector = null!;

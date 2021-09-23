@@ -351,7 +351,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             {
                 if (TypeHelper.IsIntegratedNumericType(underlyingResultType))
                 {
-                    resultValue = $"new {TypeHelper.FormatCSharpTypeName(resultElementType, _knownNamespaces.Namespaces)}[] {{ { TransformToTargetType("p + 3", sourceType, resultType: underlyingResultType) }, { TransformToTargetType("p - 1", sourceType, resultType: underlyingResultType) }, { TransformToTargetType("p + 1", sourceType, resultType: underlyingResultType) } }}";
+                    resultValue = $"new {TypeHelper.FormatCSharpTypeName(resultElementType, _knownNamespaces.Namespaces)}[] {{ { TransformToTargetType("p + 3", sourceType, resultType: resultElementType) }, { TransformToTargetType("p - 1", sourceType, resultType: resultElementType) }, { TransformToTargetType("p + 1", sourceType, resultType: resultElementType) } }}";
                 }
                 else
                 {
