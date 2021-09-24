@@ -123,7 +123,7 @@ namespace AsyncQueryableAdapter.Utils
         private static bool IsEquivalentLambdaExpressionType(
             Type syncType,
             Type asyncType,
-            EquivalentTypeMatch typeMatch) // TODO: Can we somehow use this mode here?
+            EquivalentTypeMatch typeMatch)
         {
             if (!TypeHelper.IsLambdaExpression(syncType, out var syncDelegateType))
             {
@@ -222,7 +222,9 @@ namespace AsyncQueryableAdapter.Utils
                     ThrowHelper.ThrowCollectionMustNotContainNullEntries(nameof(arguments));
                 }
 
-                var type = arguments[i].Type;
+                var parameterType = parameters[i].ParameterType;
+                var argument = arguments[i];
+                var type = argument.Type;
 
                 // TODO: Why was this necessary? The test all pass without this.
                 //if (type.IsAssignableTo(typeof(TranslatedQueryable)))
@@ -233,7 +235,7 @@ namespace AsyncQueryableAdapter.Utils
                 //    type = translatedQueryable.Expression.Type;
                 //}
 
-                if (!type.IsAssignableTo(parameters[i].ParameterType))
+                if (!type.IsAssignableTo(parameterType))
                 {
                     isCompatible = false;
                     break;
