@@ -110,13 +110,54 @@ namespace AsyncQueryableAdapter.Translators
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
+            // TODO: It is possible to translate this, if the method is implemented in IAsyncEnumerable and
+            //       we find a corresponding method in IEnumerable
+
+            // For chain-able methods, rewrite
+            // p => AsyncEnumerable.Select(p, q => q > 3)
+            // to
+            // p => Enumerable.Select(p, q => q > 3).ToAsyncEnumerable()
+            // The ToAsyncEnumerable() is needed for the expression tree to be well-formed and is removed in a later
+            // translation step again
+
+            // For non-chainable methods, rewrite
+            // p => AsyncEnumerable.Sum(p, q => q.Age)
+            // to
+            // p => new ValueTask<int>(Enumerable.Sum(p, q => q.Age))
+            // and 
+            // (p, c) => AsyncEnumerable.Sum(p, q => q.Age, c)
+            // to
+            // (p, c) => new ValueTask<int>(Enumerable.Sum(p, q => q.Age))
+            // The new ValueTask<TResult> is needed for the expression tree to be well-formed and is removed in a later
+            // translation step again.
+            // The cancellation token is ignored.
+
             if (node.Object is ParameterExpression parameterExpression
                && _lambdaParamsToRewrite.ContainsKey(parameterExpression))
             {
                 _success = false;
             }
 
-            return base.VisitMethodCall(node);
+            if (node.Arguments.Count > 0)
+            {
+                for (var i = 0; i < node.Arguments.Count; i++)
+                {
+                    if (node.Arguments[i] is ParameterExpression parameterExpression2
+                        && _lambdaParamsToRewrite.ContainsKey(parameterExpression2))
+                    {
+                        _success = false;
+                    }
+                }
+            }
+
+            try
+            {
+                return base.VisitMethodCall(node);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         protected override Expression VisitSwitch(SwitchExpression node)

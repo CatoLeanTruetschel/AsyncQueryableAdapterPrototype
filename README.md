@@ -237,6 +237,7 @@ This is a prototype. It is **not** feature complete. There are currently no rele
                 * [x] Special-case support in query provider to evaluate query
                 * [ ] Special-case support in all operation translators
         * [ ] Support for async predicates (when translatable to sync predicates)
+        * [ ] Support for translation of known functions in chained operations
         * [ ] Unit-test
     * [x] Last operation translator
         * [x] Basic support
