@@ -25,6 +25,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using AsyncQueryableAdapter.Utils;
+using AsyncQueryableAdapterPrototype.Utils;
 
 // TODO: Make this handle and test the following functions 
 //       (that all accept an argument of type IAsyncEnumerable)
@@ -78,12 +79,13 @@ namespace AsyncQueryableAdapter.Translators
                 return false;
             }
 
-            if (!TypeHelper.IsAsyncQueryableType(method.ReturnType))
+            if (!TypeHelper.IsAsyncQueryableType(method.ReturnType, out var resultElementType))
             {
                 return false;
             }
 
-            var resultElementType = method.ReturnType.GetGenericArguments()[0];
+            // TODO: This is not met for Zip, as it returns ValueTuple<TFirst, TSecond>
+            //       Either implement Zip as a special translator or make ValueTuple`2 a special known type here
             if (!method.GetGenericArguments().Any(p => p == resultElementType))
             {
                 return false;
@@ -105,15 +107,14 @@ namespace AsyncQueryableAdapter.Translators
         {
             Type[]? asyncGenericArguments = null;
             var asyncParameters = method.GetParameters();
-            var candidates = typeof(Queryable).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            var operationName = OperationNameHelper.GetOperationName(method);
+
+            var candidates = typeof(Queryable)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(p => p.Name.Equals(operationName, StringComparison.Ordinal));
 
             foreach (var candidate in candidates)
             {
-                if (!candidate.Name.Equals(method.Name, StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
                 // If the candidate is generic, construct the candidate with the async generic args
                 var constructedCandidate = candidate;
 
@@ -275,6 +276,9 @@ namespace AsyncQueryableAdapter.Translators
             if (constructedTranslationTarget is null)
                 return false;
 
+            // Translate lambda arguments
+            TranslateLambdaArguments(arguments, constructedTranslationTarget.GetParameters());
+
             // Finally check that the constructed arguments are compatible with the translation target
             if (!TypeTranslationHelper.AreArgumentsCompatible(constructedTranslationTarget, arguments))
                 return false;
@@ -318,6 +322,49 @@ namespace AsyncQueryableAdapter.Translators
             result = Expression.Constant(resultTranslatedQueryable);
 
             return true;
+        }
+
+        private static void TranslateLambdaArguments(IList<Expression> arguments, ParameterInfo[] parameters)
+        {
+            for (var i = 0; i < arguments.Count; i++)
+            {
+                var parameterType = parameters[i].ParameterType;
+                var argument = arguments[i].Unquote();
+                var type = argument.Type;
+
+                if (argument.NodeType == ExpressionType.Lambda
+                   && TypeHelper.IsLambdaExpression(parameterType, out var parameterDelegateType))
+                {
+                    var delegateType = argument.Type;
+                    Debug.Assert(TypeHelper.IsDelegate(delegateType));
+
+                    if (delegateType == parameterDelegateType)
+                    {
+                        continue;
+                    }
+
+                    // Try translate the lambda of type 'delegateType' into a lambda of type
+                    // 'parameterDelegateType'
+                    var parameterDelegateMethod = parameterDelegateType.GetMethod("Invoke");
+
+                    if (parameterDelegateMethod is null)
+                    {
+                        continue;
+                    }
+
+                    var expectedReturnType = parameterDelegateMethod.ReturnType;
+                    var expectedParameterTypes = parameterDelegateMethod
+                        .GetParameters()
+                        .Select(p => p.ParameterType)
+                        .ToArray(); // TODO: Do not use LINQ for perf!
+
+                    if (ExpressionHelper.TryTranslateExpressionToSync(
+                        argument, expectedParameterTypes, expectedReturnType, out var translatedExpression))
+                    {
+                        arguments[i] = Expression.Quote(translatedExpression);
+                    }
+                }
+            }
         }
 
         /// <summary>

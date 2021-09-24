@@ -17,6 +17,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
@@ -123,6 +124,27 @@ namespace AsyncQueryableAdapter
             translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
 
             return true;
+        }
+
+        public static bool TryTranslateExpressionToSync(
+            Expression expression,
+            IReadOnlyList<Type> sourceTypes,
+            Type targetType,
+            [NotNullWhen(true)] out Expression? translatedExpression)
+        {
+            if (sourceTypes.Count is 1)
+            {
+                return TryTranslateExpressionToSync(expression, sourceTypes[0], targetType, out translatedExpression);
+            }
+
+            if (sourceTypes.Count is 2)
+            {
+                return TryTranslateExpressionToSync(
+                    expression, sourceTypes[0], sourceTypes[1], targetType, out translatedExpression);
+            }
+
+            translatedExpression = null;
+            return false;
         }
     }
 }

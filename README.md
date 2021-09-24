@@ -164,7 +164,7 @@ This is a prototype. It is **not** feature complete. There are currently no rele
 * [ ] Expression node translators
     * [ ] Default translator for chain-able operations
         * [x] Basic implementation
-        * [ ] Support for operations that accept async selectors/predicates
+        * [x] Support for operations that accept async selectors/predicates
         * [ ] Support for operations that accept instances of type `IAsyncEnumerable`
         * [ ] Support and test
             * [ ] AsAsyncQueryable (NOP)         
