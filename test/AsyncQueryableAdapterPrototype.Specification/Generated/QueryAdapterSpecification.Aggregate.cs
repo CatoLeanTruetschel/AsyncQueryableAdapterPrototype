@@ -1241,8 +1241,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
 
@@ -1373,8 +1371,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
@@ -1507,8 +1503,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
 
@@ -1639,8 +1633,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
@@ -1773,8 +1765,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
 
@@ -1905,8 +1895,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
@@ -2039,8 +2027,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
 
@@ -2171,8 +2157,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
@@ -2305,8 +2289,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -2438,8 +2420,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;
 
@@ -2570,8 +2550,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
@@ -2752,8 +2730,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
 
@@ -2932,8 +2908,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
@@ -3114,8 +3088,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
 
@@ -3294,8 +3266,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
@@ -3476,8 +3446,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
 
@@ -3656,8 +3624,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
@@ -3838,8 +3804,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
 
@@ -4019,8 +3983,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -4199,8 +4161,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;
@@ -5571,8 +5531,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
 
@@ -5703,8 +5661,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
@@ -5837,8 +5793,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
 
@@ -5969,8 +5923,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
@@ -6103,8 +6055,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
 
@@ -6235,8 +6185,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
@@ -6369,8 +6317,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
 
@@ -6501,8 +6447,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
@@ -6635,8 +6579,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -6768,8 +6710,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;
 
@@ -6900,8 +6840,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
@@ -7082,8 +7020,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
 
@@ -7262,8 +7198,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
@@ -7444,8 +7378,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
 
@@ -7624,8 +7556,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
@@ -7806,8 +7736,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
 
@@ -7986,8 +7914,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
@@ -8168,8 +8094,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
 
@@ -8349,8 +8273,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -8529,8 +8451,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;
@@ -9901,8 +9821,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
 
@@ -10033,8 +9951,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
@@ -10167,8 +10083,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
 
@@ -10299,8 +10213,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
@@ -10433,8 +10345,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
 
@@ -10565,8 +10475,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
@@ -10699,8 +10607,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
 
@@ -10831,8 +10737,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
@@ -10965,8 +10869,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -11098,8 +11000,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;
 
@@ -11230,8 +11130,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<double?, double?, double?> func = (p, q) => p + 3 - q;
@@ -11412,8 +11310,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<double, double, double> func = (p, q) => p + 3 - q;
 
@@ -11592,8 +11488,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<decimal, decimal, decimal> func = (p, q) => p + 3 - q;
@@ -11774,8 +11668,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<decimal?, decimal?, decimal?> func = (p, q) => p + 3 - q;
 
@@ -11954,8 +11846,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<float?, float?, float?> func = (p, q) => p + 3 - q;
@@ -12136,8 +12026,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<float, float, float> func = (p, q) => p + 3 - q;
 
@@ -12316,8 +12204,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<long, long, long> func = (p, q) => p + 3 - q;
@@ -12498,8 +12384,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<int, int, int> func = (p, q) => p + 3 - q;
 
@@ -12679,8 +12563,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'seed' parameter
-
             // Arrange 'func' parameter
             Func<long?, long?, long?> func = (p, q) => p + 3 - q;
 
@@ -12859,8 +12741,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
-
-            // Arrange 'seed' parameter
 
             // Arrange 'func' parameter
             Func<int?, int?, int?> func = (p, q) => p + 3 - q;

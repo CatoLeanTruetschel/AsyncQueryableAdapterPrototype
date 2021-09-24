@@ -27,26 +27,33 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
 {
     internal abstract class Parameter
     {
-        public Parameter(string name)
+        public Parameter(string name, bool declaresVariables)
         {
             Name = name;
+            DeclaresVariables = declaresVariables;
         }
 
         public string Name { get; }
+        public bool DeclaresVariables { get; }
 
         public abstract Task SetupParameterAsync(StreamWriter writer);
 
         public static Parameter Default(string name)
         {
-            return new DefaultParameter(name);
+            return new DefaultParameter(name, declaresVariables: false);
         }
 
-        public static Parameter Default(string name, Func<StreamWriter, string, Task> setup)
+        public static Parameter Default(
+            string name,
+            Func<StreamWriter, string, Task> setup)
         {
-            return new DefaultParameter(name, setup);
+            return new DefaultParameter(name, setup, declaresVariables: true);
         }
 
-        public static Parameter Default(string name, string? prefix, Func<StreamWriter, string, Task> setup)
+        public static Parameter Default(
+            string name,
+            string? prefix,
+            Func<StreamWriter, string, Task> setup)
         {
             if (!string.IsNullOrEmpty(prefix))
             {
@@ -60,12 +67,16 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
         {
             private readonly Func<StreamWriter, string, Task> _setup;
 
-            public DefaultParameter(string name, Func<StreamWriter, string, Task> setup) : base(name)
+            public DefaultParameter(
+                string name,
+                Func<StreamWriter, string, Task> setup,
+                bool declaresVariables) : base(name, declaresVariables)
             {
                 _setup = setup;
             }
 
-            public DefaultParameter(string name) : this(name, (_, _) => Task.CompletedTask) { }
+            public DefaultParameter(string name, bool declaresVariables)
+                : this(name, (_, _) => Task.CompletedTask, declaresVariables) { }
 
             public override Task SetupParameterAsync(StreamWriter writer)
             {
@@ -90,7 +101,8 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             bool hasIndex,
             bool isExpression,
             Action<StringBuilder> formatResult,
-            IReadOnlyList<string>? parameters = null) : base(name)
+            IReadOnlyList<string>? parameters = null,
+            bool declaresVariables = true) : base(name, declaresVariables)
         {
             if (knownNamespaces is null)
                 throw new ArgumentNullException(nameof(knownNamespaces));

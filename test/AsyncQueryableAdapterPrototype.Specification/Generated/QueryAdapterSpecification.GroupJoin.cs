@@ -2223,8 +2223,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<double?, IEnumerable<double?>, double?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
 
@@ -2458,8 +2456,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<double, IEnumerable<double>, double> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -2695,8 +2691,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<decimal, IEnumerable<decimal>, decimal> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
 
@@ -2930,8 +2924,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, IEnumerable<decimal?>, decimal?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3167,8 +3159,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<float?, IEnumerable<float?>, float?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
 
@@ -3402,8 +3392,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<float, IEnumerable<float>, float> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -3639,8 +3627,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long, IEnumerable<long>, long> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
@@ -3874,8 +3860,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int, IEnumerable<int>, int> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
@@ -4111,8 +4095,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long?, IEnumerable<long?>, long?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
 
@@ -4346,8 +4328,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int?, IEnumerable<int?>, int?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -6743,8 +6723,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<double?, IEnumerable<double?>, double?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
 
@@ -6978,8 +6956,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<double, IEnumerable<double>, double> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -7215,8 +7191,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<decimal, IEnumerable<decimal>, decimal> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
 
@@ -7450,8 +7424,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, IEnumerable<decimal?>, decimal?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -7687,8 +7659,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<float?, IEnumerable<float?>, float?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
 
@@ -7922,8 +7892,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<float, IEnumerable<float>, float> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -8159,8 +8127,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long, IEnumerable<long>, long> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
@@ -8394,8 +8360,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int, IEnumerable<int>, int> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
@@ -8631,8 +8595,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long?, IEnumerable<long?>, long?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
 
@@ -8866,8 +8828,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int?, IEnumerable<int?>, int?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -11263,8 +11223,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<double?, IEnumerable<double?>, double?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
 
@@ -11498,8 +11456,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<double, IEnumerable<double>, double> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -11735,8 +11691,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<decimal, IEnumerable<decimal>, decimal> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
 
@@ -11970,8 +11924,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<decimal?, IEnumerable<decimal?>, decimal?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -12207,8 +12159,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<float?, IEnumerable<float?>, float?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
 
@@ -12442,8 +12392,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<float, IEnumerable<float>, float> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -12679,8 +12627,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long, IEnumerable<long>, long> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
@@ -12914,8 +12860,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int, IEnumerable<int>, int> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
@@ -13151,8 +13095,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'resultSelector' parameter
             Func<long?, IEnumerable<long?>, long?> resultSelector = (p, elements) => p + 3;
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
 
@@ -13386,8 +13328,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'resultSelector' parameter
             Func<int?, IEnumerable<int?>, int?> resultSelector = (p, elements) => p + 3;
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();

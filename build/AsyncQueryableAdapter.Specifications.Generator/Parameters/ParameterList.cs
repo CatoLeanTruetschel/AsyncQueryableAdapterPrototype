@@ -36,8 +36,12 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
         {
             foreach (var parameter in Parameters)
             {
-                await writer.WriteLineAsync().ConfigureAwait(false);
-                await writer.WriteLineAsync($"            // Arrange '{parameter.Name}' parameter").ConfigureAwait(false);
+                if (parameter.DeclaresVariables)
+                {
+                    await writer.WriteLineAsync().ConfigureAwait(false);
+                    await writer.WriteLineAsync($"            // Arrange '{parameter.Name}' parameter").ConfigureAwait(false);
+                }
+
                 await parameter.SetupParameterAsync(writer).ConfigureAwait(false);
             }
         }

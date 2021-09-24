@@ -851,8 +851,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<double?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
 
@@ -941,8 +939,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -1033,8 +1029,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<decimal>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
 
@@ -1123,8 +1117,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1215,8 +1207,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
 
@@ -1305,8 +1295,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -1397,8 +1385,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
@@ -1487,8 +1473,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int>();
@@ -1579,8 +1563,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
 
@@ -1669,8 +1651,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();

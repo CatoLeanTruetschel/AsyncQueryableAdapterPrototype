@@ -864,8 +864,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'second' parameter
             var second = GetQueryable<double?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
 
@@ -955,8 +953,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'second' parameter
             var second = GetQueryable<double>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -1048,8 +1044,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'second' parameter
             var second = GetQueryable<decimal>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
 
@@ -1139,8 +1133,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'second' parameter
             var second = GetQueryable<decimal?>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1232,8 +1224,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'second' parameter
             var second = GetQueryable<float?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
 
@@ -1323,8 +1313,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'second' parameter
             var second = GetQueryable<float>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -1416,8 +1404,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'second' parameter
             var second = GetQueryable<long>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
@@ -1507,8 +1493,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'second' parameter
             var second = GetQueryable<int>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
@@ -1600,8 +1584,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange 'second' parameter
             var second = GetQueryable<long?>();
 
-            // Arrange 'comparer' parameter
-
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
 
@@ -1691,8 +1673,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             // Arrange 'second' parameter
             var second = GetQueryable<int?>();
-
-            // Arrange 'comparer' parameter
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
