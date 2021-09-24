@@ -45,9 +45,39 @@ foreach(var operation in operations)
         {
             return new <#=operation#>MethodTranslator(asyncSelector);
         }
+<#
+if (string.Equals(operation, "Average", StringComparison.Ordinal))
+{
+#>
+        protected override Type ExpectedResultType(Type sourceType)
+        {
+            var expectedResultType = sourceType;
+
+            if (expectedResultType == typeof(int))
+            {
+                expectedResultType = typeof(double);
+            }
+            else if (expectedResultType == typeof(int?))
+            {
+                expectedResultType = typeof(double?);
+            }
+            else if (expectedResultType == typeof(long))
+            {
+                expectedResultType = typeof(double);
+            }
+            else if (expectedResultType == typeof(long?))
+            {
+                expectedResultType = typeof(double?);
+            }
+
+            return expectedResultType;
+        }
+<#
+}
+#>
     }
 
-    internal sealed class <#=operation#>MethodTranslator : MathAggregateTranslator
+    internal sealed partial class <#=operation#>MethodTranslator : MathAggregateTranslator
     {
         public <#=operation#>MethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
@@ -61,20 +91,45 @@ foreach(var operation in operations)
             var returnType = TypeHelper.GetValueTaskType(resultType);
             AsyncTypeAwaitable evaluationResult;
 
-            if (selector is null)
+            if (selector is not null)
             {
+<#
+if (string.Equals(operation, "Average", StringComparison.Ordinal))
+{
+#>
+                selector = TranslateSelector((LambdaExpression)selector.Unquote());
+
+<#
+}
+#>
                 evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
                     elementType,
+                    resultType,
                     translatedQueryable.GetQueryable(),
+                    selector,
                     cancellation);
             }
-            else
+<#
+if (string.Equals(operation, "Average", StringComparison.Ordinal))
+{
+#>
+            else if (NeedsSelector(elementType, out selector))
             {
                 evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
                     elementType,
                     resultType,
                     translatedQueryable.GetQueryable(),
                     selector,
+                    cancellation);
+            }
+<#
+}
+#>
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.<#=operation#>Async(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
                     cancellation);
             }
 

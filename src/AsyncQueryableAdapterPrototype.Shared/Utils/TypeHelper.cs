@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -601,6 +602,27 @@ namespace AsyncQueryableAdapter.Utils
             arr[^1] = resultType;
 
             return _funcTypeDefinitions[types.Length].MakeGenericType(arr);
+        }
+
+        public static bool IsFuncType(
+            Type type,
+            [NotNullWhen(true)] out Type? returnType,
+            [NotNullWhen(true)] out ParameterInfo[]? parameters)
+        {
+            returnType = null;
+            parameters = null;
+
+            if (!IsFuncType(type))
+            {
+                return false;
+            }
+
+            var method = type.GetMethod("Invoke")!;
+
+            returnType = method.ReturnType;
+            parameters = method.GetParameters();
+
+            return true;
         }
 
         public static bool IsFuncType(Type type)

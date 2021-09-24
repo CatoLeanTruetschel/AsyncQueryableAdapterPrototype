@@ -17,13 +17,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter.Translators
@@ -60,13 +57,11 @@ namespace AsyncQueryableAdapter.Translators
             if (!returnType.IsConstructedGenericType)
                 return false;
 
-            if (returnType.GetGenericTypeDefinition() != typeof(ValueTask<>))
+            if (!TypeHelper.IsValueTaskType(returnType, out var resultType))
                 return false;
 
             if (parameters[^1].ParameterType != typeof(CancellationToken))
                 return false;
-
-            var resultType = returnType.GetGenericArguments().First();
 
             bool asyncSelector;
 
@@ -113,15 +108,18 @@ namespace AsyncQueryableAdapter.Translators
                         if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
                             return false;
 
-                        var selectorExpressionType = TypeHelper.GetFuncExpressionType(sourceType, resultType);
-
-                        if (parameters[1].ParameterType != selectorExpressionType)
+                        if (!IsKnownSelector(
+                            sourceType, resultType, parameters[1].ParameterType))
+                        {
                             return false;
+                        }
                     }
 
                     // We are in case 2
                     else if (genericArguments[0] != resultType)
+                    {
                         return false;
+                    }
                 }
                 else
                 {
@@ -129,8 +127,15 @@ namespace AsyncQueryableAdapter.Translators
                     if (parameters.Length is not 2)
                         return false;
 
-                    if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(resultType))
+                    if (!TypeHelper.IsAsyncQueryableType(parameters[0].ParameterType, out var sourceType))
+                    {
                         return false;
+                    }
+
+                    if (resultType != ExpectedResultType(sourceType))
+                    {
+                        return false;
+                    }
                 }
 
                 asyncSelector = false;
@@ -178,21 +183,18 @@ namespace AsyncQueryableAdapter.Translators
                 if (parameters[0].ParameterType != TypeHelper.GetAsyncQueryableType(sourceType))
                     return false;
 
-                var selectorReturnType = TypeHelper.GetValueTaskType(resultType);
-                Type selectorExpressionType;
+                var withCancellation = true;
 
                 if (method.Name.Equals(OperationAwaitMethod, StringComparison.Ordinal))
                 {
-                    selectorExpressionType = TypeHelper.GetFuncExpressionType(sourceType, selectorReturnType);
-                }
-                else
-                {
-                    selectorExpressionType = TypeHelper.GetFuncExpressionType(
-                        sourceType, typeof(CancellationToken), selectorReturnType);
+                    withCancellation = false;
                 }
 
-                if (parameters[1].ParameterType != selectorExpressionType)
+                if (!IsKnownAsyncSelector(
+                    sourceType, resultType, parameters[1].ParameterType, withCancellation))
+                {
                     return false;
+                }
 
                 asyncSelector = true;
             }
@@ -202,6 +204,95 @@ namespace AsyncQueryableAdapter.Translators
             }
 
             result = BuildMethodTranslator(asyncSelector);
+            return true;
+        }
+
+        protected virtual Type ExpectedResultType(Type sourceType)
+        {
+            return sourceType;
+        }
+
+        private bool IsKnownAsyncSelector(
+            Type sourceType,
+            Type resultType,
+            Type selectorType,
+            bool withCancellation)
+        {
+            if (!TypeHelper.IsLambdaExpression(selectorType, out var selectorDelegateType))
+            {
+                return false;
+            }
+
+            if (!TypeHelper.IsFuncType(
+                selectorDelegateType, out var selectorReturnType, out var selectorParameters))
+            {
+                return false;
+            }
+
+            if (selectorParameters.Length is not 1)
+            {
+                if (selectorParameters.Length is not 2)
+                {
+                    return false;
+                }
+
+                if (!withCancellation)
+                    return false;
+
+                if (selectorParameters[^1].ParameterType != typeof(CancellationToken))
+                    return false;
+            }
+
+            if (selectorParameters[0].ParameterType != sourceType)
+            {
+                return false;
+            }
+
+            if (!TypeHelper.IsValueTaskType(selectorReturnType, out var selectorResultType))
+            {
+                return false;
+            }
+
+            var expectedResultType = ExpectedResultType(selectorResultType);
+
+            if (expectedResultType != resultType)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsKnownSelector(Type sourceType, Type resultType, Type selectorType)
+        {
+            if (!TypeHelper.IsLambdaExpression(selectorType, out var selectorDelegateType))
+            {
+                return false;
+            }
+
+            if (!TypeHelper.IsFuncType(
+                selectorDelegateType, out var selectorReturnType, out var selectorParameters))
+            {
+                return false;
+            }
+
+            if (selectorParameters.Length != 1)
+            {
+                return false;
+            }
+
+            if (selectorParameters[0].ParameterType != sourceType)
+            {
+                return false;
+            }
+
+            var expectedResultType = ExpectedResultType(selectorReturnType);
+
+            if (expectedResultType != resultType)
+            {
+                return false;
+            }
+
             return true;
         }
     }
@@ -251,13 +342,18 @@ namespace AsyncQueryableAdapter.Translators
 
             var selector = translationContext.Arguments[1];
 
-            if (AsyncSelector && !ExpressionHelper.TryTranslateExpressionToSync(
-                selector,
-                translatedQueryable.ElementType,
-                resultType,
-                out selector))
+            if (AsyncSelector)
             {
-                return false;
+                var selectorResultType = ((LambdaExpression)selector.Unquote()).ReturnType.GetGenericArguments()[0];
+
+                if (!ExpressionHelper.TryTranslateExpressionToSync(
+                    selector,
+                    translatedQueryable.ElementType,
+                    selectorResultType,
+                    out selector))
+                {
+                    return false;
+                }
             }
 
             result = ProcessOperation(resultType, translatedQueryable, selector, cancellationToken);

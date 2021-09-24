@@ -34,7 +34,7 @@ namespace AsyncQueryableAdapter.Translators
         }
     }
 
-    internal sealed class MinMethodTranslator : MathAggregateTranslator
+    internal sealed partial class MinMethodTranslator : MathAggregateTranslator
     {
         public MinMethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
@@ -48,20 +48,20 @@ namespace AsyncQueryableAdapter.Translators
             var returnType = TypeHelper.GetValueTaskType(resultType);
             AsyncTypeAwaitable evaluationResult;
 
-            if (selector is null)
-            {
-                evaluationResult = translatedQueryable.QueryAdapter.MinAsync(
-                    elementType,
-                    translatedQueryable.GetQueryable(),
-                    cancellation);
-            }
-            else
+            if (selector is not null)
             {
                 evaluationResult = translatedQueryable.QueryAdapter.MinAsync(
                     elementType,
                     resultType,
                     translatedQueryable.GetQueryable(),
                     selector,
+                    cancellation);
+            }
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.MinAsync(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
                     cancellation);
             }
 
@@ -78,7 +78,7 @@ namespace AsyncQueryableAdapter.Translators
         }
     }
 
-    internal sealed class MaxMethodTranslator : MathAggregateTranslator
+    internal sealed partial class MaxMethodTranslator : MathAggregateTranslator
     {
         public MaxMethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
@@ -92,20 +92,20 @@ namespace AsyncQueryableAdapter.Translators
             var returnType = TypeHelper.GetValueTaskType(resultType);
             AsyncTypeAwaitable evaluationResult;
 
-            if (selector is null)
-            {
-                evaluationResult = translatedQueryable.QueryAdapter.MaxAsync(
-                    elementType,
-                    translatedQueryable.GetQueryable(),
-                    cancellation);
-            }
-            else
+            if (selector is not null)
             {
                 evaluationResult = translatedQueryable.QueryAdapter.MaxAsync(
                     elementType,
                     resultType,
                     translatedQueryable.GetQueryable(),
                     selector,
+                    cancellation);
+            }
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.MaxAsync(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
                     cancellation);
             }
 
@@ -122,7 +122,7 @@ namespace AsyncQueryableAdapter.Translators
         }
     }
 
-    internal sealed class SumMethodTranslator : MathAggregateTranslator
+    internal sealed partial class SumMethodTranslator : MathAggregateTranslator
     {
         public SumMethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
@@ -136,20 +136,20 @@ namespace AsyncQueryableAdapter.Translators
             var returnType = TypeHelper.GetValueTaskType(resultType);
             AsyncTypeAwaitable evaluationResult;
 
-            if (selector is null)
-            {
-                evaluationResult = translatedQueryable.QueryAdapter.SumAsync(
-                    elementType,
-                    translatedQueryable.GetQueryable(),
-                    cancellation);
-            }
-            else
+            if (selector is not null)
             {
                 evaluationResult = translatedQueryable.QueryAdapter.SumAsync(
                     elementType,
                     resultType,
                     translatedQueryable.GetQueryable(),
                     selector,
+                    cancellation);
+            }
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.SumAsync(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
                     cancellation);
             }
 
@@ -164,9 +164,32 @@ namespace AsyncQueryableAdapter.Translators
         {
             return new AverageMethodTranslator(asyncSelector);
         }
+        protected override Type ExpectedResultType(Type sourceType)
+        {
+            var expectedResultType = sourceType;
+
+            if (expectedResultType == typeof(int))
+            {
+                expectedResultType = typeof(double);
+            }
+            else if (expectedResultType == typeof(int?))
+            {
+                expectedResultType = typeof(double?);
+            }
+            else if (expectedResultType == typeof(long))
+            {
+                expectedResultType = typeof(double);
+            }
+            else if (expectedResultType == typeof(long?))
+            {
+                expectedResultType = typeof(double?);
+            }
+
+            return expectedResultType;
+        }
     }
 
-    internal sealed class AverageMethodTranslator : MathAggregateTranslator
+    internal sealed partial class AverageMethodTranslator : MathAggregateTranslator
     {
         public AverageMethodTranslator(bool asyncSelector) : base(asyncSelector) { }
 
@@ -180,20 +203,31 @@ namespace AsyncQueryableAdapter.Translators
             var returnType = TypeHelper.GetValueTaskType(resultType);
             AsyncTypeAwaitable evaluationResult;
 
-            if (selector is null)
+            if (selector is not null)
             {
+                selector = TranslateSelector((LambdaExpression)selector.Unquote());
+
                 evaluationResult = translatedQueryable.QueryAdapter.AverageAsync(
                     elementType,
+                    resultType,
                     translatedQueryable.GetQueryable(),
+                    selector,
                     cancellation);
             }
-            else
+            else if (NeedsSelector(elementType, out selector))
             {
                 evaluationResult = translatedQueryable.QueryAdapter.AverageAsync(
                     elementType,
                     resultType,
                     translatedQueryable.GetQueryable(),
                     selector,
+                    cancellation);
+            }
+            else
+            {
+                evaluationResult = translatedQueryable.QueryAdapter.AverageAsync(
+                    elementType,
+                    translatedQueryable.GetQueryable(),
                     cancellation);
             }
 
