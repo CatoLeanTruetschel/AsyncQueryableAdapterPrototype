@@ -38,86 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region FirstAsyncWithNullableDoubleSource tests
-
-        [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<double?>(source);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            AssertHelper.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAsyncWithDoubleSource tests
 
         [Fact]
@@ -126,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -153,7 +73,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -179,7 +99,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -198,86 +118,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAsyncWithDecimalSource tests
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<decimal>(source);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            AssertHelper.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAsyncWithNullableDecimalSource tests
 
         [Fact]
@@ -286,7 +126,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -313,7 +153,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -339,7 +179,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -366,7 +206,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -393,7 +233,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -419,7 +259,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -438,6 +278,166 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region FirstAsyncWithNullableDoubleSource tests
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<double?>(source);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<double?>(asyncSource, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAsyncWithDecimalSource tests
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<decimal>(source);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<decimal>(asyncSource, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region FirstAsyncWithSingleSource tests
 
         [Fact]
@@ -446,7 +446,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -473,7 +473,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -499,7 +499,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -518,166 +518,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAsyncWithInt64Source tests
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<long>(source);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region FirstAsyncWithInt32Source tests
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<int>(source);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAsyncWithNullableInt64Source tests
 
         [Fact]
@@ -686,7 +526,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -713,7 +553,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -739,7 +579,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -766,7 +606,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -793,7 +633,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -819,7 +659,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -838,54 +678,45 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAsyncWithNullableDoubleSourceWithPredicate tests
+        #region FirstAsyncWithInt64Source tests
 
         [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        public async Task FirstAsyncWithInt64SourceIsEquivalentToFirstTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            var source = GetQueryable<long>();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<double?>(source, predicate);
+            var expectedResult = Enumerable.First<long>(source);
 
             // Act
-            var result = await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            var result = await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            AssertHelper.Equal(expectedResult, result);
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        public async Task FirstAsyncWithInt64SourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -898,23 +729,20 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
-                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        public async Task FirstAsyncWithInt64SourceNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -925,23 +753,76 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<long>(asyncSource, cancellationToken).ConfigureAwait(false);
             });
         }
+        #endregion
+
+        #region FirstAsyncWithInt32Source tests
 
         [Fact]
-        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        public async Task FirstAsyncWithInt32SourceIsEquivalentToFirstTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
 
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, bool>> asyncPredicate = null!;
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<int>(source);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -952,7 +833,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<int>(asyncSource, cancellationToken).ConfigureAwait(false);
             });
         }
         #endregion
@@ -965,7 +846,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -998,7 +879,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -1027,7 +908,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -1054,7 +935,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -1076,125 +957,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAsyncWithDecimalSourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<decimal>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            AssertHelper.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, bool>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAsyncWithNullableDecimalSourceWithPredicate tests
 
         [Fact]
@@ -1203,7 +965,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -1236,7 +998,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1265,7 +1027,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -1292,7 +1054,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1322,7 +1084,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -1355,7 +1117,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -1384,7 +1146,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -1411,7 +1173,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -1433,6 +1195,244 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region FirstAsyncWithNullableDoubleSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'predicate' parameter
+            Func<double?, bool> predicate = (p) => p != null && p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<double?>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, bool>> asyncPredicate = (p) => p != null && p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, bool>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAsyncWithDecimalSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'predicate' parameter
+            Func<decimal, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<decimal>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, bool>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region FirstAsyncWithSingleSourceWithPredicate tests
 
         [Fact]
@@ -1441,7 +1441,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -1474,7 +1474,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -1503,7 +1503,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -1530,7 +1530,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -1552,244 +1552,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAsyncWithInt64SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<long>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, bool>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region FirstAsyncWithInt32SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<int>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, bool>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAsyncWithNullableInt64SourceWithPredicate tests
 
         [Fact]
@@ -1798,7 +1560,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -1831,7 +1593,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -1860,7 +1622,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -1887,7 +1649,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -1917,7 +1679,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -1950,7 +1712,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -1979,7 +1741,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -2006,7 +1768,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -2028,54 +1790,54 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitAsyncWithNullableDoubleSourceWithPredicate tests
+        #region FirstAsyncWithInt64SourceWithPredicate tests
 
         [Fact]
-        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        public async Task FirstAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            Func<long, bool> predicate = (p) => p > 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<double?>(source, predicate);
+            var expectedResult = Enumerable.First<long>(source, predicate);
 
             // Act
-            var result = await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            var result = await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            AssertHelper.Equal(expectedResult, result);
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        public async Task FirstAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -2088,23 +1850,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        public async Task FirstAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, bool>> asyncPredicate = (p) => p > 3;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2115,23 +1877,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        public async Task FirstAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = null!;
+            Expression<Func<long, bool>> asyncPredicate = null!;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -2142,7 +1904,126 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAsyncWithInt32SourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'predicate' parameter
+            Func<int, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<int>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, bool>> asyncPredicate = (p) => p > 3;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, bool>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
         #endregion
@@ -2155,7 +2036,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -2188,7 +2069,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -2217,7 +2098,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -2244,7 +2125,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -2266,125 +2147,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitAsyncWithDecimalSourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<decimal>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            AssertHelper.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAwaitAsyncWithNullableDecimalSourceWithPredicate tests
 
         [Fact]
@@ -2393,7 +2155,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -2426,7 +2188,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2455,7 +2217,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -2482,7 +2244,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2512,7 +2274,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -2545,7 +2307,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -2574,7 +2336,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -2601,7 +2363,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -2623,6 +2385,244 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region FirstAwaitAsyncWithNullableDoubleSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'predicate' parameter
+            Func<double?, bool> predicate = (p) => p != null && p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<double?>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAwaitAsyncWithDecimalSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'predicate' parameter
+            Func<decimal, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<decimal>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region FirstAwaitAsyncWithSingleSourceWithPredicate tests
 
         [Fact]
@@ -2631,7 +2631,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -2664,7 +2664,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -2693,7 +2693,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -2720,7 +2720,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -2742,244 +2742,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitAsyncWithInt64SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<long>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region FirstAwaitAsyncWithInt32SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<int>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAwaitAsyncWithNullableInt64SourceWithPredicate tests
 
         [Fact]
@@ -2988,7 +2750,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -3021,7 +2783,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -3050,7 +2812,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -3077,7 +2839,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -3107,7 +2869,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -3140,7 +2902,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -3169,7 +2931,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -3196,7 +2958,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -3218,54 +2980,54 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicate tests
+        #region FirstAwaitAsyncWithInt64SourceWithPredicate tests
 
         [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'predicate' parameter
-            Func<double?, bool> predicate = (p) => p != null && p > 3;
+            Func<long, bool> predicate = (p) => p > 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<double?>(source, predicate);
+            var expectedResult = Enumerable.First<long>(source, predicate);
 
             // Act
-            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            var result = await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
 
             // Assert
-            AssertHelper.Equal(expectedResult, result);
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
 
             // Arrange 'cancellationToken' parameter
             using var cancellationTokenSource = new CancellationTokenSource();
@@ -3278,23 +3040,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3305,23 +3067,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        public async Task FirstAwaitAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncPredicate' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
+            Expression<Func<long, ValueTask<bool>>> asyncPredicate = null!;
 
             // Arrange 'cancellationToken' parameter
             var cancellationToken = CancellationToken.None;
@@ -3332,7 +3094,126 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+                await AsyncQueryable.FirstAwaitAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAwaitAsyncWithInt32SourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'predicate' parameter
+            Func<int, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<int>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = (p) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
         #endregion
@@ -3345,7 +3226,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -3378,7 +3259,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -3407,7 +3288,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -3434,7 +3315,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -3456,125 +3337,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'predicate' parameter
-            Func<decimal, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<decimal>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            AssertHelper.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAwaitWithCancellationAsyncWithNullableDecimalSourceWithPredicate tests
 
         [Fact]
@@ -3583,7 +3345,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -3616,7 +3378,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3645,7 +3407,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -3672,7 +3434,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3702,7 +3464,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -3735,7 +3497,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -3764,7 +3526,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -3791,7 +3553,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -3813,6 +3575,244 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'predicate' parameter
+            Func<double?, bool> predicate = (p) => p != null && p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<double?>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p != null && p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithNullableDoubleSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<double?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'predicate' parameter
+            Func<decimal, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<decimal>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            AssertHelper.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithDecimalSourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<decimal>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region FirstAwaitWithCancellationAsyncWithSingleSourceWithPredicate tests
 
         [Fact]
@@ -3821,7 +3821,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -3854,7 +3854,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -3883,7 +3883,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -3910,7 +3910,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -3932,244 +3932,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'predicate' parameter
-            Func<long, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<long>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicate tests
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'predicate' parameter
-            Func<int, bool> predicate = (p) => p > 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.First<int>(source, predicate);
-
-            // Act
-            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            using var cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = cancellationTokenSource.Token;
-            cancellationTokenSource.Cancel();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncPredicate' parameter
-            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
-
-            // Arrange 'cancellationToken' parameter
-            var cancellationToken = CancellationToken.None;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region FirstAwaitWithCancellationAsyncWithNullableInt64SourceWithPredicate tests
 
         [Fact]
@@ -4178,7 +3940,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -4211,7 +3973,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -4240,7 +4002,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -4267,7 +4029,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -4297,7 +4059,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -4330,7 +4092,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -4359,7 +4121,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -4386,7 +4148,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -4404,6 +4166,244 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.FirstAwaitWithCancellationAsync<int?>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<long>();
+
+            // Arrange 'predicate' parameter
+            Func<long, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<long>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<long> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt64SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<long, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<long>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicate tests
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateIsEquivalentToFirstTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'predicate' parameter
+            Func<int, bool> predicate = (p) => p > 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.First<int>(source, predicate);
+
+            // Act
+            var result = await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateCanceledCancellationTokenThrowsOperationCanceledExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            using var cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource.Cancel();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = (p, c) => new ValueTask<bool>(p > 3);
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task FirstAwaitWithCancellationAsyncWithInt32SourceWithPredicateNullPredicateThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncPredicate' parameter
+            Expression<Func<int, CancellationToken, ValueTask<bool>>> asyncPredicate = null!;
+
+            // Arrange 'cancellationToken' parameter
+            var cancellationToken = CancellationToken.None;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.FirstAwaitWithCancellationAsync<int>(asyncSource, asyncPredicate, cancellationToken).ConfigureAwait(false);
             });
         }
         #endregion

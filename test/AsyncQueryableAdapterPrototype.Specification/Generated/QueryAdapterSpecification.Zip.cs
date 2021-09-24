@@ -38,126 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
-
-        [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<double?>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<double?>();
-
-            // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<double?> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<double?> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipWithDoubleSourceWithFirstWithSecondWithDoubleSelector tests
 
         [Fact]
@@ -166,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<double>();
@@ -202,7 +82,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<double> asyncFirst = null!;
@@ -229,7 +109,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -256,7 +136,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -278,126 +158,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<decimal>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<decimal>();
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<decimal> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<decimal> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipWithNullableDecimalSourceWithFirstWithSecondWithNullableDecimalSelector tests
 
         [Fact]
@@ -406,7 +166,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<decimal?>();
@@ -442,7 +202,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<decimal?> asyncFirst = null!;
@@ -469,7 +229,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -496,7 +256,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -526,7 +286,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float?>();
@@ -562,7 +322,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float?> asyncFirst = null!;
@@ -589,7 +349,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -616,7 +376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -638,6 +398,246 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<double?>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<double?>();
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<double?> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<double?> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<decimal>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<decimal>();
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<decimal> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<decimal> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region ZipWithSingleSourceWithFirstWithSecondWithSingleSelector tests
 
         [Fact]
@@ -646,7 +646,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float>();
@@ -682,7 +682,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float> asyncFirst = null!;
@@ -709,7 +709,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -736,7 +736,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -758,246 +758,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipWithInt64SourceWithFirstWithSecondWithInt64Selector tests
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<long>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<long>();
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<long> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<long> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, long>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region ZipWithInt32SourceWithFirstWithSecondWithInt32Selector tests
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<int>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<int>();
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<int> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<int> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, int>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipWithNullableInt64SourceWithFirstWithSecondWithNullableInt64Selector tests
 
         [Fact]
@@ -1006,7 +766,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<long?>();
@@ -1042,7 +802,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<long?> asyncFirst = null!;
@@ -1069,7 +829,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -1096,7 +856,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -1126,7 +886,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<int?>();
@@ -1162,7 +922,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<int?> asyncFirst = null!;
@@ -1189,7 +949,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -1216,7 +976,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -1238,60 +998,60 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
+        #region ZipWithInt64SourceWithFirstWithSecondWithInt64Selector tests
 
         [Fact]
-        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
+        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
-            var first = GetQueryable<double?>();
+            var first = GetQueryable<long>();
 
             // Arrange 'second' parameter
-            var second = GetQueryable<double?>();
+            var second = GetQueryable<long>();
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
+            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
+        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<double?> asyncFirst = null!;
+            IAsyncQueryable<long> asyncFirst = null!;
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -1299,26 +1059,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
+        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<double?> asyncSecond = null!;
+            IAsyncEnumerable<long> asyncSecond = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -1326,26 +1086,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        public async Task ZipWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = null!;
+            Expression<Func<long, long, long>> asyncSelector = null!;
 
             // Act
             // -
@@ -1353,7 +1113,127 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Zip<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipWithInt32SourceWithFirstWithSecondWithInt32Selector tests
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<int>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<int>();
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<int> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<int> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, int>> asyncSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, int>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -1366,7 +1246,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<double>();
@@ -1402,7 +1282,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<double> asyncFirst = null!;
@@ -1429,7 +1309,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -1456,7 +1336,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -1478,126 +1358,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
-
-        [Fact]
-        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<decimal>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<decimal>();
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<decimal> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<decimal> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipAwaitWithNullableDecimalSourceWithFirstWithSecondWithNullableDecimalSelector tests
 
         [Fact]
@@ -1606,7 +1366,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<decimal?>();
@@ -1642,7 +1402,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<decimal?> asyncFirst = null!;
@@ -1669,7 +1429,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1696,7 +1456,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1726,7 +1486,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float?>();
@@ -1762,7 +1522,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float?> asyncFirst = null!;
@@ -1789,7 +1549,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -1816,7 +1576,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -1838,6 +1598,246 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
+
+        [Fact]
+        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<double?>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<double?>();
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<double?> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<double?> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
+
+        [Fact]
+        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<decimal>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<decimal>();
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<decimal> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<decimal> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region ZipAwaitWithSingleSourceWithFirstWithSecondWithSingleSelector tests
 
         [Fact]
@@ -1846,7 +1846,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float>();
@@ -1882,7 +1882,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float> asyncFirst = null!;
@@ -1909,7 +1909,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -1936,7 +1936,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -1958,246 +1958,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64Selector tests
-
-        [Fact]
-        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<long>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<long>();
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<long> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<long> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32Selector tests
-
-        [Fact]
-        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<int>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<int>();
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<int> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<int> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipAwaitWithNullableInt64SourceWithFirstWithSecondWithNullableInt64Selector tests
 
         [Fact]
@@ -2206,7 +1966,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<long?>();
@@ -2242,7 +2002,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<long?> asyncFirst = null!;
@@ -2269,7 +2029,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -2296,7 +2056,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -2326,7 +2086,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<int?>();
@@ -2362,7 +2122,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<int?> asyncFirst = null!;
@@ -2389,7 +2149,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -2416,7 +2176,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -2438,60 +2198,60 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
+        #region ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64Selector tests
 
         [Fact]
-        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
+        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
-            var first = GetQueryable<double?>();
+            var first = GetQueryable<long>();
 
             // Arrange 'second' parameter
-            var second = GetQueryable<double?>();
+            var second = GetQueryable<long>();
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
+            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
+        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<double?> asyncFirst = null!;
+            IAsyncQueryable<long> asyncFirst = null!;
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -2499,26 +2259,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
+        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<double?> asyncSecond = null!;
+            IAsyncEnumerable<long> asyncSecond = null!;
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -2526,26 +2286,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        public async Task ZipAwaitWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = null!;
+            Expression<Func<long, long, ValueTask<long>>> asyncSelector = null!;
 
             // Act
             // -
@@ -2553,7 +2313,127 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.ZipAwait<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32Selector tests
+
+        [Fact]
+        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<int>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<int>();
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<int> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<int> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwait<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -2566,7 +2446,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<double>();
@@ -2602,7 +2482,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<double> asyncFirst = null!;
@@ -2629,7 +2509,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -2656,7 +2536,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -2678,126 +2558,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<decimal>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<decimal>();
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<decimal> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<decimal> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipAwaitWithCancellationWithNullableDecimalSourceWithFirstWithSecondWithNullableDecimalSelector tests
 
         [Fact]
@@ -2806,7 +2566,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<decimal?>();
@@ -2842,7 +2602,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<decimal?> asyncFirst = null!;
@@ -2869,7 +2629,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2896,7 +2656,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2926,7 +2686,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float?>();
@@ -2962,7 +2722,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float?> asyncFirst = null!;
@@ -2989,7 +2749,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -3016,7 +2776,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -3038,6 +2798,246 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelector tests
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<double?>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<double?>();
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<double?, double?, double?>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<double?> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<double?> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithNullableDoubleSourceWithFirstWithSecondWithNullableDoubleSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<double?, double?, double?>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelector tests
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<decimal>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<decimal>();
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<decimal, decimal, decimal>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<decimal> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<decimal> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithDecimalSourceWithFirstWithSecondWithDecimalSelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<decimal, decimal, decimal>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region ZipAwaitWithCancellationWithSingleSourceWithFirstWithSecondWithSingleSelector tests
 
         [Fact]
@@ -3046,7 +3046,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float>();
@@ -3082,7 +3082,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float> asyncFirst = null!;
@@ -3109,7 +3109,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -3136,7 +3136,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -3158,246 +3158,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64Selector tests
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<long>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<long>();
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<long> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<long> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32Selector tests
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<int>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<int>();
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<int> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<int> asyncSecond = null!;
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ZipAwaitWithCancellationWithNullableInt64SourceWithFirstWithSecondWithNullableInt64Selector tests
 
         [Fact]
@@ -3406,7 +3166,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<long?>();
@@ -3442,7 +3202,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<long?> asyncFirst = null!;
@@ -3469,7 +3229,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -3496,7 +3256,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -3526,7 +3286,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<int?>();
@@ -3562,7 +3322,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<int?> asyncFirst = null!;
@@ -3589,7 +3349,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -3616,7 +3376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -3638,52 +3398,60 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ZipWithNullableDoubleSourceWithFirstWithSecond tests
-#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
+        #region ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64Selector tests
 
         [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondIsEquivalentToZipTest()
+        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorIsEquivalentToZipTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
-            var first = GetQueryable<double?>();
+            var first = GetQueryable<long>();
 
             // Arrange 'second' parameter
-            var second = GetQueryable<double?>();
+            var second = GetQueryable<long>();
+
+            // Arrange 'resultSelector' parameter
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<double?, double?>(first, second);
+            var expectedResult = Enumerable.Zip<long, long, long>(first, second, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullFirstThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<double?> asyncFirst = null!;
+            IAsyncQueryable<long> asyncFirst = null!;
 
             // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -3691,23 +3459,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSecondThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<double?> asyncSecond = null!;
+            IAsyncEnumerable<long> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -3715,10 +3486,156 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
             });
         }
-#endif
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithInt64SourceWithFirstWithSecondWithInt64SelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<long, long, long>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32Selector tests
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<int>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<int>();
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<int, int, int>(first, second, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<int> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<int> asyncSecond = null!;
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipAwaitWithCancellationWithInt32SourceWithFirstWithSecondWithInt32SelectorNullSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.ZipAwaitWithCancellation<int, int, int>(asyncFirst, asyncSecond, asyncSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
         #endregion
 
         #region ZipWithDoubleSourceWithFirstWithSecond tests
@@ -3730,7 +3647,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<double>();
@@ -3760,7 +3677,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<double> asyncFirst = null!;
@@ -3784,7 +3701,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -3804,89 +3721,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #endif
         #endregion
 
-        #region ZipWithDecimalSourceWithFirstWithSecond tests
-#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<decimal>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<decimal>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<decimal, decimal>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<decimal> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithDecimalSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<decimal> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-#endif
-        #endregion
-
         #region ZipWithNullableDecimalSourceWithFirstWithSecond tests
 #if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
 
@@ -3896,7 +3730,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<decimal?>();
@@ -3926,7 +3760,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<decimal?> asyncFirst = null!;
@@ -3950,7 +3784,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3979,7 +3813,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float?>();
@@ -4009,7 +3843,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float?> asyncFirst = null!;
@@ -4033,7 +3867,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -4053,6 +3887,172 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #endif
         #endregion
 
+        #region ZipWithNullableDoubleSourceWithFirstWithSecond tests
+#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<double?>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<double?>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<double?, double?>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<double?> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithNullableDoubleSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<double?> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<double?, double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+#endif
+        #endregion
+
+        #region ZipWithDecimalSourceWithFirstWithSecond tests
+#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<decimal>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<decimal>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<decimal, decimal>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<decimal> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithDecimalSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<decimal> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<decimal, decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+#endif
+        #endregion
+
         #region ZipWithSingleSourceWithFirstWithSecond tests
 #if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
 
@@ -4062,7 +4062,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float>();
@@ -4092,7 +4092,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float> asyncFirst = null!;
@@ -4116,7 +4116,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -4136,172 +4136,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
 #endif
         #endregion
 
-        #region ZipWithInt64SourceWithFirstWithSecond tests
-#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<long>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<long>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<long, long>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<long> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt64SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<long> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-#endif
-        #endregion
-
-        #region ZipWithInt32SourceWithFirstWithSecond tests
-#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondIsEquivalentToZipTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<int>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<int>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Zip<int, int>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<int> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ZipWithInt32SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<int> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-#endif
-        #endregion
-
         #region ZipWithNullableInt64SourceWithFirstWithSecond tests
 #if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
 
@@ -4311,7 +4145,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<long?>();
@@ -4341,7 +4175,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<long?> asyncFirst = null!;
@@ -4365,7 +4199,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -4394,7 +4228,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<int?>();
@@ -4424,7 +4258,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<int?> asyncFirst = null!;
@@ -4448,7 +4282,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -4463,6 +4297,172 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.Zip<int?, int?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+#endif
+        #endregion
+
+        #region ZipWithInt64SourceWithFirstWithSecond tests
+#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
+
+        [Fact]
+        public async Task ZipWithInt64SourceWithFirstWithSecondIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<long>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<long>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<long, long>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithInt64SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<long> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithInt64SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<long> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<long, long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+#endif
+        #endregion
+
+        #region ZipWithInt32SourceWithFirstWithSecond tests
+#if (SUPPORTS_QUERYABLE_SIMPLE_ZIP && SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP)
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondIsEquivalentToZipTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<int>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<int>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Zip<int, int>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<int> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ZipWithInt32SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<int> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Zip<int, int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
             });
         }
 #endif

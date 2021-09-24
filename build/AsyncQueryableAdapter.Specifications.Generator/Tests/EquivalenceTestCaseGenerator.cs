@@ -25,13 +25,18 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
     internal sealed class EquivalenceTestCaseGenerator : ITestCaseGenerator
     {
         private readonly KnownNamespaces _knownNamespaces;
+        private readonly OptionsResolver _optionsResolver;
 
-        public EquivalenceTestCaseGenerator(KnownNamespaces knownNamespaces)
+        public EquivalenceTestCaseGenerator(KnownNamespaces knownNamespaces, OptionsResolver optionsResolver)
         {
             if (knownNamespaces is null)
                 throw new ArgumentNullException(nameof(knownNamespaces));
 
+            if (optionsResolver is null)
+                throw new ArgumentNullException(nameof(optionsResolver));
+
             _knownNamespaces = knownNamespaces;
+            _optionsResolver = optionsResolver;
         }
 
         public IEnumerable<TestCase> GenerateTestCases(
@@ -45,6 +50,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
                 methods,
                 parameters,
                 _knownNamespaces,
+                _optionsResolver,
                 uniqueIdentifier);
 
             return new[] { testCase };

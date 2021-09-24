@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\KeyValuePairExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Maybe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MemoryExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\OperationNameHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamWriterExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StringExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ThrowHelper.cs" />

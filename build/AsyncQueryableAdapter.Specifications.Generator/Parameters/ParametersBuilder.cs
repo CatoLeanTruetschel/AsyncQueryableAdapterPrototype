@@ -24,6 +24,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using AsyncQueryableAdapter.Utils;
+using AsyncQueryableAdapterPrototype.Utils;
 
 namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
 {
@@ -60,7 +61,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
             Debug.Assert(syncMethod is not null);
             Debug.Assert(identifierBuilder is not null);
 
-            var operationName = GetOperationName(asyncMethod);
+            var operationName = OperationNameHelper.GetOperationName(asyncMethod);
             var asyncParameters = asyncMethod.GetParameters();
             var syncParameters = syncMethod.GetParameters();
 
@@ -130,35 +131,6 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Parameters
         private string FormatVariableDefinition(string name, string value, Type type)
         {
             return $"            {TypeHelper.FormatCSharpTypeName(type, _knownNamespaces.Namespaces)} {name} = {value};";
-        }
-
-        // TODO: Stolen from SpecificationBuilder
-        private static string GetOperationName(MethodInfo method)
-        {
-            var operationName = method.Name;
-
-            if (operationName.EndsWith("AwaitWithCancellationAsync", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitWithCancellationAsync".Length];
-            }
-            else if (operationName.EndsWith("AwaitAsync", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitAsync".Length];
-            }
-            else if (operationName.EndsWith("AwaitWithCancellation", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitWithCancellation".Length];
-            }
-            else if (operationName.EndsWith("Await", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"Await".Length];
-            }
-            else if (operationName.EndsWith("Async", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"Async".Length];
-            }
-
-            return operationName;
         }
     }
 }

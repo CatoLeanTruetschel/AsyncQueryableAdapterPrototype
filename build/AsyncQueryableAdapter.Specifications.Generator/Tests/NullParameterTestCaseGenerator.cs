@@ -28,13 +28,18 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
     internal sealed class NullParameterTestCaseGenerator : ITestCaseGenerator
     {
         private readonly KnownNamespaces _knownNamespaces;
+        private readonly OptionsResolver _optionsResolver;
 
-        public NullParameterTestCaseGenerator(KnownNamespaces knownNamespaces)
+        public NullParameterTestCaseGenerator(KnownNamespaces knownNamespaces, OptionsResolver optionsResolver)
         {
             if (knownNamespaces is null)
                 throw new ArgumentNullException(nameof(knownNamespaces));
 
+            if (optionsResolver is null)
+                throw new ArgumentNullException(nameof(optionsResolver));
+
             _knownNamespaces = knownNamespaces;
+            _optionsResolver = optionsResolver;
         }
 
         public IEnumerable<TestCase> GenerateTestCases(
@@ -66,6 +71,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
                                     await writer.WriteLineAsync($"            { TypeHelper.FormatCSharpTypeName(parameterType, _knownNamespaces.Namespaces) } { variableName } = null!;").ConfigureAwait(false);
                                 }))),
                             _knownNamespaces,
+                            _optionsResolver,
                            uniqueIdentifier));
                     }
                 }

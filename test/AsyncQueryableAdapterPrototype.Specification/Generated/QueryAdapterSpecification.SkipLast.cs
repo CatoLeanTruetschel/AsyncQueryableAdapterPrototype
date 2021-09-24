@@ -38,62 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region SkipLastWithNullableDoubleSourceWithCount tests
-
-        [Fact]
-        public async Task SkipLastWithNullableDoubleSourceWithCountIsEquivalentToSkipLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .SkipLast<double?>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.SkipLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task SkipLastWithNullableDoubleSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.SkipLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region SkipLastWithDoubleSourceWithCount tests
 
         [Fact]
@@ -102,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -131,7 +75,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -150,62 +94,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region SkipLastWithDecimalSourceWithCount tests
-
-        [Fact]
-        public async Task SkipLastWithDecimalSourceWithCountIsEquivalentToSkipLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .SkipLast<decimal>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.SkipLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task SkipLastWithDecimalSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.SkipLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region SkipLastWithNullableDecimalSourceWithCount tests
 
         [Fact]
@@ -214,7 +102,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -243,7 +131,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -270,7 +158,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -299,7 +187,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -318,6 +206,118 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region SkipLastWithNullableDoubleSourceWithCount tests
+
+        [Fact]
+        public async Task SkipLastWithNullableDoubleSourceWithCountIsEquivalentToSkipLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .SkipLast<double?>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.SkipLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task SkipLastWithNullableDoubleSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.SkipLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region SkipLastWithDecimalSourceWithCount tests
+
+        [Fact]
+        public async Task SkipLastWithDecimalSourceWithCountIsEquivalentToSkipLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .SkipLast<decimal>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.SkipLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task SkipLastWithDecimalSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.SkipLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region SkipLastWithSingleSourceWithCount tests
 
         [Fact]
@@ -326,7 +326,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -355,7 +355,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -374,118 +374,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region SkipLastWithInt64SourceWithCount tests
-
-        [Fact]
-        public async Task SkipLastWithInt64SourceWithCountIsEquivalentToSkipLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .SkipLast<long>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.SkipLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task SkipLastWithInt64SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.SkipLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region SkipLastWithInt32SourceWithCount tests
-
-        [Fact]
-        public async Task SkipLastWithInt32SourceWithCountIsEquivalentToSkipLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .SkipLast<int>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.SkipLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task SkipLastWithInt32SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.SkipLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region SkipLastWithNullableInt64SourceWithCount tests
 
         [Fact]
@@ -494,7 +382,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -523,7 +411,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -550,7 +438,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -579,7 +467,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -594,6 +482,118 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.SkipLast<int?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region SkipLastWithInt64SourceWithCount tests
+
+        [Fact]
+        public async Task SkipLastWithInt64SourceWithCountIsEquivalentToSkipLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<long>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .SkipLast<long>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.SkipLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task SkipLastWithInt64SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<long> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.SkipLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region SkipLastWithInt32SourceWithCount tests
+
+        [Fact]
+        public async Task SkipLastWithInt32SourceWithCountIsEquivalentToSkipLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .SkipLast<int>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.SkipLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task SkipLastWithInt32SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.SkipLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

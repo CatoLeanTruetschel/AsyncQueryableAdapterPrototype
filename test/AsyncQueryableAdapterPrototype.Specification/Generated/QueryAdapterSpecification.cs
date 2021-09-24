@@ -41,42 +41,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         {
             var builder = ImmutableDictionary.CreateBuilder<Type, IEnumerable>();
 
-            // double? data-set
-            var nullableDoubleDataSet = ImmutableList.CreateBuilder<double?>();
-            nullableDoubleDataSet.Add(-25.234324D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(-22.8885915D);
-            nullableDoubleDataSet.Add(-20.542859D);
-            nullableDoubleDataSet.Add(-18.1971265D);
-            nullableDoubleDataSet.Add(-15.851393999999999D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(-13.505661499999999D);
-            nullableDoubleDataSet.Add(-11.159928999999998D);
-            nullableDoubleDataSet.Add(-8.814196499999998D);
-            nullableDoubleDataSet.Add(-6.468463999999997D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(-4.122731499999997D);
-            nullableDoubleDataSet.Add(-1.7769989999999969D);
-            nullableDoubleDataSet.Add(0.5687335000000031D);
-            nullableDoubleDataSet.Add(2.914466000000003D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(5.260198500000003D);
-            nullableDoubleDataSet.Add(7.6059310000000036D);
-            nullableDoubleDataSet.Add(9.951663500000004D);
-            nullableDoubleDataSet.Add(12.297396000000004D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(14.643128500000005D);
-            nullableDoubleDataSet.Add(16.988861000000004D);
-            nullableDoubleDataSet.Add(19.334593500000004D);
-            nullableDoubleDataSet.Add(21.680326000000004D);
-            nullableDoubleDataSet.Add(null);
-            nullableDoubleDataSet.Add(24.026058500000005D);
-            nullableDoubleDataSet.Add(26.371791000000005D);
-            nullableDoubleDataSet.Add(28.717523500000006D);
-            nullableDoubleDataSet.Add(31.063256000000006D);
-            nullableDoubleDataSet.Add(null);
-            builder.Add(typeof(double?), nullableDoubleDataSet.ToImmutable());
-
             // double data-set
             var doubleDataSet = ImmutableList.CreateBuilder<double>();
             doubleDataSet.Add(-25.234324D);
@@ -105,35 +69,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             doubleDataSet.Add(28.717523500000006D);
             doubleDataSet.Add(31.063256000000006D);
             builder.Add(typeof(double), doubleDataSet.ToImmutable());
-
-            // decimal data-set
-            var decimalDataSet = ImmutableList.CreateBuilder<decimal>();
-            decimalDataSet.Add(-25.234324M);
-            decimalDataSet.Add(-22.8885915M);
-            decimalDataSet.Add(-20.542859M);
-            decimalDataSet.Add(-18.1971265M);
-            decimalDataSet.Add(-15.851394M);
-            decimalDataSet.Add(-13.5056615M);
-            decimalDataSet.Add(-11.159929M);
-            decimalDataSet.Add(-8.8141965M);
-            decimalDataSet.Add(-6.468464M);
-            decimalDataSet.Add(-4.1227315M);
-            decimalDataSet.Add(-1.776999M);
-            decimalDataSet.Add(0.568733500000003M);
-            decimalDataSet.Add(2.914466M);
-            decimalDataSet.Add(5.2601985M);
-            decimalDataSet.Add(7.605931M);
-            decimalDataSet.Add(9.9516635M);
-            decimalDataSet.Add(12.297396M);
-            decimalDataSet.Add(14.6431285M);
-            decimalDataSet.Add(16.988861M);
-            decimalDataSet.Add(19.3345935M);
-            decimalDataSet.Add(21.680326M);
-            decimalDataSet.Add(24.0260585M);
-            decimalDataSet.Add(26.371791M);
-            decimalDataSet.Add(28.7175235M);
-            decimalDataSet.Add(31.063256M);
-            builder.Add(typeof(decimal), decimalDataSet.ToImmutable());
 
             // decimal? data-set
             var nullableDecimalDataSet = ImmutableList.CreateBuilder<decimal?>();
@@ -207,6 +142,71 @@ namespace AsyncQueryableAdapterPrototype.Tests
             nullableSingleDataSet.Add(null);
             builder.Add(typeof(float?), nullableSingleDataSet.ToImmutable());
 
+            // double? data-set
+            var nullableDoubleDataSet = ImmutableList.CreateBuilder<double?>();
+            nullableDoubleDataSet.Add(-25.234324D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(-22.8885915D);
+            nullableDoubleDataSet.Add(-20.542859D);
+            nullableDoubleDataSet.Add(-18.1971265D);
+            nullableDoubleDataSet.Add(-15.851393999999999D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(-13.505661499999999D);
+            nullableDoubleDataSet.Add(-11.159928999999998D);
+            nullableDoubleDataSet.Add(-8.814196499999998D);
+            nullableDoubleDataSet.Add(-6.468463999999997D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(-4.122731499999997D);
+            nullableDoubleDataSet.Add(-1.7769989999999969D);
+            nullableDoubleDataSet.Add(0.5687335000000031D);
+            nullableDoubleDataSet.Add(2.914466000000003D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(5.260198500000003D);
+            nullableDoubleDataSet.Add(7.6059310000000036D);
+            nullableDoubleDataSet.Add(9.951663500000004D);
+            nullableDoubleDataSet.Add(12.297396000000004D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(14.643128500000005D);
+            nullableDoubleDataSet.Add(16.988861000000004D);
+            nullableDoubleDataSet.Add(19.334593500000004D);
+            nullableDoubleDataSet.Add(21.680326000000004D);
+            nullableDoubleDataSet.Add(null);
+            nullableDoubleDataSet.Add(24.026058500000005D);
+            nullableDoubleDataSet.Add(26.371791000000005D);
+            nullableDoubleDataSet.Add(28.717523500000006D);
+            nullableDoubleDataSet.Add(31.063256000000006D);
+            nullableDoubleDataSet.Add(null);
+            builder.Add(typeof(double?), nullableDoubleDataSet.ToImmutable());
+
+            // decimal data-set
+            var decimalDataSet = ImmutableList.CreateBuilder<decimal>();
+            decimalDataSet.Add(-25.234324M);
+            decimalDataSet.Add(-22.8885915M);
+            decimalDataSet.Add(-20.542859M);
+            decimalDataSet.Add(-18.1971265M);
+            decimalDataSet.Add(-15.851394M);
+            decimalDataSet.Add(-13.5056615M);
+            decimalDataSet.Add(-11.159929M);
+            decimalDataSet.Add(-8.8141965M);
+            decimalDataSet.Add(-6.468464M);
+            decimalDataSet.Add(-4.1227315M);
+            decimalDataSet.Add(-1.776999M);
+            decimalDataSet.Add(0.568733500000003M);
+            decimalDataSet.Add(2.914466M);
+            decimalDataSet.Add(5.2601985M);
+            decimalDataSet.Add(7.605931M);
+            decimalDataSet.Add(9.9516635M);
+            decimalDataSet.Add(12.297396M);
+            decimalDataSet.Add(14.6431285M);
+            decimalDataSet.Add(16.988861M);
+            decimalDataSet.Add(19.3345935M);
+            decimalDataSet.Add(21.680326M);
+            decimalDataSet.Add(24.0260585M);
+            decimalDataSet.Add(26.371791M);
+            decimalDataSet.Add(28.7175235M);
+            decimalDataSet.Add(31.063256M);
+            builder.Add(typeof(decimal), decimalDataSet.ToImmutable());
+
             // float data-set
             var singleDataSet = ImmutableList.CreateBuilder<float>();
             singleDataSet.Add(-25.234324F);
@@ -235,64 +235,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
             singleDataSet.Add(28.717524F);
             singleDataSet.Add(31.063255F);
             builder.Add(typeof(float), singleDataSet.ToImmutable());
-
-            // long data-set
-            var int64DataSet = ImmutableList.CreateBuilder<long>();
-            int64DataSet.Add(-25L);
-            int64DataSet.Add(-23L);
-            int64DataSet.Add(-21L);
-            int64DataSet.Add(-18L);
-            int64DataSet.Add(-16L);
-            int64DataSet.Add(-14L);
-            int64DataSet.Add(-11L);
-            int64DataSet.Add(-9L);
-            int64DataSet.Add(-6L);
-            int64DataSet.Add(-4L);
-            int64DataSet.Add(-2L);
-            int64DataSet.Add(1L);
-            int64DataSet.Add(3L);
-            int64DataSet.Add(5L);
-            int64DataSet.Add(8L);
-            int64DataSet.Add(10L);
-            int64DataSet.Add(12L);
-            int64DataSet.Add(15L);
-            int64DataSet.Add(17L);
-            int64DataSet.Add(19L);
-            int64DataSet.Add(22L);
-            int64DataSet.Add(24L);
-            int64DataSet.Add(26L);
-            int64DataSet.Add(29L);
-            int64DataSet.Add(31L);
-            builder.Add(typeof(long), int64DataSet.ToImmutable());
-
-            // int data-set
-            var int32DataSet = ImmutableList.CreateBuilder<int>();
-            int32DataSet.Add(-25);
-            int32DataSet.Add(-23);
-            int32DataSet.Add(-21);
-            int32DataSet.Add(-18);
-            int32DataSet.Add(-16);
-            int32DataSet.Add(-14);
-            int32DataSet.Add(-11);
-            int32DataSet.Add(-9);
-            int32DataSet.Add(-6);
-            int32DataSet.Add(-4);
-            int32DataSet.Add(-2);
-            int32DataSet.Add(1);
-            int32DataSet.Add(3);
-            int32DataSet.Add(5);
-            int32DataSet.Add(8);
-            int32DataSet.Add(10);
-            int32DataSet.Add(12);
-            int32DataSet.Add(15);
-            int32DataSet.Add(17);
-            int32DataSet.Add(19);
-            int32DataSet.Add(22);
-            int32DataSet.Add(24);
-            int32DataSet.Add(26);
-            int32DataSet.Add(29);
-            int32DataSet.Add(31);
-            builder.Add(typeof(int), int32DataSet.ToImmutable());
 
             // long? data-set
             var nullableInt64DataSet = ImmutableList.CreateBuilder<long?>();
@@ -365,6 +307,64 @@ namespace AsyncQueryableAdapterPrototype.Tests
             nullableInt32DataSet.Add(31);
             nullableInt32DataSet.Add(null);
             builder.Add(typeof(int?), nullableInt32DataSet.ToImmutable());
+
+            // long data-set
+            var int64DataSet = ImmutableList.CreateBuilder<long>();
+            int64DataSet.Add(-25L);
+            int64DataSet.Add(-23L);
+            int64DataSet.Add(-21L);
+            int64DataSet.Add(-18L);
+            int64DataSet.Add(-16L);
+            int64DataSet.Add(-14L);
+            int64DataSet.Add(-11L);
+            int64DataSet.Add(-9L);
+            int64DataSet.Add(-6L);
+            int64DataSet.Add(-4L);
+            int64DataSet.Add(-2L);
+            int64DataSet.Add(1L);
+            int64DataSet.Add(3L);
+            int64DataSet.Add(5L);
+            int64DataSet.Add(8L);
+            int64DataSet.Add(10L);
+            int64DataSet.Add(12L);
+            int64DataSet.Add(15L);
+            int64DataSet.Add(17L);
+            int64DataSet.Add(19L);
+            int64DataSet.Add(22L);
+            int64DataSet.Add(24L);
+            int64DataSet.Add(26L);
+            int64DataSet.Add(29L);
+            int64DataSet.Add(31L);
+            builder.Add(typeof(long), int64DataSet.ToImmutable());
+
+            // int data-set
+            var int32DataSet = ImmutableList.CreateBuilder<int>();
+            int32DataSet.Add(-25);
+            int32DataSet.Add(-23);
+            int32DataSet.Add(-21);
+            int32DataSet.Add(-18);
+            int32DataSet.Add(-16);
+            int32DataSet.Add(-14);
+            int32DataSet.Add(-11);
+            int32DataSet.Add(-9);
+            int32DataSet.Add(-6);
+            int32DataSet.Add(-4);
+            int32DataSet.Add(-2);
+            int32DataSet.Add(1);
+            int32DataSet.Add(3);
+            int32DataSet.Add(5);
+            int32DataSet.Add(8);
+            int32DataSet.Add(10);
+            int32DataSet.Add(12);
+            int32DataSet.Add(15);
+            int32DataSet.Add(17);
+            int32DataSet.Add(19);
+            int32DataSet.Add(22);
+            int32DataSet.Add(24);
+            int32DataSet.Add(26);
+            int32DataSet.Add(29);
+            int32DataSet.Add(31);
+            builder.Add(typeof(int), int32DataSet.ToImmutable());
 
             return builder.ToImmutable();
         }

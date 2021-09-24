@@ -30,12 +30,14 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
         private readonly ParameterList _parameters;
         private readonly UniqueIdentifier _uniqueIdentifier;
         private readonly KnownNamespaces _knownNamespaces;
+        private readonly OptionsResolver _optionsResolver;
 
         public CanceledTestCase(
             MethodInfo method,
             ParameterInfo parameter,
             ParameterList parameters,
             KnownNamespaces knownNamespaces,
+            OptionsResolver optionsResolver,
             UniqueIdentifier uniqueIdentifier)
         {
             Method = method;
@@ -43,6 +45,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
             _parameters = parameters;
             _uniqueIdentifier = uniqueIdentifier;
             _knownNamespaces = knownNamespaces;
+            _optionsResolver = optionsResolver;
         }
 
         public MethodInfo Method { get; }
@@ -52,10 +55,12 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
 
         protected override async Task FormatArrangeAsync(StreamWriter writer)
         {
+            var options = _optionsResolver.ResolveOptions(Method, _parameters);
+
             // QueryAdapter
             await writer.WriteLineAsync().ConfigureAwait(false);
             await writer.WriteLineAsync("            // Arrange 'queryAdapter' parameter").ConfigureAwait(false);
-            await writer.WriteLineAsync($"            var queryAdapter = await GetQueryAdapterAsync();").ConfigureAwait(false);
+            await writer.WriteLineAsync($"            var queryAdapter = await GetQueryAdapterAsync({options});").ConfigureAwait(false);
 
             await _parameters.SetupParametersAsync(writer).ConfigureAwait(false);
         }

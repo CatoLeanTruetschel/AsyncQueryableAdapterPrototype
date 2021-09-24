@@ -89,5 +89,37 @@ namespace AsyncQueryableAdapterPrototype.Tests
 
             return Enumerable.Empty<T>().AsQueryable();
         }
+
+        private static IOptions<AsyncQueryableOptions> DisallowAll { get; }
+            = Options.Create(new AsyncQueryableOptions
+            {
+                AllowImplicitPostProcessing = false,
+                AllowImplicitDefaultPostProcessing = false,
+                AllowInMemoryEvaluation = false
+            });
+
+        private static IOptions<AsyncQueryableOptions> AllowImplicitPostProcessing { get; }
+            = Options.Create(new AsyncQueryableOptions
+            {
+                AllowImplicitPostProcessing = true,
+                AllowImplicitDefaultPostProcessing = true,
+                AllowInMemoryEvaluation = false
+            });
+
+        private static IOptions<AsyncQueryableOptions> AllowInMemoryEvaluation { get; }
+            = Options.Create(new AsyncQueryableOptions
+            {
+                AllowImplicitPostProcessing = false,
+                AllowImplicitDefaultPostProcessing = false,
+                AllowInMemoryEvaluation = true
+            });
+
+        private static IOptions<AsyncQueryableOptions> AllowAll { get; }
+            = Options.Create(new AsyncQueryableOptions
+            {
+                AllowImplicitPostProcessing = true,
+                AllowImplicitDefaultPostProcessing = true,
+                AllowInMemoryEvaluation = true
+            });
     }
 }

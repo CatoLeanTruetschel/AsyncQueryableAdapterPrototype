@@ -38,222 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinWithDoubleSourceWithInnerWithDoubleInnerKeySelectorWithOuterWithDoubleOuterKeySelectorWithDoubleResultSelector tests
 
         [Fact]
@@ -262,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -310,7 +94,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -343,7 +127,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -376,7 +160,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -409,7 +193,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -442,7 +226,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -470,222 +254,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinWithNullableDecimalSourceWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -694,7 +262,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -742,7 +310,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -775,7 +343,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -808,7 +376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -841,7 +409,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -874,7 +442,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -910,7 +478,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -958,7 +526,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -991,7 +559,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -1024,7 +592,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -1057,7 +625,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -1090,7 +658,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -1118,6 +686,438 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinWithSingleSourceWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -1126,7 +1126,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -1174,7 +1174,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -1207,7 +1207,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -1240,7 +1240,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -1273,7 +1273,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -1306,7 +1306,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -1334,438 +1334,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinWithNullableInt64SourceWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -1774,7 +1342,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -1822,7 +1390,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -1855,7 +1423,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -1888,7 +1456,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -1921,7 +1489,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -1954,7 +1522,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -1990,7 +1558,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -2038,7 +1606,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -2071,7 +1639,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -2104,7 +1672,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -2137,7 +1705,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -2170,7 +1738,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -2198,84 +1766,78 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+        #region JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
+            var outer = GetQueryable<long>();
 
             // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
+            var inner = GetQueryable<long>();
 
             // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
+            Func<long, long> outerKeySelector = (p) => p + 3;
 
             // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
+            Func<long, long> innerKeySelector = (p) => p + 3;
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
+            IAsyncQueryable<long> asyncOuter = null!;
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -2283,35 +1845,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
+            IAsyncEnumerable<long> asyncInner = null!;
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -2319,35 +1878,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = null!;
+            Expression<Func<long, long>> asyncOuterKeySelector = null!;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -2355,35 +1911,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = null!;
+            Expression<Func<long, long>> asyncInnerKeySelector = null!;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
 
             // Act
             // -
@@ -2391,35 +1944,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, long>> asyncResultSelector = null!;
 
             // Act
             // -
@@ -2427,7 +1977,223 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -2440,7 +2206,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -2491,7 +2257,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -2527,7 +2293,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -2563,7 +2329,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -2599,7 +2365,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -2635,7 +2401,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -2666,240 +2432,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinWithNullableDecimalSourceWithComparerWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -2908,7 +2440,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -2959,7 +2491,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -2995,7 +2527,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3031,7 +2563,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3067,7 +2599,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3103,7 +2635,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3142,7 +2674,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -3193,7 +2725,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -3229,7 +2761,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -3265,7 +2797,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -3301,7 +2833,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -3337,7 +2869,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -3368,6 +2900,474 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, double?>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, double?>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, double?>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, decimal>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinWithSingleSourceWithComparerWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -3376,7 +3376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -3427,7 +3427,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -3463,7 +3463,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -3499,7 +3499,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -3535,7 +3535,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -3571,7 +3571,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -3602,474 +3602,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, long>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, int>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinWithNullableInt64SourceWithComparerWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -4078,7 +3610,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -4129,7 +3661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -4165,7 +3697,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -4201,7 +3733,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -4237,7 +3769,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -4273,7 +3805,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -4312,7 +3844,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -4363,7 +3895,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -4399,7 +3931,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -4435,7 +3967,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -4471,7 +4003,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -4507,7 +4039,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -4538,78 +4070,84 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+        #region JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
+            var outer = GetQueryable<long>();
 
             // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
+            var inner = GetQueryable<long>();
 
             // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
+            Func<long, long> outerKeySelector = (p) => p + 3;
 
             // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
+            Func<long, long> innerKeySelector = (p) => p + 3;
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
 
             // Act
-            var result = await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
+            IAsyncQueryable<long> asyncOuter = null!;
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -4617,32 +4155,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
+            IAsyncEnumerable<long> asyncInner = null!;
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -4650,32 +4191,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = null!;
+            Expression<Func<long, long>> asyncOuterKeySelector = null!;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -4683,32 +4227,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = null!;
+            Expression<Func<long, long>> asyncInnerKeySelector = null!;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, long>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -4716,32 +4263,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncOuterKeySelector = (p) => p + 3;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, long>> asyncInnerKeySelector = (p) => p + 3;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
+            Expression<Func<long, long, long>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -4749,7 +4299,241 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.Join<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, int>> asyncOuterKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, int>> asyncInnerKeySelector = (p) => p + 3;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, int>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Join<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -4762,7 +4546,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -4810,7 +4594,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -4843,7 +4627,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -4876,7 +4660,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -4909,7 +4693,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -4942,7 +4726,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -4970,222 +4754,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithNullableDecimalSourceWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -5194,7 +4762,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -5242,7 +4810,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -5275,7 +4843,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -5308,7 +4876,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -5341,7 +4909,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -5374,7 +4942,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -5410,7 +4978,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -5458,7 +5026,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -5491,7 +5059,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -5524,7 +5092,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -5557,7 +5125,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -5590,7 +5158,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -5618,6 +5186,438 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinAwaitWithSingleSourceWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -5626,7 +5626,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -5674,7 +5674,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -5707,7 +5707,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -5740,7 +5740,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -5773,7 +5773,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -5806,7 +5806,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -5834,438 +5834,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithNullableInt64SourceWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -6274,7 +5842,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -6322,7 +5890,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -6355,7 +5923,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -6388,7 +5956,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -6421,7 +5989,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -6454,7 +6022,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -6490,7 +6058,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -6538,7 +6106,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -6571,7 +6139,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -6604,7 +6172,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -6637,7 +6205,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -6670,7 +6238,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -6698,84 +6266,78 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+        #region JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
+            var outer = GetQueryable<long>();
 
             // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
+            var inner = GetQueryable<long>();
 
             // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
+            Func<long, long> outerKeySelector = (p) => p + 3;
 
             // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
+            Func<long, long> innerKeySelector = (p) => p + 3;
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
+            IAsyncQueryable<long> asyncOuter = null!;
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -6783,35 +6345,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
+            IAsyncEnumerable<long> asyncInner = null!;
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -6819,35 +6378,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = null!;
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = null!;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -6855,35 +6411,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = null!;
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = null!;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -6891,35 +6444,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = null!;
 
             // Act
             // -
@@ -6927,7 +6477,223 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -6940,7 +6706,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -6991,7 +6757,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -7027,7 +6793,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -7063,7 +6829,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -7099,7 +6865,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -7135,7 +6901,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -7166,240 +6932,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithNullableDecimalSourceWithComparerWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -7408,7 +6940,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -7459,7 +6991,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -7495,7 +7027,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -7531,7 +7063,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -7567,7 +7099,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -7603,7 +7135,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -7642,7 +7174,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -7693,7 +7225,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -7729,7 +7261,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -7765,7 +7297,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -7801,7 +7333,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -7837,7 +7369,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -7868,6 +7400,474 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = (p, q) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncOuterKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncInnerKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, ValueTask<double?>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = (p, q) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncOuterKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncInnerKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, ValueTask<decimal>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinAwaitWithSingleSourceWithComparerWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -7876,7 +7876,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -7927,7 +7927,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -7963,7 +7963,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -7999,7 +7999,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -8035,7 +8035,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -8071,7 +8071,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -8102,474 +8102,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithNullableInt64SourceWithComparerWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -8578,7 +8110,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -8629,7 +8161,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -8665,7 +8197,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -8701,7 +8233,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -8737,7 +8269,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -8773,7 +8305,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -8812,7 +8344,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -8863,7 +8395,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -8899,7 +8431,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -8935,7 +8467,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -8971,7 +8503,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -9007,7 +8539,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -9038,78 +8570,84 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+        #region JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
+            var outer = GetQueryable<long>();
 
             // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
+            var inner = GetQueryable<long>();
 
             // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
+            Func<long, long> outerKeySelector = (p) => p + 3;
 
             // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
+            Func<long, long> innerKeySelector = (p) => p + 3;
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
 
             // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
+            IAsyncQueryable<long> asyncOuter = null!;
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -9117,32 +8655,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
+            IAsyncEnumerable<long> asyncInner = null!;
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -9150,32 +8691,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = null!;
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = null!;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -9183,32 +8727,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = null!;
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = null!;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = (p, q) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -9216,32 +8763,35 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncOuterKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncInnerKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
+            Expression<Func<long, long, ValueTask<long>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
 
             // Act
             // -
@@ -9249,7 +8799,241 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwait<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = (p, q) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncOuterKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncInnerKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, ValueTask<int>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwait<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -9262,7 +9046,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -9310,7 +9094,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -9343,7 +9127,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -9376,7 +9160,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -9409,7 +9193,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -9442,7 +9226,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -9470,222 +9254,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithCancellationWithNullableDecimalSourceWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -9694,7 +9262,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -9742,7 +9310,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -9775,7 +9343,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -9808,7 +9376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -9841,7 +9409,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -9874,7 +9442,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -9910,7 +9478,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -9958,7 +9526,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -9991,7 +9559,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -10024,7 +9592,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -10057,7 +9625,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -10090,7 +9658,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -10118,6 +9686,438 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinAwaitWithCancellationWithSingleSourceWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -10126,7 +10126,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -10174,7 +10174,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -10207,7 +10207,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -10240,7 +10240,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -10273,7 +10273,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -10306,7 +10306,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -10334,438 +10334,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithCancellationWithNullableInt64SourceWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -10774,7 +10342,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -10822,7 +10390,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -10855,7 +10423,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -10888,7 +10456,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -10921,7 +10489,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -10954,7 +10522,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -10990,7 +10558,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -11038,7 +10606,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -11071,7 +10639,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -11104,7 +10672,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -11137,7 +10705,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -11170,7 +10738,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -11198,84 +10766,78 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+        #region JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
-            var outer = GetQueryable<double?>();
+            var outer = GetQueryable<long>();
 
             // Arrange 'inner' parameter
-            var inner = GetQueryable<double?>();
+            var inner = GetQueryable<long>();
 
             // Arrange 'outerKeySelector' parameter
-            Func<double?, double?> outerKeySelector = (p) => p + 3;
+            Func<long, long> outerKeySelector = (p) => p + 3;
 
             // Arrange 'innerKeySelector' parameter
-            Func<double?, double?> innerKeySelector = (p) => p + 3;
+            Func<long, long> innerKeySelector = (p) => p + 3;
 
             // Arrange 'resultSelector' parameter
-            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
 
             // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<double?> asyncOuter = null!;
+            IAsyncQueryable<long> asyncOuter = null!;
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -11283,35 +10845,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<double?> asyncInner = null!;
+            IAsyncEnumerable<long> asyncInner = null!;
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -11319,35 +10878,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = null!;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = null!;
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -11355,35 +10911,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = null!;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = null!;
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
 
             // Act
             // -
@@ -11391,35 +10944,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'asyncResultSelector' parameter
-            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<double?>.Default;
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = null!;
 
             // Act
             // -
@@ -11427,7 +10977,223 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -11440,7 +11206,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<double>();
@@ -11491,7 +11257,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<double> asyncOuter = null!;
@@ -11527,7 +11293,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -11563,7 +11329,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -11599,7 +11365,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -11635,7 +11401,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<double>();
@@ -11666,240 +11432,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<decimal>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<decimal>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<decimal> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<decimal> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithCancellationWithNullableDecimalSourceWithComparerWithInnerWithNullableDecimalInnerKeySelectorWithOuterWithNullableDecimalOuterKeySelectorWithNullableDecimalResultSelector tests
 
         [Fact]
@@ -11908,7 +11440,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<decimal?>();
@@ -11959,7 +11491,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<decimal?> asyncOuter = null!;
@@ -11995,7 +11527,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -12031,7 +11563,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -12067,7 +11599,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -12103,7 +11635,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -12142,7 +11674,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float?>();
@@ -12193,7 +11725,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float?> asyncOuter = null!;
@@ -12229,7 +11761,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -12265,7 +11797,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -12301,7 +11833,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -12337,7 +11869,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float?>();
@@ -12368,6 +11900,474 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<double?>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<double?>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<double?, double?> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<double?, double?> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<double?, double?, double?> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<double?, double?, double?, double?>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<double?> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<double?> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = (p, q, c) => new ValueTask<double?>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithNullableDoubleSourceWithComparerWithInnerWithNullableDoubleInnerKeySelectorWithOuterWithNullableDoubleOuterKeySelectorWithNullableDoubleResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncOuterKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncInnerKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<double?, double?, CancellationToken, ValueTask<double?>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<double?, double?, double?, double?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<decimal>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<decimal>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<decimal, decimal> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<decimal, decimal> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<decimal, decimal, decimal> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<decimal, decimal, decimal, decimal>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<decimal> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<decimal> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = (p, q, c) => new ValueTask<decimal>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithDecimalSourceWithComparerWithInnerWithDecimalInnerKeySelectorWithOuterWithDecimalOuterKeySelectorWithDecimalResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncOuterKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncInnerKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<decimal, decimal, CancellationToken, ValueTask<decimal>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<decimal, decimal, decimal, decimal>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region JoinAwaitWithCancellationWithSingleSourceWithComparerWithInnerWithSingleInnerKeySelectorWithOuterWithSingleOuterKeySelectorWithSingleResultSelector tests
 
         [Fact]
@@ -12376,7 +12376,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<float>();
@@ -12427,7 +12427,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<float> asyncOuter = null!;
@@ -12463,7 +12463,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -12499,7 +12499,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -12535,7 +12535,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -12571,7 +12571,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<float>();
@@ -12602,474 +12602,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<long>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<long>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<long, long> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<long, long> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<long> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<long> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'outer' parameter
-            var outer = GetQueryable<int>();
-
-            // Arrange 'inner' parameter
-            var inner = GetQueryable<int>();
-
-            // Arrange 'outerKeySelector' parameter
-            Func<int, int> outerKeySelector = (p) => p + 3;
-
-            // Arrange 'innerKeySelector' parameter
-            Func<int, int> innerKeySelector = (p) => p + 3;
-
-            // Arrange 'resultSelector' parameter
-            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            IAsyncQueryable<int> asyncOuter = null!;
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            IAsyncEnumerable<int> asyncInner = null!;
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = null!;
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = null!;
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncOuter' parameter
-            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncInner' parameter
-            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncOuterKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncInnerKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'asyncResultSelector' parameter
-            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = EqualityComparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region JoinAwaitWithCancellationWithNullableInt64SourceWithComparerWithInnerWithNullableInt64InnerKeySelectorWithOuterWithNullableInt64OuterKeySelectorWithNullableInt64ResultSelector tests
 
         [Fact]
@@ -13078,7 +12610,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<long?>();
@@ -13129,7 +12661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<long?> asyncOuter = null!;
@@ -13165,7 +12697,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -13201,7 +12733,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -13237,7 +12769,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -13273,7 +12805,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<long?>();
@@ -13312,7 +12844,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'outer' parameter
             var outer = GetQueryable<int?>();
@@ -13363,7 +12895,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             IAsyncQueryable<int?> asyncOuter = null!;
@@ -13399,7 +12931,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -13435,7 +12967,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -13471,7 +13003,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -13507,7 +13039,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncOuter' parameter
             var asyncOuter = queryAdapter.GetAsyncQueryable<int?>();
@@ -13534,6 +13066,474 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.JoinAwaitWithCancellation<int?, int?, int?, int?>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<long>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<long>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<long, long> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<long, long> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<long, long, long> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<long, long, long, long>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<long> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<long> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = (p, q, c) => new ValueTask<long>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt64SourceWithComparerWithInnerWithInt64InnerKeySelectorWithOuterWithInt64OuterKeySelectorWithInt64ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncOuterKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncInnerKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<long, long, CancellationToken, ValueTask<long>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<long, long, long, long>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelector tests
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorIsEquivalentToJoinTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'outer' parameter
+            var outer = GetQueryable<int>();
+
+            // Arrange 'inner' parameter
+            var inner = GetQueryable<int>();
+
+            // Arrange 'outerKeySelector' parameter
+            Func<int, int> outerKeySelector = (p) => p + 3;
+
+            // Arrange 'innerKeySelector' parameter
+            Func<int, int> innerKeySelector = (p) => p + 3;
+
+            // Arrange 'resultSelector' parameter
+            Func<int, int, int> resultSelector = (p, q) => p + 3 - q;
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Join<int, int, int, int>(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            IAsyncQueryable<int> asyncOuter = null!;
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            IAsyncEnumerable<int> asyncInner = null!;
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullOuterKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = null!;
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullInnerKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = null!;
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = (p, q, c) => new ValueTask<int>(p + 3 - q);
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task JoinAwaitWithCancellationWithInt32SourceWithComparerWithInnerWithInt32InnerKeySelectorWithOuterWithInt32OuterKeySelectorWithInt32ResultSelectorNullResultSelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncOuter' parameter
+            var asyncOuter = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncInner' parameter
+            var asyncInner = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncOuterKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncOuterKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncInnerKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncInnerKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'asyncResultSelector' parameter
+            Expression<Func<int, int, CancellationToken, ValueTask<int>>> asyncResultSelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = EqualityComparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.JoinAwaitWithCancellation<int, int, int, int>(asyncOuter, asyncInner, asyncOuterKeySelector, asyncInnerKeySelector, asyncResultSelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

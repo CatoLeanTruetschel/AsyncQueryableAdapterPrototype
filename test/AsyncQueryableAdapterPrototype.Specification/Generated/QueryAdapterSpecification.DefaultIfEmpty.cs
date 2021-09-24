@@ -38,54 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region DefaultIfEmptyWithNullableDoubleSource tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithNullableDoubleSourceIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<double?>(source);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithNullableDoubleSourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region DefaultIfEmptyWithDoubleSource tests
 
         [Fact]
@@ -94,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -118,7 +70,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -134,54 +86,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region DefaultIfEmptyWithDecimalSource tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithDecimalSourceIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<decimal>(source);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithDecimalSourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region DefaultIfEmptyWithNullableDecimalSource tests
 
         [Fact]
@@ -190,7 +94,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -214,7 +118,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -238,7 +142,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -262,7 +166,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -278,6 +182,102 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region DefaultIfEmptyWithNullableDoubleSource tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithNullableDoubleSourceIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<double?>(source);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithNullableDoubleSourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region DefaultIfEmptyWithDecimalSource tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithDecimalSourceIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<decimal>(source);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithDecimalSourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region DefaultIfEmptyWithSingleSource tests
 
         [Fact]
@@ -286,7 +286,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -310,7 +310,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -326,102 +326,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region DefaultIfEmptyWithInt64Source tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt64SourceIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<long>(source);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<long>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt64SourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<long>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region DefaultIfEmptyWithInt32Source tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt32SourceIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<int>(source);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<int>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt32SourceNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<int>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region DefaultIfEmptyWithNullableInt64Source tests
 
         [Fact]
@@ -430,7 +334,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -454,7 +358,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -478,7 +382,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -502,7 +406,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -518,48 +422,42 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region DefaultIfEmptyWithNullableDoubleSourceWithDefaultValue tests
+        #region DefaultIfEmptyWithInt64Source tests
 
         [Fact]
-        public async Task DefaultIfEmptyWithNullableDoubleSourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
+        public async Task DefaultIfEmptyWithInt64SourceIsEquivalentToDefaultIfEmptyTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<double?>(source, defaultValue);
+            var expectedResult = Enumerable.DefaultIfEmpty<long>(source);
 
             // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.DefaultIfEmpty<long>(asyncSource).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task DefaultIfEmptyWithNullableDoubleSourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
+        public async Task DefaultIfEmptyWithInt64SourceNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Act
             // -
@@ -567,7 +465,55 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.DefaultIfEmpty<long>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region DefaultIfEmptyWithInt32Source tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt32SourceIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<int>(source);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<int>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt32SourceNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<int>(asyncSource).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -580,7 +526,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -607,7 +553,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -626,60 +572,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region DefaultIfEmptyWithDecimalSourceWithDefaultValue tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithDecimalSourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<decimal>(source, defaultValue);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithDecimalSourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region DefaultIfEmptyWithNullableDecimalSourceWithDefaultValue tests
 
         [Fact]
@@ -688,7 +580,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -715,7 +607,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -742,7 +634,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -769,7 +661,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -788,6 +680,114 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region DefaultIfEmptyWithNullableDoubleSourceWithDefaultValue tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithNullableDoubleSourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<double?>(source, defaultValue);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithNullableDoubleSourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<double?>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region DefaultIfEmptyWithDecimalSourceWithDefaultValue tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithDecimalSourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<decimal>(source, defaultValue);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithDecimalSourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<decimal>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region DefaultIfEmptyWithSingleSourceWithDefaultValue tests
 
         [Fact]
@@ -796,7 +796,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -823,7 +823,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -842,114 +842,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region DefaultIfEmptyWithInt64SourceWithDefaultValue tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt64SourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<long>(source, defaultValue);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<long>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt64SourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<long>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region DefaultIfEmptyWithInt32SourceWithDefaultValue tests
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt32SourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.DefaultIfEmpty<int>(source, defaultValue);
-
-            // Act
-            var result = await AsyncQueryable.DefaultIfEmpty<int>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task DefaultIfEmptyWithInt32SourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'defaultValue' parameter
-            var defaultValue = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.DefaultIfEmpty<int>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region DefaultIfEmptyWithNullableInt64SourceWithDefaultValue tests
 
         [Fact]
@@ -958,7 +850,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -985,7 +877,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -1012,7 +904,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -1039,7 +931,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -1054,6 +946,114 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.DefaultIfEmpty<int?>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region DefaultIfEmptyWithInt64SourceWithDefaultValue tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt64SourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<long>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<long>(source, defaultValue);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<long>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt64SourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<long> asyncSource = null!;
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<long>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region DefaultIfEmptyWithInt32SourceWithDefaultValue tests
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt32SourceWithDefaultValueIsEquivalentToDefaultIfEmptyTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.DefaultIfEmpty<int>(source, defaultValue);
+
+            // Act
+            var result = await AsyncQueryable.DefaultIfEmpty<int>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DefaultIfEmptyWithInt32SourceWithDefaultValueNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'defaultValue' parameter
+            var defaultValue = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.DefaultIfEmpty<int>(asyncSource, defaultValue).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

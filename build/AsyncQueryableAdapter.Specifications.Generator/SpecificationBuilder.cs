@@ -31,6 +31,7 @@ using AsyncQueryableAdapter.Specifications.Generator.Parameters;
 using AsyncQueryableAdapter.Specifications.Generator.Resources;
 using AsyncQueryableAdapter.Specifications.Generator.Tests;
 using AsyncQueryableAdapter.Utils;
+using AsyncQueryableAdapterPrototype.Utils;
 using Microsoft.Extensions.Options;
 using Nito.AsyncEx;
 using static AsyncQueryableAdapter.Utils.TypeTranslationHelper;
@@ -277,7 +278,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator
                 testCases.AddRange(generatedTestCases);
             }
 
-            var operationName = GetOperationName(method);
+            var operationName = OperationNameHelper.GetOperationName(method);
 
             // TODO: We need method chains, to test this!
             if (string.Equals(operationName, "ThenByDescending", StringComparison.Ordinal)
@@ -365,7 +366,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator
 
             var asyncGenericArgumentsDefinition = method.GetGenericArguments();
             var sourceTypes = _knownCollectionTypes.CollectionTypes;
-            var operationName = GetOperationName(method);
+            var operationName = OperationNameHelper.GetOperationName(method);
 
             foreach (var sourceType in sourceTypes)
             {
@@ -440,7 +441,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator
         private static MethodInfo? GetEquivalentMethod(MethodInfo method)
         {
             Type[]? asyncGenericArguments = null;
-            var operationName = GetOperationName(method);
+            var operationName = OperationNameHelper.GetOperationName(method);
 
             var asyncParameters = method.GetParameters().AsSpan();
 
@@ -618,34 +619,6 @@ namespace AsyncQueryableAdapter.Specifications.Generator
             }
 
             return true;
-        }
-
-        private static string GetOperationName(MethodInfo method)
-        {
-            var operationName = method.Name;
-
-            if (operationName.EndsWith("AwaitWithCancellationAsync", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitWithCancellationAsync".Length];
-            }
-            else if (operationName.EndsWith("AwaitAsync", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitAsync".Length];
-            }
-            else if (operationName.EndsWith("AwaitWithCancellation", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"AwaitWithCancellation".Length];
-            }
-            else if (operationName.EndsWith("Await", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"Await".Length];
-            }
-            else if (operationName.EndsWith("Async", StringComparison.Ordinal))
-            {
-                operationName = operationName[..^"Async".Length];
-            }
-
-            return operationName;
         }
     }
 

@@ -38,74 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region OfTypeWithNullableDoubleResult tests
-
-        [Fact]
-        public async Task OfTypeWithNullableDoubleResultIsEquivalentToOfTypeTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
-            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
-            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
-
-            // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
-            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
-            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OfType<double?>(source);
-
-            // Act
-            var result = await AsyncQueryable.OfType<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OfTypeWithNullableDoubleResultNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<object> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OfType<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OfTypeWithDoubleResult tests
 
         [Fact]
@@ -114,32 +46,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -158,7 +90,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -174,74 +106,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OfTypeWithDecimalResult tests
-
-        [Fact]
-        public async Task OfTypeWithDecimalResultIsEquivalentToOfTypeTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
-            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
-            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
-
-            // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
-            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
-            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OfType<decimal>(source);
-
-            // Act
-            var result = await AsyncQueryable.OfType<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OfTypeWithDecimalResultNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<object> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OfType<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OfTypeWithNullableDecimalResult tests
 
         [Fact]
@@ -250,32 +114,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -294,7 +158,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -318,32 +182,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -362,7 +226,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -378,6 +242,142 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OfTypeWithNullableDoubleResult tests
+
+        [Fact]
+        public async Task OfTypeWithNullableDoubleResultIsEquivalentToOfTypeTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
+            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
+            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
+            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
+            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OfType<double?>(source);
+
+            // Act
+            var result = await AsyncQueryable.OfType<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OfTypeWithNullableDoubleResultNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<object> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OfType<double?>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OfTypeWithDecimalResult tests
+
+        [Fact]
+        public async Task OfTypeWithDecimalResultIsEquivalentToOfTypeTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
+            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
+            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
+            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
+            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OfType<decimal>(source);
+
+            // Act
+            var result = await AsyncQueryable.OfType<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OfTypeWithDecimalResultNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<object> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OfType<decimal>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OfTypeWithSingleResult tests
 
         [Fact]
@@ -386,32 +386,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -430,7 +430,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -446,142 +446,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OfTypeWithInt64Result tests
-
-        [Fact]
-        public async Task OfTypeWithInt64ResultIsEquivalentToOfTypeTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
-            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
-            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
-
-            // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
-            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
-            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OfType<long>(source);
-
-            // Act
-            var result = await AsyncQueryable.OfType<long>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OfTypeWithInt64ResultNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<object> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OfType<long>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OfTypeWithInt32Result tests
-
-        [Fact]
-        public async Task OfTypeWithInt32ResultIsEquivalentToOfTypeTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
-            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
-            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
-
-            // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
-            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
-            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OfType<int>(source);
-
-            // Act
-            var result = await AsyncQueryable.OfType<int>(asyncSource).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OfTypeWithInt32ResultNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<object> asyncSource = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OfType<int>(asyncSource).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OfTypeWithNullableInt64Result tests
 
         [Fact]
@@ -590,32 +454,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -634,7 +498,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -658,32 +522,32 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var sourcePart1 = GetQueryable<double?>().Select(p => (object)p);
-            var sourcePart2 = GetQueryable<double>().Select(p => (object)p);
-            var sourcePart3 = GetQueryable<decimal>().Select(p => (object)p);
-            var sourcePart4 = GetQueryable<decimal?>().Select(p => (object)p);
-            var sourcePart5 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
             var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
-            var sourcePart7 = GetQueryable<long>().Select(p => (object)p);
-            var sourcePart8 = GetQueryable<int>().Select(p => (object)p);
-            var sourcePart9 = GetQueryable<long?>().Select(p => (object)p);
-            var sourcePart10 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
             var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
 
             // Arrange 'asyncSource' parameter
-            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
-            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
-            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
-            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
-            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
             var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
-            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
-            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
-            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
-            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
             var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
 
             // Arrange 'expectedResult' parameter
@@ -702,7 +566,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<object> asyncSource = null!;
@@ -714,6 +578,142 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.OfType<int?>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OfTypeWithInt64Result tests
+
+        [Fact]
+        public async Task OfTypeWithInt64ResultIsEquivalentToOfTypeTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
+            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
+            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
+            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
+            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OfType<long>(source);
+
+            // Act
+            var result = await AsyncQueryable.OfType<long>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OfTypeWithInt64ResultNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<object> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OfType<long>(asyncSource).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OfTypeWithInt32Result tests
+
+        [Fact]
+        public async Task OfTypeWithInt32ResultIsEquivalentToOfTypeTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var sourcePart1 = GetQueryable<double>().Select(p => (object)p);
+            var sourcePart2 = GetQueryable<decimal?>().Select(p => (object)p);
+            var sourcePart3 = GetQueryable<float?>().Select(p => (object)p);
+            var sourcePart4 = GetQueryable<double?>().Select(p => (object)p);
+            var sourcePart5 = GetQueryable<decimal>().Select(p => (object)p);
+            var sourcePart6 = GetQueryable<float>().Select(p => (object)p);
+            var sourcePart7 = GetQueryable<long?>().Select(p => (object)p);
+            var sourcePart8 = GetQueryable<int?>().Select(p => (object)p);
+            var sourcePart9 = GetQueryable<long>().Select(p => (object)p);
+            var sourcePart10 = GetQueryable<int>().Select(p => (object)p);
+            var source = sourcePart1.Concat(sourcePart2).Concat(sourcePart3).Concat(sourcePart4).Concat(sourcePart5).Concat(sourcePart6).Concat(sourcePart7).Concat(sourcePart8).Concat(sourcePart9).Concat(sourcePart10);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSourcePart1 = queryAdapter.GetAsyncQueryable<double>().Select(p => (object)p);
+            var asyncSourcePart2 = queryAdapter.GetAsyncQueryable<decimal?>().Select(p => (object)p);
+            var asyncSourcePart3 = queryAdapter.GetAsyncQueryable<float?>().Select(p => (object)p);
+            var asyncSourcePart4 = queryAdapter.GetAsyncQueryable<double?>().Select(p => (object)p);
+            var asyncSourcePart5 = queryAdapter.GetAsyncQueryable<decimal>().Select(p => (object)p);
+            var asyncSourcePart6 = queryAdapter.GetAsyncQueryable<float>().Select(p => (object)p);
+            var asyncSourcePart7 = queryAdapter.GetAsyncQueryable<long?>().Select(p => (object)p);
+            var asyncSourcePart8 = queryAdapter.GetAsyncQueryable<int?>().Select(p => (object)p);
+            var asyncSourcePart9 = queryAdapter.GetAsyncQueryable<long>().Select(p => (object)p);
+            var asyncSourcePart10 = queryAdapter.GetAsyncQueryable<int>().Select(p => (object)p);
+            var asyncSource = asyncSourcePart1.Concat(asyncSourcePart2).Concat(asyncSourcePart3).Concat(asyncSourcePart4).Concat(asyncSourcePart5).Concat(asyncSourcePart6).Concat(asyncSourcePart7).Concat(asyncSourcePart8).Concat(asyncSourcePart9).Concat(asyncSourcePart10);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OfType<int>(source);
+
+            // Act
+            var result = await AsyncQueryable.OfType<int>(asyncSource).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OfTypeWithInt32ResultNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<object> asyncSource = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OfType<int>(asyncSource).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

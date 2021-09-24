@@ -21,6 +21,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter.Specifications.Generator.Parameters;
 using AsyncQueryableAdapter.Utils;
+using AsyncQueryableAdapterPrototype.Utils;
 
 namespace AsyncQueryableAdapter.Specifications.Generator.Tests
 {
@@ -30,27 +31,32 @@ namespace AsyncQueryableAdapter.Specifications.Generator.Tests
         private readonly ParameterListPair _parameters;
         private readonly UniqueIdentifier _uniqueIdentifier;
         private readonly KnownNamespaces _knownNamespaces;
+        private readonly OptionsResolver _optionsResolver;
 
         public EquivalenceTestCase(
             MethodPair methods,
             ParameterListPair parameters,
             KnownNamespaces knownNamespaces,
+            OptionsResolver optionsResolver,
             UniqueIdentifier uniqueIdentifier)
         {
             _methods = methods;
             _parameters = parameters;
             _uniqueIdentifier = uniqueIdentifier;
             _knownNamespaces = knownNamespaces;
+            _optionsResolver = optionsResolver;
         }
 
         protected override string Name => $"{_uniqueIdentifier}IsEquivalentTo{_methods.SyncMethod.Name}";
 
         protected override async Task FormatArrangeAsync(StreamWriter writer)
         {
+            var options = _optionsResolver.ResolveOptions(_methods.AsyncMethod, _parameters.AsyncParameters);
+
             // QueryAdapter
             await writer.WriteLineAsync().ConfigureAwait(false);
             await writer.WriteLineAsync("            // Arrange 'queryAdapter' parameter").ConfigureAwait(false);
-            await writer.WriteLineAsync($"            var queryAdapter = await GetQueryAdapterAsync();").ConfigureAwait(false);
+            await writer.WriteLineAsync($"            var queryAdapter = await GetQueryAdapterAsync({options});").ConfigureAwait(false);
 
             await _parameters.SyncParameters.SetupParametersAsync(writer).ConfigureAwait(false);
             await _parameters.AsyncParameters.SetupParametersAsync(writer).ConfigureAwait(false);

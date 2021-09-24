@@ -38,62 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region TakeLastWithNullableDoubleSourceWithCount tests
-
-        [Fact]
-        public async Task TakeLastWithNullableDoubleSourceWithCountIsEquivalentToTakeLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .TakeLast<double?>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.TakeLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task TakeLastWithNullableDoubleSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.TakeLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region TakeLastWithDoubleSourceWithCount tests
 
         [Fact]
@@ -102,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -131,7 +75,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -150,62 +94,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region TakeLastWithDecimalSourceWithCount tests
-
-        [Fact]
-        public async Task TakeLastWithDecimalSourceWithCountIsEquivalentToTakeLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .TakeLast<decimal>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.TakeLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task TakeLastWithDecimalSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.TakeLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region TakeLastWithNullableDecimalSourceWithCount tests
 
         [Fact]
@@ -214,7 +102,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -243,7 +131,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -270,7 +158,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -299,7 +187,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -318,6 +206,118 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region TakeLastWithNullableDoubleSourceWithCount tests
+
+        [Fact]
+        public async Task TakeLastWithNullableDoubleSourceWithCountIsEquivalentToTakeLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .TakeLast<double?>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.TakeLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task TakeLastWithNullableDoubleSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.TakeLast<double?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region TakeLastWithDecimalSourceWithCount tests
+
+        [Fact]
+        public async Task TakeLastWithDecimalSourceWithCountIsEquivalentToTakeLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .TakeLast<decimal>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.TakeLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task TakeLastWithDecimalSourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.TakeLast<decimal>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region TakeLastWithSingleSourceWithCount tests
 
         [Fact]
@@ -326,7 +326,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -355,7 +355,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -374,118 +374,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region TakeLastWithInt64SourceWithCount tests
-
-        [Fact]
-        public async Task TakeLastWithInt64SourceWithCountIsEquivalentToTakeLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .TakeLast<long>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.TakeLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task TakeLastWithInt64SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.TakeLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region TakeLastWithInt32SourceWithCount tests
-
-        [Fact]
-        public async Task TakeLastWithInt32SourceWithCountIsEquivalentToTakeLastTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult =
-            EnumerableExtension
-            .TakeLast<int>(source, count);
-
-            // Act
-            var result = await AsyncQueryable.TakeLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task TakeLastWithInt32SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'count' parameter
-            var count = 5;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.TakeLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region TakeLastWithNullableInt64SourceWithCount tests
 
         [Fact]
@@ -494,7 +382,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -523,7 +411,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -550,7 +438,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -579,7 +467,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -594,6 +482,118 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.TakeLast<int?>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region TakeLastWithInt64SourceWithCount tests
+
+        [Fact]
+        public async Task TakeLastWithInt64SourceWithCountIsEquivalentToTakeLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<long>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .TakeLast<long>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.TakeLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task TakeLastWithInt64SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<long> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.TakeLast<long>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region TakeLastWithInt32SourceWithCount tests
+
+        [Fact]
+        public async Task TakeLastWithInt32SourceWithCountIsEquivalentToTakeLastTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult =
+            EnumerableExtension
+            .TakeLast<int>(source, count);
+
+            // Act
+            var result = await AsyncQueryable.TakeLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task TakeLastWithInt32SourceWithCountNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'count' parameter
+            var count = 5;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.TakeLast<int>(asyncSource, count).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

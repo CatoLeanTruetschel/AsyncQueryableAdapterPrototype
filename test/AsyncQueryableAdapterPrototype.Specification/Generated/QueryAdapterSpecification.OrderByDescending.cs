@@ -38,87 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
-
-            // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithDoubleSourceWithDoubleKeySelector tests
 
         [Fact]
@@ -127,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -157,7 +76,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -181,7 +100,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -200,87 +119,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithNullableDecimalSourceWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -289,7 +127,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -319,7 +157,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -343,7 +181,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -370,7 +208,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -400,7 +238,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -424,7 +262,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -443,6 +281,168 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingAwaitWithSingleSourceWithSingleKeySelector tests
 
         [Fact]
@@ -451,7 +451,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -481,7 +481,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -505,7 +505,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -524,168 +524,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithInt64SourceWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingAwaitWithInt32SourceWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithNullableInt64SourceWithNullableInt64KeySelector tests
 
         [Fact]
@@ -694,7 +532,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -724,7 +562,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -748,7 +586,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -775,7 +613,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -805,7 +643,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -829,7 +667,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -848,57 +686,51 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+        #region OrderByDescendingAwaitWithInt64SourceWithInt64KeySelector tests
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
+            Func<long, long> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
 
             // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
 
             // Act
             // -
@@ -906,26 +738,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = null!;
 
             // Act
             // -
@@ -933,7 +762,88 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithInt32SourceWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -946,7 +856,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -979,7 +889,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -1006,7 +916,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -1028,96 +938,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithNullableDecimalSourceWithComparerWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -1126,7 +946,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -1159,7 +979,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -1186,7 +1006,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -1216,7 +1036,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -1249,7 +1069,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -1276,7 +1096,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -1298,6 +1118,186 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = (p) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, ValueTask<double?>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = (p) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, ValueTask<decimal>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingAwaitWithSingleSourceWithComparerWithSingleKeySelector tests
 
         [Fact]
@@ -1306,7 +1306,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -1339,7 +1339,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -1366,7 +1366,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -1388,186 +1388,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, ValueTask<long>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, ValueTask<int>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithNullableInt64SourceWithComparerWithNullableInt64KeySelector tests
 
         [Fact]
@@ -1576,7 +1396,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -1609,7 +1429,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -1636,7 +1456,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -1666,7 +1486,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -1699,7 +1519,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -1726,7 +1546,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -1748,51 +1568,57 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelector tests
+        #region OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelector tests
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
+            Func<long, long> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
 
             // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = (p) => new ValueTask<long>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Act
             // -
@@ -1800,23 +1626,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
+            Expression<Func<long, ValueTask<long>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Act
             // -
@@ -1824,7 +1653,97 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwait<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = (p) => new ValueTask<int>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, ValueTask<int>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwait<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -1837,7 +1756,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -1867,7 +1786,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -1891,7 +1810,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -1910,87 +1829,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithCancellationWithNullableDecimalSourceWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -1999,7 +1837,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -2029,7 +1867,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -2053,7 +1891,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2080,7 +1918,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -2110,7 +1948,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -2134,7 +1972,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -2153,6 +1991,168 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingAwaitWithCancellationWithSingleSourceWithSingleKeySelector tests
 
         [Fact]
@@ -2161,7 +2161,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -2191,7 +2191,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -2215,7 +2215,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -2234,168 +2234,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithCancellationWithNullableInt64SourceWithNullableInt64KeySelector tests
 
         [Fact]
@@ -2404,7 +2242,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -2434,7 +2272,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -2458,7 +2296,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -2485,7 +2323,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -2515,7 +2353,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -2539,7 +2377,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -2558,57 +2396,51 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+        #region OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelector tests
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
+            Func<long, long> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
 
             // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
 
             // Act
             // -
@@ -2616,26 +2448,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = null!;
 
             // Act
             // -
@@ -2643,7 +2472,88 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -2656,7 +2566,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -2689,7 +2599,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -2716,7 +2626,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -2738,96 +2648,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithCancellationWithNullableDecimalSourceWithComparerWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -2836,7 +2656,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -2869,7 +2689,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -2896,7 +2716,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -2926,7 +2746,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -2959,7 +2779,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -2986,7 +2806,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -3008,6 +2828,186 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = (p, c) => new ValueTask<double?>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, CancellationToken, ValueTask<double?>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = (p, c) => new ValueTask<decimal>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, CancellationToken, ValueTask<decimal>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingAwaitWithCancellationWithSingleSourceWithComparerWithSingleKeySelector tests
 
         [Fact]
@@ -3016,7 +3016,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -3049,7 +3049,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -3076,7 +3076,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -3098,186 +3098,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingAwaitWithCancellationWithNullableInt64SourceWithComparerWithNullableInt64KeySelector tests
 
         [Fact]
@@ -3286,7 +3106,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -3319,7 +3139,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -3346,7 +3166,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -3376,7 +3196,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -3409,7 +3229,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -3436,7 +3256,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -3458,51 +3278,57 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelector tests
+        #region OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelector tests
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
+            Func<long, long> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
 
             // Act
-            var result = await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = (p, c) => new ValueTask<long>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Act
             // -
@@ -3510,23 +3336,26 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingAwaitWithCancellationWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = null!;
+            Expression<Func<long, CancellationToken, ValueTask<long>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
 
             // Act
             // -
@@ -3534,7 +3363,97 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = (p, c) => new ValueTask<int>(p + 3);
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingAwaitWithCancellationWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, CancellationToken, ValueTask<int>>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescendingAwaitWithCancellation<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -3547,7 +3466,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -3577,7 +3496,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -3601,7 +3520,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -3620,87 +3539,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithDecimalSourceWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingWithNullableDecimalSourceWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -3709,7 +3547,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -3739,7 +3577,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -3763,7 +3601,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -3790,7 +3628,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -3820,7 +3658,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -3844,7 +3682,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -3863,6 +3701,168 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingWithDecimalSourceWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingWithSingleSourceWithSingleKeySelector tests
 
         [Fact]
@@ -3871,7 +3871,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -3901,7 +3901,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -3925,7 +3925,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -3944,168 +3944,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithInt64SourceWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingWithInt32SourceWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingWithNullableInt64SourceWithNullableInt64KeySelector tests
 
         [Fact]
@@ -4114,7 +3952,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -4144,7 +3982,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -4168,7 +4006,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -4195,7 +4033,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -4225,7 +4063,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -4249,7 +4087,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -4268,57 +4106,51 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+        #region OrderByDescendingWithInt64SourceWithInt64KeySelector tests
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
-            var source = GetQueryable<double?>();
+            var source = GetQueryable<long>();
 
             // Arrange 'keySelector' parameter
-            Func<double?, double?> keySelector = (p) => p + 3;
+            Func<long, long> keySelector = (p) => p + 3;
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
 
             // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector);
 
             // Act
-            var result = await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            var result = await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            IAsyncQueryable<double?> asyncSource = null!;
+            IAsyncQueryable<long> asyncSource = null!;
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
 
             // Act
             // -
@@ -4326,26 +4158,23 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
 
         [Fact]
-        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        public async Task OrderByDescendingWithInt64SourceWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
         {
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
 
             // Arrange 'asyncKeySelector' parameter
-            Expression<Func<double?, double?>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<double?>.Default;
+            Expression<Func<long, long>> asyncKeySelector = null!;
 
             // Act
             // -
@@ -4353,7 +4182,88 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
-                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingWithInt32SourceWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion
@@ -4366,7 +4276,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<double>();
@@ -4399,7 +4309,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<double> asyncSource = null!;
@@ -4426,7 +4336,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<double>();
@@ -4448,96 +4358,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<decimal>();
-
-            // Arrange 'keySelector' parameter
-            Func<decimal, decimal> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<decimal> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<decimal, decimal>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<decimal>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingWithNullableDecimalSourceWithComparerWithNullableDecimalKeySelector tests
 
         [Fact]
@@ -4546,7 +4366,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<decimal?>();
@@ -4579,7 +4399,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<decimal?> asyncSource = null!;
@@ -4606,7 +4426,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -4636,7 +4456,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float?>();
@@ -4669,7 +4489,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float?> asyncSource = null!;
@@ -4696,7 +4516,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float?>();
@@ -4718,6 +4538,186 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<double?>();
+
+            // Arrange 'keySelector' parameter
+            Func<double?, double?> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<double?, double?>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<double?> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithNullableDoubleSourceWithComparerWithNullableDoubleKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<double?, double?>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<double?>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<double?, double?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<decimal>();
+
+            // Arrange 'keySelector' parameter
+            Func<decimal, decimal> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<decimal, decimal>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<decimal> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithDecimalSourceWithComparerWithDecimalKeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<decimal, decimal>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<decimal>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<decimal, decimal>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region OrderByDescendingWithSingleSourceWithComparerWithSingleKeySelector tests
 
         [Fact]
@@ -4726,7 +4726,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<float>();
@@ -4759,7 +4759,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<float> asyncSource = null!;
@@ -4786,7 +4786,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<float>();
@@ -4808,186 +4808,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<long>();
-
-            // Arrange 'keySelector' parameter
-            Func<long, long> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<long> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<long, long>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<long>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelector tests
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'source' parameter
-            var source = GetQueryable<int>();
-
-            // Arrange 'keySelector' parameter
-            Func<int, int> keySelector = (p) => p + 3;
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
-
-            // Act
-            var result = await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            IAsyncQueryable<int> asyncSource = null!;
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncSource' parameter
-            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncKeySelector' parameter
-            Expression<Func<int, int>> asyncKeySelector = null!;
-
-            // Arrange 'comparer' parameter
-            var comparer = Comparer<int>.Default;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region OrderByDescendingWithNullableInt64SourceWithComparerWithNullableInt64KeySelector tests
 
         [Fact]
@@ -4996,7 +4816,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<long?>();
@@ -5029,7 +4849,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<long?> asyncSource = null!;
@@ -5056,7 +4876,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<long?>();
@@ -5086,7 +4906,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'source' parameter
             var source = GetQueryable<int?>();
@@ -5119,7 +4939,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             IAsyncQueryable<int?> asyncSource = null!;
@@ -5146,7 +4966,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncSource' parameter
             var asyncSource = queryAdapter.GetAsyncQueryable<int?>();
@@ -5164,6 +4984,186 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.OrderByDescending<int?, int?>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<long>();
+
+            // Arrange 'keySelector' parameter
+            Func<long, long> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<long, long>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<long> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<long, long>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt64SourceWithComparerWithInt64KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<long, long>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<long>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<long, long>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelector tests
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorIsEquivalentToOrderByDescendingTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'source' parameter
+            var source = GetQueryable<int>();
+
+            // Arrange 'keySelector' parameter
+            Func<int, int> keySelector = (p) => p + 3;
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.OrderByDescending<int, int>(source, keySelector, comparer);
+
+            // Act
+            var result = await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorNullSourceThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            IAsyncQueryable<int> asyncSource = null!;
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = (p) => p + 3;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task OrderByDescendingWithInt32SourceWithComparerWithInt32KeySelectorNullKeySelectorThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncSource' parameter
+            var asyncSource = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncKeySelector' parameter
+            Expression<Func<int, int>> asyncKeySelector = null!;
+
+            // Arrange 'comparer' parameter
+            var comparer = Comparer<int>.Default;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.OrderByDescending<int, int>(asyncSource, asyncKeySelector, comparer).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

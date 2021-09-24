@@ -38,87 +38,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
     public abstract partial class QueryAdapterSpecificationV2
     {
 
-        #region ConcatWithNullableDoubleSourceWithFirstWithSecond tests
-
-        [Fact]
-        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondIsEquivalentToConcatTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<double?>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<double?>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Concat<double?>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<double?> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<double?> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ConcatWithDoubleSourceWithFirstWithSecond tests
 
         [Fact]
@@ -127,7 +46,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<double>();
@@ -157,7 +76,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<double> asyncFirst = null!;
@@ -181,7 +100,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<double>();
@@ -200,87 +119,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ConcatWithDecimalSourceWithFirstWithSecond tests
-
-        [Fact]
-        public async Task ConcatWithDecimalSourceWithFirstWithSecondIsEquivalentToConcatTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<decimal>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<decimal>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Concat<decimal>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ConcatWithDecimalSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<decimal> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ConcatWithDecimalSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<decimal> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ConcatWithNullableDecimalSourceWithFirstWithSecond tests
 
         [Fact]
@@ -289,7 +127,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<decimal?>();
@@ -319,7 +157,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<decimal?> asyncFirst = null!;
@@ -343,7 +181,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<decimal?>();
@@ -370,7 +208,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float?>();
@@ -400,7 +238,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float?> asyncFirst = null!;
@@ -424,7 +262,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float?>();
@@ -443,6 +281,168 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
+        #region ConcatWithNullableDoubleSourceWithFirstWithSecond tests
+
+        [Fact]
+        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondIsEquivalentToConcatTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<double?>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<double?>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Concat<double?>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<double?> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ConcatWithNullableDoubleSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<double?>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<double?> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<double?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ConcatWithDecimalSourceWithFirstWithSecond tests
+
+        [Fact]
+        public async Task ConcatWithDecimalSourceWithFirstWithSecondIsEquivalentToConcatTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<decimal>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<decimal>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Concat<decimal>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ConcatWithDecimalSourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<decimal> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ConcatWithDecimalSourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<decimal>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<decimal> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<decimal>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
         #region ConcatWithSingleSourceWithFirstWithSecond tests
 
         [Fact]
@@ -451,7 +451,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<float>();
@@ -481,7 +481,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<float> asyncFirst = null!;
@@ -505,7 +505,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<float>();
@@ -524,168 +524,6 @@ namespace AsyncQueryableAdapterPrototype.Tests
         }
         #endregion
 
-        #region ConcatWithInt64SourceWithFirstWithSecond tests
-
-        [Fact]
-        public async Task ConcatWithInt64SourceWithFirstWithSecondIsEquivalentToConcatTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<long>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<long>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Concat<long>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ConcatWithInt64SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<long> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ConcatWithInt64SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<long> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
-        #region ConcatWithInt32SourceWithFirstWithSecond tests
-
-        [Fact]
-        public async Task ConcatWithInt32SourceWithFirstWithSecondIsEquivalentToConcatTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'first' parameter
-            var first = GetQueryable<int>();
-
-            // Arrange 'second' parameter
-            var second = GetQueryable<int>();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'expectedResult' parameter
-            var expectedResult = Enumerable.Concat<int>(first, second);
-
-            // Act
-            var result = await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-
-        [Fact]
-        public async Task ConcatWithInt32SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            IAsyncQueryable<int> asyncFirst = null!;
-
-            // Arrange 'asyncSecond' parameter
-            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-
-        [Fact]
-        public async Task ConcatWithInt32SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
-        {
-            // Arrange
-
-            // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
-
-            // Arrange 'asyncFirst' parameter
-            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
-
-            // Arrange 'asyncSecond' parameter
-            IAsyncEnumerable<int> asyncSecond = null!;
-
-            // Act
-            // -
-
-            // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            {
-                await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
-            });
-        }
-        #endregion
-
         #region ConcatWithNullableInt64SourceWithFirstWithSecond tests
 
         [Fact]
@@ -694,7 +532,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<long?>();
@@ -724,7 +562,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<long?> asyncFirst = null!;
@@ -748,7 +586,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<long?>();
@@ -775,7 +613,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'first' parameter
             var first = GetQueryable<int?>();
@@ -805,7 +643,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             IAsyncQueryable<int?> asyncFirst = null!;
@@ -829,7 +667,7 @@ namespace AsyncQueryableAdapterPrototype.Tests
             // Arrange
 
             // Arrange 'queryAdapter' parameter
-            var queryAdapter = await GetQueryAdapterAsync();
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
 
             // Arrange 'asyncFirst' parameter
             var asyncFirst = queryAdapter.GetAsyncQueryable<int?>();
@@ -844,6 +682,168 @@ namespace AsyncQueryableAdapterPrototype.Tests
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await AsyncQueryable.Concat<int?>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ConcatWithInt64SourceWithFirstWithSecond tests
+
+        [Fact]
+        public async Task ConcatWithInt64SourceWithFirstWithSecondIsEquivalentToConcatTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<long>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<long>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Concat<long>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ConcatWithInt64SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<long> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<long>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ConcatWithInt64SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<long>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<long> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<long>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+        #endregion
+
+        #region ConcatWithInt32SourceWithFirstWithSecond tests
+
+        [Fact]
+        public async Task ConcatWithInt32SourceWithFirstWithSecondIsEquivalentToConcatTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'first' parameter
+            var first = GetQueryable<int>();
+
+            // Arrange 'second' parameter
+            var second = GetQueryable<int>();
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'expectedResult' parameter
+            var expectedResult = Enumerable.Concat<int>(first, second);
+
+            // Act
+            var result = await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task ConcatWithInt32SourceWithFirstWithSecondNullFirstThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            IAsyncQueryable<int> asyncFirst = null!;
+
+            // Arrange 'asyncSecond' parameter
+            var asyncSecond = queryAdapter.GetAsyncQueryable<int>();
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
+            });
+        }
+
+        [Fact]
+        public async Task ConcatWithInt32SourceWithFirstWithSecondNullSecondThrowsArgumentNullExceptionTest()
+        {
+            // Arrange
+
+            // Arrange 'queryAdapter' parameter
+            var queryAdapter = await GetQueryAdapterAsync(DisallowAll);
+
+            // Arrange 'asyncFirst' parameter
+            var asyncFirst = queryAdapter.GetAsyncQueryable<int>();
+
+            // Arrange 'asyncSecond' parameter
+            IAsyncEnumerable<int> asyncSecond = null!;
+
+            // Act
+            // -
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+            {
+                await AsyncQueryable.Concat<int>(asyncFirst, asyncSecond).ToListAsync().ConfigureAwait(false);
             });
         }
         #endregion

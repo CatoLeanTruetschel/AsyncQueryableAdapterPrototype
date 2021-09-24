@@ -30,6 +30,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator
         {
             services.Configure<ApplicationOptions>(options => options.OutputDirectory = _outputDirectory);
             services.AddSingleton<SpecificationBuilder>();
+            services.AddSingleton<OptionsResolver>();
 
             // Const registries
             services.AddSingleton<KnownNamespaces>();
