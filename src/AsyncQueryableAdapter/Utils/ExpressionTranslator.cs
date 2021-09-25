@@ -20,7 +20,6 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using AsyncQueryableAdapter.Utils;
@@ -35,35 +34,36 @@ namespace AsyncQueryableAdapter
         [ThreadStatic]
         private static ParameterExpression[]? _2EntryParameterExpressionBuffer;
 
-        [Obsolete("Use one of the 'TryTranslate' overloads.")]
-        public static bool TryTranslateExpressionToSync(
-           Expression expression,
-           Type sourceType,
-           Type targetType,
-           [NotNullWhen(true)] out Expression? translatedExpression)
+        [ThreadStatic]
+        private static Type[]? _1EntryTypeBuffer;
+
+        [ThreadStatic]
+        private static Type[]? _2EntryTypeBuffer;
+
+        public static bool TryTranslate(
+            Expression expression,
+            Type sourceType,
+            Type targetType,
+            [NotNullWhen(true)] out Expression? translatedExpression)
         {
-            return TryTranslate(expression, new[] { sourceType }, targetType, out translatedExpression);
+            _1EntryTypeBuffer ??= new Type[1];
+            _1EntryTypeBuffer[0] = sourceType;
+
+            return TryTranslate(expression, _1EntryTypeBuffer, targetType, out translatedExpression);
         }
 
-        [Obsolete("Use one of the 'TryTranslate' overloads.")]
-        public static bool TryTranslateExpressionToSync(
+        public static bool TryTranslate(
             Expression expression,
             Type sourceType1,
             Type sourceType2,
             Type targetType,
             [NotNullWhen(true)] out Expression? translatedExpression)
         {
-            return TryTranslate(expression, new[] { sourceType1, sourceType2 }, targetType, out translatedExpression);
-        }
+            _2EntryTypeBuffer ??= new Type[2];
+            _2EntryTypeBuffer[0] = sourceType1;
+            _2EntryTypeBuffer[1] = sourceType2;
 
-        [Obsolete("Use one of the 'TryTranslate' overloads.")]
-        public static bool TryTranslateExpressionToSync(
-            Expression expression,
-            IReadOnlyList<Type> sourceTypes,
-            Type targetType,
-            [NotNullWhen(true)] out Expression? translatedExpression)
-        {
-            return TryTranslate(expression, sourceTypes.ToArray().AsSpan(), targetType, out translatedExpression);
+            return TryTranslate(expression, _2EntryTypeBuffer, targetType, out translatedExpression);
         }
 
         public static bool TryTranslate(
@@ -120,6 +120,9 @@ namespace AsyncQueryableAdapter
             Expression expression,
             [NotNullWhen(true)] out Expression? translatedExpression)
         {
+            if (expression is null)
+                throw new ArgumentNullException(nameof(expression));
+
             translatedExpression = null;
 
             if (expression.Unquote() is not LambdaExpression lambdaExpression)

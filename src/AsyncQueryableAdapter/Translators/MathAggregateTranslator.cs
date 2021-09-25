@@ -346,11 +346,12 @@ namespace AsyncQueryableAdapter.Translators
             {
                 var selectorResultType = ((LambdaExpression)selector.Unquote()).ReturnType.GetGenericArguments()[0];
 
-                if (!ExpressionTranslator.TryTranslateExpressionToSync(
-                    selector,
-                    translatedQueryable.ElementType,
-                    selectorResultType,
-                    out selector))
+#if DEBUG
+                if (!ExpressionTranslator.TryTranslate(
+                    selector, translatedQueryable.ElementType, selectorResultType, out selector))
+#else
+                if (!ExpressionTranslator.TryTranslate(selector, out selector))
+#endif
                 {
                     return false;
                 }

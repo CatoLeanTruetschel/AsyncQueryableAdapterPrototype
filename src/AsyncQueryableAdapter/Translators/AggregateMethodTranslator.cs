@@ -252,14 +252,17 @@ namespace AsyncQueryableAdapter.Translators
             {
                 var accumulator = translationContext.Arguments[1];
 
-                if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
-                    accumulator,
-                    elementType,
-                    elementType,
-                    elementType,
-                    out accumulator))
+                if (AsyncFunctions)
                 {
-                    return false;
+#if DEBUG
+                    if (!ExpressionTranslator.TryTranslate(
+                        accumulator, elementType, elementType, elementType, out accumulator))
+#else
+                    if (!ExpressionTranslator.TryTranslate(accumulator, out accumulator))
+#endif
+                    {
+                        return false;
+                    }
                 }
 
                 evaluationResult = translatedQueryable.QueryAdapter.AggregateAsync(
@@ -283,11 +286,13 @@ namespace AsyncQueryableAdapter.Translators
 
                     resultSelector = translationContext.Arguments[3];
 
-                    if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
-                        resultSelector,
-                        accumulateType,
-                        resultType,
-                        out resultSelector))
+#if DEBUG
+                    if (AsyncFunctions && !ExpressionTranslator.TryTranslate(
+                        resultSelector, accumulateType, resultType, out resultSelector))
+#else
+                    if (AsyncFunctions && !ExpressionTranslator.TryTranslate(resultSelector, out resultSelector))      
+#endif
+
                     {
                         return false;
                     }
@@ -304,12 +309,12 @@ namespace AsyncQueryableAdapter.Translators
                 var seed = translationContext.Arguments[1].Evaluate();
                 var accumulator = translationContext.Arguments[2];
 
-                if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
-                    accumulator,
-                    accumulateType,
-                    elementType,
-                    accumulateType,
-                    out accumulator))
+#if DEBUG
+                if (AsyncFunctions && !ExpressionTranslator.TryTranslate(
+                    accumulator, accumulateType, elementType, accumulateType, out accumulator))
+#else
+                if (AsyncFunctions && !ExpressionTranslator.TryTranslate(accumulator, out accumulator))
+#endif
                 {
                     return false;
                 }

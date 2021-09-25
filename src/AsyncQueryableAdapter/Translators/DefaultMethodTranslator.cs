@@ -324,47 +324,105 @@ namespace AsyncQueryableAdapter.Translators
             return true;
         }
 
+        [ThreadStatic]
+        private static Type[]? _1EntryTypeBuffer;
+
+        [ThreadStatic]
+        private static Type[]? _2EntryTypeBuffer;
+
         private static void TranslateLambdaArguments(IList<Expression> arguments, ParameterInfo[] parameters)
         {
             for (var i = 0; i < arguments.Count; i++)
             {
-                var parameterType = parameters[i].ParameterType;
+                var expectedType = parameters[i].ParameterType;
                 var argument = arguments[i].Unquote();
-                var type = argument.Type;
 
-                if (argument.NodeType == ExpressionType.Lambda
-                   && TypeHelper.IsLambdaExpression(parameterType, out var parameterDelegateType))
+                var translatedArgument = TranslateLambdaArgument(argument, expectedType);
+
+                if (argument != translatedArgument)
                 {
-                    var delegateType = argument.Type;
-                    Debug.Assert(TypeHelper.IsDelegate(delegateType));
-
-                    if (delegateType == parameterDelegateType)
-                    {
-                        continue;
-                    }
-
-                    // Try translate the lambda of type 'delegateType' into a lambda of type
-                    // 'parameterDelegateType'
-                    var parameterDelegateMethod = parameterDelegateType.GetMethod("Invoke");
-
-                    if (parameterDelegateMethod is null)
-                    {
-                        continue;
-                    }
-
-                    var expectedReturnType = parameterDelegateMethod.ReturnType;
-                    var expectedParameterTypes = parameterDelegateMethod
-                        .GetParameters()
-                        .Select(p => p.ParameterType)
-                        .ToArray(); // TODO: Do not use LINQ for perf!
-
-                    if (ExpressionTranslator.TryTranslateExpressionToSync(
-                        argument, expectedParameterTypes, expectedReturnType, out var translatedExpression))
-                    {
-                        arguments[i] = Expression.Quote(translatedExpression);
-                    }
+                    arguments[i] = Expression.Quote(translatedArgument);
                 }
             }
+        }
+
+        private static Expression TranslateLambdaArgument(Expression argument, Type expectedType)
+        {
+            if (argument.NodeType != ExpressionType.Lambda)
+            {
+                return argument;
+            }
+
+            if (!TypeHelper.IsLambdaExpression(expectedType, out var expectedDelegateType))
+            {
+                return argument;
+            }
+
+            var delegateType = argument.Type;
+            Debug.Assert(TypeHelper.IsDelegate(delegateType));
+
+            if (delegateType == expectedDelegateType)
+            {
+                return argument;
+            }
+
+            // Try translate the lambda of type 'delegateType' into a lambda of type
+            // 'expectedDelegateType'
+            var expectedDelegateMethod = expectedDelegateType.GetMethod("Invoke");
+
+            if (expectedDelegateMethod is null)
+            {
+                return argument;
+            }
+
+            var expectedReturnType = expectedDelegateMethod.ReturnType;
+            var parameters = expectedDelegateMethod.GetParameters();
+
+            Span<Type> expectedParameterTypes;
+            Type[]? rentedExpectedParameterTypes = null;
+
+            try
+            {
+                if (parameters.Length is 0)
+                {
+                    expectedParameterTypes = default;
+                }
+                else if (parameters.Length is 1)
+                {
+                    _1EntryTypeBuffer ??= new Type[1];
+                    expectedParameterTypes = _1EntryTypeBuffer;
+                }
+                else if (parameters.Length is 2)
+                {
+                    _2EntryTypeBuffer ??= new Type[2];
+                    expectedParameterTypes = _2EntryTypeBuffer;
+                }
+                else
+                {
+                    rentedExpectedParameterTypes = ArrayPool<Type>.Shared.Rent(parameters.Length);
+                    expectedParameterTypes = rentedExpectedParameterTypes.AsSpan(0, parameters.Length);
+                }
+
+                for (var j = 0; j < parameters.Length; j++)
+                {
+                    expectedParameterTypes[j] = parameters[j].ParameterType;
+                }
+
+                if (ExpressionTranslator.TryTranslate(
+                    argument, expectedParameterTypes, expectedReturnType, out var translatedArgument))
+                {
+                    argument = translatedArgument;
+                }
+            }
+            finally
+            {
+                if (rentedExpectedParameterTypes is not null)
+                {
+                    ArrayPool<Type>.Shared.Return(rentedExpectedParameterTypes);
+                }
+            }
+
+            return argument;
         }
 
         /// <summary>
