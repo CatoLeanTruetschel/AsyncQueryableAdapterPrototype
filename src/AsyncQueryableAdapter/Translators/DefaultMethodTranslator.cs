@@ -358,7 +358,7 @@ namespace AsyncQueryableAdapter.Translators
                         .Select(p => p.ParameterType)
                         .ToArray(); // TODO: Do not use LINQ for perf!
 
-                    if (ExpressionHelper.TryTranslateExpressionToSync(
+                    if (ExpressionTranslator.TryTranslateExpressionToSync(
                         argument, expectedParameterTypes, expectedReturnType, out var translatedExpression))
                     {
                         arguments[i] = Expression.Quote(translatedExpression);

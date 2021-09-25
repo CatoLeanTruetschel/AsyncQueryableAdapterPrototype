@@ -192,7 +192,7 @@ namespace AsyncQueryableAdapter.Translators
 
             var selector = translationContext.Arguments[1];
 
-            if (AsyncPredicate && !ExpressionHelper.TryTranslateExpressionToSync(
+            if (AsyncPredicate && !ExpressionTranslator.TryTranslateExpressionToSync(
                 selector,
                 translatedQueryable.ElementType,
                 typeof(bool),

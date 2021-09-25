@@ -25,8 +25,8 @@ using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
 {
-    // TODO: Rename to ExpressionTranslator?
-    internal static partial class ExpressionHelper
+    internal static partial class ExpressionTranslator
+
     {
         [ThreadStatic]
         private static ParameterExpression[]? _1EntryParameterExpressionBuffer;

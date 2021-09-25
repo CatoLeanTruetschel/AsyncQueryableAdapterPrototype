@@ -252,7 +252,7 @@ namespace AsyncQueryableAdapter.Translators
             {
                 var accumulator = translationContext.Arguments[1];
 
-                if (AsyncFunctions && !ExpressionHelper.TryTranslateExpressionToSync(
+                if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
                     accumulator,
                     elementType,
                     elementType,
@@ -283,7 +283,7 @@ namespace AsyncQueryableAdapter.Translators
 
                     resultSelector = translationContext.Arguments[3];
 
-                    if (AsyncFunctions && !ExpressionHelper.TryTranslateExpressionToSync(
+                    if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
                         resultSelector,
                         accumulateType,
                         resultType,
@@ -304,7 +304,7 @@ namespace AsyncQueryableAdapter.Translators
                 var seed = translationContext.Arguments[1].Evaluate();
                 var accumulator = translationContext.Arguments[2];
 
-                if (AsyncFunctions && !ExpressionHelper.TryTranslateExpressionToSync(
+                if (AsyncFunctions && !ExpressionTranslator.TryTranslateExpressionToSync(
                     accumulator,
                     accumulateType,
                     elementType,
