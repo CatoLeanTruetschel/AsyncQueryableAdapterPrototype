@@ -19,8 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using AsyncQueryableAdapter.Utils;
 
 namespace AsyncQueryableAdapter
@@ -57,10 +57,20 @@ namespace AsyncQueryableAdapter
             if (translatedBody.Type != targetType)
                 return false;
 
-            if (selectorExpressionVisitor.Parameters.Count > 1)
-                return false;
+            if (lambdaExpression.Parameters.Count > 1)
+            {
+                if (lambdaExpression.Parameters.Count != 2)
+                {
+                    return false;
+                }
 
-            var sourceParameter = selectorExpressionVisitor.Parameters.FirstOrDefault();
+                if (lambdaExpression.Parameters[1].Type != typeof(CancellationToken))
+                {
+                    return false;
+                }
+            }
+
+            var sourceParameter = lambdaExpression.Parameters[0];
 
             if (sourceParameter is not null && sourceParameter.Type != sourceType)
                 return false;
@@ -100,11 +110,21 @@ namespace AsyncQueryableAdapter
             if (translatedBody.Type != targetType)
                 return false;
 
-            if (selectorExpressionVisitor.Parameters.Count > 2)
-                return false;
+            if (lambdaExpression.Parameters.Count > 2)
+            {
+                if (lambdaExpression.Parameters.Count != 3)
+                {
+                    return false;
+                }
 
-            var source1Parameter = selectorExpressionVisitor.Parameters.FirstOrDefault();
-            var source2Parameter = selectorExpressionVisitor.Parameters.Skip(1).FirstOrDefault();
+                if (lambdaExpression.Parameters[2].Type != typeof(CancellationToken))
+                {
+                    return false;
+                }
+            }
+
+            var source1Parameter = lambdaExpression.Parameters[0];
+            var source2Parameter = lambdaExpression.Parameters[1];
 
             if (source1Parameter is not null && source1Parameter.Type != sourceType1)
                 return false;

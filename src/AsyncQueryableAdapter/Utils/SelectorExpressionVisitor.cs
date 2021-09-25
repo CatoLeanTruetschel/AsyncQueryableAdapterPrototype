@@ -17,8 +17,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -31,6 +29,7 @@ using AsyncQueryableAdapter.Utils;
 namespace AsyncQueryableAdapter
 {
     // TODO: Pool me pls
+    // TODO: This not only visits selectors, so rename
     internal sealed class SelectorExpressionVisitor : ExpressionVisitor
     {
         private const string VALUE_TASK_FROM_RESULT_METHOD_NAME = "FromResult";
@@ -102,12 +101,6 @@ namespace AsyncQueryableAdapter
         private bool _allowTranslateCurrent = true;
         private bool _allowTranslate = true;
 
-        private HashSet<ParameterExpression>? _parameters;
-
-        // TODO: This is required to be ordered!
-        public ISet<ParameterExpression> Parameters
-            => _parameters ?? (ISet<ParameterExpression>)ImmutableHashSet<ParameterExpression>.Empty;
-
         public SelectorExpressionVisitor(Type targetType)
         {
             _targetType = targetType;
@@ -136,8 +129,6 @@ namespace AsyncQueryableAdapter
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            _parameters ??= new HashSet<ParameterExpression>();
-            _parameters.Add(node);
             return base.VisitParameter(node);
         }
 
