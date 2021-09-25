@@ -48,7 +48,7 @@ namespace AsyncQueryableAdapter.Specifications.Generator
             }
             else if (string.Equals(operationName, "Contains", StringComparison.Ordinal))
             {
-                if (parameters.Length == 2) // TODO: && parameters[1] is not NullParameter
+                if (parameters.Length == 3) // TODO: && parameters[2] is not NullParameter
                 {
                     options = ResolvedOptions.AllowInMemoryEvaluation;
                 }
