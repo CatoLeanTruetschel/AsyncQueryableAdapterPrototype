@@ -46,7 +46,7 @@ namespace AsyncQueryableAdapter
             // Or of form: Expression<Func<TSource, CancellationToken, ValueTask<TResult>>>
             // Translate it to form Expression<Func<TSource, TResult>> if possible
 
-            var selectorExpressionVisitor = new SelectorExpressionVisitor(targetType);
+            var selectorExpressionVisitor = new BodyVisitor(targetType);
 
             if (expression.Unquote() is not LambdaExpression lambdaExpression)
                 return false;
@@ -99,7 +99,7 @@ namespace AsyncQueryableAdapter
             // Or of form: Expression<Func<TSource1, TSource2, CancellationToken, ValueTask<TResult>>>
             // Translate it to form Expression<Func<TSource1, TSource2, TResult>> if possible
 
-            var selectorExpressionVisitor = new SelectorExpressionVisitor(targetType);
+            var selectorExpressionVisitor = new BodyVisitor(targetType);
 
             if (expression.Unquote() is not LambdaExpression lambdaExpression)
                 return false;
