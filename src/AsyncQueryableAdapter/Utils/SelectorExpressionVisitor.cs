@@ -164,7 +164,7 @@ namespace AsyncQueryableAdapter
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (_allowTranslate && TryTranslateValueTaskFactorMethodCall(node, out var result))
+            if (_allowTranslate && TryTranslateValueTaskFactoryMethodCall(node, out var result))
             {
                 return result;
             }
@@ -193,7 +193,7 @@ namespace AsyncQueryableAdapter
                     }
                 }
 
-                // Tree shaking: If the condition is constant, we only needs to evaluate one path.
+                // Tree shaking: If the condition is constant, we only need to evaluate one path.
                 else if ((bool)constantExpression.Value!)
                 {
                     var ifTrue = Visit(node.IfTrue);
@@ -237,7 +237,7 @@ namespace AsyncQueryableAdapter
             return true;
         }
 
-        private bool TryTranslateValueTaskFactorMethodCall(
+        private bool TryTranslateValueTaskFactoryMethodCall(
             MethodCallExpression node,
             [NotNullWhen(true)] out Expression? result)
         {
