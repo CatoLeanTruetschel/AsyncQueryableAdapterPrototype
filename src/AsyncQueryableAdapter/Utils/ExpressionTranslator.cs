@@ -46,44 +46,60 @@ namespace AsyncQueryableAdapter
             // Or of form: Expression<Func<TSource, CancellationToken, ValueTask<TResult>>>
             // Translate it to form Expression<Func<TSource, TResult>> if possible
 
-            var selectorExpressionVisitor = new BodyVisitor(targetType);
+#if DISABLE_EXPRESSION_TRANSLATOR_POOLING
+            var bodyVisitor = new BodyVisitor();
+#else
+            var bodyVisitor = _bodyVisitorPool.Get();
+#endif
 
-            if (expression.Unquote() is not LambdaExpression lambdaExpression)
-                return false;
-
-            var body = lambdaExpression.Body;
-            var translatedBody = selectorExpressionVisitor.Visit(body).Unquote();
-
-            if (translatedBody.Type != targetType)
-                return false;
-
-            if (lambdaExpression.Parameters.Count > 1)
+            try
             {
-                if (lambdaExpression.Parameters.Count != 2)
-                {
+                bodyVisitor.Init(targetType);
+
+                if (expression.Unquote() is not LambdaExpression lambdaExpression)
                     return false;
+
+                var body = lambdaExpression.Body;
+                var translatedBody = bodyVisitor.Visit(body).Unquote();
+
+                if (translatedBody.Type != targetType)
+                    return false;
+
+                if (lambdaExpression.Parameters.Count > 1)
+                {
+                    if (lambdaExpression.Parameters.Count != 2)
+                    {
+                        return false;
+                    }
+
+                    if (lambdaExpression.Parameters[1].Type != typeof(CancellationToken))
+                    {
+                        return false;
+                    }
                 }
 
-                if (lambdaExpression.Parameters[1].Type != typeof(CancellationToken))
-                {
+                var sourceParameter = lambdaExpression.Parameters[0];
+
+                if (sourceParameter is not null && sourceParameter.Type != sourceType)
                     return false;
-                }
+
+                sourceParameter ??= Expression.Parameter(sourceType);
+
+                var selectorType = TypeHelper.GetFuncType(sourceType, targetType);
+                var parameters = _1EntryParameterExpressionBuffer ??= new ParameterExpression[1];
+                parameters[0] = sourceParameter;
+
+                translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
+
+                return true;
             }
-
-            var sourceParameter = lambdaExpression.Parameters[0];
-
-            if (sourceParameter is not null && sourceParameter.Type != sourceType)
-                return false;
-
-            sourceParameter ??= Expression.Parameter(sourceType);
-
-            var selectorType = TypeHelper.GetFuncType(sourceType, targetType);
-            var parameters = _1EntryParameterExpressionBuffer ??= new ParameterExpression[1];
-            parameters[0] = sourceParameter;
-
-            translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
-
-            return true;
+            finally
+            {
+#if !DISABLE_EXPRESSION_TRANSLATOR_POOLING
+                bodyVisitor.Reset();
+                _bodyVisitorPool.Return(bodyVisitor);
+#endif
+            }
         }
 
         public static bool TryTranslateExpressionToSync(
@@ -99,51 +115,67 @@ namespace AsyncQueryableAdapter
             // Or of form: Expression<Func<TSource1, TSource2, CancellationToken, ValueTask<TResult>>>
             // Translate it to form Expression<Func<TSource1, TSource2, TResult>> if possible
 
-            var selectorExpressionVisitor = new BodyVisitor(targetType);
+#if DISABLE_EXPRESSION_TRANSLATOR_POOLING
+            var bodyVisitor = new BodyVisitor();
+#else
+            var bodyVisitor = _bodyVisitorPool.Get();
+#endif
 
-            if (expression.Unquote() is not LambdaExpression lambdaExpression)
-                return false;
-
-            var body = lambdaExpression.Body;
-            var translatedBody = selectorExpressionVisitor.Visit(body).Unquote();
-
-            if (translatedBody.Type != targetType)
-                return false;
-
-            if (lambdaExpression.Parameters.Count > 2)
+            try
             {
-                if (lambdaExpression.Parameters.Count != 3)
-                {
+                bodyVisitor.Init(targetType);
+
+                if (expression.Unquote() is not LambdaExpression lambdaExpression)
                     return false;
+
+                var body = lambdaExpression.Body;
+                var translatedBody = bodyVisitor.Visit(body).Unquote();
+
+                if (translatedBody.Type != targetType)
+                    return false;
+
+                if (lambdaExpression.Parameters.Count > 2)
+                {
+                    if (lambdaExpression.Parameters.Count != 3)
+                    {
+                        return false;
+                    }
+
+                    if (lambdaExpression.Parameters[2].Type != typeof(CancellationToken))
+                    {
+                        return false;
+                    }
                 }
 
-                if (lambdaExpression.Parameters[2].Type != typeof(CancellationToken))
-                {
+                var source1Parameter = lambdaExpression.Parameters[0];
+                var source2Parameter = lambdaExpression.Parameters[1];
+
+                if (source1Parameter is not null && source1Parameter.Type != sourceType1)
                     return false;
-                }
+
+                if (source2Parameter is not null && source2Parameter.Type != sourceType2)
+                    return false;
+
+                source1Parameter ??= Expression.Parameter(sourceType1);
+                source2Parameter ??= Expression.Parameter(sourceType2);
+
+                var selectorType = TypeHelper.GetFuncType(sourceType1, sourceType2, targetType);
+
+                var parameters = _2EntryParameterExpressionBuffer ??= new ParameterExpression[2];
+                parameters[0] = source1Parameter;
+                parameters[1] = source2Parameter;
+
+                translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
+
+                return true;
             }
-
-            var source1Parameter = lambdaExpression.Parameters[0];
-            var source2Parameter = lambdaExpression.Parameters[1];
-
-            if (source1Parameter is not null && source1Parameter.Type != sourceType1)
-                return false;
-
-            if (source2Parameter is not null && source2Parameter.Type != sourceType2)
-                return false;
-
-            source1Parameter ??= Expression.Parameter(sourceType1);
-            source2Parameter ??= Expression.Parameter(sourceType2);
-
-            var selectorType = TypeHelper.GetFuncType(sourceType1, sourceType2, targetType);
-
-            var parameters = _2EntryParameterExpressionBuffer ??= new ParameterExpression[2];
-            parameters[0] = source1Parameter;
-            parameters[1] = source2Parameter;
-
-            translatedExpression = Expression.Lambda(selectorType, translatedBody, parameters);
-
-            return true;
+            finally
+            {
+#if !DISABLE_EXPRESSION_TRANSLATOR_POOLING
+                bodyVisitor.Reset();
+                _bodyVisitorPool.Return(bodyVisitor);
+#endif
+            }
         }
 
         public static bool TryTranslateExpressionToSync(

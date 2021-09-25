@@ -25,13 +25,16 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AsyncQueryableAdapter.Utils;
+using Microsoft.Extensions.ObjectPool;
 
 namespace AsyncQueryableAdapter
 {
     partial class ExpressionTranslator
     {
-        // TODO: Pool me pls
-        // TODO: This not only visits selectors, so rename
+#if !DISABLE_EXPRESSION_TRANSLATOR_POOLING
+        private static readonly ObjectPool<BodyVisitor> _bodyVisitorPool = ObjectPool.Create<BodyVisitor>();
+#endif
+
         private sealed class BodyVisitor : ExpressionVisitor
         {
             private const string VALUE_TASK_FROM_RESULT_METHOD_NAME = "FromResult";
@@ -85,27 +88,33 @@ namespace AsyncQueryableAdapter
                 return null;
             }
 
-            private static readonly ConditionalWeakTable<Type, ValueTaskMethodCacheEntry> _valueTaskMethodsCache = new();
-            private static readonly ConditionalWeakTable<Type, ValueTaskMethodCacheEntry>.CreateValueCallback _buildValueTaskMethodCacheEntry
-                = BuildValueTaskMethodCacheEntry;
-
-            private static ValueTaskMethodCacheEntry BuildValueTaskMethodCacheEntry(Type type)
-            {
-                return new ValueTaskMethodCacheEntry(type);
-            }
+            private static readonly ConditionalWeakTable<Type, ValueTaskMethodCacheEntry> _valueTaskMethodsCache
+                = new();
 
             private static ValueTaskMethodCacheEntry GetValueTaskMethodCacheEntry(Type type)
             {
-                return _valueTaskMethodsCache.GetValue(type, _buildValueTaskMethodCacheEntry);
+                return _valueTaskMethodsCache.GetValue(type, type => new ValueTaskMethodCacheEntry(type));
             }
 
-            private readonly Type _targetType;
-            private bool _allowTranslateCurrent = true;
-            private bool _allowTranslate = true;
+            private Type? _targetType;
+            private bool _allowTranslateCurrent;
+            private bool _allowTranslate;
 
-            public BodyVisitor(Type targetType)
+            public BodyVisitor()
+            {
+                Reset();
+            }
+
+            public void Init(Type targetType)
             {
                 _targetType = targetType;
+            }
+
+            public void Reset()
+            {
+                _targetType = null;
+                _allowTranslateCurrent = true;
+                _allowTranslate = true;
             }
 
             [return: NotNullIfNotNull("node")]
@@ -212,10 +221,12 @@ namespace AsyncQueryableAdapter
             }
 
             private bool TryTranslateValueTaskConstruction(
-              NewExpression node,
-              [NotNullWhen(true)] out Expression? result)
+                NewExpression node,
+                [NotNullWhen(true)] out Expression? result)
             {
                 result = null;
+
+                Debug.Assert(_targetType is not null);
 
                 var methodsCacheEntry = GetValueTaskMethodCacheEntry(_targetType);
                 var ctor = methodsCacheEntry.ValueTaskFromResultConstructor;
@@ -238,6 +249,8 @@ namespace AsyncQueryableAdapter
 
                 if (VALUE_TASK_FROM_RESULT_METHOD_DEFINITION is null)
                     return false;
+
+                Debug.Assert(_targetType is not null);
 
                 var methodsCacheEntry = GetValueTaskMethodCacheEntry(_targetType);
                 var factoryMethod = methodsCacheEntry.ValueTaskFromResultMethod;

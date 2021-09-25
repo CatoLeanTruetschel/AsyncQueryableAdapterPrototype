@@ -9,6 +9,7 @@
     <PackageReference Include="Linq.Expression.Optimizer" />
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" />
   </ItemGroup>
   
   <ItemGroup>

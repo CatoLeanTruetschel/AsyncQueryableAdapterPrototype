@@ -112,4 +112,8 @@
     <Compile Include="$(RepositorySharedPath)ConditionalCLSCompliance.cs" Link="Properties\ConditionalCLSCompliance.cs" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <!--<DefineConstants>$(DefineConstants)DISABLE_EXPRESSION_TRANSLATOR_POOLING;</DefineConstants>-->
+  </PropertyGroup>
+
 </Project>
