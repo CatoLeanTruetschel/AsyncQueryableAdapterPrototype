@@ -598,10 +598,109 @@ namespace AsyncQueryableAdapter.Utils
                     throw new ArgumentException("A Func type for the specified amount of parameters is not defined.");
             }
 
-            types.CopyTo(arr.AsSpan()[..^1]);
+            types.CopyTo(arr.AsSpan());
             arr[^1] = resultType;
 
             return _funcTypeDefinitions[types.Length].MakeGenericType(arr);
+        }
+
+        public static Type GetFuncType(IReadOnlyList<Type> types, Type resultType)
+        {
+            Type[] arr;
+
+            switch (types.Count)
+            {
+                case 0:
+                    _1EntryTypeBuffer ??= new Type[1];
+                    arr = _1EntryTypeBuffer;
+                    break;
+                case 1:
+                    _2EntryTypeBuffer ??= new Type[2];
+                    arr = _2EntryTypeBuffer;
+                    break;
+                case 2:
+                    _3EntryTypeBuffer ??= new Type[3];
+                    arr = _3EntryTypeBuffer;
+                    break;
+                case 3:
+                    _4EntryTypeBuffer ??= new Type[4];
+                    arr = _4EntryTypeBuffer;
+                    break;
+                case 4:
+                    _5EntryTypeBuffer ??= new Type[5];
+                    arr = _5EntryTypeBuffer;
+                    break;
+                case 5:
+                    _6EntryTypeBuffer ??= new Type[6];
+                    arr = _6EntryTypeBuffer;
+                    break;
+                case 6:
+                    _7EntryTypeBuffer ??= new Type[7];
+                    arr = _7EntryTypeBuffer;
+                    break;
+                case 7:
+                    _8EntryTypeBuffer ??= new Type[8];
+                    arr = _8EntryTypeBuffer;
+                    break;
+                case 8:
+                    _9EntryTypeBuffer ??= new Type[9];
+                    arr = _9EntryTypeBuffer;
+                    break;
+                case 9:
+                    _10EntryTypeBuffer ??= new Type[10];
+                    arr = _10EntryTypeBuffer;
+                    break;
+                case 10:
+                    _11EntryTypeBuffer ??= new Type[11];
+                    arr = _11EntryTypeBuffer;
+                    break;
+                case 11:
+                    _12EntryTypeBuffer ??= new Type[12];
+                    arr = _12EntryTypeBuffer;
+                    break;
+                case 12:
+                    _13EntryTypeBuffer ??= new Type[13];
+                    arr = _13EntryTypeBuffer;
+                    break;
+                case 13:
+                    _14EntryTypeBuffer ??= new Type[14];
+                    arr = _14EntryTypeBuffer;
+                    break;
+                case 14:
+                    _15EntryTypeBuffer ??= new Type[15];
+                    arr = _15EntryTypeBuffer;
+                    break;
+                case 15:
+                    _16EntryTypeBuffer ??= new Type[16];
+                    arr = _16EntryTypeBuffer;
+                    break;
+                case 16:
+                    _17EntryTypeBuffer ??= new Type[17];
+                    arr = _17EntryTypeBuffer;
+                    break;
+                default:
+                    throw new ArgumentException("A Func type for the specified amount of parameters is not defined.");
+            }
+
+            if (types is Type[] array)
+            {
+                array.CopyTo(arr.AsSpan());
+            }
+            else if (types is ICollection<Type> collection)
+            {
+                collection.CopyTo(arr, arrayIndex: 0);
+            }
+            else
+            {
+                for (var i = 0; i < types.Count; i++)
+                {
+                    arr[i] = types[i];
+                }
+            }
+
+            arr[^1] = resultType;
+
+            return _funcTypeDefinitions[types.Count].MakeGenericType(arr);
         }
 
         public static bool IsFuncType(
