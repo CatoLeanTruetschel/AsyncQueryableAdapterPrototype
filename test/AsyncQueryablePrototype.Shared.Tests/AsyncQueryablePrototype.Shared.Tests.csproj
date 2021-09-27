@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(TestFrameworkVersions)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Async.Queryable" />
+  </ItemGroup>
+  
+  <Import Project="..\..\src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems" Label="Shared" />
+
+</Project>

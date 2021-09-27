@@ -51,14 +51,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{30CB25E2
 		build\Directory.Build.props = build\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncQueryableAdapter.Specifications.Generator", "build\AsyncQueryableAdapter.Specifications.Generator\AsyncQueryableAdapter.Specifications.Generator.csproj", "{FC84404B-91EA-457A-B38A-2B4ADDF3F042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncQueryableAdapter.Specifications.Generator", "build\AsyncQueryableAdapter.Specifications.Generator\AsyncQueryableAdapter.Specifications.Generator.csproj", "{FC84404B-91EA-457A-B38A-2B4ADDF3F042}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AsyncQueryableAdapterPrototype.Shared", "src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.shproj", "{C38A4BF7-9050-4E12-89EA-3187397BB678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncQueryablePrototype.Shared.Tests", "test\AsyncQueryablePrototype.Shared.Tests\AsyncQueryablePrototype.Shared.Tests.csproj", "{C708F86D-B806-4879-AA9C-84EBCBAAC400}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{80961bd4-3c36-453d-afc3-2ffc91665be0}*SharedItemsImports = 5
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{c38a4bf7-9050-4e12-89ea-3187397bb678}*SharedItemsImports = 13
+		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{c708f86d-b806-4879-aa9c-84ebcbaac400}*SharedItemsImports = 5
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{fc84404b-91ea-457a-b38a-2b4addf3f042}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +133,18 @@ Global
 		{FC84404B-91EA-457A-B38A-2B4ADDF3F042}.Release|x64.Build.0 = Release|Any CPU
 		{FC84404B-91EA-457A-B38A-2B4ADDF3F042}.Release|x86.ActiveCfg = Release|Any CPU
 		{FC84404B-91EA-457A-B38A-2B4ADDF3F042}.Release|x86.Build.0 = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|x64.Build.0 = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Debug|x86.Build.0 = Debug|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x64.ActiveCfg = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x64.Build.0 = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x86.ActiveCfg = Release|Any CPU
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +157,7 @@ Global
 		{9EA6CE73-8F3E-4FF0-854F-9CAA4FA7A79C} = {F7CE5BDA-9D4A-4DAB-B64F-DEC8FA931E32}
 		{FC84404B-91EA-457A-B38A-2B4ADDF3F042} = {30CB25E2-78EE-42F2-BF23-BC275B832FAC}
 		{C38A4BF7-9050-4E12-89EA-3187397BB678} = {8252AFA1-FB67-4BD8-84BD-49D029F2794C}
+		{C708F86D-B806-4879-AA9C-84EBCBAAC400} = {F7CE5BDA-9D4A-4DAB-B64F-DEC8FA931E32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E25CEAE8-5983-47BD-ACF5-96800C532C68}

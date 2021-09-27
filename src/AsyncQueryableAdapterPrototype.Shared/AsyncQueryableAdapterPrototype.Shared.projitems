@@ -15,6 +15,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\CompiledDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\DictionaryExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\EnumerableExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionEqualityComparer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionEqualityComparer.HashCodeExpressionVisitor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionEqualityComparer.ParameterDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\KeyValuePairExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Maybe.cs" />

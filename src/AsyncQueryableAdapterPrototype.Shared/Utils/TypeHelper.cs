@@ -948,11 +948,15 @@ namespace AsyncQueryableAdapter.Utils
 
             delegateType = typeof(Delegate);
 
-            if (type.IsGenericType)
+            while (type.IsGenericType)
             {
-                Debug.Assert(type.GetGenericTypeDefinition() == typeof(Expression<>));
+                if (type.GetGenericTypeDefinition() == typeof(Expression<>))
+                {
+                    delegateType = type.GetGenericArguments()[0];
+                    break;
+                }
 
-                delegateType = type.GetGenericArguments()[0];
+                type = type.BaseType;
             }
 
             return true;
