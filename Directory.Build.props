@@ -14,16 +14,17 @@
     <Version>1.0.0-pre$([System.DateTime]::UtcNow.ToString(yyMMddHHmmss))</Version>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
-
+  
   <PropertyGroup>
     <RepositoryRoot Condition="'$(RepositoryRoot)' == ''">$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <LangVersion>9.0</LangVersion>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
-    <DefineConstants>$(DefineConstants);ALLOW_UNSAFE;</DefineConstants>
-    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+    <DefineConstants Condition="($([System.Text.RegularExpressions.Regex]::IsMatch('%(LangVersion)', '^[0-9]+(?:\.[0-9]+)?$')) And $(LangVersion) &gt; 10.0) Or '$(LangVersion)' == 'preview'">$(DefineConstants)SUPPORTS_GENERIC_ATTRIBUTES;</DefineConstants>
+    <DefineConstants>$(DefineConstants)ALLOW_UNSAFE;</DefineConstants>
+    <WarningsAsErrors>$(WarningsAsErrors)nullable;</WarningsAsErrors>
     <SolutionDir>$(RepositoryRoot)</SolutionDir>
-    <NoWarn>$(NoWarn);NU5105</NoWarn>
+    <NoWarn>$(NoWarn)NU5105;</NoWarn>
     <AllowUnsafeBlocks Condition="$(DefineConstants.Contains(ALLOW_UNSAFE))">true</AllowUnsafeBlocks>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
