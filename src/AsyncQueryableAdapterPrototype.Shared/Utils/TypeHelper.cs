@@ -20,7 +20,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
@@ -948,15 +947,17 @@ namespace AsyncQueryableAdapter.Utils
 
             delegateType = typeof(Delegate);
 
-            while (type.IsGenericType)
+            var curr = (Type?)type;
+
+            while (curr is not null && curr.IsGenericType)
             {
-                if (type.GetGenericTypeDefinition() == typeof(Expression<>))
+                if (curr.GetGenericTypeDefinition() == typeof(Expression<>))
                 {
-                    delegateType = type.GetGenericArguments()[0];
+                    delegateType = curr.GetGenericArguments()[0];
                     break;
                 }
 
-                type = type.BaseType;
+                curr = curr.BaseType;
             }
 
             return true;
