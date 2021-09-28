@@ -6,8 +6,8 @@
     <PackageId>$(ProjectName)</PackageId>
     <Copyright>Copyright (c) Cato Léan Trütschel and contributors</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/CatoLeanTruetschel/DotNetPlot</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/CatoLeanTruetschel/DotNetPlot</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
