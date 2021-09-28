@@ -24,10 +24,13 @@
     <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
     <SolutionDir>$(RepositoryRoot)</SolutionDir>
     <NoWarn>$(NoWarn);NU5105</NoWarn>
-    <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
     <AllowUnsafeBlocks Condition="$(DefineConstants.Contains(ALLOW_UNSAFE))">true</AllowUnsafeBlocks>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -54,17 +57,18 @@
   <PropertyGroup>
     <NetStandardVersion>netstandard2.1</NetStandardVersion>
     <NetStandardVersions>$(NetStandardVersion);netstandard2.0;</NetStandardVersions>
-    <NetCoreAppVersion>net5.0</NetCoreAppVersion>
-    <NetCoreAppVersions>netcoreapp3.1;$(NetCoreAppVersion);</NetCoreAppVersions>
+    <NetCoreAppVersion>net6.0</NetCoreAppVersion>
+    <NetCoreAppVersions>netcoreapp3.1;net5.0;$(NetCoreAppVersion);</NetCoreAppVersions>
     <RuntimeVersions>$(NetCoreAppVersions);net48;</RuntimeVersions>
     <FrameworkVersions>$(RuntimeVersions)$(NetStandardVersions)</FrameworkVersions>
-    <LibVersions>$(NetStandardVersions)net5.0;</LibVersions>
+    <LibVersions>$(NetStandardVersions)net5.0;net6.0;</LibVersions>
     <TestFrameworkVersions>$(RuntimeVersions)</TestFrameworkVersions>
     <NETSTD20Features></NETSTD20Features>
     <NETSTD21Features>$(NETSTD20Features)SUPPORTS_QUERYABLE_TAKE_LAST;SUPPORTS_DEFAULT_INTERFACE_METHODS;SUPPORTS_NULLABILITY_ATTRIBUTES;SUPPORTS_RANGE;SUPPORTS_DICTIONARY_INITIALIZATION_FROM_ENUMERABLE;SUPPORTS_QUERYABLE_APPEND;SUPPORTS_IMPLICIT_STRING_TO_SPAN_CONVERSION;SUPPORTS_STRING_REPLACE_WITH_COMPARISON;SUPPORTS_ASYNC_DISPOSAL;SUPPORTS_KEY_VALUE_PAIR_DECONSTRUCT;SUPPORTS_MATH_F;</NETSTD21Features>
     <NET48Features>$(NETSTD20Features)</NET48Features>
     <NETCORE31Features>$(NETSTD21Features)SUPPORTS_COLLECTIBLE_ASSEMBLY_LOAD_CONTEXT;SUPPORTS_RUNE;SUPPORTS_QUERYABLE_SIMPLE_ZIP;SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP;</NETCORE31Features>
     <NET50Features>$(NETCORE31Features)HAS_SKIP_LOCALS_INIT_ATTRIBUTE;HAS_IS_EXTERNAL_INIT;SUPPORTS_MEMBER_NULLABILITY_ATTRIBUTES;SUPPORTS_TYPE_IS_ASSIGNABLE_TO;SUPPORTS_VALUE_TASK_FROM_RESULT;SUPPORTS_READ_ONLY_SET;</NET50Features>
+    <NET60Features>$(NETCORE31Features)</NET60Features>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -87,6 +91,10 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
     <DefineConstants>$(DefineConstants)$(NET50Features)NETCORE50;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <DefineConstants>$(DefineConstants)$(NET60Features)NETCORE60;</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'net48'">
