@@ -46,7 +46,7 @@
 using System;
 using System.IO;
 
-namespace AsyncQueryableAdapterPrototype.Utils.Expressions
+namespace AsyncQueryableAdapter.Utils
 {
     internal class TextWriterFormatter : IFormatter
     {
@@ -92,6 +92,13 @@ namespace AsyncQueryableAdapterPrototype.Utils.Expressions
         public void WriteToken(string token)
         {
             Write(token);
+        }
+
+        public void WriteToken(char token)
+        {
+            WriteIndent();
+            _writer.Write(token);
+            _writeIndent = false;
         }
 
         public void WriteKeyword(string keyword)

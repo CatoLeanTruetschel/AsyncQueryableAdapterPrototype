@@ -21,10 +21,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -1506,40 +1506,60 @@ namespace AsyncQueryableAdapter.Utils
         }
 
 #if SUPPORTS_READ_ONLY_SET
-        public static string FormatCSharpTypeName(Type type, IEnumerable<string>? knownNamespaces)
+        public static string FormatCSharpTypeName(Type type, IReadOnlySet<string>? knownNamespaces)
         {
-            if (knownNamespaces is null)
-            {
-                return FormatCSharpTypeName(type, null as IReadOnlySet<string>);
-            }
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
 
-            if (knownNamespaces is IReadOnlySet<string> readOnlySet)
-            {
-                return FormatCSharpTypeName(type, readOnlySet);
-            }
+            var writer = new StringWriter();
+            var formatter = new TextWriterFormatter(writer);
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces, allowVoid: true);
+            return writer.GetStringBuilder().ToString();
+        }
+#endif
 
-            return FormatCSharpTypeName(type, knownNamespaces.ToImmutableHashSet());
+        public static string FormatCSharpTypeName(Type type, IEnumerable<string>? knownNamespaces = null)
+        {
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
+
+            var writer = new StringWriter();
+            var formatter = new TextWriterFormatter(writer);
+#if SUPPORTS_READ_ONLY_SET
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces as IReadOnlySet<string> ?? knownNamespaces?.ToImmutableHashSet(), allowVoid: true);
+#else
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces, allowVoid: true);
+#endif
+            return writer.GetStringBuilder().ToString();
+
         }
 
-        public static string FormatCSharpTypeName(Type type, IReadOnlySet<string>? knownNamespaces = null)
-#else
-        public static string FormatCSharpTypeName(Type type, IEnumerable<string>? knownNamespaces = null)
-#endif
+#if SUPPORTS_READ_ONLY_SET
+        public static void FormatCSharpTypeName(Type type, IFormatter formatter, IReadOnlySet<string>? knownNamespaces)
         {
-            if (type == typeof(void))
-            {
-                throw new ArgumentException("Cannot represent System.Void in C# Syntax in this context.");
-            }
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
 
-            if (IsSpecialCSharpTypeAlias(type, out var alias))
-            {
-                return alias;
-            }
+            if (formatter is null)
+                throw new ArgumentNullException(nameof(formatter));
 
-            var builder = new StringBuilder();
-            FormatCSharpTypeName(type, builder, knownNamespaces);
-            return builder.ToString();
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces, allowVoid: true);
+        }
+#endif
 
+        public static void FormatCSharpTypeName(Type type, IFormatter formatter, IEnumerable<string>? knownNamespaces = null)
+        {
+            if (type is null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (formatter is null)
+                throw new ArgumentNullException(nameof(formatter));
+
+#if SUPPORTS_READ_ONLY_SET
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces as IReadOnlySet<string> ?? knownNamespaces?.ToImmutableHashSet(), allowVoid: true);
+#else
+            FormatCSharpTypeNameCore(type, formatter, knownNamespaces, allowVoid: true);
+#endif
         }
 
         private static bool IsSpecialCSharpTypeAlias(Type type, [NotNullWhen(true)] out string? alias)
@@ -1640,6 +1660,12 @@ namespace AsyncQueryableAdapter.Utils
                 return true;
             }
 
+            if (type == typeof(string))
+            {
+                alias = "string";
+                return true;
+            }
+
             if (type == typeof(void))
             {
                 alias = "void";
@@ -1651,20 +1677,27 @@ namespace AsyncQueryableAdapter.Utils
         }
 
 #if SUPPORTS_READ_ONLY_SET
-        private static void FormatCSharpTypeName(
+        private static void FormatCSharpTypeNameCore(
             Type type,
-            StringBuilder builder,
-            IReadOnlySet<string>? knownNamespaces)
+            IFormatter formatter,
+            IReadOnlySet<string>? knownNamespaces,
+            bool allowVoid = false)
 #else
-        private static void FormatCSharpTypeName(
+        private static void FormatCSharpTypeNameCore(
             Type type,
-            StringBuilder builder,
-            IEnumerable<string>? knownNamespaces)
+            IFormatter formatter,
+            IEnumerable<string>? knownNamespaces,
+            bool allowVoid = false)
 #endif
         {
+            if (type == typeof(void) && !allowVoid)
+            {
+                throw new ArgumentException("Cannot represent System.Void in C# Syntax in this context.");
+            }
+
             if (IsSpecialCSharpTypeAlias(type, out var alias))
             {
-                builder.Append(alias);
+                formatter.WriteReference(alias, type);
             }
             else if (type.IsArray)
             {
@@ -1673,22 +1706,23 @@ namespace AsyncQueryableAdapter.Utils
                 var arrayRank = type.GetArrayRank();
                 var elementType = type.GetElementType();
 
-                FormatCSharpTypeName(elementType!, builder, knownNamespaces);
-                builder.Append('[');
-                builder.Append(',', arrayRank - 1);
-                builder.Append(']');
+                FormatCSharpTypeNameCore(elementType!, formatter, knownNamespaces);
+                formatter.WriteToken('[');
+                for (var i = 1; i < arrayRank; i++)
+                    formatter.WriteToken(',');
+                formatter.WriteToken(']');
             }
             else if (type.IsPointer)
             {
                 var elementType = type.GetElementType();
-                FormatCSharpTypeName(elementType!, builder, knownNamespaces);
-                builder.Append('*');
+                FormatCSharpTypeNameCore(elementType!, formatter, knownNamespaces);
+                formatter.WriteToken('*');
             }
             else if (type.IsByRef)
             {
                 var elementType = type.GetElementType();
-                builder.Append("ref ");
-                FormatCSharpTypeName(elementType!, builder, knownNamespaces);
+                formatter.WriteToken("ref ");
+                FormatCSharpTypeNameCore(elementType!, formatter, knownNamespaces);
             }
             else if (type.IsGenericType)
             {
@@ -1697,35 +1731,36 @@ namespace AsyncQueryableAdapter.Utils
 
                 if (type.IsConstructedGenericType && typeDef == typeof(Nullable<>))
                 {
-                    FormatCSharpTypeName(genericArgs[0], builder, knownNamespaces);
-                    builder.Append('?');
+                    FormatCSharpTypeNameCore(genericArgs[0], formatter, knownNamespaces);
+                    formatter.WriteToken('?');
                 }
                 else
                 {
-                    var hasPrefix = FormatCSharpTypeNamespace(typeDef, builder, knownNamespaces);
+                    var hasPrefix = FormatCSharpTypeNamespace(typeDef, formatter, knownNamespaces);
 
                     if (hasPrefix)
                     {
-                        builder.Append('.');
+                        formatter.WriteToken('.');
                     }
 
-                    builder.Append(typeDef.Name.Substring(0, typeDef.Name.IndexOf("`", StringComparison.Ordinal)));
-                    builder.Append('<');
+                    formatter.WriteReference(typeDef.Name.Substring(0, typeDef.Name.IndexOf("`", StringComparison.Ordinal)), typeDef);
+                    formatter.WriteToken('<');
 
                     if (type.IsGenericTypeDefinition)
                     {
-                        builder.Append(',', genericArgs.Length - 1);
+                        for (var i = 1; i < genericArgs.Length; i++)
+                            formatter.WriteToken(',');
                     }
                     else if (type.IsConstructedGenericType)
                     {
                         for (var i = 0; i < genericArgs.Length; i++)
                         {
-                            FormatCSharpTypeName(genericArgs[i], builder, knownNamespaces);
+                            FormatCSharpTypeNameCore(genericArgs[i], formatter, knownNamespaces);
 
                             if (i < genericArgs.Length - 1)
                             {
-                                builder.Append(',');
-                                builder.Append(' ');
+                                formatter.WriteToken(',');
+                                formatter.WriteSpace();
                             }
                         }
                     }
@@ -1734,31 +1769,31 @@ namespace AsyncQueryableAdapter.Utils
                         throw new ArgumentException("Cannot represent a partially constructed generic type in C# syntax.");
                     }
 
-                    builder.Append('>');
+                    formatter.WriteToken('>');
                 }
             }
             else
             {
-                var hasPrefix = FormatCSharpTypeNamespace(type, builder, knownNamespaces);
+                var hasPrefix = FormatCSharpTypeNamespace(type, formatter, knownNamespaces);
 
                 if (hasPrefix)
                 {
-                    builder.Append('.');
+                    formatter.WriteToken('.');
                 }
 
-                builder.Append(type.Name);
+                formatter.WriteReference(type.Name, type);
             }
         }
 
 #if SUPPORTS_READ_ONLY_SET
         private static bool FormatCSharpTypeNamespace(
             Type type,
-            StringBuilder builder,
+            IFormatter formatter,
             IReadOnlySet<string>? knownNamespaces)
 #else
         private static bool FormatCSharpTypeNamespace(
             Type type,
-            StringBuilder builder,
+            IFormatter formatter,
             IEnumerable<string>? knownNamespaces)
 #endif
         {
@@ -1771,15 +1806,20 @@ namespace AsyncQueryableAdapter.Utils
                     return false;
                 }
 
-                builder.Append(type.Namespace);
-                return !string.IsNullOrEmpty(type.Namespace);
+                if (string.IsNullOrEmpty(type.Namespace))
+                {
+                    return false;
+                }
+
+                formatter.WriteReference(type.Namespace, type.Namespace);
+                return true;
             }
 
-            var hasPrefix = FormatCSharpTypeNamespace(type.DeclaringType, builder, knownNamespaces);
+            var hasPrefix = FormatCSharpTypeNamespace(type.DeclaringType, formatter, knownNamespaces);
 
             if (hasPrefix)
             {
-                builder.Append('.');
+                formatter.WriteToken('.');
             }
 
             if (type.DeclaringType.IsGenericType)
@@ -1790,14 +1830,15 @@ namespace AsyncQueryableAdapter.Utils
                         "Cannot represent the nested type of a partially constructed generic type in C# syntax.");
                 }
 
-                builder.Append(
+                formatter.WriteReference(
                     type.DeclaringType.Name.Substring(
                         0,
-                        type.DeclaringType.Name.IndexOf("`", StringComparison.Ordinal)));
+                        type.DeclaringType.Name.IndexOf("`", StringComparison.Ordinal)),
+                    type.DeclaringType);
             }
             else
             {
-                builder.Append(type.DeclaringType.Name);
+                formatter.WriteReference(type.DeclaringType.Name, type.DeclaringType);
             }
 
             return true;

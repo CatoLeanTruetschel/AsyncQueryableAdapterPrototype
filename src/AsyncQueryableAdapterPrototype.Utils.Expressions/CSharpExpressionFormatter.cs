@@ -45,25 +45,49 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Immutable;
 using System.Linq.Expressions;
+using AsyncQueryableAdapter.Utils;
 using AsyncQueryableAdapter.Utils.Expressions;
 
 namespace AsyncQueryableAdapterPrototype.Utils.Expressions
 {
     internal sealed class CSharpExpressionFormatter : ExpressionVisitor
     {
-        private readonly Dictionary<ParameterExpression, string> _uniqueNames = new();
         private readonly IFormatter _formatter;
+#if SUPPORTS_READ_ONLY_SET
+        private readonly IReadOnlySet<string>? _knownNamespaces;
+#else
+        private readonly IEnumerable<string>? _knownNamespaces;
+#endif
+        private readonly Dictionary<ParameterExpression, string> _uniqueNames = new();
         private int _uniqueSeed;
 
-        public CSharpExpressionFormatter(IFormatter formatter)
+        public CSharpExpressionFormatter(IFormatter formatter, IEnumerable<string>? knownNamespaces = null)
         {
             if (formatter is null)
                 throw new ArgumentNullException(nameof(formatter));
 
             _formatter = formatter;
+
+#if SUPPORTS_READ_ONLY_SET
+            _knownNamespaces = knownNamespaces as IReadOnlySet<string> ?? knownNamespaces?.ToImmutableHashSet();
+#else
+            _knownNamespaces = knownNamespaces;
+#endif
+
         }
+
+#if SUPPORTS_READ_ONLY_SET
+        public CSharpExpressionFormatter(IFormatter formatter, IReadOnlySet<string>? knownNamespaces)
+        {
+            if (formatter is null)
+                throw new ArgumentNullException(nameof(formatter));
+
+            _formatter = formatter;
+            _knownNamespaces = knownNamespaces;
+        }
+#endif
 
         protected override Expression VisitExtension(Expression node)
         {
@@ -252,105 +276,12 @@ namespace AsyncQueryableAdapterPrototype.Utils.Expressions
 
         private void VisitType(Type type)
         {
-            if (type.IsArray)
-            {
-                VisitArrayType(type);
-                return;
-            }
-
-            if (type.IsGenericParameter)
-            {
-                _formatter.WriteReference(type.Name, type);
-                return;
-            }
-
-            if (type.IsGenericType && type.IsGenericTypeDefinition)
-            {
-                VisitGenericTypeDefinition(type);
-                return;
-            }
-
-            if (type.IsGenericType && !type.IsGenericTypeDefinition)
-            {
-                VisitGenericTypeInstance(type);
-                return;
-            }
-
-            VisitSimpleType(type);
-        }
-
-        private void VisitArrayType(Type type)
-        {
-            VisitType(type.GetElementType());
-            _formatter.WriteToken("[");
-            for (var i = 1; i < type.GetArrayRank(); i++)
-                _formatter.WriteToken(",");
-            _formatter.WriteToken("]");
-        }
-
-        private void VisitGenericTypeDefinition(Type type)
-        {
-            _formatter.WriteReference(CleanGenericName(type), type);
-            _formatter.WriteToken("<");
-            var arity = type.GetGenericArguments().Length;
-            for (var i = 1; i < arity; i++)
-                _formatter.WriteToken(",");
-            _formatter.WriteToken(">");
-        }
-
-        private void VisitGenericTypeInstance(Type type)
-        {
-            _formatter.WriteReference(CleanGenericName(type), type);
-
-            VisitGenericArguments(type.GetGenericArguments());
+            TypeHelper.FormatCSharpTypeName(type, _formatter, _knownNamespaces);
         }
 
         private void VisitGenericArguments(Type[] genericArguments)
         {
             VisitList(genericArguments, "<", VisitType, ">");
-        }
-
-        private static string CleanGenericName(Type type)
-        {
-            var name = type.Name;
-            var position = name.LastIndexOf("`");
-            if (position == -1)
-                return name;
-
-            return name.Substring(0, position);
-        }
-
-        private void VisitSimpleType(Type type)
-        {
-            _formatter.WriteReference(GetSimpleTypeName(type), type);
-        }
-
-        private static string GetSimpleTypeName(Type type)
-        {
-            if (type == typeof(void))
-                return "void";
-
-            if (type == typeof(object))
-                return "object";
-
-            return Type.GetTypeCode(type) switch
-            {
-                TypeCode.Boolean => "bool",
-                TypeCode.Byte => "byte",
-                TypeCode.Char => "char",
-                TypeCode.Decimal => "decimal",
-                TypeCode.Double => "double",
-                TypeCode.Int16 => "short",
-                TypeCode.Int32 => "int",
-                TypeCode.Int64 => "long",
-                TypeCode.SByte => "sbyte",
-                TypeCode.Single => "float",
-                TypeCode.String => "string",
-                TypeCode.UInt16 => "ushort",
-                TypeCode.UInt32 => "uint",
-                TypeCode.UInt64 => "ulong",
-                _ => type.Name,
-            };
         }
 
         protected override Expression VisitBlock(BlockExpression node)

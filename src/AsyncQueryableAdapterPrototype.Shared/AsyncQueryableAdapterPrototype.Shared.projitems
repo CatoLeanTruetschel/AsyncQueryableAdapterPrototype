@@ -20,12 +20,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionEqualityComparer.HashCodeExpressionVisitor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionEqualityComparer.ParameterDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ExpressionExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\IFormatter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\KeyValuePairExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Maybe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\MemoryExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\OperationNameHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StreamWriterExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StringExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TextWriterFormatter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ThrowHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TypeHelper.cs" />

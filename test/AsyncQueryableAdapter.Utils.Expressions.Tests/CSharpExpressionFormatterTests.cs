@@ -75,8 +75,16 @@ namespace AsyncQueryableAdapter.Utils.Expressions.Tests
 
         private static void AssertExpression(string expected, LambdaExpression expression)
         {
+            var knownNamespaces = new[]
+            {
+                "System",
+                "System.Collections.Generic",
+                "System.Linq.Expressions",
+                typeof(CSharpExpressionFormatterTests).Namespace
+            };
+
             var result = new StringWriter();
-            var csharp = new CSharpExpressionFormatter(new TextWriterFormatter(result));
+            var csharp = new CSharpExpressionFormatter(new TextWriterFormatter(result), knownNamespaces);
 
             csharp.Write(expression);
 
@@ -727,9 +735,9 @@ Dictionary<string, int> ListInitDict()
                     Expression.Bind(typeof(Gazonk).GetProperty("Name"), Expression.Constant("Gazonka"))));
 
             AssertLambda<Func<Foo>>(@"
-Foo MemberInit()
+CSharpExpressionFormatterTests.Foo MemberInit()
 {
-	return new Foo()
+	return new CSharpExpressionFormatterTests.Foo()
 	{
 		Bar = 42,
 		Baz = {4, 12},
