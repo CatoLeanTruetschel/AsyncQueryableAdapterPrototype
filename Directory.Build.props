@@ -1,128 +1,134 @@
 <!--EXTERNAL_PROPERTIES: TargetFramework;MSBuildThisFileDirectory-->
 <Project>
-  <PropertyGroup>
-    <Authors>Cato Léan Trütschel and contributors</Authors>
-    <Product>$(ProjectName)</Product>
-    <PackageId>$(ProjectName)</PackageId>
-    <Copyright>Copyright (c) Cato Léan Trütschel and contributors</Copyright>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Version>1.0.0-pre$([System.DateTime]::UtcNow.ToString(yyMMddHHmmss))</Version>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <RepositoryRoot Condition="'$(RepositoryRoot)' == ''">$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
-    <LangVersion>preview</LangVersion>
-    <Nullable>enable</Nullable>
-    <DefineConstants Condition="($([System.Text.RegularExpressions.Regex]::IsMatch('%(LangVersion)', '^[0-9]+(?:\.[0-9]+)?$')) And $(LangVersion) &gt; 10.0) Or '$(LangVersion)' == 'preview'">$(DefineConstants)SUPPORTS_GENERIC_ATTRIBUTES;</DefineConstants>
-    <DefineConstants>$(DefineConstants)ALLOW_UNSAFE;</DefineConstants>
-    <WarningsAsErrors>$(WarningsAsErrors)nullable;</WarningsAsErrors>
-    <SolutionDir>$(RepositoryRoot)</SolutionDir>
-    <NoWarn>$(NoWarn)NU5105;</NoWarn>
-    <AllowUnsafeBlocks Condition="$(DefineConstants.Contains(ALLOW_UNSAFE))">true</AllowUnsafeBlocks>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Authors>Cato Léan Trütschel and contributors</Authors>
+		<Product>$(ProjectName)</Product>
+		<PackageId>$(ProjectName)</PackageId>
+		<Copyright>Copyright (c) Cato Léan Trütschel and contributors</Copyright>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/CatoLeanTruetschel/AsyncQueryableAdapterPrototype</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Version>1.0.0-pre$([System.DateTime]::UtcNow.ToString(yyMMddHHmmss))</Version>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <RepositoryRootPath>$(RepositoryRoot)\</RepositoryRootPath>
-    <RepositorySharedPath>$(RepositoryRoot)\src\Shared\</RepositorySharedPath>
-    <RepositoryBuiltPath>$(RepositoryRootPath)artifacts\</RepositoryBuiltPath>
-    <RootOutputPath>$(RepositoryBuiltPath)bin\</RootOutputPath>
-    <RootIntermediateOutputPath>$(RepositoryBuiltPath)obj\</RootIntermediateOutputPath>
-    <PackageOutputPath>$(RepositoryBuiltPath)nupkg\</PackageOutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RepositoryRoot Condition="'$(RepositoryRoot)' == ''">$(MSBuildThisFileDirectory)</RepositoryRoot>
+		<Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<DefineConstants Condition="($([System.Text.RegularExpressions.Regex]::IsMatch('%(LangVersion)', '^[0-9]+(?:\.[0-9]+)?$')) And $(LangVersion) &gt; 10.0) Or '$(LangVersion)' == 'preview'">$(DefineConstants)SUPPORTS_GENERIC_ATTRIBUTES;</DefineConstants>
+		<DefineConstants>$(DefineConstants)ALLOW_UNSAFE;</DefineConstants>
+		<WarningsAsErrors>$(WarningsAsErrors)nullable;</WarningsAsErrors>
+		<SolutionDir>$(RepositoryRoot)</SolutionDir>
+		<NoWarn>$(NoWarn)NU5105;</NoWarn>
+		<AllowUnsafeBlocks Condition="$(DefineConstants.Contains(ALLOW_UNSAFE))">true</AllowUnsafeBlocks>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(RootOutputPath)' != ''">
-    <BaseOutputPath Condition="'$(BaseOutputPath)' == ''">$(RootOutputPath)$(MSBuildProjectName)\</BaseOutputPath>
-    <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(RootIntermediateOutputPath)' != ''">
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''">$(RootIntermediateOutputPath)$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
-    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
-    <RestoreOutputPath>$(BaseIntermediateOutputPath)</RestoreOutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RepositoryRootPath>$(RepositoryRoot)\</RepositoryRootPath>
+		<RepositorySharedPath>$(RepositoryRoot)\src\Shared\</RepositorySharedPath>
+		<RepositoryBuiltPath>$(RepositoryRootPath)artifacts\</RepositoryBuiltPath>
+		<RootOutputPath>$(RepositoryBuiltPath)bin\</RootOutputPath>
+		<RootIntermediateOutputPath>$(RepositoryBuiltPath)obj\</RootIntermediateOutputPath>
+		<PackageOutputPath>$(RepositoryBuiltPath)nupkg\</PackageOutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <NetStandardVersion>netstandard2.1</NetStandardVersion>
-    <NetStandardVersions>$(NetStandardVersion);netstandard2.0;</NetStandardVersions>
-    <NetCoreAppVersion>net6.0</NetCoreAppVersion>
-    <NetCoreAppVersions>netcoreapp3.1;net5.0;$(NetCoreAppVersion);</NetCoreAppVersions>
-    <RuntimeVersions>$(NetCoreAppVersions);net48;</RuntimeVersions>
-    <FrameworkVersions>$(RuntimeVersions)$(NetStandardVersions)</FrameworkVersions>
-    <LibVersions>$(NetStandardVersions)net5.0;net6.0;</LibVersions>
-    <TestFrameworkVersions>$(RuntimeVersions)</TestFrameworkVersions>
-    <NETSTD20Features></NETSTD20Features>
-    <NETSTD21Features>$(NETSTD20Features)SUPPORTS_QUERYABLE_TAKE_LAST;SUPPORTS_DEFAULT_INTERFACE_METHODS;SUPPORTS_NULLABILITY_ATTRIBUTES;SUPPORTS_RANGE;SUPPORTS_DICTIONARY_INITIALIZATION_FROM_ENUMERABLE;SUPPORTS_QUERYABLE_APPEND;SUPPORTS_IMPLICIT_STRING_TO_SPAN_CONVERSION;SUPPORTS_STRING_REPLACE_WITH_COMPARISON;SUPPORTS_ASYNC_DISPOSAL;SUPPORTS_KEY_VALUE_PAIR_DECONSTRUCT;SUPPORTS_MATH_F;</NETSTD21Features>
-    <NET48Features>$(NETSTD20Features)</NET48Features>
-    <NETCORE31Features>$(NETSTD21Features)SUPPORTS_COLLECTIBLE_ASSEMBLY_LOAD_CONTEXT;SUPPORTS_RUNE;SUPPORTS_QUERYABLE_SIMPLE_ZIP;SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP;</NETCORE31Features>
-    <NET50Features>$(NETCORE31Features)HAS_SKIP_LOCALS_INIT_ATTRIBUTE;HAS_IS_EXTERNAL_INIT;SUPPORTS_MEMBER_NULLABILITY_ATTRIBUTES;SUPPORTS_TYPE_IS_ASSIGNABLE_TO;SUPPORTS_VALUE_TASK_FROM_RESULT;SUPPORTS_READ_ONLY_SET;</NET50Features>
-    <NET60Features>$(NETCORE31Features)</NET60Features>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(RootOutputPath)' != ''">
+		<BaseOutputPath Condition="'$(BaseOutputPath)' == ''">$(RootOutputPath)$(MSBuildProjectName)\</BaseOutputPath>
+		<OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>$(DefineConstants)$(NETSTD20Features)NETSTD20;</DefineConstants>
-    <Nullable>annotations</Nullable>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(RootIntermediateOutputPath)' != ''">
+		<BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''">$(RootIntermediateOutputPath)$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+		<IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
+		<MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+		<RestoreOutputPath>$(BaseIntermediateOutputPath)</RestoreOutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
-    <DefineConstants>$(DefineConstants)$(NET48Features)NET48;</DefineConstants>
-    <Nullable>annotations</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<NetStandardVersion>netstandard2.1</NetStandardVersion>
+		<NetStandardVersions>$(NetStandardVersion);netstandard2.0;</NetStandardVersions>
+		<NetCoreAppVersion>net6.0</NetCoreAppVersion>
+		<NetCoreAppVersions>netcoreapp3.1;net5.0;$(NetCoreAppVersion);</NetCoreAppVersions>
+		<RuntimeVersions>$(NetCoreAppVersions);net48;</RuntimeVersions>
+		<FrameworkVersions>$(RuntimeVersions)$(NetStandardVersions)</FrameworkVersions>
+		<LibVersions>$(NetStandardVersions)net5.0;net6.0;</LibVersions>
+		<TestFrameworkVersions>$(RuntimeVersions)</TestFrameworkVersions>
+		<NETSTD20Features></NETSTD20Features>
+		<NETSTD21Features>$(NETSTD20Features)SUPPORTS_QUERYABLE_TAKE_LAST;SUPPORTS_DEFAULT_INTERFACE_METHODS;SUPPORTS_NULLABILITY_ATTRIBUTES;SUPPORTS_RANGE;SUPPORTS_DICTIONARY_INITIALIZATION_FROM_ENUMERABLE;SUPPORTS_QUERYABLE_APPEND;SUPPORTS_IMPLICIT_STRING_TO_SPAN_CONVERSION;SUPPORTS_STRING_REPLACE_WITH_COMPARISON;SUPPORTS_ASYNC_DISPOSAL;SUPPORTS_KEY_VALUE_PAIR_DECONSTRUCT;SUPPORTS_MATH_F;</NETSTD21Features>
+		<NET48Features>$(NETSTD20Features)</NET48Features>
+		<NETCORE31Features>$(NETSTD21Features)SUPPORTS_COLLECTIBLE_ASSEMBLY_LOAD_CONTEXT;SUPPORTS_RUNE;SUPPORTS_QUERYABLE_SIMPLE_ZIP;SUPPORTS_ASYNC_QUERYABLE_SIMPLE_ZIP;</NETCORE31Features>
+		<NET50Features>$(NETCORE31Features)HAS_SKIP_LOCALS_INIT_ATTRIBUTE;HAS_IS_EXTERNAL_INIT;SUPPORTS_MEMBER_NULLABILITY_ATTRIBUTES;SUPPORTS_TYPE_IS_ASSIGNABLE_TO;SUPPORTS_VALUE_TASK_FROM_RESULT;SUPPORTS_READ_ONLY_SET;</NET50Features>
+		<NET60Features>$(NETCORE31Features)</NET60Features>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
-    <DefineConstants>$(DefineConstants)$(NETSTD21Features)NETSTD21;</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<DefineConstants>$(DefineConstants)$(NETSTD20Features)NETSTD20;</DefineConstants>
+		<Nullable>annotations</Nullable>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <DefineConstants>$(DefineConstants)$(NETCORE31Features)NETCORE31;</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+		<DefineConstants>$(DefineConstants)$(NET48Features)NET48;</DefineConstants>
+		<Nullable>annotations</Nullable>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <DefineConstants>$(DefineConstants)$(NET50Features)NETCORE50;</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+		<DefineConstants>$(DefineConstants)$(NETSTD21Features)NETSTD21;</DefineConstants>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <DefineConstants>$(DefineConstants)$(NET60Features)NETCORE60;</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+		<DefineConstants>$(DefineConstants)$(NETCORE31Features)NETCORE31;</DefineConstants>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'net48'">
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Memory"/>
-    <PackageReference Include="System.Numerics.Vectors"/>
-    <PackageReference Include="System.Threading.Tasks.Extensions" />
-    <PackageReference Include="FSharp.Core"/>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces"/>
-    <PackageReference Include="Microsoft.Bcl.HashCode"/>
-  </ItemGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<DefineConstants>$(DefineConstants)$(NET50Features)NETCORE50;</DefineConstants>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1' Or '$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="System.Collections.Immutable" />
-  </ItemGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<DefineConstants>$(DefineConstants)$(NET60Features)NETCORE60;</DefineConstants>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="$(RepositorySharedPath)NullabilityAttributes.cs" Link="Shared\NullabilityAttributes.cs" />
-    <Compile Include="$(RepositorySharedPath)SkipLocalsInitAttribute.cs" Link="Shared\SkipLocalsInitAttribute.cs" />
-    <Compile Include="$(RepositorySharedPath)Range.cs" Link="Shared\Range.cs" />
-    <Compile Include="$(RepositorySharedPath)Rune.cs" Link="Shared\Rune.cs" />
-    <Compile Include="$(RepositorySharedPath)IsExternalInit.cs" Link="Shared\IsExternalInit.cs" />
-    <Compile Include="$(RepositorySharedPath)ConditionalCLSCompliance.cs" Link="Properties\ConditionalCLSCompliance.cs" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'net48'">
+		<PackageReference Include="System.Collections.Immutable" />
+		<PackageReference Include="System.Memory"/>
+		<PackageReference Include="System.Numerics.Vectors"/>
+		<PackageReference Include="System.Threading.Tasks.Extensions" />
+		<PackageReference Include="FSharp.Core"/>
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces"/>
+		<PackageReference Include="Microsoft.Bcl.HashCode"/>
+	</ItemGroup>
 
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants)DISABLE_EXPRESSION_TRANSLATOR_POOLING;</DefineConstants>-->
-  </PropertyGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1' Or '$(TargetFramework)' == 'netcoreapp3.1'">
+		<PackageReference Include="System.Collections.Immutable" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="$(RepositorySharedPath)NullabilityAttributes.cs" Link="Shared\NullabilityAttributes.cs" />
+		<Compile Include="$(RepositorySharedPath)SkipLocalsInitAttribute.cs" Link="Shared\SkipLocalsInitAttribute.cs" />
+		<Compile Include="$(RepositorySharedPath)Range.cs" Link="Shared\Range.cs" />
+		<Compile Include="$(RepositorySharedPath)Rune.cs" Link="Shared\Rune.cs" />
+		<Compile Include="$(RepositorySharedPath)IsExternalInit.cs" Link="Shared\IsExternalInit.cs" />
+		<Compile Include="$(RepositorySharedPath)ConditionalCLSCompliance.cs" Link="Properties\ConditionalCLSCompliance.cs" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<EnableExpressionTranslatorPooling>false</EnableExpressionTranslatorPooling>
+		<EnableExpressionDisposeByExtension>false</EnableExpressionDisposeByExtension>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DefineConstants Condition="'$(EnableExpressionTranslatorPooling)' != 'true'">$(DefineConstants)DISABLE_EXPRESSION_TRANSLATOR_POOLING;</DefineConstants>
+		<DefineConstants Condition="'$(EnableExpressionDisposeByExtension)' == 'true'">$(DefineConstants)ENABLE_EXPRESSION_DISPOSE_BY_EXTENSION;</DefineConstants>
+	</PropertyGroup>
 
 </Project>

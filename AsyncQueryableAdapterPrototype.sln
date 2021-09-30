@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8252AFA1-FB67-4BD8-84BD-49D029F2794C}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,10 +55,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncQueryableAdapter.Speci
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AsyncQueryableAdapterPrototype.Shared", "src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.shproj", "{C38A4BF7-9050-4E12-89EA-3187397BB678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncQueryablePrototype.Shared.Tests", "test\AsyncQueryablePrototype.Shared.Tests\AsyncQueryablePrototype.Shared.Tests.csproj", "{C708F86D-B806-4879-AA9C-84EBCBAAC400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncQueryablePrototype.Shared.Tests", "test\AsyncQueryablePrototype.Shared.Tests\AsyncQueryablePrototype.Shared.Tests.csproj", "{C708F86D-B806-4879-AA9C-84EBCBAAC400}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncQueryableAdapter.Utils.Expressions.Tests", "test\AsyncQueryableAdapter.Utils.Expressions.Tests\AsyncQueryableAdapter.Utils.Expressions.Tests.csproj", "{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AsyncQueryableAdapterPrototype.Utils.Expressions", "src\AsyncQueryableAdapterPrototype.Utils.Expressions\AsyncQueryableAdapterPrototype.Utils.Expressions.shproj", "{6D8AD748-0599-4F8D-A789-278C4D50A6C7}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\AsyncQueryableAdapterPrototype.Utils.Expressions\AsyncQueryableAdapterPrototype.Utils.Expressions.projitems*{6d8ad748-0599-4f8d-a789-278c4d50a6c7}*SharedItemsImports = 13
+		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{6f6893c0-91e7-4d67-9c3f-7c8cde782b3f}*SharedItemsImports = 5
+		src\AsyncQueryableAdapterPrototype.Utils.Expressions\AsyncQueryableAdapterPrototype.Utils.Expressions.projitems*{6f6893c0-91e7-4d67-9c3f-7c8cde782b3f}*SharedItemsImports = 5
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{80961bd4-3c36-453d-afc3-2ffc91665be0}*SharedItemsImports = 5
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{c38a4bf7-9050-4e12-89ea-3187397bb678}*SharedItemsImports = 13
 		src\AsyncQueryableAdapterPrototype.Shared\AsyncQueryableAdapterPrototype.Shared.projitems*{c708f86d-b806-4879-aa9c-84ebcbaac400}*SharedItemsImports = 5
@@ -145,6 +152,18 @@ Global
 		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x64.Build.0 = Release|Any CPU
 		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x86.ActiveCfg = Release|Any CPU
 		{C708F86D-B806-4879-AA9C-84EBCBAAC400}.Release|x86.Build.0 = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|x64.Build.0 = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Debug|x86.Build.0 = Debug|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|x64.ActiveCfg = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|x64.Build.0 = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +177,8 @@ Global
 		{FC84404B-91EA-457A-B38A-2B4ADDF3F042} = {30CB25E2-78EE-42F2-BF23-BC275B832FAC}
 		{C38A4BF7-9050-4E12-89EA-3187397BB678} = {8252AFA1-FB67-4BD8-84BD-49D029F2794C}
 		{C708F86D-B806-4879-AA9C-84EBCBAAC400} = {F7CE5BDA-9D4A-4DAB-B64F-DEC8FA931E32}
+		{6F6893C0-91E7-4D67-9C3F-7C8CDE782B3F} = {F7CE5BDA-9D4A-4DAB-B64F-DEC8FA931E32}
+		{6D8AD748-0599-4F8D-A789-278C4D50A6C7} = {8252AFA1-FB67-4BD8-84BD-49D029F2794C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E25CEAE8-5983-47BD-ACF5-96800C532C68}

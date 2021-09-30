@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6d8ad748-0599-4f8d-a789-278c4d50a6c7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>AsyncQueryableAdapterPrototype.Utils.Expressions</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.DoWhile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.For.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.ForEach.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.Using.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.While.cs" />
+  </ItemGroup>
+</Project>
