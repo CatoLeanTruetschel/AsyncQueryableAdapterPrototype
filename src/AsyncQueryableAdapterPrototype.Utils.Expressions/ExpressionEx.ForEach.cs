@@ -46,7 +46,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -54,13 +53,13 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 {
     internal static partial class ExpressionEx
     {
-        public static Expression ForEach(ParameterExpression variable, Expression enumerable, Expression body)
+        public static ForEachExpression ForEach(ParameterExpression variable, Expression enumerable, Expression body)
         {
             CheckForEachArgs(variable, enumerable, body, continueTarget: null);
             return ForEachUnchecked(variable, enumerable, body, breakTarget: null, continueTarget: null);
         }
 
-        public static Expression ForEach(
+        public static ForEachExpression ForEach(
             ParameterExpression variable,
             Expression enumerable,
             Expression body,
@@ -70,7 +69,7 @@ namespace AsyncQueryableAdapter.Utils.Expressions
             return ForEachUnchecked(variable, enumerable, body, breakTarget, continueTarget: null);
         }
 
-        public static Expression ForEach(
+        public static ForEachExpression ForEach(
             ParameterExpression variable,
             Expression enumerable,
             Expression body,
@@ -100,36 +99,87 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 throw new ArgumentException("Continue label target must be void", nameof(continueTarget));
         }
 
-        public static Expression ForEachUnchecked(
+        public static ForEachExpression ForEachUnchecked(
             ParameterExpression variable,
             Expression enumerable,
             Expression body,
             LabelTarget? breakTarget,
             LabelTarget? continueTarget)
         {
-            if (enumerable.Type.IsArray)
+            return new ForEachExpression(variable, enumerable, body, breakTarget, continueTarget);
+        }
+    }
+
+    public sealed class ForEachExpression : Expression
+    {
+        private readonly EnumerableTypeDescriptor _enumerableTypeDescriptor;
+
+        internal ForEachExpression(
+            ParameterExpression variable,
+            Expression enumerable,
+            Expression body,
+            LabelTarget? breakTarget,
+            LabelTarget? continueTarget)
+        {
+            _enumerableTypeDescriptor = EnumerableTypeDescriptor.GetTypeDescriptor(enumerable.Type);
+
+            if (!_enumerableTypeDescriptor.IsEnumerable)
             {
-                return ReduceForArray(variable, enumerable, body, breakTarget, continueTarget);
+                throw new ArgumentException("The specified argument is not enumerable.", nameof(enumerable));
             }
 
-            return ReduceForEnumerable(variable, enumerable, body, breakTarget, continueTarget);
+            Variable = variable;
+            Enumerable = enumerable;
+            Body = body;
+            BreakTarget = breakTarget ?? Expression.Label("break");
+            ContinueTarget = continueTarget ?? Expression.Label("continue");
         }
 
-        private static Expression ReduceForArray(
-            ParameterExpression variable,
-            Expression enumerable,
-            Expression body,
-            LabelTarget? breakTarget,
-            LabelTarget? continueTarget)
+        public override ExpressionType NodeType => ExpressionType.Extension;
+
+        public override Type Type
         {
-            var innerLoopBreak = Expression.Label("inner_loop_break");
-            var innerLoopContinue = Expression.Label("inner_loop_continue");
-            var @continue = continueTarget ?? Expression.Label("continue");
-            var @break = breakTarget ?? Expression.Label("break");
+            get
+            {
+                if (BreakTarget != null)
+                    return BreakTarget.Type;
+
+                return typeof(void);
+            }
+        }
+
+        public override bool CanReduce => true;
+
+        public new ParameterExpression Variable { get; }
+
+        public Expression Enumerable { get; }
+
+        public Expression Body { get; }
+
+        public LabelTarget BreakTarget { get; }
+
+        public LabelTarget ContinueTarget { get; }
+
+        public override Expression Reduce()
+        {
+            if (Enumerable.Type.IsArray)
+            {
+                return ReduceForArray();
+            }
+
+            return ReduceForEnumerable();
+        }
+
+        private Expression ReduceForArray()
+        {
+            var innerLoopBreak = Expression.Label("INNER_LOOP_BREAK");
+            var innerLoopContinue = Expression.Label("INNER_LOOP_CONTINUE");
+            var @continue = ContinueTarget;
+            var @break = BreakTarget;
             var index = Expression.Variable(typeof(int), "i");
 
             return Expression.Block(
-                new[] { index, variable },
+                new[] { index, Variable },
                 Expression.Assign(index, Expression.Constant(0)),
                 Expression.Loop(
                     Expression.Block(
@@ -137,14 +187,14 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                             Expression.IsFalse(
                                 Expression.LessThan(
                                     index,
-                                    Expression.ArrayLength(enumerable))),
+                                    Expression.ArrayLength(Enumerable))),
                             Expression.Break(innerLoopBreak)),
                         Expression.Assign(
-                            variable,
+                            Variable,
                             Expression.Convert(Expression.ArrayIndex(
-                                enumerable,
-                                index), variable.Type)),
-                        body,
+                                Enumerable,
+                                index), Variable.Type)),
+                        Body,
                         Expression.Label(@continue),
                         Expression.PreIncrementAssign(index)),
                     innerLoopBreak,
@@ -152,50 +202,38 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 Expression.Label(@break));
         }
 
-        private static Expression ReduceForEnumerable(
-            ParameterExpression variable,
-            Expression enumerable,
-            Expression body,
-            LabelTarget? breakTarget,
-            LabelTarget? continueTarget)
+        private Expression ReduceForEnumerable()
         {
-            var enumerableTypeDescriptor = EnumerableTypeDescriptor.GetTypeDescriptor(enumerable.Type);
-
-            if (!enumerableTypeDescriptor.IsEnumerable)
-            {
-                throw new ArgumentException("The specified argument is not enumerable.", nameof(enumerable));
-            }
-
-            var enumerator = Expression.Variable(enumerableTypeDescriptor.EnumeratorType);
+            var enumerator = Expression.Variable(_enumerableTypeDescriptor.EnumeratorType);
 
             var innerLoopContinue = Expression.Label("inner_loop_continue");
             var innerLoopBreak = Expression.Label("inner_loop_break");
-            var @continue = continueTarget ?? Expression.Label("continue");
-            var @break = breakTarget ?? Expression.Label("break");
+            var @continue = ContinueTarget;
+            var @break = BreakTarget;
 
             Expression variableInitializer;
 
-            if (enumerableTypeDescriptor.CurrentProperty.PropertyType.IsAssignableTo(variable.Type))
+            if (_enumerableTypeDescriptor.CurrentProperty.PropertyType.IsAssignableTo(Variable.Type))
             {
-                variableInitializer = Expression.Property(enumerator, enumerableTypeDescriptor.CurrentProperty);
+                variableInitializer = Expression.Property(enumerator, _enumerableTypeDescriptor.CurrentProperty);
             }
             else
             {
                 variableInitializer = Expression.Convert(
-                    Expression.Property(enumerator, enumerableTypeDescriptor.CurrentProperty),
-                    variable.Type);
+                    Expression.Property(enumerator, _enumerableTypeDescriptor.CurrentProperty),
+                    Variable.Type);
             }
 
             Expression loop = Expression.Block(
-                new[] { variable },
+                new[] { Variable },
                 Expression.Goto(@continue),
                 Expression.Loop(
                     Expression.Block(
-                        Expression.Assign(variable, variableInitializer),
-                        body,
+                        Expression.Assign(Variable, variableInitializer),
+                        Body,
                         Expression.Label(@continue),
                         Expression.Condition(
-                            Expression.Call(enumerator, enumerableTypeDescriptor.MoveNextMethod),
+                            Expression.Call(enumerator, _enumerableTypeDescriptor.MoveNextMethod),
                             Expression.Goto(innerLoopContinue),
                             Expression.Goto(innerLoopBreak))),
                     innerLoopBreak,
@@ -203,15 +241,15 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 Expression.Label(@break));
 
             // CSharp only disposes of the enumerator, if it implicitly implements IDisposable.
-            if (enumerableTypeDescriptor.EnumeratorType.IsAssignableTo(typeof(IDisposable)))
+            if (_enumerableTypeDescriptor.EnumeratorType.IsAssignableTo(typeof(IDisposable)))
             {
                 MethodInfo? disposeMethod;
 
                 // TODO: Currently we use a special case, but it would be better to use a generic implementation that walks
                 // up the type hierarchy and searches for a matching methods. We have to mimic what the C# compiler would do.
-                if (enumerableTypeDescriptor.EnumeratorType == typeof(IEnumerator)
-                    || enumerableTypeDescriptor.EnumeratorType.IsGenericType
-                    && enumerableTypeDescriptor.EnumeratorType.GetGenericTypeDefinition() == typeof(IEnumerator<>))
+                if (_enumerableTypeDescriptor.EnumeratorType == typeof(IEnumerator)
+                    || _enumerableTypeDescriptor.EnumeratorType.IsGenericType
+                    && _enumerableTypeDescriptor.EnumeratorType.GetGenericTypeDefinition() == typeof(IEnumerator<>))
                 {
                     disposeMethod = typeof(IDisposable).GetMethod(
                         nameof(IDisposable.Dispose),
@@ -222,7 +260,7 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 }
                 else
                 {
-                    disposeMethod = enumerableTypeDescriptor.EnumeratorType.GetMethod(
+                    disposeMethod = _enumerableTypeDescriptor.EnumeratorType.GetMethod(
                         nameof(IDisposable.Dispose),
                         BindingFlags.Instance | BindingFlags.Public,
                         Type.DefaultBinder,
@@ -239,119 +277,8 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 
             return Expression.Block(
                 new[] { enumerator },
-                Expression.Assign(enumerator, Expression.Call(enumerable, enumerableTypeDescriptor.GetEnumeratorMethod)),
+                Expression.Assign(enumerator, Expression.Call(Enumerable, _enumerableTypeDescriptor.GetEnumeratorMethod)),
                 loop);
         }
-
-        //private static void ResolveEnumerationMembers(
-        //    ParameterExpression variable,
-        //    Expression enumerable,
-        //    out MethodInfo getEnumerator,
-        //    out MethodInfo moveNext,
-        //    out MethodInfo getCurrent)
-        //{
-        //    // TODO: foreach should not require the enumerator to implement IEnumerable
-
-        //    Type enumerableType;
-        //    Type enumeratorType;
-
-        //    if (TryGetGenericEnumerableArgument(variable, enumerable, out var itemType))
-        //    {
-        //        enumerableType = typeof(IEnumerable<>).MakeGenericType(itemType);
-        //        enumeratorType = typeof(IEnumerator<>).MakeGenericType(itemType);
-        //    }
-        //    else
-        //    {
-        //        enumerableType = typeof(IEnumerable);
-        //        enumeratorType = typeof(IEnumerator);
-        //    }
-
-        //    moveNext = typeof(IEnumerator).GetMethod("MoveNext")!;
-        //    getCurrent = enumeratorType.GetProperty("Current")!.GetGetMethod()!;
-        //    getEnumerator = enumerable.Type.GetMethod("GetEnumerator", BindingFlags.Public | BindingFlags.Instance)!;
-
-        //    //
-        //    // We want to avoid unnecessarily boxing an enumerator if it's a value type.  Look
-        //    // for a GetEnumerator() method that conforms to the rules of the C# 'foreach'
-        //    // pattern.  If we don't find one, fall back to IEnumerable[<T>].GetEnumerator().
-        //    //
-
-        //    if (getEnumerator is null || !enumeratorType.IsAssignableFrom(getEnumerator.ReturnType))
-        //    {
-        //        getEnumerator = enumerableType.GetMethod("GetEnumerator")!;
-        //    }
-        //}
-
-        //private static Expression? CreateDisposeOperation(
-        //    Type enumeratorType,
-        //    ParameterExpression enumerator)
-        //{
-        //    // TODO: foreach should not require the enumerator to implement IDisposable
-
-        //    var dispose = typeof(IDisposable).GetMethod("Dispose", BindingFlags.Public | BindingFlags.Instance);
-
-        //    if (typeof(IDisposable).IsAssignableFrom(enumeratorType))
-        //    {
-        //        //
-        //        // We know the enumerator implements IDisposable, so skip the type check.
-        //        //
-        //        return Expression.Call(enumerator, dispose!);
-        //    }
-
-        //    if (enumeratorType.IsValueType)
-        //    {
-        //        //
-        //        // The enumerator is a value type and doesn't implement IDisposable; we needn't
-        //        // bother with a check at all.
-        //        //
-        //        return null;
-        //    }
-
-        //    //
-        //    // We don't know whether the enumerator implements IDisposable or not.  Emit a
-        //    // runtime check.
-        //    //
-        //    var disposable = Expression.Variable(typeof(IDisposable));
-
-        //    // {
-        //    //      IDisposable disposable;
-        //    //      disposable = enumerator as IDisposable;
-        //    //      if (!ReferenceEquals(disposable, null)) {
-        //    //          disposable.Dispose();
-        //    // }
-        //    return Expression.Block(
-        //        new[] { disposable },
-        //        Expression.Assign(disposable, Expression.TypeAs(enumerator, typeof(IDisposable))),
-        //        Expression.IfThen(
-        //            Expression.ReferenceNotEqual(disposable, Expression.Constant(null)),
-        //            Expression.Call(
-        //                disposable,
-        //                "Dispose",
-        //                Type.EmptyTypes)));
-        //}
-
-        //private static bool TryGetGenericEnumerableArgument(
-        //    ParameterExpression variable,
-        //    Expression enumerable,
-        //    [NotNullWhen(true)] out Type? argument)
-        //{
-        //    argument = null;
-
-        //    foreach (var @interface in enumerable.Type.GetInterfaces())
-        //    {
-        //        if (!@interface.IsGenericType)
-        //            continue;
-
-        //        var definition = @interface.GetGenericTypeDefinition();
-        //        if (definition != typeof(IEnumerable<>))
-        //            continue;
-
-        //        argument = @interface.GetGenericArguments()[0];
-        //        if (variable.Type.IsAssignableFrom(argument))
-        //            return true;
-        //    }
-
-        //    return false;
-        //}
     }
 }

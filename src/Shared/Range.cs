@@ -289,7 +289,7 @@ namespace System.Runtime.CompilerServices
             var (offset, length) = range.GetOffsetAndLength(array.Length);
             T[] result;
 
-            if (default(T) != null || typeof(T[]) == array.GetType())
+            if (default(T) is not null || typeof(T[]) == array.GetType())
             {
                 // We know the type of the array to be exactly T[].
                 if (length == 0)

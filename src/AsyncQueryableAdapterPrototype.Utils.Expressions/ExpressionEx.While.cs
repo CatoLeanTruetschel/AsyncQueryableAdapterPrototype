@@ -50,19 +50,19 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 {
     internal static partial class ExpressionEx
     {
-        public static Expression While(Expression test, Expression body)
+        public static WhileExpression While(Expression test, Expression body)
         {
             CheckWhileArgs(test, body, continueTarget: null);
             return WhileUnchecked(test, body, breakTarget: null, continueTarget: null);
         }
 
-        public static Expression While(Expression test, Expression body, LabelTarget? breakTarget)
+        public static WhileExpression While(Expression test, Expression body, LabelTarget? breakTarget)
         {
             CheckWhileArgs(test, body, continueTarget: null);
             return WhileUnchecked(test, body, breakTarget, continueTarget: null);
         }
 
-        public static Expression While(
+        public static WhileExpression While(
             Expression test,
             Expression body,
             LabelTarget? breakTarget,
@@ -87,26 +87,86 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 throw new ArgumentException("Continue label target must be void", nameof(continueTarget));
         }
 
-        public static Expression WhileUnchecked(
+        public static WhileExpression WhileUnchecked(
             Expression test,
             Expression body,
             LabelTarget? breakTarget,
             LabelTarget? continueTarget)
         {
-            var innerLoopBreak = Expression.Label("inner_loop_break");
-            var innerLoopContinue = Expression.Label("inner_loop_continue");
+            return new WhileExpression(test, body, breakTarget, continueTarget);
+        }
+    }
 
-            var @continue = continueTarget ?? Expression.Label("continue");
-            var @break = breakTarget ?? Expression.Label("break");
+    internal sealed class WhileExpression : Expression
+    {
+        internal WhileExpression(
+            Expression test,
+            Expression body,
+            LabelTarget? breakTarget,
+            LabelTarget? continueTarget)
+        {
+            Test = test;
+            Body = body;
+            BreakTarget = breakTarget ?? Expression.Label("BREAK");
+            ContinueTarget = continueTarget ?? Expression.Label("CONTINUE");
+        }
+
+        public override ExpressionType NodeType => ExpressionType.Extension;
+
+        public override Type Type
+        {
+            get
+            {
+                if (BreakTarget != null)
+                    return BreakTarget.Type;
+
+                return typeof(void);
+            }
+        }
+
+        public override bool CanReduce => true;
+
+        public Expression Test { get; }
+
+        public Expression Body { get; }
+
+        public LabelTarget BreakTarget { get; }
+
+        public LabelTarget ContinueTarget { get; }
+
+        public override Expression Reduce()
+        {
+            var innerLoopBreak = Expression.Label("INNER_LOOP_BREAK");
+            var innerLoopContinue = Expression.Label("INNER_LOOP_CONTINUE");
+
+            var @continue = ContinueTarget;
+            var @break = BreakTarget;
+
+            //  {
+            //      {
+            //          INNER_LOOP_CONTINUE:
+            //          {
+            //              CONTINUE:
+            //              if ([test]) {
+            //                  [body]
+            //                  goto INNER_LOOP_CONTINUE;
+            //              } else {
+            //                  goto INNER_LOOP_BREAK;
+            //              }
+            //          }
+            //      }
+            //      INNER_LOOP_BREAK:
+            //      BREAK:
+            //  }
 
             return Expression.Block(
                 Expression.Loop(
                     Expression.Block(
                         Expression.Label(@continue),
                         Expression.Condition(
-                            test,
+                            Test,
                             Expression.Block(
-                                body,
+                                Body,
                                 Expression.Goto(innerLoopContinue)),
                             Expression.Goto(innerLoopBreak))),
                     innerLoopBreak,

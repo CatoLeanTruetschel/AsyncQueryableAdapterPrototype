@@ -57,16 +57,13 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 {
     internal static partial class ExpressionEx
     {
-        private static readonly MethodInfo _disposableDisposeMethod = typeof(IDisposable)
-            .GetMethod(nameof(IDisposable.Dispose), BindingFlags.Public | BindingFlags.Instance);
-
-        public static Expression Using(Expression disposable, Expression body)
+        public static UsingExpression Using(Expression disposable, Expression body)
         {
             CheckUsingArgs(variable: null, disposable, body);
             return UsingUnchecked(null, disposable, body);
         }
 
-        public static Expression Using(ParameterExpression? variable, Expression disposable, Expression body)
+        public static UsingExpression Using(ParameterExpression? variable, Expression disposable, Expression body)
         {
             CheckUsingArgs(variable, disposable, body);
             return UsingUnchecked(variable, disposable, body);
@@ -85,6 +82,34 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 throw new ArgumentException(
                     $"The type of { nameof(disposable) } must be assignable to the type of { nameof(variable) }.");
             }
+        }
+
+        private static UsingExpression UsingUnchecked(ParameterExpression? variable, Expression disposable, Expression body)
+        {
+            return new UsingExpression(variable, disposable, body);
+        }
+    }
+
+    internal sealed class UsingExpression : Expression
+    {
+        private static readonly MethodInfo _disposableDisposeMethod = typeof(IDisposable)
+            .GetMethod(nameof(IDisposable.Dispose), BindingFlags.Public | BindingFlags.Instance);
+
+        private readonly MethodInfo _disposeMethod;
+
+        internal UsingExpression(ParameterExpression? variable, Expression disposable, Expression body)
+        {
+            if (variable is null)
+                variable = Expression.Parameter(disposable.Type);
+
+            if (!TryFindDisposeMethod(disposable, out _disposeMethod!))
+            {
+                throw new ArgumentException("The value must be disposable", nameof(disposable));
+            }
+
+            Variable = variable;
+            Disposable = disposable;
+            Body = body;
         }
 
         private static bool TryFindDisposeMethod(
@@ -118,8 +143,8 @@ namespace AsyncQueryableAdapter.Utils.Expressions
             disposeMethod = disposableType.GetMethod(
                 nameof(IDisposable.Dispose),
                 BindingFlags.Public | BindingFlags.Instance, // TODO: Use also internal dispose methods?
-                Type.DefaultBinder,
-                Type.EmptyTypes,
+                System.Type.DefaultBinder,
+                System.Type.EmptyTypes,
                 modifiers: null);
 
             return disposeMethod is not null;
@@ -242,23 +267,27 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 
 #endif
 
-        private static Expression UsingUnchecked(ParameterExpression? variable, Expression disposable, Expression body)
+        public override ExpressionType NodeType => ExpressionType.Extension;
+
+        public override Type Type => Body.Type;
+
+        public override bool CanReduce => true;
+
+        public new ParameterExpression Variable { get; }
+
+        public Expression Disposable { get; }
+
+        public Expression Body { get; }
+
+        public override Expression Reduce()
         {
-            if (variable is null)
-                variable = Expression.Parameter(disposable.Type);
-
-            if (!TryFindDisposeMethod(disposable, out var disposeMethod))
-            {
-                throw new ArgumentException("The value must be disposable", nameof(disposable));
-            }
-
             var end_finally = Expression.Label("END_FINALLY");
 
             Expression disposeCall;
 
-            if (disposeMethod == _disposableDisposeMethod)
+            if (_disposeMethod == _disposableDisposeMethod)
             {
-                disposeCall = Expression.Call(Expression.Convert(variable, typeof(IDisposable)), disposeMethod);
+                disposeCall = Expression.Call(Expression.Convert(Variable, typeof(IDisposable)), _disposeMethod);
             }
 #if ENABLE_EXPRESSION_DISPOSE_BY_EXTENSION
             // Extensions method
@@ -270,16 +299,16 @@ namespace AsyncQueryableAdapter.Utils.Expressions
             // Instance method
             else
             {
-                disposeCall = Expression.Call(variable, disposeMethod);
+                disposeCall = Expression.Call(Variable, _disposeMethod);
             }
 
             // TODO: Is this correct or do we have to check diposeable.Type???
             // TODO: Check for dynamic type
-            if (!variable.Type.IsValueType || TypeHelper.IsNullableType(variable.Type))
+            if (!Variable.Type.IsValueType || TypeHelper.IsNullableType(Variable.Type))
             {
                 disposeCall =
                     Expression.Condition(
-                        Expression.ReferenceNotEqual(variable, Expression.Constant(null)),
+                        Expression.ReferenceNotEqual(Variable, Expression.Constant(null)),
                         Expression.Block(
                             disposeCall,
                             Expression.Goto(end_finally)),
@@ -310,9 +339,9 @@ namespace AsyncQueryableAdapter.Utils.Expressions
             //      }
             //  }
             return Expression.Block(
-                new[] { variable },
-                Expression.Assign(variable, disposable),
-                Expression.TryFinally(body, @finally));
+                new[] { Variable },
+                Expression.Assign(Variable, Disposable),
+                Expression.TryFinally(Body, @finally));
         }
     }
 }

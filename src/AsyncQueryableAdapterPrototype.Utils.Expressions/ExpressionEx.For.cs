@@ -50,19 +50,19 @@ namespace AsyncQueryableAdapter.Utils.Expressions
 {
     internal static partial class ExpressionEx
     {
-        public static Expression For(ParameterExpression variable, Expression initializer, Expression test, Expression step, Expression body)
+        public static ForExpression For(ParameterExpression variable, Expression initializer, Expression test, Expression step, Expression body)
         {
             CheckForArgs(variable, initializer, test, step, body, continueTarget: null);
             return ForUnchecked(variable, initializer, test, step, body, breakTarget: null, continueTarget: null);
         }
 
-        public static Expression For(ParameterExpression variable, Expression initializer, Expression test, Expression step, Expression body, LabelTarget? breakTarget)
+        public static ForExpression For(ParameterExpression variable, Expression initializer, Expression test, Expression step, Expression body, LabelTarget? breakTarget)
         {
             CheckForArgs(variable, initializer, test, step, body, continueTarget: null);
             return ForUnchecked(variable, initializer, test, step, body, breakTarget, continueTarget: null);
         }
 
-        public static Expression For(
+        public static ForExpression For(
             ParameterExpression variable,
             Expression initializer,
             Expression test,
@@ -108,7 +108,7 @@ namespace AsyncQueryableAdapter.Utils.Expressions
                 throw new ArgumentException("Continue label target must be void", nameof(continueTarget));
         }
 
-        public static Expression ForUnchecked(
+        public static ForExpression ForUnchecked(
             ParameterExpression variable,
             Expression initializer,
             Expression test,
@@ -117,23 +117,78 @@ namespace AsyncQueryableAdapter.Utils.Expressions
             LabelTarget? breakTarget,
             LabelTarget? continueTarget)
         {
+            return new ForExpression(variable, initializer, test, step, body, breakTarget, continueTarget);
+        }
+    }
+
+    public sealed class ForExpression : Expression
+    {
+        internal ForExpression(
+            ParameterExpression variable,
+            Expression initializer,
+            Expression test,
+            Expression step,
+            Expression body,
+            LabelTarget? breakTarget,
+            LabelTarget? continueTarget)
+        {
+            Variable = variable;
+            Initializer = initializer;
+            Test = test;
+            Step = step;
+            Body = body;
+            BreakTarget = breakTarget ?? Expression.Label("break");
+            ContinueTarget = continueTarget ?? Expression.Label("continue");
+        }
+
+        public override ExpressionType NodeType => ExpressionType.Extension;
+
+        public override Type Type
+        {
+            get
+            {
+                if (BreakTarget != null)
+                    return BreakTarget.Type;
+
+                return typeof(void);
+            }
+        }
+
+        public override bool CanReduce => true;
+
+        public new ParameterExpression Variable { get; }
+
+        public Expression Initializer { get; }
+
+        public Expression Test { get; }
+
+        public Expression Step { get; }
+
+        public Expression Body { get; }
+
+        public LabelTarget BreakTarget { get; }
+
+        public LabelTarget ContinueTarget { get; }
+
+        public override Expression Reduce()
+        {
             var innerLoopBreak = Expression.Label("inner_loop_break");
             var innerLoopContinue = Expression.Label("inner_loop_continue");
 
-            var @continue = continueTarget ?? Expression.Label("continue");
-            var @break = breakTarget ?? Expression.Label("break");
+            var @continue = ContinueTarget;
+            var @break = BreakTarget;
 
             return Expression.Block(
-                new[] { variable },
-                Expression.Assign(variable, initializer),
+                new[] { Variable },
+                Expression.Assign(Variable, Initializer),
                 Expression.Loop(
                     Expression.Block(
                         Expression.IfThen(
-                            Expression.IsFalse(test),
+                            Expression.IsFalse(Test),
                             Expression.Break(innerLoopBreak)),
-                        body,
+                        Body,
                         Expression.Label(@continue),
-                        step),
+                        Step),
                     innerLoopBreak,
                     innerLoopContinue),
                 Expression.Label(@break));

@@ -9,6 +9,9 @@
     <Import_RootNamespace>AsyncQueryableAdapterPrototype.Utils.Expressions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)IFormatter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextWriterFormatter.cs" />
+    <Compile Include="..\..\src\AsyncQueryableAdapterPrototype.Utils.Expressions\CSharpExpressionFormatter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.DoWhile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.For.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExpressionEx.ForEach.cs" />
